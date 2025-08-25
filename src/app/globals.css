@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary-light: #49909d1f;
+  --purple-light: #e3dbfc;
+  --gray-light: #f2f5f6;
+  --blue-light: #cbe7ff;
+  --primary-0: #d3eee2;
+  --red-light: #fcdbdb;
+  --primary: #49909d;
+  --gray-60: #8d9a9b;
+  --gray-80: #51595a;
+  --gray-70: #626d6f;
+  --gray-10: #e9edee;
+  --gray-50: #9ea9aa;
+  --heading: #171a1f;
+  --black: #25292a;
+  --gray: #666566;
+  --blue: #1f58ea;
+  --red: #f14d4d;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-purple-light: var(--purple-light);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-neutral-grey-0: var(--gray-light);
+  --color-neutral-grey-10: var(--gray-10);
+  --color-neutral-grey-50: var(--gray-50);
+  --color-neutral-grey-60: var(--gray-60);
+  --color-neutral-grey-70: var(--gray-70);
+  --color-neutral-grey-80: var(--gray-80);
+  --color-neutral-grey-100: var(--black);
+  --color-secondary: var(--gray);
+
+  --color-primary-light: var(--primary-light);
+  --color-primary-0: var(--primary-0);
+  --color-primary: var(--primary);
+
+  --color-heading: var(--heading);
+
+  --color-blue-light: var(--blue-light);
+  --color-blue: var(--blue);
+
+  --color-red-light: var(--red-light);
+  --color-red: var(--red);
+
+  --font-fredoka: var(--font-fredoka);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+  font-family: var(--font-fredoka);
 }

@@ -15,7 +15,7 @@ const initialValues = {
   firstName: '',
   lastName: '',
   password: '',
-  profile: '',
+  profile: 'lorem',
   email: '',
 };
 
@@ -26,7 +26,7 @@ const SignUpView = (): JSX.Element => {
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues,
     validationSchema: SignUpSchema,
-    onSubmit: () => push(verifyEmail),
+    onSubmit: ({ email }) => push(verifyEmail + '?email=' + email),
   });
 
   return (

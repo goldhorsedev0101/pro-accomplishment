@@ -18,9 +18,15 @@
   --gray: #666566;
   --blue: #1f58ea;
   --red: #f14d4d;
+
+  --text-size-32: 32px;
+  --text-size-31: 31px;
+  --text-size-28: 28px;
+  --text-size-22: 22px;
 }
 
 @theme inline {
+  /* ===================== Colors ===================== */
   --color-purple-light: var(--purple-light);
 
   --color-neutral-grey-0: var(--gray-light);
@@ -43,8 +49,16 @@
 
   --color-red-light: var(--red-light);
   --color-red: var(--red);
+  /* =================================================== */
 
+  /* Font Family */
   --font-fredoka: var(--font-fredoka);
+
+  /* Text Size */
+  --text-32: var(--text-size-32);
+  --text-31: var(--text-size-31);
+  --text-28: var(--text-size-28);
+  --text-22: var(--text-size-22);
 }
 
 body {

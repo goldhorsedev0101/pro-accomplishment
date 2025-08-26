@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import Heading from "@/components/common/heading";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Routes from "@/constants/routes";
-import { SignInSchema } from "@/schemas/sign-in.schema";
-import { useFormik } from "formik";
-import { useRouter } from "next/navigation";
-import { JSX } from "react";
+import Heading from '@/components/common/heading';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import Routes from '@/constants/routes';
+import { SignInSchema } from '@/schemas/sign-in.schema';
+import { useFormik } from 'formik';
+import { useRouter } from 'next/navigation';
+import { JSX } from 'react';
 
 const SignInView = (): JSX.Element => {
   const { push } = useRouter();
   const { forgetPassword, signUp, home } = Routes;
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
-    initialValues: { email: "", password: "" },
+    initialValues: { email: '', password: '' },
     validationSchema: SignInSchema,
     onSubmit: () => push(home),
   });
@@ -28,7 +28,7 @@ const SignInView = (): JSX.Element => {
           error={touched.email ? errors.email : undefined}
           placeholder="johndo@example.com"
           onChange={handleChange}
-          value={values["email"]}
+          value={values['email']}
           label="Email"
           name="email"
           required
@@ -36,7 +36,7 @@ const SignInView = (): JSX.Element => {
         <Input
           error={touched.password ? errors.password : undefined}
           placeholder="ohndoe122&&*^Y"
-          value={values["password"]}
+          value={values['password']}
           onChange={handleChange}
           label="Password"
           type="password"
@@ -46,7 +46,7 @@ const SignInView = (): JSX.Element => {
         <Button
           className="flex w-fit self-end justify-end underline p-0 text-base font-normal"
           onClick={() => push(forgetPassword)}
-          variant={"link"}
+          variant={'link'}
           type="button"
         >
           Forgot Password?
@@ -60,7 +60,7 @@ const SignInView = (): JSX.Element => {
         <Button
           onClick={() => push(signUp)}
           className="w-fit p-0 underline text-base font-semibold"
-          variant={"link"}
+          variant={'link'}
           type="button"
         >
           Sign Up

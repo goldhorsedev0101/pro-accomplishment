@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import BackButton from "@/components/common/back-button";
-import Heading from "@/components/common/heading";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Routes from "@/constants/routes";
-import { SignUpSchema } from "@/schemas/sign-up.schema";
-import { useFormik } from "formik";
-import { useRouter } from "next/navigation";
-import { JSX } from "react";
+import BackButton from '@/components/common/back-button';
+import Heading from '@/components/common/heading';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import Routes from '@/constants/routes';
+import { SignUpSchema } from '@/schemas/sign-up.schema';
+import { useFormik } from 'formik';
+import { useRouter } from 'next/navigation';
+import { JSX } from 'react';
 
 const initialValues = {
-  confirmPassword: "",
-  firstName: "",
-  lastName: "",
-  password: "",
-  profile: "",
-  email: "",
+  confirmPassword: '',
+  firstName: '',
+  lastName: '',
+  password: '',
+  profile: '',
+  email: '',
 };
 
 const SignUpView = (): JSX.Element => {
@@ -38,7 +38,7 @@ const SignUpView = (): JSX.Element => {
         <div className="flex items-center gap-x-3 w-full">
           <Input
             error={touched.firstName ? errors.firstName : undefined}
-            value={values["firstName"]}
+            value={values['firstName']}
             onChange={handleChange}
             placeholder="James"
             label="First Name"
@@ -47,7 +47,7 @@ const SignUpView = (): JSX.Element => {
           />
           <Input
             error={touched.lastName ? errors.lastName : undefined}
-            value={values["lastName"]}
+            value={values['lastName']}
             onChange={handleChange}
             placeholder="Shawn"
             label="Last Name"
@@ -60,7 +60,7 @@ const SignUpView = (): JSX.Element => {
           error={touched.email ? errors.email : undefined}
           placeholder="johndo@example.com"
           onChange={handleChange}
-          value={values["email"]}
+          value={values['email']}
           label="Email"
           name="email"
           required
@@ -68,7 +68,7 @@ const SignUpView = (): JSX.Element => {
         <Input
           error={touched.password ? errors.password : undefined}
           placeholder="ohndoe122&&*^Y"
-          value={values["password"]}
+          value={values['password']}
           onChange={handleChange}
           label="Password"
           type="password"
@@ -77,7 +77,7 @@ const SignUpView = (): JSX.Element => {
         />
         <Input
           error={touched.confirmPassword ? errors.confirmPassword : undefined}
-          value={values["confirmPassword"]}
+          value={values['confirmPassword']}
           placeholder="***********"
           label="Confirm Password"
           onChange={handleChange}
@@ -94,7 +94,7 @@ const SignUpView = (): JSX.Element => {
         <Button
           onClick={() => push(signIn)}
           className="w-fit p-0 underline text-base font-semibold"
-          variant={"link"}
+          variant={'link'}
           type="button"
         >
           Sign in

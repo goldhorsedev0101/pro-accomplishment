@@ -18,6 +18,7 @@
   --gray-20: #d8dfe0;
   --gray-10: #e9edee;
   --heading: #171a1f;
+  --yellow: #f1c34d;
   --black: #25292a;
   --gray: #666566;
   --blue: #1f58ea;
@@ -86,6 +87,8 @@
 
   --color-red-light: var(--red-light);
   --color-red: var(--red);
+
+  --color-yellow: var(--yellow);
   /* =================================================== */
 
   /* Font Family */

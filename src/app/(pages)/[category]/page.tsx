@@ -1,5 +1,7 @@
-const page = () => {
-  return <div>page</div>;
-};
+import CategoryView from '@/views/pages/Category';
 
-export default page;
+const CategoryPage = ({ params }: { params: { category: string } }) => (
+  <CategoryView category={params.category} />
+);
+
+export default CategoryPage;

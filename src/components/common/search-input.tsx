@@ -14,7 +14,7 @@ const SearchInput: FC<IProps> = ({ searchTerm, setSearchTerm }) => {
 
   useEffect(() => setSearchTerm?.(searching ?? ''), [searching]);
   return (
-    <div className="relative p-3 bg-white flex items-center gap-2 border border-neutral-grey-20 rounded-md">
+    <div className="relative p-3 bg-white flex items-center gap-2 border border-neutral-grey-20 rounded-md w-full">
       <IoSearchOutline size={24} color="#828282" />
       <Input
         type="text"

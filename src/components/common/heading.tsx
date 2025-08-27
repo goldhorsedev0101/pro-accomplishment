@@ -9,7 +9,7 @@ interface IProps {
 const Heading: FC<IProps> = ({ text, size = '32', width = 'semibold' }) => (
   <h2
     style={{ fontSize: `var(--text-size-${size})` }}
-    className={`font-${width} text-neutral-grey-100`}
+    className={`font-${width} text-neutral-grey-100 capitalize`}
   >
     {text}
   </h2>

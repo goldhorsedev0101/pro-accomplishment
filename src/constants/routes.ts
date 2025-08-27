@@ -9,6 +9,7 @@ const Routes = {
   // ====================== Pages ====================== //
   participantDetail: (slug: string, id: string) => `/${slug}/${id}`,
   category: (slug: string) => `/${slug}`,
+  profile: '/profile',
   home: '/',
 };
 

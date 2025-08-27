@@ -14,8 +14,9 @@
   --gray-60: #8d9a9b;
   --gray-80: #51595a;
   --gray-70: #626d6f;
-  --gray-10: #e9edee;
   --gray-50: #9ea9aa;
+  --gray-20: #d8dfe0;
+  --gray-10: #e9edee;
   --heading: #171a1f;
   --black: #25292a;
   --gray: #666566;
@@ -66,6 +67,7 @@
 
   --color-neutral-grey-0: var(--gray-light);
   --color-neutral-grey-10: var(--gray-10);
+  --color-neutral-grey-20: var(--gray-20);
   --color-neutral-grey-50: var(--gray-50);
   --color-neutral-grey-60: var(--gray-60);
   --color-neutral-grey-70: var(--gray-70);

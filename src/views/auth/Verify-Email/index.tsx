@@ -11,16 +11,16 @@ import { useRouter } from 'next/navigation';
 
 interface IProps {
   email: string;
+  route: string;
 }
 
-const VerifyEmailView: FC<IProps> = ({ email }) => {
+const VerifyEmailView: FC<IProps> = ({ email, route }) => {
   const { push } = useRouter();
-
-  const { home } = Routes;
+  const { home, resetPassword } = Routes;
 
   const { handleSubmit, setFieldValue, values } = useFormik({
     initialValues: { email, otp: '' },
-    onSubmit: () => push(home),
+    onSubmit: () => push(route === 'password' ? resetPassword : home),
   });
 
   const handleResend = () => {};

@@ -26,7 +26,7 @@ const SignUpView = (): JSX.Element => {
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues,
     validationSchema: SignUpSchema,
-    onSubmit: ({ email }) => push(verifyEmail + '?email=' + email),
+    onSubmit: ({ email }) => push(verifyEmail + '?email=' + email + '&route=register'),
   });
 
   return (

@@ -13,7 +13,6 @@ import { useState } from 'react';
 const HomeView = () => {
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState(1);
-  console.log('🚀 ~ HomeView ~ page:', page);
   const totalPages = 5;
 
   return (
@@ -31,7 +30,7 @@ const HomeView = () => {
           <NoData />
         </div>
       ) : (
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
           {Array.from({ length: totalPages }).map((_, index) => (
             <ParticipantCard
               about="Springfield Central High School"

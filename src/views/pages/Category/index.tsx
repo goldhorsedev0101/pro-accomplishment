@@ -21,11 +21,13 @@ const CategoryView: FC<IProps> = ({ category }) => {
   const [search, setSearch] = useState('');
   const [subCategory, setSubCategory] = useState<string>();
 
+  const title = category.replaceAll('%20', ' ');
+
   return (
     <div className="flex flex-col gap-y-6">
       <div className="flex items-center gap-x-2">
         <BackButton />
-        <Heading text={category} width="medium" size="28" />
+        <Heading text={title} width="medium" size="28" />
       </div>
 
       <div className="flex items-center gap-x-3 w-full">
@@ -42,7 +44,7 @@ const CategoryView: FC<IProps> = ({ category }) => {
         </Select>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
+      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
         {Array.from({ length: 20 }).map((_, index) => (
           <ParticipantCard
             about="Springfield Central High School"

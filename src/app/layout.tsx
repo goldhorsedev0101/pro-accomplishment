@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Fredoka } from 'next/font/google';
+import { Toaster } from 'react-hot-toast';
 import './globals.css';
 
 const fredoka = Fredoka({
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning className={`${fredoka.variable} antialiased`}>
+        <Toaster />
         {children}
       </body>
     </html>

@@ -5,17 +5,22 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Routes from '@/constants/routes';
 import { ResetPasswordSchema } from '@/schemas/reset-password.schema';
+import { setCookie } from 'cookies-next';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 
 const ResetPasswordView = () => {
-  const { push } = useRouter();
+  const { push, refresh } = useRouter();
   const { home } = Routes;
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: { confirmPassword: '', password: '' },
     validationSchema: ResetPasswordSchema,
-    onSubmit: () => push(home),
+    onSubmit: () => {
+      setCookie('token', 'lorem');
+      push(home);
+      refresh();
+    },
   });
 
   return (

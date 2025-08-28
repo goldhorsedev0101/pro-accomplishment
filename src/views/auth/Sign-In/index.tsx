@@ -5,18 +5,23 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Routes from '@/constants/routes';
 import { SignInSchema } from '@/schemas/sign-in.schema';
+import { setCookie } from 'cookies-next';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { JSX } from 'react';
 
 const SignInView = (): JSX.Element => {
-  const { push } = useRouter();
+  const { push, refresh } = useRouter();
   const { forgetPassword, signUp, home } = Routes;
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: { email: '', password: '' },
     validationSchema: SignInSchema,
-    onSubmit: () => push(home),
+    onSubmit: () => {
+      setCookie('token', 'lorem');
+      push(home);
+      refresh();
+    },
   });
 
   return (

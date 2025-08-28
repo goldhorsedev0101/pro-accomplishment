@@ -25,6 +25,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      cookies-next:
+        specifier: ^6.1.0
+        version: 6.1.0(next@15.5.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
       embla-carousel-react:
         specifier: ^8.6.0
         version: 8.6.0(react@19.1.0)
@@ -46,6 +49,9 @@ importers:
       react-dom:
         specifier: 19.1.0
         version: 19.1.0(react@19.1.0)
+      react-hot-toast:
+        specifier: ^2.6.0
+        version: 2.6.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-icons:
         specifier: ^5.5.0
         version: 5.5.0(react@19.1.0)
@@ -1710,6 +1716,22 @@ packages:
         integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==,
       }
 
+  cookie@1.0.2:
+    resolution:
+      {
+        integrity: sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==,
+      }
+    engines: { node: '>=18' }
+
+  cookies-next@6.1.0:
+    resolution:
+      {
+        integrity: sha512-8MqWliHg6YRatqlup5HlKCqXM5cFtwq9BVowDpPniPfbTOmrfIEXUQOcRFVXQltV+hyvKDRGJPNtceICkiJ/IA==,
+      }
+    peerDependencies:
+      next: '>=15.0.0'
+      react: '>= 16.8.0'
+
   cross-spawn@7.0.6:
     resolution:
       {
@@ -2303,6 +2325,14 @@ packages:
         integrity: sha512-DpLKbNU4WylpxJykQujfCcwYWiV/Jhm50Goo0wrVILAv5jOr9d+H+UR3PhSCD2rCCEIg0uc+G+muBTwD54JhDQ==,
       }
     engines: { node: '>= 0.4' }
+
+  goober@2.1.16:
+    resolution:
+      {
+        integrity: sha512-erjk19y1U33+XAMe1VTvIONHYoSqE4iS7BYUZfHaqeohLmnC0FdxEh7rQU+6MZ4OajItzjZFSRtVANrQwNq6/g==,
+      }
+    peerDependencies:
+      csstype: ^3.0.10
 
   gopd@1.2.0:
     resolution:
@@ -3182,6 +3212,16 @@ packages:
       {
         integrity: sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==,
       }
+
+  react-hot-toast@2.6.0:
+    resolution:
+      {
+        integrity: sha512-bH+2EBMZ4sdyou/DPrfgIouFpcRLCJ+HoCA32UoAYHn6T3Ur5yfcDCeSr5mwldl6pFOsiocmrXMuoCJ1vV8bWg==,
+      }
+    engines: { node: '>=10' }
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
 
   react-icons@5.5.0:
     resolution:
@@ -4754,6 +4794,14 @@ snapshots:
 
   concat-map@0.0.1: {}
 
+  cookie@1.0.2: {}
+
+  cookies-next@6.1.0(next@15.5.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0):
+    dependencies:
+      cookie: 1.0.2
+      next: 15.5.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react: 19.1.0
+
   cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
@@ -5280,6 +5328,10 @@ snapshots:
       define-properties: 1.2.1
       gopd: 1.2.0
 
+  goober@2.1.16(csstype@3.1.3):
+    dependencies:
+      csstype: 3.1.3
+
   gopd@1.2.0: {}
 
   graceful-fs@4.2.11: {}
@@ -5749,6 +5801,13 @@ snapshots:
       scheduler: 0.26.0
 
   react-fast-compare@2.0.4: {}
+
+  react-hot-toast@2.6.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      csstype: 3.1.3
+      goober: 2.1.16(csstype@3.1.3)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
 
   react-icons@5.5.0(react@19.1.0):
     dependencies:

@@ -13,6 +13,7 @@ import { useState } from 'react';
 const HomeView = () => {
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState(1);
+  console.log("🚀 ~ HomeView ~ page:", page)
   const totalPages = 5;
 
   return (

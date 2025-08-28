@@ -7,7 +7,9 @@ import { FC } from 'react';
 import { Button } from '@/components/ui/button';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
 import Routes from '@/constants/routes';
+import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 interface IProps {
   email: string;
@@ -15,12 +17,24 @@ interface IProps {
 }
 
 const VerifyEmailView: FC<IProps> = ({ email, route }) => {
-  const { push } = useRouter();
+  const { push, refresh } = useRouter();
   const { home, resetPassword } = Routes;
 
   const { handleSubmit, setFieldValue, values } = useFormik({
     initialValues: { email, otp: '' },
-    onSubmit: () => push(route === 'password' ? resetPassword : home),
+    onSubmit: ({ otp }) => {
+      if (otp !== '000000') {
+        toast.error('Invalid OTP');
+        return;
+      }
+
+      if (route === 'password') push(resetPassword);
+      else {
+        setCookie('token', 'lorem');
+        push(home);
+        refresh();
+      }
+    },
   });
 
   const handleResend = () => {};

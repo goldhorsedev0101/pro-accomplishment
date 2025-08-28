@@ -28,6 +28,7 @@
   --text-size-31: 31px;
   --text-size-28: 28px;
   --text-size-22: 22px;
+  --text-size-25: 25px;
 
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -98,6 +99,7 @@
   --text-32: var(--text-size-32);
   --text-31: var(--text-size-31);
   --text-28: var(--text-size-28);
+  --text-25: var(--text-size-25);
   --text-22: var(--text-size-22);
 
   --color-sidebar-ring: var(--sidebar-ring);

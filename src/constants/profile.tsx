@@ -14,7 +14,11 @@ import { PROFILE_ENUM } from '@/enum/profile-enum';
 
 import { StaticImageData } from 'next/image';
 
-type ProfileSidebarType = { label: string; icon: StaticImageData; coloredIcon: StaticImageData };
+type ProfileSidebarType = {
+  label: PROFILE_ENUM;
+  icon: StaticImageData;
+  coloredIcon: StaticImageData;
+};
 
 const { CHANGE_PASSWORD, LOGOUT, PRIVACY_POLICY, PROFILE, SUBSCRIPTION, TERMS_CONDITIONS } =
   PROFILE_ENUM;

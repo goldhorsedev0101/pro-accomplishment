@@ -7,7 +7,7 @@ const Routes = {
   signIn: '/sign-in',
 
   // ====================== Pages ====================== //
-  participantDetail: (slug: string, id: string) => `/home/${slug}/${id}`,
+  studentDetail: (slug: string, id: string) => `/home/${slug}/${id}`,
   category: (slug: string) => `/home/${slug}`,
   profile: '/profile',
   home: '/home',

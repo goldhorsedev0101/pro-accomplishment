@@ -1,7 +1,9 @@
-import React from 'react';
+import StudentDetails from '@/views/pages/Student-Details';
 
-const page = () => {
-  return <div>page</div>;
+const DetailsPage = async ({ params }: { params: { category: string; id: string } }) => {
+  const { category, id } = await params;
+
+  return <StudentDetails category={category} id={id} />;
 };
 
-export default page;
+export default DetailsPage;

@@ -49,9 +49,11 @@ const CategoryView: FC<IProps> = ({ category }) => {
           <ParticipantCard
             about="Springfield Central High School"
             location="California"
-            profile={profile}
+            id={index.toString()}
             name="Emma Robert"
             grade="8th Grade"
+            profile={profile}
+            category={title}
             key={index}
             gpa="3.5"
           />

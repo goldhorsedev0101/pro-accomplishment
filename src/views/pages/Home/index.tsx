@@ -35,9 +35,11 @@ const HomeView = () => {
           {Array.from({ length: totalPages }).map((_, index) => (
             <ParticipantCard
               about="Springfield Central High School"
+              id={index.toString()}
               location="California"
-              profile={profile}
+              category="Academics"
               name="Emma Robert"
+              profile={profile}
               grade="8th Grade"
               key={index}
               gpa="3.5"

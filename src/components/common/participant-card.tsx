@@ -1,20 +1,29 @@
 import locationIcon from '@/../public/icons/location.svg';
 import school from '@/../public/icons/school.svg';
+import Routes from '@/constants/routes';
 import Image, { StaticImageData } from 'next/image';
+import Link from 'next/link';
 import { TiStar } from 'react-icons/ti';
 
 interface IProps {
   profile: string | StaticImageData;
   location: string;
+  category: string;
   grade: string;
   about: string;
   name: string;
   gpa: string;
+  id: string;
 }
 
-const ParticipantCard = ({ profile, about, gpa, grade, location, name }: IProps) => {
+const ParticipantCard = ({ gpa, name, grade, about, profile, location, category, id }: IProps) => {
+  const { studentDetail: participantDetail } = Routes;
+
   return (
-    <div className="shadow-sm border border-neutral-grey-10 bg-white rounded-lg p-3.5 w-full flex gap-x-2 justify-between">
+    <Link
+      href={participantDetail(category, id)}
+      className="shadow-sm border border-neutral-grey-10 bg-white rounded-lg p-3.5 w-full flex gap-x-2 justify-between"
+    >
       <div className="flex gap-x-3">
         <Image src={profile} alt="profile" width={66} height={68} />
         <div className="flex flex-col gap-y-1">
@@ -38,7 +47,7 @@ const ParticipantCard = ({ profile, about, gpa, grade, location, name }: IProps)
           GPA<span className="font-medium"> {gpa}</span>
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

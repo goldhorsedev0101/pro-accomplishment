@@ -2,6 +2,12 @@
 
 import BackButton from '@/components/common/back-button';
 import Box from '@/components/common/box';
+import AcademicsCard from '@/components/common/cards/academics-card';
+import AthleticsCard from '@/components/common/cards/athletics-card';
+import AwardsCard from '@/components/common/cards/awards-card';
+import CertificationsCard from '@/components/common/cards/certifications-card';
+import EmploymentCard from '@/components/common/cards/employment-card';
+import TalentsCard from '@/components/common/cards/talents-card';
 import Heading from '@/components/common/heading';
 import { Button } from '@/components/ui/button';
 import { FC, useState } from 'react';
@@ -40,7 +46,7 @@ const StudentDetails: FC<IProps> = () => {
 
       <Box className="shadow-sm !gap-y-1">
         <Heading text="Objective" width="medium" className="!text-xl" />
-        <p className="font-normal text-lg text-neutral-grey-80">
+        <p className="font-normal text-lg !text-neutral-grey-80">
           Every accomplishment begins with the decision to try but it&apos;s the perseverance to
           finish that makes it extraordinary Every accomplishment begins with the decision to try
           but it&apos;s the perseverance to finish that makes it extraordinary
@@ -48,6 +54,59 @@ const StudentDetails: FC<IProps> = () => {
       </Box>
 
       <Heading text="Accomplishment" size="22" width="medium" />
+
+      <div className="grid md:grid-cols-2 gap-6">
+        <div className="flex flex-col gap-y-6">
+          <Box className="!gap-y-4 !border-none !p-0">
+            <Heading text="Athletics" className="!text-lg !text-neutral-grey-60" width="medium" />
+            <AthleticsCard />
+          </Box>
+          <Box className="!gap-y-4 !border-none !p-0">
+            <Heading text="Academics" className="!text-lg !text-neutral-grey-60" width="medium" />
+            {Array(2)
+              .fill(0)
+              .map((_, i) => (
+                <AcademicsCard key={i} />
+              ))}
+          </Box>
+          <Box className="!gap-y-4 !border-none !p-0">
+            <Heading text="Awards" className="!text-lg !text-neutral-grey-60" width="medium" />
+            {Array(5)
+              .fill(0)
+              .map((_, i) => (
+                <AwardsCard key={i} />
+              ))}
+          </Box>
+        </div>
+
+        <div className="flex flex-col gap-y-6">
+          <Box className="!gap-y-4 !border-none !p-0">
+            <Heading
+              text="Certifications"
+              className="!text-lg !text-neutral-grey-60"
+              width="medium"
+            />
+            {Array(3)
+              .fill(0)
+              .map((_, i) => (
+                <CertificationsCard key={i} />
+              ))}
+          </Box>
+          <Box className="!gap-y-4 !border-none !p-0">
+            <Heading text="Talents" className="!text-lg !text-neutral-grey-60" width="medium" />
+
+            {Array(3)
+              .fill(0)
+              .map((_, i) => (
+                <TalentsCard key={i} />
+              ))}
+          </Box>
+          <Box className="!gap-y-4 !border-none !p-0">
+            <Heading text="Employment" className="!text-lg !text-neutral-grey-60" width="medium" />
+            <EmploymentCard />
+          </Box>
+        </div>
+      </div>
     </div>
   );
 };

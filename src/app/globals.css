@@ -19,14 +19,16 @@
   --gray-10: #e9edee;
   --heading: #171a1f;
   --yellow: #f1c34d;
-  --: #25292a;
+  --yellow-light: #fcf3db;
+  --black: #25292a;
   --gray: #666566;
   --blue: #1f58ea;
   --red: #f14d4d;
+  --green-light: #a4ffd873;
 
   --text-size-32: 32px;
   --text-size-31: 31px;
-  --textblack-size-28: 28px;
+  --text-size-28: 28px;
   --text-size-22: 22px;
   --text-size-25: 25px;
 
@@ -90,10 +92,15 @@
   --color-red: var(--red);
 
   --color-yellow: var(--yellow);
+  --color-yellow-light: var(--yellow-light);
+
+  --color-green-light: var(--green-light);
+
   /* =================================================== */
 
   /* Font Family */
   --font-fredoka: var(--font-fredoka);
+  --font-quicksand: var(--font-quicksand);
 
   /* Text Size */
   --text-32: var(--text-size-32);

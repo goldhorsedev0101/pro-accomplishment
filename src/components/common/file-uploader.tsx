@@ -33,6 +33,7 @@ const FileUploader: FC<IProps> = ({ name, setFieldValue }) => {
 
       setFieldValue(name, file.name);
     } catch (error) {
+      console.log('🚀 ~ handleImageUpload ~ error:', error);
       toast.error('Image upload failed!', {
         position: 'top-right',
       });

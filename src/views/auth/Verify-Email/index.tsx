@@ -10,6 +10,7 @@ import Routes from '@/constants/routes';
 import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { useTimer } from 'react-timer-hook';
 
 interface IProps {
   email: string;
@@ -37,6 +38,11 @@ const VerifyEmailView: FC<IProps> = ({ email, route }) => {
     },
   });
 
+  const time = new Date();
+  time.setSeconds(time.getSeconds() + 30);
+
+  const { seconds } = useTimer({ expiryTimestamp: time, interval: 1000 });
+
   const handleResend = () => {};
 
   return (
@@ -45,11 +51,10 @@ const VerifyEmailView: FC<IProps> = ({ email, route }) => {
       <div>
         <Heading text="Enter Verification Code" />
         <p className="font-medium text-base text-secondary">
-          We&rsquo;ve sent a 6-digit code to <span className="text-primary">alex@example.com</span>{' '}
-          Enter it below to verify your email and continue.
+          We&rsquo;ve sent a 6-digit code to <span className="text-primary">{email}</span> Enter it
+          below to verify your email and continue.
         </p>
       </div>
-
       <InputOTP maxLength={6} onChange={(e) => setFieldValue('otp', e)} value={values.otp}>
         <InputOTPGroup className="gap-x-3">
           {Array(6)
@@ -64,12 +69,14 @@ const VerifyEmailView: FC<IProps> = ({ email, route }) => {
         </InputOTPGroup>
       </InputOTP>
 
-      <Button type="submit">Verify</Button>
+      {seconds > 0 && <p className="text-primary text-sm font-medium text-center">00:{seconds}</p>}
 
+      <Button type="submit">Verify</Button>
       <div className="flex items-center gap-x-1 w-full justify-center -mt-4">
         <p className="font-normal">Didn&rsquo;t receive code?</p>
         <Button
           className="w-fit p-0 underline text-base font-semibold"
+          disabled={seconds > 0}
           onClick={handleResend}
           variant={'link'}
           type="button"

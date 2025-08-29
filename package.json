@@ -27,9 +27,11 @@
     "next": "15.5.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-dropzone": "^14.3.8",
     "react-hot-toast": "^2.6.0",
     "react-icons": "^5.5.0",
     "react-paginate": "^8.3.0",
+    "react-timer-hook": "^4.0.5",
     "tailwind-merge": "^3.3.1",
     "use-debounce": "^10.0.5",
     "yup": "^1.7.0"

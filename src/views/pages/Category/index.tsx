@@ -2,8 +2,9 @@
 import profile from '@/../public/img/profile.png';
 import BackButton from '@/components/common/back-button';
 import Heading from '@/components/common/heading';
-import ParticipantCard from '@/components/common/participant-card';
+import StudentCard from '@/components/common/cards/student-card';
 import SearchInput from '@/components/common/search-input';
+
 import {
   Select,
   SelectContent,
@@ -46,7 +47,7 @@ const CategoryView: FC<IProps> = ({ category }) => {
 
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
         {Array.from({ length: 20 }).map((_, index) => (
-          <ParticipantCard
+          <StudentCard
             about="Springfield Central High School"
             location="California"
             id={index.toString()}

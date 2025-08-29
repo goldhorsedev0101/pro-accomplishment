@@ -19,14 +19,14 @@
   --gray-10: #e9edee;
   --heading: #171a1f;
   --yellow: #f1c34d;
-  --black: #25292a;
+  --: #25292a;
   --gray: #666566;
   --blue: #1f58ea;
   --red: #f14d4d;
 
   --text-size-32: 32px;
   --text-size-31: 31px;
-  --text-size-28: 28px;
+  --textblack-size-28: 28px;
   --text-size-22: 22px;
   --text-size-25: 25px;
 
@@ -75,7 +75,7 @@
   --color-neutral-grey-70: var(--gray-70);
   --color-neutral-grey-80: var(--gray-80);
   --color-neutral-grey-100: var(--black);
-  --color-secondary: var(--gray);
+  --color-gray: var(--gray);
 
   --color-primary-light: var(--primary-light);
   --color-primary-0: var(--primary-0);

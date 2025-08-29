@@ -1,6 +1,7 @@
 'use client';
 
 import BackButton from '@/components/common/back-button';
+import FileUploader from '@/components/common/file-uploader';
 import Heading from '@/components/common/heading';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,10 +13,10 @@ import { JSX } from 'react';
 
 const initialValues = {
   confirmPassword: '',
+  profile: 'lorem',
   firstName: '',
   lastName: '',
   password: '',
-  profile: 'lorem',
   email: '',
 };
 
@@ -23,7 +24,7 @@ const SignUpView = (): JSX.Element => {
   const { push } = useRouter();
   const { signIn, verifyEmail } = Routes;
 
-  const { handleChange, handleSubmit, values, errors, touched } = useFormik({
+  const { handleChange, handleSubmit, values, errors, touched, setFieldValue } = useFormik({
     initialValues,
     validationSchema: SignUpSchema,
     onSubmit: ({ email }) => push(verifyEmail + '?email=' + email + '&route=register'),
@@ -35,6 +36,8 @@ const SignUpView = (): JSX.Element => {
       <Heading text="Sign up" />
 
       <div className="flex w-full flex-col gap-y-3">
+        <FileUploader name="profile" setFieldValue={setFieldValue} value={values['profile']} />
+
         <div className="flex items-center gap-x-3 w-full">
           <Input
             error={touched.firstName ? errors.firstName : undefined}
@@ -65,6 +68,7 @@ const SignUpView = (): JSX.Element => {
           name="email"
           required
         />
+
         <Input
           error={touched.password ? errors.password : undefined}
           placeholder="ohndoe122&&*^Y"
@@ -75,6 +79,7 @@ const SignUpView = (): JSX.Element => {
           name="password"
           required
         />
+
         <Input
           error={touched.confirmPassword ? errors.confirmPassword : undefined}
           value={values['confirmPassword']}

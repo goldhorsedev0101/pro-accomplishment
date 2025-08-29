@@ -5,7 +5,7 @@ import { Filters } from '@/components/common/filters';
 import Heading from '@/components/common/heading';
 import NoData from '@/components/common/no-data';
 import Pagination from '@/components/common/pagination';
-import ParticipantCard from '@/components/common/participant-card';
+import StudentCard from '@/components/common/cards/student-card';
 import SearchInput from '@/components/common/search-input';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -33,7 +33,7 @@ const HomeView = () => {
       ) : (
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
           {Array.from({ length: totalPages }).map((_, index) => (
-            <ParticipantCard
+            <StudentCard
               about="Springfield Central High School"
               id={index.toString()}
               location="California"

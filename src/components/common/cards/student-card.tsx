@@ -16,7 +16,7 @@ interface IProps {
   id: string;
 }
 
-const ParticipantCard = ({ gpa, name, grade, about, profile, location, category, id }: IProps) => {
+const StudentCard = ({ gpa, name, grade, about, profile, location, category, id }: IProps) => {
   const { studentDetail: participantDetail } = Routes;
 
   return (
@@ -51,4 +51,4 @@ const ParticipantCard = ({ gpa, name, grade, about, profile, location, category,
   );
 };
 
-export default ParticipantCard;
+export default StudentCard;

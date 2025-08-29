@@ -31,11 +31,11 @@ const Sidebar = ({ activeTab, setActiveTab, children }: IProps) => {
   return (
     <Tabs
       onValueChange={(v) => setActiveTab(v as PROFILE_ENUM)}
-      className="w-full flex !flex-row items-start gap-x-6"
+      className="w-full flex md:!flex-row items-start gap-x-6"
       defaultValue={PROFILE}
       value={activeTab}
     >
-      <TabsList className="flex bg-white gap-y-3 flex-col h-full items-start w-full max-w-[324px] border border-neutral-grey-20 rounded-xl px-4 py-6">
+      <TabsList className="flex bg-white gap-y-3 flex-col h-full items-start w-full md:max-w-[324px] border border-neutral-grey-20 rounded-xl px-4 py-6">
         {sidebar.map(({ icon, label, coloredIcon }, i) => (
           <Fragment key={i}>
             <TabsTrigger
@@ -58,7 +58,7 @@ const Sidebar = ({ activeTab, setActiveTab, children }: IProps) => {
         ))}
       </TabsList>
 
-      {children}
+      <div className="w-full">{children}</div>
     </Tabs>
   );
 };

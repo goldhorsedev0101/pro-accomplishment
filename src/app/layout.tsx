@@ -1,3 +1,4 @@
+import QueryProvider from '@/providers/query-client-provider';
 import type { Metadata } from 'next';
 import { Fredoka, Quicksand } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
@@ -31,8 +32,10 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${fredoka.variable} ${quicksand.variable} antialiased`}
       >
-        <Toaster />
-        {children}
+        <QueryProvider>
+          <Toaster />
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );

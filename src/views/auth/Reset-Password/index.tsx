@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Routes from '@/constants/routes';
 import { ResetPasswordSchema } from '@/schemas/reset-password.schema';
+import { useResetPasswordMutation } from '@/services/auth/reset-password-mutation';
 import { setCookie } from 'cookies-next';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
@@ -13,13 +14,24 @@ const ResetPasswordView = () => {
   const { push, refresh } = useRouter();
   const { home } = Routes;
 
+  const {
+    //  mutateAsync,
+    isPending,
+  } = useResetPasswordMutation();
+
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: { confirmPassword: '', password: '' },
     validationSchema: ResetPasswordSchema,
-    onSubmit: () => {
-      setCookie('token', 'lorem');
-      push(home);
-      refresh();
+    onSubmit: async () => {
+      try {
+        // const { token } = await mutateAsync(values);
+
+        setCookie('token', 'lorem');
+        push(home);
+        refresh();
+      } catch (error) {
+        console.log('🚀 ~ ResetPasswordView ~ error:', error);
+      }
     },
   });
 
@@ -51,7 +63,9 @@ const ResetPasswordView = () => {
         required
       />
 
-      <Button type="submit">Save Password</Button>
+      <Button type="submit" disabled={isPending}>
+        Save Password
+      </Button>
     </form>
   );
 };

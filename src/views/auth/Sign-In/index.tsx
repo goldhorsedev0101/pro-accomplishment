@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Routes from '@/constants/routes';
 import { SignInSchema } from '@/schemas/sign-in.schema';
+import { useSignInMutation } from '@/services/auth/sign-in-mutation';
 import { setCookie } from 'cookies-next';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
@@ -13,16 +14,20 @@ import { JSX } from 'react';
 const SignInView = (): JSX.Element => {
   const { push, refresh } = useRouter();
   const { forgetPassword, signUp, home } = Routes;
-  // const { mutateAsync } = useLoginMutation();
+  const { isPending } = useSignInMutation();
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: { email: '', password: '' },
     validationSchema: SignInSchema,
     onSubmit: async () => {
-      // const { token } = await mutateAsync(values);
-      setCookie('token', 'lorem');
-      push(home);
-      refresh();
+      try {
+        // const { token } = await mutateAsync(values);
+        setCookie('token', 'lorem');
+        push(home);
+        refresh();
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
 
@@ -60,7 +65,9 @@ const SignInView = (): JSX.Element => {
         </Button>
       </div>
 
-      <Button type="submit">Sign In</Button>
+      <Button type="submit" disabled={isPending}>
+        Sign In
+      </Button>
 
       <div className="flex items-center gap-x-1 w-full justify-center -mt-4">
         <p className="font-normal">Don&apos;t have an account?</p>

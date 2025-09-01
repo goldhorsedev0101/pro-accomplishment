@@ -5,17 +5,26 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Routes from '@/constants/routes';
 import { ForgetPasswordSchema } from '@/schemas/forget-password.schema';
+import { useForgetPasswordMutation } from '@/services/auth/forget-password-mutation';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 
 const ForgetPasswordView = () => {
   const { push } = useRouter();
   const { verifyEmail } = Routes;
+  const { isPending } = useForgetPasswordMutation();
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: { email: '' },
     validationSchema: ForgetPasswordSchema,
-    onSubmit: ({ email }) => push(verifyEmail + '?email=' + email + '&route=password'),
+    onSubmit: async ({ email }) => {
+      try {
+        // await mutateAsync({ email });
+        push(verifyEmail + '?email=' + email + '&route=password');
+      } catch (error) {
+        console.log('🚀 ~ ForgetPasswordView ~ error:', error);
+      }
+    },
   });
 
   return (
@@ -37,7 +46,9 @@ const ForgetPasswordView = () => {
         required
       />
 
-      <Button type="submit">Send</Button>
+      <Button type="submit" disabled={isPending}>
+        Send
+      </Button>
     </form>
   );
 };

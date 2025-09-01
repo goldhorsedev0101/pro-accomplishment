@@ -7,11 +7,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Routes from '@/constants/routes';
 import { SignUpSchema } from '@/schemas/sign-up.schema';
+import { useSignUpMutation } from '@/services/auth/sign-up-mutation';
+import { SignUpPayloadT } from '@/types/auth/sign-up/sign-up-payload';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { JSX } from 'react';
 
-const initialValues = {
+const initialValues: SignUpPayloadT = {
   confirmPassword: '',
   profile: 'lorem',
   firstName: '',
@@ -23,11 +25,22 @@ const initialValues = {
 const SignUpView = (): JSX.Element => {
   const { push } = useRouter();
   const { signIn, verifyEmail } = Routes;
+  const {
+    //  mutateAsync,
+    isPending,
+  } = useSignUpMutation();
 
   const { handleChange, handleSubmit, values, errors, touched, setFieldValue } = useFormik({
     initialValues,
     validationSchema: SignUpSchema,
-    onSubmit: ({ email }) => push(verifyEmail + '?email=' + email + '&route=register'),
+    onSubmit: async (value) => {
+      try {
+        // await mutateAsync(value);
+        push(verifyEmail + '?email=' + value.email + '&route=register');
+      } catch (error) {
+        console.log('🚀 ~ SignUpView ~ error:', error);
+      }
+    },
   });
 
   return (
@@ -92,7 +105,9 @@ const SignUpView = (): JSX.Element => {
         />
       </div>
 
-      <Button type="submit">Sign up</Button>
+      <Button type="submit" disabled={isPending}>
+        Sign up
+      </Button>
 
       <div className="flex items-center gap-x-1 w-full justify-center -mt-4">
         <p className="font-normal">Already have an account?</p>

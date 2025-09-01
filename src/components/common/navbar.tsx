@@ -1,11 +1,20 @@
 'use client';
+
+// Icons
 import avatar from '@/../public/img/avatar.png';
 import logo from '@/../public/img/logo.png';
+
+// Constant
 import Routes from '@/constants/routes';
+
+// Component
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Navbar = () => {
+// Types
+import { JSX } from 'react';
+
+const Navbar = (): JSX.Element => {
   const { profile, home } = Routes;
 
   return (

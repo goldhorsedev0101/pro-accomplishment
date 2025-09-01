@@ -1,10 +1,13 @@
 'use client';
-import profile from '@/../public/img/profile.png';
-import BackButton from '@/components/common/back-button';
-import Heading from '@/components/common/heading';
-import StudentCard from '@/components/common/cards/student-card';
-import SearchInput from '@/components/common/search-input';
 
+// Icon
+import profile from '@/../public/img/profile.png';
+
+// Component
+import BackButton from '@/components/common/back-button';
+import StudentCard from '@/components/common/cards/student-card';
+import Heading from '@/components/common/heading';
+import SearchInput from '@/components/common/search-input';
 import {
   Select,
   SelectContent,
@@ -12,13 +15,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { FC, useState } from 'react';
 
-interface IProps {
-  category: string;
-}
+// Types
+import { IParams } from '@/types/params.type';
+import { FC, JSX, useState } from 'react';
 
-const CategoryView: FC<IProps> = ({ category }) => {
+const CategoryView: FC<IParams> = ({ category }): JSX.Element => {
   const [search, setSearch] = useState('');
   const [subCategory, setSubCategory] = useState<string>();
 

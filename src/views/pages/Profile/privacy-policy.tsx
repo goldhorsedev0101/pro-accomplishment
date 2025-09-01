@@ -1,7 +1,11 @@
+// Components
 import Box from '@/components/common/box';
 import Heading from '@/components/common/heading';
 
-const PrivacyPolicy = () => {
+// Type
+import { JSX } from 'react';
+
+const PrivacyPolicy = (): JSX.Element => {
   return (
     <Box>
       <Heading text="Privacy Policy" width="medium" size="31" />

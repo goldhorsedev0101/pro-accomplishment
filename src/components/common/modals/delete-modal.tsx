@@ -1,13 +1,18 @@
 'use client';
 
+// Components
 import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
 import BasicModal from './basic-modal';
 
-const DeleteModal = () => {
+// Types
+import { JSX, useState } from 'react';
+
+// Toast
+import toast from 'react-hot-toast';
+
+const DeleteModal = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [deleteText, setDeleteText] = useState<string>('');
 

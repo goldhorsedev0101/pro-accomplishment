@@ -1,12 +1,22 @@
+// Components
 import Box from '@/components/common/box';
 import Heading from '@/components/common/heading';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
+// Schema
 import { ChangePasswordSchema } from '@/schemas/change-password.schema';
+
+// Formik
 import { useFormik } from 'formik';
+
+// Type
+import { JSX } from 'react';
+
+// Toast
 import toast from 'react-hot-toast';
 
-const ChangePassword = () => {
+const ChangePassword = (): JSX.Element => {
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: { oldPassword: '', newPassword: '', confirmPassword: '' },
     validationSchema: ChangePasswordSchema,

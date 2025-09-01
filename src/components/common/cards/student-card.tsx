@@ -1,9 +1,18 @@
+// Icons
 import locationIcon from '@/../public/icons/location.svg';
 import school from '@/../public/icons/school.svg';
-import Routes from '@/constants/routes';
-import Image, { StaticImageData } from 'next/image';
-import Link from 'next/link';
 import { TiStar } from 'react-icons/ti';
+
+// Constant
+import Routes from '@/constants/routes';
+
+// Components
+import Image from 'next/image';
+import Link from 'next/link';
+
+// Types
+import { StaticImageData } from 'next/image';
+import { JSX } from 'react';
 
 interface IProps {
   profile: string | StaticImageData;
@@ -16,7 +25,16 @@ interface IProps {
   id: string;
 }
 
-const StudentCard = ({ gpa, name, grade, about, profile, location, category, id }: IProps) => {
+const StudentCard = ({
+  location,
+  category,
+  profile,
+  grade,
+  about,
+  name,
+  gpa,
+  id,
+}: IProps): JSX.Element => {
   const { studentDetail: participantDetail } = Routes;
 
   return (

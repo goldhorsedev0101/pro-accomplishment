@@ -1,20 +1,32 @@
 'use client';
+
+// Components
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import Image from 'next/image';
+
+// Constant
 import { sidebar } from '@/constants/profile';
 import Routes from '@/constants/routes';
+
+// Enum
 import { PROFILE_ENUM } from '@/enum/profile-enum';
+
+// Cookie
 import { deleteCookie } from 'cookies-next';
-import Image from 'next/image';
+
+// Router
 import { useRouter } from 'next/navigation';
-import { Dispatch, Fragment, ReactNode, SetStateAction } from 'react';
+
+// Types
+import { Dispatch, Fragment, JSX, ReactNode, SetStateAction } from 'react';
 
 interface IProps {
-  activeTab: PROFILE_ENUM;
   setActiveTab: Dispatch<SetStateAction<PROFILE_ENUM>>;
+  activeTab: PROFILE_ENUM;
   children: ReactNode;
 }
 
-const Sidebar = ({ activeTab, setActiveTab, children }: IProps) => {
+const Sidebar = ({ activeTab, setActiveTab, children }: IProps): JSX.Element => {
   const isActive = (label: PROFILE_ENUM) => activeTab === label;
 
   const { LOGOUT, PROFILE } = PROFILE_ENUM;

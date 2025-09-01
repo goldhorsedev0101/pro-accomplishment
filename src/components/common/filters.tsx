@@ -1,3 +1,4 @@
+// Components
 import {
   Carousel,
   CarouselContent,
@@ -5,12 +6,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { filters } from '@/constants/filters';
-import Routes from '@/constants/routes';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export function Filters() {
+// Constants
+import { filters } from '@/constants/filters';
+import Routes from '@/constants/routes';
+
+// Types
+import { JSX } from 'react';
+
+export function Filters(): JSX.Element {
   const { category } = Routes;
 
   return (

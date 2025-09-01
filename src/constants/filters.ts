@@ -16,6 +16,7 @@ import talents from '@/../public/icons/filters/talents.svg';
 import tech from '@/../public/icons/filters/tech.svg';
 import volunteer from '@/../public/icons/filters/volunteer.svg';
 
+// Type
 import { StaticImageData } from 'next/image';
 
 type IFilters = Array<{ label: string; icon: StaticImageData }>;

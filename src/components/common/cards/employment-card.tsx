@@ -1,11 +1,17 @@
+// Icons
 import briefcase from '@/../public/icons/briefcase.svg';
 import note from '@/../public/icons/note.svg';
+
+// Components
 import Image from 'next/image';
 import Link from 'next/link';
 import Box from '../box';
 import Heading from '../heading';
 
-const EmploymentCard = () => {
+// Type
+import { JSX } from 'react';
+
+const EmploymentCard = (): JSX.Element => {
   const skills = ['React.js', 'TypeScript', 'Tailwind CSS'];
 
   return (

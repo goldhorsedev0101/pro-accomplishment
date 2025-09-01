@@ -1,20 +1,18 @@
+// Fonts
+import { fredoka, quicksand } from '@/../public/fonts';
+
+// Provider
 import QueryProvider from '@/providers/query-client-provider';
+
+// Types
 import type { Metadata } from 'next';
-import { Fredoka, Quicksand } from 'next/font/google';
+import { JSX } from 'react';
+
+// Toast
 import { Toaster } from 'react-hot-toast';
+
+// CSS
 import './globals.css';
-
-const fredoka = Fredoka({
-  variable: '--font-fredoka',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-});
-
-const quicksand = Quicksand({
-  variable: '--font-quicksand',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-});
 
 export const metadata: Metadata = {
   title: 'Accomplishment Tracking',
@@ -25,7 +23,7 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>): JSX.Element {
   return (
     <html lang="en">
       <body

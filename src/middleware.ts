@@ -1,4 +1,7 @@
+// Types
 import { NextRequest, NextResponse } from 'next/server';
+
+// Constant
 import Routes from './constants/routes';
 
 // Public Routes

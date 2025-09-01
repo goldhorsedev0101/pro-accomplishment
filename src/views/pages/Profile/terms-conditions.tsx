@@ -1,7 +1,11 @@
+// Components
 import Box from '@/components/common/box';
 import Heading from '@/components/common/heading';
 
-const TermsConditions = () => {
+// Type
+import { JSX } from 'react';
+
+const TermsConditions = (): JSX.Element => {
   return (
     <Box>
       <Heading text="Terms & Conditions" width="medium" size="31" />

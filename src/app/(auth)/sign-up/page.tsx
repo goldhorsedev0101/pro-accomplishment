@@ -1,6 +1,12 @@
+// View
 import SignUpView from '@/views/auth/Sign-Up';
+
+// Types
+import { Metadata } from 'next';
 import { JSX } from 'react';
 
-const SignupPage = (): JSX.Element => <SignUpView />;
+export const metadata: Metadata = { title: 'Sign Up - Accomplishment' };
 
-export default SignupPage;
+const SignUpPage = (): JSX.Element => <SignUpView />;
+
+export default SignUpPage;

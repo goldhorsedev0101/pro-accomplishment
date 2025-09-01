@@ -1,16 +1,25 @@
 'use client';
 
+// Icons
 import edit from '@/../public/icons/edit.svg';
+
+// Components
 import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { EditProfileSchema } from '@/schemas/edit-profile.schema';
-import { useFormik } from 'formik';
 import Image from 'next/image';
-import { useState } from 'react';
 import BasicModal from './basic-modal';
 
-const EditProfileModal = () => {
+// Schemas
+import { EditProfileSchema } from '@/schemas/edit-profile.schema';
+
+// Formik
+import { useFormik } from 'formik';
+
+// Types
+import { JSX, useState } from 'react';
+
+const EditProfileModal = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const { touched, errors, values, handleChange, handleSubmit, resetForm } = useFormik({

@@ -1,4 +1,7 @@
-import { Dispatch, SetStateAction } from 'react';
+// Types
+import { Dispatch, JSX, SetStateAction } from 'react';
+
+// Component
 import ReactPaginate from 'react-paginate';
 
 interface IProps {
@@ -6,7 +9,7 @@ interface IProps {
   setPage: Dispatch<SetStateAction<number>>;
 }
 
-export default function Pagination({ totalPages, setPage }: IProps) {
+export default function Pagination({ totalPages, setPage }: IProps): JSX.Element {
   return (
     <div className="w-fit self-end">
       <ReactPaginate

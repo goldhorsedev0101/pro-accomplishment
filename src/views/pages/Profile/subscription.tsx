@@ -1,13 +1,23 @@
+// Icons
 import check from '@/../public/icons/check.svg';
+
+// Components
 import Box from '@/components/common/box';
 import Heading from '@/components/common/heading';
 import BasicModal from '@/components/common/modals/basic-modal';
 import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
+
+// Constant
 import { plans } from '@/constants/plans';
+
+// Tag
 import Image from 'next/image';
 
-const Subscription = () => {
+// Types
+import { JSX } from 'react';
+
+const Subscription = (): JSX.Element => {
   return (
     <div className="space-y-6">
       <Box>

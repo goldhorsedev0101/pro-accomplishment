@@ -1,14 +1,29 @@
 'use client';
 
+// Components
 import Heading from '@/components/common/heading';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
+// Constants
 import Routes from '@/constants/routes';
+
+// Schema
 import { SignInSchema } from '@/schemas/sign-in.schema';
+
+// Mutation
 import { useSignInMutation } from '@/services/auth/sign-in-mutation';
+
+// Cookies
 import { setCookie } from 'cookies-next';
+
+// Formik
 import { useFormik } from 'formik';
+
+// Router
 import { useRouter } from 'next/navigation';
+
+// Types
 import { JSX } from 'react';
 
 const SignInView = (): JSX.Element => {

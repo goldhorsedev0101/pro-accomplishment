@@ -1,10 +1,16 @@
+// Icons
 import building from '@/../public/icons/building.svg';
 import start from '@/../public/icons/medal-star.svg';
+
+// Components
 import Image from 'next/image';
 import Box from '../box';
 import Heading from '../heading';
 
-const CertificationsCard = () => {
+// Type
+import { JSX } from 'react';
+
+const CertificationsCard = (): JSX.Element => {
   return (
     <Box className="shadow-sm w-full !gap-y-3">
       <div className="flex items-center gap-x-3">

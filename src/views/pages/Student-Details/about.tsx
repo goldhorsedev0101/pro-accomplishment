@@ -1,15 +1,22 @@
+// Component
 import Box from '@/components/common/box';
 import Heading from '@/components/common/heading';
-import { contacts } from '@/constants/contacts';
 import Image from 'next/image';
-import { PiQuotesLight } from 'react-icons/pi';
-import { TiStar } from 'react-icons/ti';
 
+// Constant
+import { contacts } from '@/constants/contacts';
+
+// Icons
 import link from '@/../public/icons/link.svg';
 import school from '@/../public/icons/school.svg';
 import profile from '@/../public/img/profile.png';
+import { PiQuotesLight } from 'react-icons/pi';
+import { TiStar } from 'react-icons/ti';
 
-const About = () => {
+// Type
+import { JSX } from 'react';
+
+const About = (): JSX.Element => {
   return (
     <Box className="shadow-sm">
       <div className="flex lg:!flex-row  gap-6 flex-col-reverse items-start justify-between">

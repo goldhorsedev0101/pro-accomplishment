@@ -1,6 +1,7 @@
-import React from 'react';
+// Types
+import { JSX, ReactNode } from 'react';
 
-const AuthLayout = ({ children }: { children: React.ReactNode }) => {
+const AuthLayout = ({ children }: { children: ReactNode }): JSX.Element => {
   return (
     <div className="h-screen overflow-x-hidden w-screen grid lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6">
       {/* Section 1 - Logo */}

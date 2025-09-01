@@ -1,16 +1,22 @@
 'use client';
+
+// Icons
 import header from '@/../public/img/header.png';
 import profile from '@/../public/img/profile.png';
+
+// Components
+import StudentCard from '@/components/common/cards/student-card';
 import { Filters } from '@/components/common/filters';
 import Heading from '@/components/common/heading';
 import NoData from '@/components/common/no-data';
 import Pagination from '@/components/common/pagination';
-import StudentCard from '@/components/common/cards/student-card';
 import SearchInput from '@/components/common/search-input';
 import Image from 'next/image';
-import { useState } from 'react';
 
-const HomeView = () => {
+// Types
+import { JSX, useState } from 'react';
+
+const HomeView = (): JSX.Element => {
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState(1);
   console.log('🚀 ~ HomeView ~ page:', page);

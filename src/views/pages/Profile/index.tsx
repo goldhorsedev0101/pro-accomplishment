@@ -1,8 +1,7 @@
 'use client';
 
+// Components
 import { TabsContent } from '@/components/ui/tabs';
-import { PROFILE_ENUM } from '@/enum/profile-enum';
-import { useState } from 'react';
 import ChangePassword from './change-password';
 import PrivacyPolicy from './privacy-policy';
 import Profile from './profile';
@@ -10,7 +9,13 @@ import Sidebar from './sidebar';
 import Subscription from './subscription';
 import TermsConditions from './terms-conditions';
 
-const ProfileView = () => {
+// Enum
+import { PROFILE_ENUM } from '@/enum/profile-enum';
+
+// Types
+import { JSX, useState } from 'react';
+
+const ProfileView = (): JSX.Element => {
   const { PROFILE, SUBSCRIPTION, CHANGE_PASSWORD, PRIVACY_POLICY, TERMS_CONDITIONS, LOGOUT } =
     PROFILE_ENUM;
 

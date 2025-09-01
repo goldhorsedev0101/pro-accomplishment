@@ -1,11 +1,17 @@
+// Icons
 import calendar from '@/../public/icons/calendar-tick.svg';
 import cup from '@/../public/icons/cup.svg';
 import location from '@/../public/icons/location-colored.svg';
+
+// Components
 import Image from 'next/image';
 import Box from '../box';
 import Heading from '../heading';
 
-const AthleticsCard = () => {
+// Types
+import { JSX } from 'react';
+
+const AthleticsCard = (): JSX.Element => {
   return (
     <Box className="shadow-sm">
       <div className="flex justify-between items-start">

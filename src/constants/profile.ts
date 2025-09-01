@@ -10,8 +10,11 @@ import subscriptionColored from '@/../public/icons/sidebar/subscription-colored.
 import subscription from '@/../public/icons/sidebar/subscription.svg';
 import termsConditionsColored from '@/../public/icons/sidebar/terms-conditions-colored.svg';
 import termsConditions from '@/../public/icons/sidebar/terms-conditions.svg';
+
+// Enum
 import { PROFILE_ENUM } from '@/enum/profile-enum';
 
+// Type
 import { StaticImageData } from 'next/image';
 
 type ProfileSidebarType = {

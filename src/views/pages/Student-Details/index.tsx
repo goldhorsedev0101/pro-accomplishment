@@ -1,5 +1,6 @@
 'use client';
 
+// Components
 import BackButton from '@/components/common/back-button';
 import Box from '@/components/common/box';
 import AcademicsCard from '@/components/common/cards/academics-card';
@@ -10,17 +11,17 @@ import EmploymentCard from '@/components/common/cards/employment-card';
 import TalentsCard from '@/components/common/cards/talents-card';
 import Heading from '@/components/common/heading';
 import { Button } from '@/components/ui/button';
-import { FC, useState } from 'react';
-import { GoHeart, GoHeartFill } from 'react-icons/go';
-import { HiOutlineDownload } from 'react-icons/hi';
 import About from './about';
 
-interface IProps {
-  category: string;
-  id: string;
-}
+// Types
+import { IParams } from '@/types/params.type';
+import { FC, JSX, useState } from 'react';
 
-const StudentDetails: FC<IProps> = () => {
+// Icons
+import { GoHeart, GoHeartFill } from 'react-icons/go';
+import { HiOutlineDownload } from 'react-icons/hi';
+
+const StudentDetails: FC<IParams> = (): JSX.Element => {
   const [isFav, setIsFav] = useState<boolean>(false);
 
   return (

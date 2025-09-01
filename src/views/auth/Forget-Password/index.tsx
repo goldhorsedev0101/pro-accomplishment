@@ -1,15 +1,30 @@
 'use client';
+
+// Components
 import BackButton from '@/components/common/back-button';
 import Heading from '@/components/common/heading';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
+// Routes
 import Routes from '@/constants/routes';
+
+// Schema
 import { ForgetPasswordSchema } from '@/schemas/forget-password.schema';
+
+// Mutation
 import { useForgetPasswordMutation } from '@/services/auth/forget-password-mutation';
+
+// Formik
 import { useFormik } from 'formik';
+
+// Router
 import { useRouter } from 'next/navigation';
 
-const ForgetPasswordView = () => {
+// Type
+import { JSX } from 'react';
+
+const ForgetPasswordView = (): JSX.Element => {
   const { push } = useRouter();
   const { verifyEmail } = Routes;
   const { isPending } = useForgetPasswordMutation();

@@ -1,3 +1,4 @@
+// Components
 import {
   Dialog,
   DialogContent,
@@ -6,8 +7,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+
+// Utils
 import { cn } from '@/lib/utils';
-import { Dispatch, FC, ReactNode, SetStateAction } from 'react';
+
+// Types
+import { Dispatch, FC, JSX, ReactNode, SetStateAction } from 'react';
 
 interface IProps {
   trigger: { className?: string; child: ReactNode };
@@ -17,7 +22,7 @@ interface IProps {
   isOpen?: boolean;
 }
 
-const BasicModal: FC<IProps> = ({ trigger, title, footer, isOpen, setIsOpen }) => {
+const BasicModal: FC<IProps> = ({ trigger, title, footer, isOpen, setIsOpen }): JSX.Element => {
   return (
     <Dialog open={isOpen}>
       <DialogTrigger onClick={() => setIsOpen?.(!isOpen)} className={cn(trigger.className)}>

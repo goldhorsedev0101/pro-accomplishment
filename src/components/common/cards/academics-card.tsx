@@ -1,12 +1,17 @@
+// Components
+import Image from 'next/image';
 import Box from '../box';
 import Heading from '../heading';
 
+// Icons
 import book from '@/../public/icons/book.svg';
 import percentage from '@/../public/icons/percentage.svg';
 import teacher from '@/../public/icons/teacher.svg';
-import Image from 'next/image';
 
-const AcademicsCard = () => {
+// Types
+import { JSX } from 'react';
+
+const AcademicsCard = (): JSX.Element => {
   const data = [
     { icon: book, label: 'Math' },
     { icon: percentage, label: '95%' },

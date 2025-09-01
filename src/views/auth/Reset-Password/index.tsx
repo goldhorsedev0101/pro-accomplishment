@@ -1,16 +1,33 @@
 'use client';
+
+// Components
 import BackButton from '@/components/common/back-button';
 import Heading from '@/components/common/heading';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
+// Routes
 import Routes from '@/constants/routes';
+
+// Schema
 import { ResetPasswordSchema } from '@/schemas/reset-password.schema';
+
+// Mutation
 import { useResetPasswordMutation } from '@/services/auth/reset-password-mutation';
+
+// Cookies
 import { setCookie } from 'cookies-next';
+
+// Formik
 import { useFormik } from 'formik';
+
+// Router
 import { useRouter } from 'next/navigation';
 
-const ResetPasswordView = () => {
+// Type
+import { JSX } from 'react';
+
+const ResetPasswordView = (): JSX.Element => {
   const { push, refresh } = useRouter();
   const { home } = Routes;
 

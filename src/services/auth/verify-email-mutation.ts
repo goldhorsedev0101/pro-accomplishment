@@ -1,8 +1,17 @@
+// Types
 import { VerifyEmailPayloadT } from '@/types/auth/verify-email/verify-email-payload';
 import { VerifyEmailResponseT } from '@/types/auth/verify-email/verify-email-response';
+
+// Mutation
 import { useMutation } from '@tanstack/react-query';
+
+// Axios
 import axios from 'axios';
+
+// Toast
 import toast from 'react-hot-toast';
+
+// URL
 import { URLS } from '../base-url';
 
 const useVerifyEmailMutation = () => {

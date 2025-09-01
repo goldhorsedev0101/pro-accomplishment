@@ -1,17 +1,30 @@
 'use client';
 
+// Components
 import BackButton from '@/components/common/back-button';
 import FileUploader from '@/components/common/file-uploader';
 import Heading from '@/components/common/heading';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
+// Constant
 import Routes from '@/constants/routes';
+
+// Schema
 import { SignUpSchema } from '@/schemas/sign-up.schema';
+
+// Mutation
 import { useSignUpMutation } from '@/services/auth/sign-up-mutation';
+
+// Type
 import { SignUpPayloadT } from '@/types/auth/sign-up/sign-up-payload';
-import { useFormik } from 'formik';
-import { useRouter } from 'next/navigation';
 import { JSX } from 'react';
+
+// Formik
+import { useFormik } from 'formik';
+
+// Router
+import { useRouter } from 'next/navigation';
 
 const initialValues: SignUpPayloadT = {
   confirmPassword: '',

@@ -1,9 +1,15 @@
+// Icons
 import start from '@/../public/icons/magic-star.svg';
+
+// Components
 import Image from 'next/image';
 import Box from '../box';
 import Heading from '../heading';
 
-const TalentsCard = () => {
+// Types
+import { JSX } from 'react';
+
+const TalentsCard = (): JSX.Element => {
   const actress = ['Memorization', 'Stage Presence', 'Acting'];
 
   return (

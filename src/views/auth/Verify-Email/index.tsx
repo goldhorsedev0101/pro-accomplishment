@@ -1,16 +1,34 @@
 'use client';
+
+// Components
 import BackButton from '@/components/common/back-button';
 import Heading from '@/components/common/heading';
 import { Button } from '@/components/ui/button';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
+
+// Constant
 import Routes from '@/constants/routes';
+
+// Mutation
 import { useResendOTPMutation } from '@/services/auth/resend-otp-mutation';
 import { useVerifyEmailMutation } from '@/services/auth/verify-email-mutation';
+
+// Cookie
 import { setCookie } from 'cookies-next';
+
+// Formik
 import { useFormik } from 'formik';
+
+// Router
 import { useRouter } from 'next/navigation';
-import { FC } from 'react';
+
+// Types
+import { FC, JSX } from 'react';
+
+// Toast
 import toast from 'react-hot-toast';
+
+// Hoot
 import { useTimer } from 'react-timer-hook';
 
 interface IProps {
@@ -18,7 +36,7 @@ interface IProps {
   route: string;
 }
 
-const VerifyEmailView: FC<IProps> = ({ email, route }) => {
+const VerifyEmailView: FC<IProps> = ({ email, route }): JSX.Element => {
   const { push, refresh } = useRouter();
   const { home, resetPassword } = Routes;
 

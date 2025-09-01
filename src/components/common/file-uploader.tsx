@@ -1,16 +1,21 @@
 'use client';
 
-// React & next Imports
-import { FC } from 'react';
+// Types
+import { FC, JSX } from 'react';
+
+// Toast
 import toast from 'react-hot-toast';
 
-// Dropzone Imports
+// Dropzone
 import Dropzone from 'react-dropzone';
 
-// Formik Imports
+// Formik
 import { FormikValues } from 'formik';
+
+// Component
 import Image from 'next/image';
 
+// Icons
 import camera from '@/../public/icons/camera.svg';
 import gallery from '@/../public/icons/gallery.svg';
 
@@ -20,7 +25,7 @@ interface IProps {
   name: string;
 }
 
-const FileUploader: FC<IProps> = ({ name, setFieldValue }) => {
+const FileUploader: FC<IProps> = ({ name, setFieldValue }): JSX.Element => {
   const handleImageUpload = async (newFiles: File[]): Promise<void> => {
     const file = newFiles[0];
     const formData = new FormData();
@@ -34,9 +39,7 @@ const FileUploader: FC<IProps> = ({ name, setFieldValue }) => {
       setFieldValue(name, file.name);
     } catch (error) {
       console.log('🚀 ~ handleImageUpload ~ error:', error);
-      toast.error('Image upload failed!', {
-        position: 'top-right',
-      });
+      toast.error('Image upload failed!');
     }
   };
 

@@ -1,9 +1,13 @@
+// Components
 import Box from '@/components/common/box';
 import Heading from '@/components/common/heading';
 import DeleteModal from '@/components/common/modals/delete-modal';
 import EditProfileModal from '@/components/common/modals/edit-profile-modal';
 
-const Profile = () => {
+// Type
+import { JSX } from 'react';
+
+const Profile = (): JSX.Element => {
   const data = [
     { label: 'First Name', value: 'Jane' },
     { label: 'Last Name', value: 'Cooper' },

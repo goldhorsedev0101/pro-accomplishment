@@ -17,6 +17,7 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get('token');
 
   if (pathName === '/') return NextResponse.redirect(new URL(home, request.url));
+  if (pathName === '/icons') return NextResponse.redirect(new URL(home, request.url));
 
   if (!token && publicRoutes.includes(pathName)) return NextResponse.next();
 

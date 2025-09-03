@@ -18,6 +18,7 @@ import { IParams } from '@/types/params.type';
 import { FC, JSX, useState } from 'react';
 
 // Icons
+import DetailsModalLayout from '@/components/common/modals/details-modal-layout';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { HiOutlineDownload } from 'react-icons/hi';
 
@@ -31,7 +32,7 @@ const StudentDetails: FC<IParams> = (): JSX.Element => {
         <div className="flex items-center gap-x-2">
           <button
             onClick={() => setIsFav(!isFav)}
-            className="size-12 rounded-full flex items-center justify-center text-white text-2xl bg-[#0000003D]"
+            className="size-12 cursor-pointer rounded-full flex items-center justify-center text-white text-2xl bg-[#0000003D]"
           >
             {isFav ? <GoHeartFill /> : <GoHeart />}
           </button>
@@ -108,6 +109,8 @@ const StudentDetails: FC<IParams> = (): JSX.Element => {
           </Box>
         </div>
       </div>
+
+      <DetailsModalLayout />
     </div>
   );
 };

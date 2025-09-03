@@ -54,7 +54,7 @@ function DialogContent({
   showCloseButton = true,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
-  onClick: () => void;
+  onClick?: () => void;
   showCloseButton?: boolean;
 }) {
   return (

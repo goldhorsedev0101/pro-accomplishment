@@ -6,6 +6,7 @@ import internshipAbroad from '@/../public/pdf/internship-abroad.svg';
 import internships from '@/../public/pdf/internships.svg';
 import language from '@/../public/pdf/language.svg';
 import mobileProgramming from '@/../public/pdf/mobile-programming.svg';
+import quote from '@/../public/pdf/quote.svg';
 import ranking from '@/../public/pdf/ranking.svg';
 import routing from '@/../public/pdf/routing.svg';
 import star from '@/../public/pdf/star.svg';
@@ -22,6 +23,7 @@ const icons = [
   ranking,
   routing,
   agency,
+  quote,
   bill,
   info,
   star,

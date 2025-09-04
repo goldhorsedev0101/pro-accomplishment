@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Quicksand:wght@300..700&display=swap');
+
+:root {
+  --primary-light: #49909d1f;
+  --green-light: #a4ffd873;
+  --purple-light: #e3dbfc;
+  --yellow-light: #fcf3db;
+  --gray-light: #f2f5f6;
+  --blue-light: #cbe7ff;
+  --primary-20: #f4ffcb;
+  --primary-10: #b5e3cf;
+  --primary-0: #d3eee2;
+  --red-light: #fcdbdb;
+  --primary: #49909d;
+  --gray-60: #8d9a9b;
+  --gray-80: #51595a;
+  --gray-70: #626d6f;
+  --gray-50: #9ea9aa;
+  --gray-20: #d8dfe0;
+  --gray-10: #e9edee;
+  --heading: #171a1f;
+  --yellow: #f1c34d;
+  --black: #25292a;
+  --gray: #666566;
+  --blue: #1f58ea;
+  --red: #f14d4d;
+
+  --text-size-32: 32px;
+  --text-size-31: 31px;
+  --text-size-28: 28px;
+  --text-size-22: 22px;
+  --text-size-25: 25px;
+}
+
+@page {
+  size: Letter;
+  margin: 0.3in;
+}
+
+body {
+  font-family: 'Fredoka', sans-serif;
+  flex-direction: column;
+  display: flex;
+  gap: 24px;
+}
+
+.paper {
+  column-count: 2;
+  column-gap: 0.25in;
+}
+
+.box {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  page-break-inside: avoid;
+  border-radius: 0.75rem;
+  flex-direction: column;
+  break-inside: avoid;
+  padding: 16px;
+  display: flex;
+  gap: 24px;
+}
+
+.quicksand {
+  font-family: 'Quicksand', sans-serif !important;
+}

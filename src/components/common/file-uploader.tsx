@@ -1,16 +1,15 @@
 'use client';
 
 // Types
-import { FC, JSX } from 'react';
+import { UploadPayloadT } from '@/types/others/upload/upload-payload';
+import { FormikValues } from 'formik';
+import { FC, Fragment, JSX, useEffect, useState } from 'react';
 
 // Toast
 import toast from 'react-hot-toast';
 
 // Dropzone
 import Dropzone from 'react-dropzone';
-
-// Formik
-import { FormikValues } from 'formik';
 
 // Component
 import Image from 'next/image';
@@ -19,29 +18,39 @@ import Image from 'next/image';
 import camera from '@/../public/icons/camera.svg';
 import gallery from '@/../public/icons/gallery.svg';
 
+// Mutation
+import { useUploadMutation } from '@/services/others/image-upload';
+
+// Loader
+import { MoonLoader } from 'react-spinners';
+
 interface IProps {
   setFieldValue: FormikValues['setFieldValue'];
   value: string | null;
   name: string;
 }
 
-const FileUploader: FC<IProps> = ({ name, setFieldValue }): JSX.Element => {
+const FileUploader: FC<IProps> = ({ setFieldValue, value, name }): JSX.Element => {
+  const [img, setImg] = useState<string>(value || '');
+  const { mutateAsync, isPending } = useUploadMutation();
+
   const handleImageUpload = async (newFiles: File[]): Promise<void> => {
     const file = newFiles[0];
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('oldUrl', value || 'null');
 
     try {
-      //   const response = (await POST(URL.POST_KNEE, formData)) as {
-      //     url: string;
-      //   };
-
-      setFieldValue(name, file.name);
+      const { data } = await mutateAsync(formData as unknown as UploadPayloadT);
+      setImg(data?.publicUrl ?? 'lorem');
     } catch (error) {
-      console.log('🚀 ~ handleImageUpload ~ error:', error);
       toast.error('Image upload failed!');
     }
   };
+
+  useEffect(() => {
+    if (img) setFieldValue(name, img);
+  }, [img]);
 
   return (
     <Dropzone
@@ -54,12 +63,23 @@ const FileUploader: FC<IProps> = ({ name, setFieldValue }): JSX.Element => {
     >
       {({ getRootProps, getInputProps }) => (
         <div
-          className="relative rounded-full h-[130px] w-[130px] flex items-center justify-center cursor-pointer bg-[#F4F5F8] self-center"
+          className={`relative rounded-full h-[130px] w-[130px] flex items-center ${value && 'overflow-hidden'} justify-center cursor-pointer bg-[#F4F5F8] self-center`}
           {...getRootProps()}
         >
-          <input {...getInputProps()} />
-          <Image src={gallery} alt="Gallery" sizes="56" />
-          <Image src={camera} alt="Camera" sizes="36" className="absolute bottom-0 right-0" />
+          {isPending ? (
+            <MoonLoader color="#49909d" size={60} />
+          ) : img ? (
+            <Fragment>
+              <input {...getInputProps()} />
+              <Image src={img} alt="profile" className="object-cover" fill />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <input {...getInputProps()} />
+              <Image src={gallery} alt="Gallery" sizes="56" />
+              <Image src={camera} alt="Camera" sizes="36" className="absolute bottom-0 right-0" />
+            </Fragment>
+          )}
         </div>
       )}
     </Dropzone>

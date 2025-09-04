@@ -14,16 +14,19 @@ import toast from 'react-hot-toast';
 // URL
 import { URLS } from '../base-url';
 
+// Util
+import { getError } from '@/utils/get-error';
+
 const useSignInMutation = () => {
   const signInFn = async (payload: SignInPayloadT): Promise<SignInResponseT> => {
-    const res: SignInResponseT = await axios.post(URLS.SIGN_IN, payload);
-    return res;
+    const { data } = await axios.post(URLS.SIGN_IN, payload);
+    return data as SignInResponseT;
   };
 
   return useMutation({
     mutationFn: signInFn,
     onSuccess: () => toast.success('Login successful'),
-    onError: () => toast.error('Login failed'),
+    onError: getError,
   });
 };
 

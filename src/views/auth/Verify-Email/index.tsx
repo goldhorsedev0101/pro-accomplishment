@@ -11,7 +11,7 @@ import Routes from '@/constants/routes';
 
 // Mutation
 import { useResendOTPMutation } from '@/services/auth/resend-otp-mutation';
-import { useVerifyEmailMutation } from '@/services/auth/verify-email-mutation';
+import { useVerifyOTPMutation } from '@/services/auth/verify-email-mutation';
 
 // Cookie
 import { setCookie } from 'cookies-next';
@@ -40,10 +40,7 @@ const VerifyEmailView: FC<IProps> = ({ email, route }): JSX.Element => {
   const { push, refresh } = useRouter();
   const { home, resetPassword } = Routes;
 
-  const {
-    // mutateAsync: verifyEmail,
-    isPending,
-  } = useVerifyEmailMutation();
+  const { mutateAsync: verifyOTP, isPending } = useVerifyOTPMutation();
 
   const {
     // mutateAsync: resendOTP,
@@ -59,7 +56,7 @@ const VerifyEmailView: FC<IProps> = ({ email, route }): JSX.Element => {
           return;
         }
 
-        // const { token } = await verifyEmail({ email, otp });
+        await verifyOTP({ email, otp });
 
         if (route === 'password') push(resetPassword);
         else {

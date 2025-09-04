@@ -20,7 +20,5 @@ export const SignUpSchema = Yup.object({
   confirmPassword: Yup.string()
     .required('Confirm password is required')
     .oneOf([Yup.ref('password')], 'Passwords must match'),
-  profile: Yup.string()
-    .required('Profile is required')
-    .max(100, 'Profile cannot exceed 100 characters'),
+  profileImage: Yup.string().required('Profile is required'),
 });

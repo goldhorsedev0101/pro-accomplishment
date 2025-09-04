@@ -29,14 +29,15 @@ import { JSX } from 'react';
 const SignInView = (): JSX.Element => {
   const { push, refresh } = useRouter();
   const { forgetPassword, signUp, home } = Routes;
-  const { isPending } = useSignInMutation();
+  const { mutateAsync, isPending } = useSignInMutation();
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: { email: '', password: '' },
     validationSchema: SignInSchema,
     onSubmit: async () => {
       try {
-        // const { token } = await mutateAsync(values);
+        const res = await mutateAsync(values);
+        console.log('🚀 ~ SignInView ~ res:', res);
         setCookie('token', 'lorem');
         push(home);
         refresh();

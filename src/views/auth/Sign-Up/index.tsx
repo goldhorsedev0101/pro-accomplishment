@@ -28,7 +28,7 @@ import { useRouter } from 'next/navigation';
 
 const initialValues: SignUpPayloadT = {
   confirmPassword: '',
-  profile: 'lorem',
+  profileImage: '',
   firstName: '',
   lastName: '',
   password: '',
@@ -38,17 +38,14 @@ const initialValues: SignUpPayloadT = {
 const SignUpView = (): JSX.Element => {
   const { push } = useRouter();
   const { signIn, verifyEmail } = Routes;
-  const {
-    //  mutateAsync,
-    isPending,
-  } = useSignUpMutation();
+  const { mutateAsync, isPending } = useSignUpMutation();
 
   const { handleChange, handleSubmit, values, errors, touched, setFieldValue } = useFormik({
     initialValues,
     validationSchema: SignUpSchema,
     onSubmit: async (value) => {
       try {
-        // await mutateAsync(value);
+        mutateAsync(value);
         push(verifyEmail + '?email=' + value.email + '&route=register');
       } catch (error) {
         console.log('🚀 ~ SignUpView ~ error:', error);
@@ -62,7 +59,11 @@ const SignUpView = (): JSX.Element => {
       <Heading text="Sign up" />
 
       <div className="flex w-full flex-col gap-y-3">
-        <FileUploader name="profile" setFieldValue={setFieldValue} value={values['profile']} />
+        <FileUploader
+          value={values['profileImage']}
+          setFieldValue={setFieldValue}
+          name="profileImage"
+        />
 
         <div className="flex items-center gap-x-3 w-full">
           <Input

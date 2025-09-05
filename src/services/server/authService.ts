@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase/server';
+import { EmailOtpType, MobileOtpType } from '@supabase/supabase-js';
 
 export interface ICustomError {
   message: string;
@@ -20,7 +21,7 @@ export const verifyOtp = async ({
 }: {
   email: string;
   token: string;
-  type: string;
+  type: EmailOtpType;
 }) => {
   const { data, error } = await supabase.auth.verifyOtp({
     email,
@@ -30,7 +31,7 @@ export const verifyOtp = async ({
   return { data, error };
 };
 
-export const resendOtp = async ({ email, type }: { email: string; type: string }) => {
+export const resendOtp = async ({ email, type }: { email: string; type: any }) => {
   const { error, data } = await supabase.auth.resend({
     type,
     email,

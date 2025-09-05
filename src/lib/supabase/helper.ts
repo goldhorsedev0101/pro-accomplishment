@@ -58,6 +58,24 @@
 //     return { success: false, error: 'Oops! There might be an issue. Please try again.' };
 //   } catch (error: any) {
 //     console.error('REQUEST HANDLER ERROR CATCH', error);
-//     return { success: false, error: error?.message };
+//     return { success: false, error: error?.message, data: null };
 //   }
 // };
+
+// import { NextResponse } from 'next/server';
+
+// const corsHeaders = {
+//   'Access-Control-Allow-Origin': 'http://localhost:3000',
+//   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+//   'Access-Control-Allow-Headers':
+//     'X-CSRF-Token, X-Requested-With, Accept, Content-Type, Authorization',
+//   'Access-Control-Allow-Credentials': 'true',
+// };
+
+// export const response = (json: any, status = 200) => {
+//   return NextResponse.json(json, { status, headers: corsHeaders });
+// };
+
+// export function corsOptions() {
+//   return NextResponse.json({}, { status: 200, headers: corsHeaders });
+// }

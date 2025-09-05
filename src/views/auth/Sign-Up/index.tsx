@@ -23,6 +23,9 @@ import { JSX } from 'react';
 // Formik
 import { useFormik } from 'formik';
 
+// Enum
+import { Verification_Type_Enum } from '@/enum/verification-type.enum';
+
 // Router
 import { useRouter } from 'next/navigation';
 
@@ -46,7 +49,7 @@ const SignUpView = (): JSX.Element => {
     onSubmit: async (value) => {
       try {
         mutateAsync(value);
-        push(verifyEmail + '?email=' + value.email + '&route=register');
+        push(verifyEmail + '?email=' + value.email + `&route=${Verification_Type_Enum.SIGNUP}`);
       } catch (error) {
         console.log('🚀 ~ SignUpView ~ error:', error);
       }

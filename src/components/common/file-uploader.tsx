@@ -44,6 +44,7 @@ const FileUploader: FC<IProps> = ({ setFieldValue, value, name }): JSX.Element =
       const { data } = await mutateAsync(formData as unknown as UploadPayloadT);
       setImg(data?.publicUrl ?? 'lorem');
     } catch (error) {
+      console.log('🚀 ~ handleImageUpload ~ error:', error);
       toast.error('Image upload failed!');
     }
   };

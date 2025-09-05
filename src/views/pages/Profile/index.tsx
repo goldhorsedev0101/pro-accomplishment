@@ -10,7 +10,7 @@ import Subscription from './subscription';
 import TermsConditions from './terms-conditions';
 
 // Enum
-import { PROFILE_ENUM } from '@/enum/profile-enum';
+import { PROFILE_ENUM } from '@/enum/profile.enum';
 
 // Types
 import { JSX, useState } from 'react';

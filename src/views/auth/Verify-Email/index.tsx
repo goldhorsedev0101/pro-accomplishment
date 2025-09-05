@@ -25,15 +25,15 @@ import { useRouter } from 'next/navigation';
 // Types
 import { FC, JSX } from 'react';
 
-// Toast
-import toast from 'react-hot-toast';
+// Enum
+import { Verification_Type_Enum } from '@/enum/verification-type.enum';
 
 // Hoot
 import { useTimer } from 'react-timer-hook';
 
 interface IProps {
   email: string;
-  route: string;
+  route: Verification_Type_Enum;
 }
 
 const VerifyEmailView: FC<IProps> = ({ email, route }): JSX.Element => {
@@ -42,25 +42,18 @@ const VerifyEmailView: FC<IProps> = ({ email, route }): JSX.Element => {
 
   const { mutateAsync: verifyOTP, isPending } = useVerifyOTPMutation();
 
-  const {
-    // mutateAsync: resendOTP,
-    isPending: resendPending,
-  } = useResendOTPMutation();
+  const { mutateAsync: resendOTP, isPending: resendPending } = useResendOTPMutation();
 
   const { handleSubmit, setFieldValue, values } = useFormik({
     initialValues: { email, otp: '' },
     onSubmit: async ({ otp }) => {
       try {
-        if (otp !== '000000') {
-          toast.error('Invalid OTP');
-          return;
-        }
+        const { data } = await verifyOTP({ email, otp, type: route });
+        const token = data.session.access_token;
 
-        await verifyOTP({ email, otp });
-
-        if (route === 'password') push(resetPassword);
+        if (route === Verification_Type_Enum.RECOVERY) push(resetPassword);
         else {
-          setCookie('token', 'lorem');
+          setCookie('token', token);
           push(home);
           refresh();
         }
@@ -81,7 +74,7 @@ const VerifyEmailView: FC<IProps> = ({ email, route }): JSX.Element => {
       const resendTime = new Date();
       resendTime.setSeconds(resendTime.getSeconds() + totalSeconds);
       restart(resendTime);
-      // resendOTP({ email });
+      resendOTP({ email });
     } catch (error) {
       console.log('🚀 ~ handleResend ~ error:', error);
     }

@@ -12,7 +12,7 @@ import termsConditionsColored from 'public/icons/sidebar/terms-conditions-colore
 import termsConditions from 'public/icons/sidebar/terms-conditions.svg';
 
 // Enum
-import { PROFILE_ENUM } from '@/enum/profile-enum';
+import { PROFILE_ENUM } from '@/enum/profile.enum';
 
 // Type
 import { StaticImageData } from 'next/image';

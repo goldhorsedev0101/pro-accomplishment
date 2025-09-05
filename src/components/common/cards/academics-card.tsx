@@ -4,9 +4,9 @@ import Box from '../box';
 import Heading from '../heading';
 
 // Icons
-import book from '@/../public/icons/book.svg';
-import percentage from '@/../public/icons/percentage.svg';
-import teacher from '@/../public/icons/teacher.svg';
+import book from 'public/icons/book.svg';
+import percentage from 'public/icons/percentage.svg';
+import teacher from 'public/icons/teacher.svg';
 
 // Types
 import { JSX } from 'react';

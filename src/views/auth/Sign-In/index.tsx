@@ -36,8 +36,8 @@ const SignInView = (): JSX.Element => {
     validationSchema: SignInSchema,
     onSubmit: async () => {
       try {
-        const res = await mutateAsync(values);
-        console.log('🚀 ~ SignInView ~ res:', res);
+        // const res = await mutateAsync(values);
+        // console.log('🚀 ~ SignInView ~ res:', res);
         setCookie('token', 'lorem');
         push(home);
         refresh();

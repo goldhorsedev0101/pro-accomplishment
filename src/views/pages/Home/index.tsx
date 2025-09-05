@@ -1,8 +1,8 @@
 'use client';
 
 // Icons
-import header from '@/../public/img/header.png';
-import profile from '@/../public/img/profile.png';
+import header from 'public/img/header.png';
+import profile from 'public/img/profile.png';
 
 // Components
 import StudentCard from '@/components/common/cards/student-card';

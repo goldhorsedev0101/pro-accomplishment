@@ -1,5 +1,5 @@
 // Icons
-import start from '@/../public/icons/magic-star.svg';
+import start from 'public/icons/magic-star.svg';
 
 // Components
 import Image from 'next/image';

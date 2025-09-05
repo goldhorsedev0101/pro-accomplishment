@@ -1,5 +1,5 @@
 // Icons
-import heart from '@/../public/icons/heart.svg';
+import heart from 'public/icons/heart.svg';
 
 // Component
 import Image from 'next/image';

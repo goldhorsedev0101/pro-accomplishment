@@ -1,6 +1,6 @@
 // Icons
-import locationIcon from '@/../public/icons/location.svg';
-import school from '@/../public/icons/school.svg';
+import locationIcon from 'public/icons/location.svg';
+import school from 'public/icons/school.svg';
 import { TiStar } from 'react-icons/ti';
 
 // Constant

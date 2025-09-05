@@ -1,6 +1,6 @@
 // Icons
-import briefcase from '@/../public/icons/briefcase.svg';
-import note from '@/../public/icons/note.svg';
+import briefcase from 'public/icons/briefcase.svg';
+import note from 'public/icons/note.svg';
 
 // Components
 import Image from 'next/image';

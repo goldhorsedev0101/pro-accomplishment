@@ -1,7 +1,7 @@
 // Icons
-import calendar from '@/../public/icons/calendar-tick.svg';
-import cup from '@/../public/icons/cup.svg';
-import location from '@/../public/icons/location-colored.svg';
+import calendar from 'public/icons/calendar-tick.svg';
+import cup from 'public/icons/cup.svg';
+import location from 'public/icons/location-colored.svg';
 
 // Components
 import Image from 'next/image';

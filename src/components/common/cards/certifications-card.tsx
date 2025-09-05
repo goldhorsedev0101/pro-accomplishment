@@ -1,6 +1,6 @@
 // Icons
-import building from '@/../public/icons/building.svg';
-import start from '@/../public/icons/medal-star.svg';
+import building from 'public/icons/building.svg';
+import start from 'public/icons/medal-star.svg';
 
 // Components
 import Image from 'next/image';

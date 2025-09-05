@@ -1,7 +1,7 @@
 'use client';
 
 // Icon
-import profile from '@/../public/img/profile.png';
+import profile from 'public/img/profile.png';
 
 // Component
 import BackButton from '@/components/common/back-button';

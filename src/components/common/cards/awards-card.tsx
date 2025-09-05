@@ -1,6 +1,6 @@
 // Icons
-import building from '@/../public/icons/building.svg';
-import cup from '@/../public/icons/cup.svg';
+import building from 'public/icons/building.svg';
+import cup from 'public/icons/cup.svg';
 
 // Components
 import Image from 'next/image';

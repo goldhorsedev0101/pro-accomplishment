@@ -1,7 +1,7 @@
 'use client';
 
 // Icons
-import edit from '@/../public/icons/edit.svg';
+import edit from 'public/icons/edit.svg';
 
 // Components
 import { Button } from '@/components/ui/button';

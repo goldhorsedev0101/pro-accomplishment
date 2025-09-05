@@ -1,8 +1,8 @@
 'use client';
 
 // Icons
-import avatar from '@/../public/img/avatar.png';
-import logo from '@/../public/img/logo.png';
+import avatar from 'public/img/avatar.png';
+import logo from 'public/img/logo.png';
 
 // Constant
 import Routes from '@/constants/routes';

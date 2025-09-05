@@ -7,9 +7,9 @@ import Image from 'next/image';
 import { contacts } from '@/constants/contacts';
 
 // Icons
-import link from '@/../public/icons/link.svg';
-import school from '@/../public/icons/school.svg';
-import profile from '@/../public/img/profile.png';
+import link from 'public/icons/link.svg';
+import school from 'public/icons/school.svg';
+import profile from 'public/img/profile.png';
 import { PiQuotesLight } from 'react-icons/pi';
 import { TiStar } from 'react-icons/ti';
 

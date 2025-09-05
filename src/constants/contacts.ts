@@ -1,8 +1,8 @@
 // Icons
-import call from '@/../public/icons/call.svg';
-import link from '@/../public/icons/link.svg';
-import location from '@/../public/icons/location.svg';
-import sms from '@/../public/icons/sms.svg';
+import call from 'public/icons/call.svg';
+import link from 'public/icons/link.svg';
+import location from 'public/icons/location.svg';
+import sms from 'public/icons/sms.svg';
 
 // Type
 import { StaticImageData } from 'next/image';

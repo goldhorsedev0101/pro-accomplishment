@@ -15,8 +15,8 @@ import Dropzone from 'react-dropzone';
 import Image from 'next/image';
 
 // Icons
-import camera from '@/../public/icons/camera.svg';
-import gallery from '@/../public/icons/gallery.svg';
+import camera from 'public/icons/camera.svg';
+import gallery from 'public/icons/gallery.svg';
 
 // Mutation
 import { useUploadMutation } from '@/services/others/image-upload';

@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase/server';
-import { EmailOtpType, MobileOtpType } from '@supabase/supabase-js';
+import { EmailOtpType } from '@supabase/supabase-js';
 
 export interface ICustomError {
   message: string;
@@ -97,7 +97,7 @@ export const uploadProfilePicture = async ({
   if (oldUrl) {
     const existingFilePath = oldUrl.split('/').pop();
     if (existingFilePath) {
-      const { error, data } = await deleteExistingImage(existingFilePath);
+      const { error } = await deleteExistingImage(existingFilePath);
       if (error) return { error, data: null };
     }
   }

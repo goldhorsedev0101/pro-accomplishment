@@ -37,8 +37,7 @@ const ForgetPasswordView = (): JSX.Element => {
     validationSchema: ForgetPasswordSchema,
     onSubmit: async ({ email }) => {
       try {
-        const res = await mutateAsync({ email });
-        console.log('🚀 ~ ForgetPasswordView ~ res:', res);
+        await mutateAsync({ email });
         push(verifyEmail + '?email=' + email + `&route=${Verification_Type_Enum.RECOVERY}`);
       } catch (error) {
         console.log('🚀 ~ ForgetPasswordView ~ error:', error);

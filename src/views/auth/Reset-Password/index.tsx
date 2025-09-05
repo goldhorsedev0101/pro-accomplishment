@@ -31,17 +31,15 @@ const ResetPasswordView = (): JSX.Element => {
   const { push, refresh } = useRouter();
   const { home } = Routes;
 
-  const {
-    //  mutateAsync,
-    isPending,
-  } = useResetPasswordMutation();
+  const { mutateAsync, isPending } = useResetPasswordMutation();
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: { confirmPassword: '', password: '' },
     validationSchema: ResetPasswordSchema,
     onSubmit: async () => {
       try {
-        // const { token } = await mutateAsync(values);
+        const res = await mutateAsync(values);
+        console.log('🚀 ~ ResetPasswordView ~ res:', res);
 
         setCookie('token', 'lorem');
         push(home);

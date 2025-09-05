@@ -15,4 +15,7 @@ export const URLS = {
 
   // =========================== Image Upload ===================== //
   IMAGE_UPLOADER: `${baseUrl}/auth/image-uploader`,
+
+  // =========================== Profile ===================== //
+  ME: `${baseUrl}/me`,
 };

@@ -14,18 +14,21 @@ import toast from 'react-hot-toast';
 // URL
 import { URLS } from '../base-url';
 
+// Util
+import { getError } from '@/utils/get-error';
+
 const useForgetPasswordMutation = () => {
   const forgetPasswordFn = async (
     payload: ForgetPasswordPayloadT,
   ): Promise<ForgetPasswordResponseT> => {
-    const res: ForgetPasswordResponseT = await axios.post(URLS.FORGET_PASSWORD, payload);
-    return res;
+    const { data } = await axios.post(URLS.FORGET_PASSWORD, payload);
+    return data as ForgetPasswordResponseT;
   };
 
   return useMutation({
-    mutationFn: forgetPasswordFn,
     onSuccess: () => toast.success('OTP send successfully'),
-    onError: () => toast.error('OTP send failed'),
+    mutationFn: forgetPasswordFn,
+    onError: getError,
   });
 };
 

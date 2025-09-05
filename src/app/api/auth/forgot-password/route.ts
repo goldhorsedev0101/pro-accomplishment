@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
-import { updatePassword } from '@/services/server/authService';
+import { isUserExist, resendOtp, resetPassword } from '@/services/server/authService';
 
 export async function OPTIONS() {
   return corsOptions();
@@ -8,39 +8,33 @@ export async function OPTIONS() {
 
 export async function POST(request: NextRequest) {
   try {
-    const { newPassword, confirmPassword } = await request.json();
-
-    if (newPassword !== confirmPassword) {
-      return response(
-        {
-          message: 'Passwords do not match',
-          data: null,
-          error: 'password_mismatch',
-        },
-        400,
-      );
-    }
-
-    const resetPasswordResponse = await supabasePromiseResolver({
-      requestFunction: updatePassword,
-      requestBody: { password: newPassword },
+    const { email } = await request.json();
+    const lowerCased = email.toLowerCase();
+    const isUserExistResponse = await supabasePromiseResolver({
+      requestFunction: isUserExist,
+      requestBody: { email: lowerCased },
     });
-
-    if (!resetPasswordResponse?.success) {
+    if (!isUserExistResponse?.success) {
+      return response({ error: isUserExistResponse?.error }, 400);
+    }
+    const resendOtpResponse = await supabasePromiseResolver({
+      requestFunction: resetPassword,
+      requestBody: { email: lowerCased },
+    });
+    if (!resendOtpResponse?.success) {
       return response(
         {
-          message: resetPasswordResponse?.error ?? 'Failed to reset password',
+          message: resendOtpResponse?.error ?? 'Error while sending OTP.',
           data: null,
-          error: resetPasswordResponse?.error,
+          error: resendOtpResponse?.error,
         },
         400,
       );
     }
-
     return response(
       {
-        message: 'Password reset successfully',
-        data: resetPasswordResponse?.data,
+        message: 'OTP sent successfully.',
+        data: null,
         error: null,
       },
       200,

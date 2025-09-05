@@ -21,7 +21,14 @@ export async function POST(request: NextRequest) {
       requestBody: { email: lowerCased },
     });
     if (!isUserNotExistResponse?.success) {
-      return response({ error: isUserNotExistResponse?.error }, 400);
+      return response(
+        {
+          data: null,
+          message: isUserNotExistResponse?.error,
+          error: isUserNotExistResponse?.error,
+        },
+        400,
+      );
     }
     const signUpResponse = await supabasePromiseResolver({
       requestFunction: signUp,
@@ -31,7 +38,14 @@ export async function POST(request: NextRequest) {
       },
     });
     if (!signUpResponse?.success) {
-      return response({ error: isUserNotExistResponse?.error }, 400);
+      return response(
+        {
+          error: signUpResponse?.error,
+          data: null,
+          message: signUpResponse?.error,
+        },
+        400,
+      );
     }
     const userId = signUpResponse?.data?.user?.id;
     const createProfileResponse = await supabasePromiseResolver({
@@ -47,9 +61,9 @@ export async function POST(request: NextRequest) {
     if (!createProfileResponse.success) {
       return response(
         {
-          error: isUserNotExistResponse?.error,
+          error: createProfileResponse?.error,
           data: null,
-          message: isUserNotExistResponse?.error,
+          message: createProfileResponse?.error,
         },
         400,
       );

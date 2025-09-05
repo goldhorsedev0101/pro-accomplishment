@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
     if (!updatePasswordResponse?.success) {
       return response(
         {
-          message: updatePasswordResponse?.error ?? 'Error while changing password.',
+          message: updatePasswordResponse?.error || 'Error while changing password.',
           data: null,
           error: updatePasswordResponse?.error,
         },
@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return response(
       {
-        message: (error as Error)?.message ?? 'Internal Server Error.',
+        message: (error as Error)?.message || 'Internal Server Error.',
         data: null,
         error,
       },

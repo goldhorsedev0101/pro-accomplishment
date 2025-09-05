@@ -15,7 +15,14 @@ export async function POST(request: NextRequest) {
       requestBody: { email: lowerCased },
     });
     if (!isUserExistResponse?.success) {
-      return response({ error: isUserExistResponse?.error }, 400);
+      return response(
+        {
+          data: null,
+          message: isUserExistResponse?.error || 'User not found.',
+          error: isUserExistResponse?.error || 'User not found.',
+        },
+        400,
+      );
     }
     const resendOtpResponse = await supabasePromiseResolver({
       requestFunction: resetPassword,
@@ -24,9 +31,9 @@ export async function POST(request: NextRequest) {
     if (!resendOtpResponse?.success) {
       return response(
         {
-          message: resendOtpResponse?.error ?? 'Error while sending OTP.',
+          message: resendOtpResponse?.error || 'Error while sending OTP.',
           data: null,
-          error: resendOtpResponse?.error,
+          error: resendOtpResponse?.error || 'Error while sending OTP.',
         },
         400,
       );
@@ -42,7 +49,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return response(
       {
-        message: (error as Error)?.message ?? 'Internal Server Error',
+        message: (error as Error)?.message || 'Internal Server Error',
         data: null,
         error,
       },

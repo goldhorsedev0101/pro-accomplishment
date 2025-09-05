@@ -11,7 +11,14 @@ export async function POST(request: NextRequest) {
     const { otp, email, type } = await request.json();
 
     if (otp.length !== 6) {
-      return response({ error: 'Please enter the 6-digit OTP code sent to your email.' }, 400);
+      return response(
+        {
+          data: null,
+          error: 'Please enter the 6-digit OTP code sent to your email.',
+          message: 'Please enter the 6-digit OTP code sent to your email.',
+        },
+        400,
+      );
     }
     const verifyOtpResponse = await supabasePromiseResolver({
       requestFunction: verifyOtp,
@@ -24,7 +31,11 @@ export async function POST(request: NextRequest) {
 
     if (!verifyOtpResponse?.success) {
       return response(
-        { error: verifyOtpResponse?.error, message: verifyOtpResponse?.error, data: null },
+        {
+          error: verifyOtpResponse?.error || 'Verification failed.',
+          message: verifyOtpResponse?.error || 'Verification failed.',
+          data: null,
+        },
         400,
       );
     }
@@ -40,8 +51,8 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return response(
       {
-        error: error as Error,
-        message: (error as Error)?.message ?? 'Internal Server Error',
+        error: (error as Error) || 'Internal Server Error',
+        message: (error as Error)?.message || 'Internal Server Error',
         data: null,
       },
       500,

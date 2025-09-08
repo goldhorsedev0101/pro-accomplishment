@@ -27,18 +27,25 @@ import { useRouter } from 'next/navigation';
 // Type
 import { JSX } from 'react';
 
+// Context
+import { useAuth } from '@/context/auth.context';
+
 const ForgetPasswordView = (): JSX.Element => {
-  const { push } = useRouter();
-  const { verifyEmail } = Routes;
   const { isPending, mutateAsync } = useForgetPasswordMutation();
+  const { RECOVERY } = Verification_Type_Enum;
+  const { setEmail, setRoute } = useAuth();
+  const { verifyEmail } = Routes;
+  const { push } = useRouter();
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
-    initialValues: { email: '' },
     validationSchema: ForgetPasswordSchema,
+    initialValues: { email: '' },
     onSubmit: async ({ email }) => {
       try {
         await mutateAsync({ email });
-        push(verifyEmail + '?email=' + email + `&route=${Verification_Type_Enum.RECOVERY}`);
+        setRoute(RECOVERY);
+        push(verifyEmail);
+        setEmail(email);
       } catch (error) {
         console.log('🚀 ~ ForgetPasswordView ~ error:', error);
       }

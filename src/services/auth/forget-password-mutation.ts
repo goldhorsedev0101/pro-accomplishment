@@ -15,7 +15,7 @@ import toast from 'react-hot-toast';
 import { URLS } from '../base-url';
 
 // Util
-import { getError } from '@/utils/get-error';
+import { errorFn } from '@/utils/error-fn';
 
 const useForgetPasswordMutation = () => {
   const forgetPasswordFn = async (
@@ -28,7 +28,7 @@ const useForgetPasswordMutation = () => {
   return useMutation({
     onSuccess: () => toast.success('OTP send successfully'),
     mutationFn: forgetPasswordFn,
-    onError: getError,
+    onError: errorFn,
   });
 };
 

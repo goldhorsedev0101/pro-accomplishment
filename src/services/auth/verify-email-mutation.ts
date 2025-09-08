@@ -15,7 +15,7 @@ import toast from 'react-hot-toast';
 import { URLS } from '../base-url';
 
 // Util
-import { getError } from '@/utils/get-error';
+import { errorFn } from '@/utils/error-fn';
 
 const useVerifyOTPMutation = () => {
   const verifyOTPFn = async (payload: VerifyOtpPayloadT): Promise<VerifyOtpResponseT> => {
@@ -26,7 +26,7 @@ const useVerifyOTPMutation = () => {
   return useMutation({
     onSuccess: () => toast.success('OTP verified successful'),
     mutationFn: verifyOTPFn,
-    onError: getError,
+    onError: errorFn,
   });
 };
 

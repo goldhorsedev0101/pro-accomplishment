@@ -23,7 +23,7 @@ import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 
 // Types
-import { FC, JSX } from 'react';
+import { JSX } from 'react';
 
 // Enum
 import { Verification_Type_Enum } from '@/enum/verification-type.enum';
@@ -31,29 +31,28 @@ import { Verification_Type_Enum } from '@/enum/verification-type.enum';
 // Hoot
 import { useTimer } from 'react-timer-hook';
 
-interface IProps {
-  email: string;
-  route: Verification_Type_Enum;
-}
+// Context
+import { useAuth } from '@/context/auth.context';
 
-const VerifyEmailView: FC<IProps> = ({ email, route }): JSX.Element => {
-  const { push, refresh } = useRouter();
+const VerifyEmailView = (): JSX.Element => {
+  const { RECOVERY } = Verification_Type_Enum;
   const { home, resetPassword } = Routes;
-
-  const { mutateAsync: verifyOTP, isPending } = useVerifyOTPMutation();
+  const { push, refresh } = useRouter();
+  const { email, route } = useAuth();
 
   const { mutateAsync: resendOTP, isPending: resendPending } = useResendOTPMutation();
+  const { mutateAsync: verifyOTP, isPending } = useVerifyOTPMutation();
 
   const { handleSubmit, setFieldValue, values } = useFormik({
-    initialValues: { email, otp: '' },
+    initialValues: { otp: '' },
     onSubmit: async ({ otp }) => {
       try {
         const { data } = await verifyOTP({ email, otp, type: route });
-        const token = data.session.access_token;
+        const { access_token } = data.session;
 
-        if (route === Verification_Type_Enum.RECOVERY) push(resetPassword);
+        if (route === RECOVERY) push(resetPassword);
         else {
-          setCookie('token', token);
+          setCookie('token', access_token);
           push(home);
           refresh();
         }
@@ -73,8 +72,8 @@ const VerifyEmailView: FC<IProps> = ({ email, route }): JSX.Element => {
     try {
       const resendTime = new Date();
       resendTime.setSeconds(resendTime.getSeconds() + totalSeconds);
+      resendOTP({ email, type: route });
       restart(resendTime);
-      resendOTP({ email });
     } catch (error) {
       console.log('🚀 ~ handleResend ~ error:', error);
     }

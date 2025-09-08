@@ -12,7 +12,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 // URL
-import { getError } from '@/utils/get-error';
+import { errorFn } from '@/utils/error-fn';
 
 // Util
 import { URLS } from '../base-url';
@@ -26,7 +26,7 @@ const useUploadMutation = () => {
   return useMutation({
     onSuccess: () => toast.success('Image uploaded successful'),
     mutationFn: uploadFn,
-    onError: getError,
+    onError: errorFn,
   });
 };
 

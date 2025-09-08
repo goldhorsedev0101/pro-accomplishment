@@ -15,7 +15,7 @@ import toast from 'react-hot-toast';
 import { URLS } from '../base-url';
 
 // Util
-import { getError } from '@/utils/get-error';
+import { errorFn } from '@/utils/error-fn';
 
 const useSignInMutation = () => {
   const signInFn = async (payload: SignInPayloadT): Promise<SignInResponseT> => {
@@ -24,9 +24,9 @@ const useSignInMutation = () => {
   };
 
   return useMutation({
-    mutationFn: signInFn,
     onSuccess: () => toast.success('Login successful'),
-    onError: getError,
+    mutationFn: signInFn,
+    onError: errorFn,
   });
 };
 

@@ -10,7 +10,7 @@ export const URLS = {
   RESET_PASSWORD: `${baseUrl}/auth/reset-password`,
   VERIFY_OTP: `${baseUrl}/auth/verify-otp`,
   RESEND_OTP: `${baseUrl}/auth/resend-otp`,
-  SIGN_IN: `${baseUrl}/auth/signin`,
+  SIGN_IN: `${baseUrl}/auth/login`,
   SIGN_UP: `${baseUrl}/auth/signup`,
 
   // =========================== Image Upload ===================== //

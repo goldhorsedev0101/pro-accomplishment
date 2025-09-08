@@ -15,7 +15,7 @@ import toast from 'react-hot-toast';
 import { URLS } from '../base-url';
 
 // Util
-import { getError } from '@/utils/get-error';
+import { errorFn } from '@/utils/error-fn';
 
 const useResetPasswordMutation = () => {
   const resetPasswordFn = async (
@@ -28,7 +28,7 @@ const useResetPasswordMutation = () => {
   return useMutation({
     onSuccess: () => toast.success('Password reset successfully'),
     mutationFn: resetPasswordFn,
-    onError: getError,
+    onError: errorFn,
   });
 };
 

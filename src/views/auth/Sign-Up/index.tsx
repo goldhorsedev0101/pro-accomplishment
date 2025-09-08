@@ -29,6 +29,9 @@ import { Verification_Type_Enum } from '@/enum/verification-type.enum';
 // Router
 import { useRouter } from 'next/navigation';
 
+// Context
+import { useAuth } from '@/context/auth.context';
+
 const initialValues: SignUpPayloadT = {
   confirmPassword: '',
   profileImage: '',
@@ -39,17 +42,21 @@ const initialValues: SignUpPayloadT = {
 };
 
 const SignUpView = (): JSX.Element => {
-  const { push } = useRouter();
-  const { signIn, verifyEmail } = Routes;
   const { mutateAsync, isPending } = useSignUpMutation();
+  const { SIGNUP } = Verification_Type_Enum;
+  const { setEmail, setRoute } = useAuth();
+  const { signIn, verifyEmail } = Routes;
+  const { push } = useRouter();
 
   const { handleChange, handleSubmit, values, errors, touched, setFieldValue } = useFormik({
     initialValues,
     validationSchema: SignUpSchema,
     onSubmit: async (value) => {
       try {
-        mutateAsync(value);
-        push(verifyEmail + '?email=' + value.email + `&route=${Verification_Type_Enum.SIGNUP}`);
+        await mutateAsync(value);
+        setEmail(value.email);
+        push(verifyEmail);
+        setRoute(SIGNUP);
       } catch (error) {
         console.log('🚀 ~ SignUpView ~ error:', error);
       }

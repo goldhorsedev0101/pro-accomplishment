@@ -194,7 +194,7 @@ export const isUserExist = async ({ email }: { email: string }) => {
   let customError: ICustomError | null = error ? error : null;
 
   if (!data && !customError) {
-    customError = { message: 'User does not exist or is not a recruiter' };
+    customError = { message: 'User does not exist or is not a recruiter.' };
   }
 
   return {

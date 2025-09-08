@@ -1,6 +1,6 @@
-import { NextRequest } from 'next/server';
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
-import { isUserExist, resendOtp, resetPassword } from '@/services/server/authService';
+import { isUserExist, resetPassword } from '@/services/server/authService';
+import { NextRequest } from 'next/server';
 
 export async function OPTIONS() {
   return corsOptions();

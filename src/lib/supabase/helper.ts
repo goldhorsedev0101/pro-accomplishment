@@ -1,3 +1,4 @@
+import * as jwt from 'jwt-decode';
 export interface ISupabasePromiseResolver {
   requestFunction: (requestBody: any) => Promise<{ data?: any; error?: any }>;
   requestBody: any;
@@ -78,4 +79,57 @@ export const response = (json: any, status = 200) => {
 
 export function corsOptions() {
   return NextResponse.json({}, { status: 200, headers: corsHeaders });
+}
+
+interface CustomJwtPayload {
+  exp?: number;
+  email?: string;
+  sub?: string;
+}
+
+export function isTokenExpired(token: string): boolean {
+  try {
+    const decoded = jwt.jwtDecode<CustomJwtPayload>(token);
+    if (!decoded.exp) {
+      return true;
+    }
+    const currentTime = Math.floor(Date.now() / 1000);
+    return decoded.exp < currentTime;
+  } catch {
+    return true;
+  }
+}
+
+export function verifyToken(accessToken?: string) {
+  if (!accessToken) {
+    return {
+      valid: false,
+      error: 'Unauthorized',
+    };
+  }
+  try {
+    const decoded = jwt.jwtDecode<CustomJwtPayload>(accessToken);
+    if (isTokenExpired(accessToken)) {
+      return {
+        valid: false,
+        error: 'Token expired. Please login again.',
+      };
+    }
+    if (!decoded.email || !decoded.sub) {
+      return {
+        valid: false,
+        error: 'Invalid token. Please login again.',
+      };
+    }
+    return {
+      valid: true,
+      email: decoded.email,
+      id: decoded.sub,
+    };
+  } catch {
+    return {
+      valid: false,
+      error: 'Invalid token format.',
+    };
+  }
 }

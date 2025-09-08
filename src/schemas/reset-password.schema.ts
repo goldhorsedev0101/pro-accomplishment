@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 export const ResetPasswordSchema = Yup.object({
-  password: Yup.string()
+  newPassword: Yup.string()
     .required('Password is required')
     .min(8, 'Password must be at least 8 characters')
     .matches(
@@ -10,5 +10,5 @@ export const ResetPasswordSchema = Yup.object({
     ),
   confirmPassword: Yup.string()
     .required('Confirm password is required')
-    .oneOf([Yup.ref('password')], 'Passwords must match'),
+    .oneOf([Yup.ref('newPassword')], 'Passwords must match'),
 });

@@ -15,9 +15,6 @@ import { ResetPasswordSchema } from '@/schemas/reset-password.schema';
 // Mutation
 import { useResetPasswordMutation } from '@/services/auth/reset-password-mutation';
 
-// Cookies
-import { setCookie } from 'cookies-next';
-
 // Formik
 import { useFormik } from 'formik';
 
@@ -29,20 +26,17 @@ import { JSX } from 'react';
 
 const ResetPasswordView = (): JSX.Element => {
   const { push, refresh } = useRouter();
-  const { home } = Routes;
+  const { signIn } = Routes;
 
   const { mutateAsync, isPending } = useResetPasswordMutation();
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
-    initialValues: { confirmPassword: '', password: '' },
+    initialValues: { confirmPassword: '', newPassword: '' },
     validationSchema: ResetPasswordSchema,
     onSubmit: async () => {
       try {
-        const res = await mutateAsync(values);
-        console.log('🚀 ~ ResetPasswordView ~ res:', res);
-
-        setCookie('token', 'lorem');
-        push(home);
+        await mutateAsync(values);
+        push(signIn);
         refresh();
       } catch (error) {
         console.log('🚀 ~ ResetPasswordView ~ error:', error);
@@ -57,13 +51,13 @@ const ResetPasswordView = (): JSX.Element => {
       <Heading text="Create New Password" />
 
       <Input
-        error={touched.password ? errors.password : undefined}
+        error={touched.newPassword ? errors.newPassword : undefined}
         placeholder="ohndoe122&&*^Y"
-        value={values['password']}
+        value={values['newPassword']}
         onChange={handleChange}
+        name="newPassword"
         label="Password"
         type="password"
-        name="password"
         required
       />
 

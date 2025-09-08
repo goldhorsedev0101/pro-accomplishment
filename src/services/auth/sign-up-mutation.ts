@@ -1,6 +1,6 @@
 // Types
 import { SignUpPayloadT } from '@/types/auth/sign-up/sign-up-payload';
-import { SignUpResponseT } from '@/types/auth/sign-up/sign-up-responsive';
+import { SignUpResponseT } from '@/types/auth/sign-up/sign-up-response';
 
 // Mutation
 import { useMutation } from '@tanstack/react-query';

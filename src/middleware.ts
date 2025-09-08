@@ -1,5 +1,6 @@
 // Types
 import { NextRequest, NextResponse } from 'next/server';
+import { MeResponseT } from './types/others/me/me-response';
 
 // Constant
 import Routes from './constants/routes';
@@ -15,35 +16,26 @@ const publicRoutes: Array<string> = [forgetPassword, resetPassword, signUp, sign
 const { home, profile } = Routes;
 const privateRoutes: Array<string> = [home, profile];
 
-export async function middleware(request: NextRequest) {
-  const pathName = request.nextUrl.pathname;
-  const token = request.cookies.get('token')?.value;
+export async function middleware({ url, nextUrl, cookies }: NextRequest) {
+  const token = cookies.get('token')?.value;
+  const { redirect, next } = NextResponse;
+  const user = await getUser(token);
+  const { pathname } = nextUrl;
 
-  await getUser('');
+  const isPublicRoute = publicRoutes.includes(pathname);
+  const isPrivateRoute = privateRoutes.includes(pathname);
 
-  if (pathName === '/' || pathName === '/icons') {
-    return NextResponse.redirect(new URL(home, request.url));
-  }
+  if (pathname === '/' || pathname === '/icons') return redirect(new URL(home, url));
 
-  if (!token && publicRoutes.includes(pathName)) return NextResponse.next();
+  // invalid token && private route
+  if (!user && isPrivateRoute) return redirect(new URL(signIn, url));
 
-  if (token && privateRoutes.includes(pathName)) return NextResponse.next();
-
-  if (!token && privateRoutes.includes(pathName)) {
-    return NextResponse.redirect(new URL(signIn, request.url));
-  }
-
-  if (token && publicRoutes.includes(pathName)) {
-    return NextResponse.redirect(new URL(home, request.url));
-  }
+  // valid token && public route
+  if (user && isPublicRoute) return redirect(new URL(home, url));
 
   // Default: Allow
-  return NextResponse.next();
+  return next();
 }
-
-export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'],
-};
 
 const getUser = async (token?: string) => {
   if (!token) return null;
@@ -52,6 +44,10 @@ const getUser = async (token?: string) => {
 
   if (!response.ok) return null;
 
-  const user = await response.json();
-  return user;
+  const { data }: MeResponseT = await response.json();
+  return data;
+};
+
+export const config = {
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'],
 };

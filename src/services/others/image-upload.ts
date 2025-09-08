@@ -1,6 +1,6 @@
 // Types
 import { UploadPayloadT } from '@/types/others/upload/upload-payload';
-import { UploadResponseT } from '@/types/others/upload/upload-responsive';
+import { UploadResponseT } from '@/types/others/upload/upload-response';
 
 // Mutation
 import { useMutation } from '@tanstack/react-query';

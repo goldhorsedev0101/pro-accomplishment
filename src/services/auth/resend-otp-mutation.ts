@@ -1,6 +1,6 @@
 // Types
 import { ForgetPasswordPayloadT } from '@/types/auth/forget-password/forget-password-payload';
-import { ForgetPasswordResponseT } from '@/types/auth/forget-password/forget-password-responsive';
+import { ForgetPasswordResponseT } from '@/types/auth/forget-password/forget-password-response';
 
 // Mutation
 import { useMutation } from '@tanstack/react-query';

@@ -1,6 +1,6 @@
 // Types
 import { ResetPasswordPayloadT } from '@/types/auth/reset-password/reset-password-payload';
-import { ResetPasswordResponseT } from '@/types/auth/reset-password/reset-password-responsive';
+import { ResetPasswordResponseT } from '@/types/auth/reset-password/reset-password-response';
 
 // Mutation
 import { useMutation } from '@tanstack/react-query';

@@ -2,7 +2,6 @@
 
 // Icons
 import header from 'public/img/header.png';
-import profile from 'public/img/profile.png';
 
 // Components
 import StudentCard from '@/components/common/cards/student-card';
@@ -14,13 +13,31 @@ import SearchInput from '@/components/common/search-input';
 import Image from 'next/image';
 
 // Types
+import { useGetCandidateQuery } from '@/services/others/candidate/get-candidate-query';
 import { JSX, useState } from 'react';
 
 const HomeView = (): JSX.Element => {
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState(1);
-  console.log('🚀 ~ HomeView ~ page:', page);
-  const totalPages = 5;
+
+  const { data } = useGetCandidateQuery({
+    skip: (page - 1) * 10,
+    searchTerm: search,
+    take: 10,
+  });
+
+  const { candidates, meta_data } = data?.data || {};
+
+  const candidate = candidates?.map((item) => ({
+    name: item.first_name + ' ' + item.last_name,
+    about: item?.objective_for_summary,
+    category: item.organization_name,
+    profile: item.profile_photo_url,
+    location: item.country,
+    grade: item.grade,
+    gpa: item.gpa,
+    id: item.id,
+  }));
 
   return (
     <div className="flex flex-col gap-y-10 w-full">
@@ -31,30 +48,22 @@ const HomeView = (): JSX.Element => {
       <Filters />
 
       <Heading text="Favorite Talents" width="medium" size="31" />
+
       <SearchInput searchTerm={search} setSearchTerm={setSearch} />
-      {totalPages <= 0 ? (
+
+      {(meta_data?.total || 0) <= 0 ? (
         <div className="w-full self-center h-[40dvh] flex items-center justify-center">
           <NoData />
         </div>
       ) : (
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {Array.from({ length: totalPages }).map((_, index) => (
-            <StudentCard
-              about="Springfield Central High School"
-              id={index.toString()}
-              location="California"
-              category="Academics"
-              name="Emma Robert"
-              profile={profile}
-              grade="8th Grade"
-              key={index}
-              gpa="3.5"
-            />
+          {candidate?.map((items, index) => (
+            <StudentCard key={index} {...items} />
           ))}
         </div>
       )}
 
-      <Pagination totalPages={Math.ceil(totalPages / 10)} setPage={setPage} />
+      <Pagination totalPages={meta_data?.skip || 0} setPage={setPage} />
     </div>
   );
 };

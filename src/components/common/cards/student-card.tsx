@@ -21,7 +21,7 @@ interface IProps {
   grade: string;
   about: string;
   name: string;
-  gpa: string;
+  gpa: number;
   id: string;
 }
 

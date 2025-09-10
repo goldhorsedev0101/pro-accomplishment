@@ -58,7 +58,7 @@ const CategoryView: FC<IParams> = ({ category }): JSX.Element => {
             profile={profile}
             category={title}
             key={index}
-            gpa="3.5"
+            gpa={3.5}
           />
         ))}
       </div>

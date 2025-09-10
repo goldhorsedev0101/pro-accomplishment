@@ -1,7 +1,7 @@
 const localhost = 'http://localhost:3000/api';
 const live = process.env.API_URL;
 
-const isLive = true;
+const isLive = false;
 const baseUrl = isLive ? live : localhost;
 
 export const URLS = {
@@ -15,6 +15,9 @@ export const URLS = {
 
   // =========================== Image Upload ===================== //
   IMAGE_UPLOADER: `${baseUrl}/auth/image-uploader`,
+
+  // =========================== Image Upload ===================== //
+  GET_CANDIDATES: `${baseUrl}/candidate/get-candidates`,
 
   // =========================== Profile ===================== //
   ME: `${baseUrl}/me`,

@@ -14,10 +14,19 @@ export const toggleFavoriteCandidate = async ({
   return { data, error };
 };
 
-export const getFavoriteCandidates = async ({ recruiterId }: { recruiterId: string }) => {
-  const { data, error } = await supabase
-    .from('favorite_candidate')
-    .select('*')
-    .eq('recruiter_id', recruiterId);
+export const getFavoriteCandidates = async ({
+  recruiterId,
+  skip,
+  take,
+}: {
+  recruiterId: string;
+  skip: number;
+  take: number;
+}) => {
+  const { data, error } = await supabase.rpc('get_favorite_candidates', {
+    p_recruiter_id: recruiterId,
+    p_skip: skip,
+    p_take: take,
+  });
   return { data, error };
 };

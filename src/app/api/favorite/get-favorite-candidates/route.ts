@@ -38,9 +38,12 @@ export async function GET(request: NextRequest) {
       );
     }
     const recruiterId = getRecruiterResponse?.data?.id;
+    const { searchParams } = new URL(request.url);
+    const skip = parseInt(searchParams.get('skip') || '0', 10);
+    const take = parseInt(searchParams.get('take') || '25', 10);
     const favoriteCandidatesResponse = await supabasePromiseResolver({
       requestFunction: getFavoriteCandidates,
-      requestBody: { recruiterId },
+      requestBody: { recruiterId, skip, take },
     });
     if (!favoriteCandidatesResponse?.success) {
       return response(
@@ -56,7 +59,7 @@ export async function GET(request: NextRequest) {
     return response(
       {
         message: 'Favorite candidates retrieved successfully.',
-        data: favoriteCandidatesResponse?.data || [],
+        data: favoriteCandidatesResponse?.data?.data || [],
         error: null,
       },
       200,

@@ -16,9 +16,16 @@ export const URLS = {
   // =========================== Image Upload ===================== //
   IMAGE_UPLOADER: `${baseUrl}/auth/image-uploader`,
 
-  // =========================== Image Upload ===================== //
+  // =========================== Candidate ===================== //
   GET_CANDIDATES: `${baseUrl}/candidate/get-candidates`,
+
+  // =========================== Category ===================== //
+  GET_CATEGORIES: `${baseUrl}/category/get-categories`,
+  GET_SUB_CATEGORIES: `${baseUrl}/category/get-sub-categories`,
 
   // =========================== Profile ===================== //
   ME: `${baseUrl}/me`,
+
+  // =========================== Favorite ===================== //
+  TOGGLE_FAVORITE_CANDIDATE: `${baseUrl}/favorite/toggle-favorite-candidate`,
 };

@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     const skip = Number(searchParams.get('skip') ?? 0);
     const take = Number(searchParams.get('take') ?? 25);
     const cookieStore = await cookies();
-    const accessToken = cookieStore.get('token')?.value;
+    const accessToken = cookieStore.get('accessToken')?.value;
     const tokenCheckResponse = verifyToken(accessToken);
     if (!tokenCheckResponse?.valid) {
       return response(
@@ -28,6 +28,7 @@ export async function GET(request: NextRequest) {
         401,
       );
     }
+
     const getRecruiterResponse = await supabasePromiseResolver({
       requestFunction: getRecruiter,
       requestBody: {

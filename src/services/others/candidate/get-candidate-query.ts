@@ -17,7 +17,7 @@ const useGetCandidateQuery = (payload: GetCandidatePayloadT) => {
     return data as GetCandidateResponseT;
   };
 
-  return useQuery({ queryKey: ['get-candidate'], queryFn: getCandidateFn });
+  return useQuery({ queryKey: ['get-candidate', payload], queryFn: getCandidateFn });
 };
 
 export { useGetCandidateQuery };

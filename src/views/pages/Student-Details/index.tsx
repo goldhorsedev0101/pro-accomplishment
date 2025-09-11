@@ -22,8 +22,17 @@ import DetailsModalLayout from '@/components/common/modals/details-modal-layout'
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { HiOutlineDownload } from 'react-icons/hi';
 
-const StudentDetails: FC<IParams> = (): JSX.Element => {
+// Mutation
+import { useToggleFavoriteCandidateMutation } from '@/services/others/favorite/toggle-favorite-candidate';
+
+const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
   const [isFav, setIsFav] = useState<boolean>(false);
+  const { mutateAsync: toggle } = useToggleFavoriteCandidateMutation();
+
+  const handleToggle = async () => {
+    await toggle({ candidateId: id || '' });
+    setIsFav(!isFav);
+  };
 
   return (
     <div className="flex flex-col gap-y-6">
@@ -31,10 +40,10 @@ const StudentDetails: FC<IParams> = (): JSX.Element => {
         <BackButton />
         <div className="flex items-center gap-x-2">
           <button
-            onClick={() => setIsFav(!isFav)}
+            onClick={handleToggle}
             className="size-12 cursor-pointer rounded-full flex items-center justify-center text-white text-2xl bg-[#0000003D]"
           >
-            {isFav ? <GoHeartFill /> : <GoHeart />}
+            {isFav ? <GoHeartFill color="#49909d" /> : <GoHeart />}
           </button>
 
           <Button className="h-12 rounded-lg p-6">

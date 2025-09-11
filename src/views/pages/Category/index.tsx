@@ -1,8 +1,5 @@
 'use client';
 
-// Icon
-import profile from 'public/img/profile.png';
-
 // Component
 import BackButton from '@/components/common/back-button';
 import StudentCard from '@/components/common/cards/student-card';
@@ -20,11 +17,41 @@ import {
 import { IParams } from '@/types/params.type';
 import { FC, JSX, useState } from 'react';
 
-const CategoryView: FC<IParams> = ({ category }): JSX.Element => {
-  const [search, setSearch] = useState('');
-  const [subCategory, setSubCategory] = useState<string>();
+// Queries
+import Loader from '@/components/common/loader';
+import NoData from '@/components/common/no-data';
+import { useGetCandidateQuery } from '@/services/others/candidate/get-candidate-query';
+import { useGetSubCategoriesQuery } from '@/services/others/categories/get-sub-categories-query';
 
-  const title = category.replaceAll('%20', ' ');
+const CategoryView: FC<IParams & { name: string }> = ({ category, name }): JSX.Element => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [subCategoryId, setSubCategoryId] = useState<string>();
+
+  const { data: subCategories, isPending: isSubCategoriesPending } = useGetSubCategoriesQuery({
+    categoryId: category,
+  });
+
+  const { data: candidate, isPending: isCandidatePending } = useGetCandidateQuery({
+    categoryId: category,
+    subCategoryId,
+    searchTerm,
+  });
+
+  const { candidates, meta_data } = candidate?.data || {};
+
+  const data = candidates?.map((item) => ({
+    name: item.first_name + ' ' + item.last_name,
+    about: item?.objective_for_summary,
+    category: item.organization_name,
+    profile: item.profile_photo_url,
+    location: item.country,
+    grade: item.grade,
+    gpa: item.gpa,
+    id: item.id,
+  }));
+
+  const subCategoriesData = subCategories?.data;
+  const title = name.replaceAll('%20', ' ');
 
   return (
     <div className="flex flex-col gap-y-6">
@@ -34,34 +61,43 @@ const CategoryView: FC<IParams> = ({ category }): JSX.Element => {
       </div>
 
       <div className="flex items-center gap-x-3 w-full">
-        <SearchInput searchTerm={search} setSearchTerm={setSearch} />
+        <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-        <Select onValueChange={setSubCategory} value={subCategory}>
+        <Select onValueChange={setSubCategoryId} value={subCategoryId}>
           <SelectTrigger className="w-full h-10 py-6 max-w-[200px] text-neutral-grey-100">
             <SelectValue placeholder="Sub-Category" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="1">One</SelectItem>
-            <SelectItem value="2">Two</SelectItem>
+          <SelectContent className="max-h-[400px]">
+            {isSubCategoriesPending ? (
+              <Loader width="150" />
+            ) : (subCategoriesData?.length || 0) > 0 ? (
+              subCategoriesData?.map((item) => (
+                <SelectItem key={item.id} value={item.id}>
+                  {item.name}
+                </SelectItem>
+              ))
+            ) : (
+              <span className="text-xs px-5">No Sub Categories Available</span>
+            )}
           </SelectContent>
         </Select>
       </div>
 
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {Array.from({ length: 20 }).map((_, index) => (
-          <StudentCard
-            about="Springfield Central High School"
-            location="California"
-            id={index.toString()}
-            name="Emma Robert"
-            grade="8th Grade"
-            profile={profile}
-            category={title}
-            key={index}
-            gpa={3.5}
-          />
-        ))}
-      </div>
+      {isCandidatePending ? (
+        <div className="w-full self-center h-[40dvh] flex items-center justify-center">
+          <Loader />
+        </div>
+      ) : (meta_data?.total || 0) <= 0 ? (
+        <div className="w-full self-center h-[40dvh] flex items-center justify-center">
+          <NoData />
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {data?.map((items, index) => (
+            <StudentCard key={index} {...items} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

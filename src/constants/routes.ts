@@ -7,8 +7,8 @@ const Routes = {
   signIn: '/sign-in',
 
   // ====================== Pages ====================== //
+  category: (slug: string, name?: string) => `/home/${slug}${name && `?name=${name}`}`,
   studentDetail: (slug: string, id: string) => `/home/${slug}/${id}`,
-  category: (slug: string) => `/home/${slug}`,
   profile: '/profile',
   home: '/home',
 };

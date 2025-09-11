@@ -1,3 +1,5 @@
+'use client';
+
 // Components
 import {
   Carousel,
@@ -8,33 +10,45 @@ import {
 } from '@/components/ui/carousel';
 import Image from 'next/image';
 import Link from 'next/link';
+import Loader from './loader';
 
 // Constants
-import { filters } from '@/constants/filters';
 import Routes from '@/constants/routes';
-
 // Types
 import { JSX } from 'react';
 
+// Query
+import { useGetCategoriesQuery } from '@/services/others/categories/get-categories-query';
+
 export function Filters(): JSX.Element {
   const { category } = Routes;
+  const { data, isPending } = useGetCategoriesQuery();
+  const categories = data?.data || [];
+
+  if (isPending) {
+    return (
+      <div className="flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="px-6 sm:px-10 md:px-20">
       <Carousel className="w-full">
         <CarouselContent className="-ml-1">
-          {filters.map(({ icon, label }, index) => (
+          {categories.map(({ icon_url, id, name }, index) => (
             <CarouselItem
               key={index}
               className="pl-1 h-[250px] basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 2xl:basis-1/7 flex items-center justify-center"
             >
               <Link
-                href={category(label.toLowerCase())}
+                href={category(id, name)}
                 className="relative cursor-pointer border border-neutral-grey-20 !w-[110px] !h-[110px] rounded-full flex items-center justify-center"
               >
-                <Image src={icon} alt={label} />
+                <Image src={icon_url} alt={name} width={49} height={49} />
                 <p className="absolute text-center top-32 w-[150px] text-neutral-grey-100 font-medium text-base">
-                  {label}
+                  {name}
                 </p>
               </Link>
             </CarouselItem>

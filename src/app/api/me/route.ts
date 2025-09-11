@@ -1,11 +1,8 @@
 // Helper
-import { response, supabasePromiseResolver } from '@/lib/supabase/helper';
+import { response, supabasePromiseResolver, verifyToken } from '@/lib/supabase/helper';
 
 // Services
 import { isUserExist } from '@/services/server/authService';
-
-// JWT Decoder
-import { jwtDecode } from 'jwt-decode';
 
 // Header
 import { headers } from 'next/headers';
@@ -13,18 +10,30 @@ import { headers } from 'next/headers';
 export async function GET() {
   try {
     const { get } = await headers();
-    const token = get('authorization')?.split(' ')[1];
 
-    if (!token) {
-      const errorMsg = 'Pleas Login first';
+    const accessToken = get('authorization')?.split(' ')[1];
+
+    if (!accessToken) {
+      const errorMsg = 'Please login first';
       return response({ error: errorMsg, data: null, message: errorMsg }, 401);
     }
 
-    const { email } = jwtDecode<{ email: string }>(token);
+    const tokenCheckResponse = verifyToken(accessToken);
+
+    if (!tokenCheckResponse?.valid) {
+      return response(
+        {
+          message: tokenCheckResponse.error,
+          data: null,
+          error: tokenCheckResponse.error,
+        },
+        401,
+      );
+    }
 
     const { success, data, error } = await supabasePromiseResolver({
       requestFunction: isUserExist,
-      requestBody: { email },
+      requestBody: { email: tokenCheckResponse?.email },
     });
 
     if (!success) {

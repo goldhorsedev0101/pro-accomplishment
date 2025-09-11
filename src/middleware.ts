@@ -17,9 +17,9 @@ const { home, profile } = Routes;
 const privateRoutes: Array<string> = [home, profile];
 
 export async function middleware({ url, nextUrl, cookies }: NextRequest) {
-  const token = cookies.get('token')?.value;
+  const accessToken = cookies.get('accessToken')?.value;
   const { redirect, next } = NextResponse;
-  const user = await getUser(token);
+  const user = await getUser(accessToken);
   const { pathname } = nextUrl;
 
   const isPublicRoute = publicRoutes.includes(pathname);

@@ -16,15 +16,18 @@ export const toggleFavoriteCandidate = async ({
 
 export const getFavoriteCandidates = async ({
   recruiterId,
+  search,
   skip,
   take,
 }: {
   recruiterId: string;
+  search?: string | null;
   skip: number;
   take: number;
 }) => {
   const { data, error } = await supabase.rpc('get_favorite_candidates', {
     p_recruiter_id: recruiterId,
+    p_search_term: search,
     p_skip: skip,
     p_take: take,
   });

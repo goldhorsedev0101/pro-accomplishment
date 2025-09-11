@@ -7,49 +7,79 @@ import Image from 'next/image';
 import { contacts } from '@/constants/contacts';
 
 // Icons
-import link from 'public/icons/link.svg';
 import school from 'public/icons/school.svg';
-import profile from 'public/img/profile.png';
 import { PiQuotesLight } from 'react-icons/pi';
 import { TiStar } from 'react-icons/ti';
 
 // Type
-import { JSX } from 'react';
+import { CandidateData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
+import Link from 'next/link';
+import { FC, JSX } from 'react';
 
-const About = (): JSX.Element => {
+interface IProps {
+  candidate_data?: CandidateData;
+}
+
+const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
+  const {
+    gpa,
+    link,
+    city,
+    grade,
+    email,
+    quote,
+    country,
+    last_name,
+    first_name,
+    phone_number,
+    organization_name,
+    profile_photo_url,
+  } = candidate_data || {};
+
+  const name = first_name + ' ' + last_name;
+  const address = city + ', ' + country;
+
+  const contact = contacts({ email, phone_number, address, link });
+
   return (
     <Box className="shadow-sm">
       <div className="flex lg:!flex-row  gap-6 flex-col-reverse items-start justify-between">
         <div className="flex flex-col gap-y-3">
-          <Heading text="Emma Robert" className="text-4xl" width="medium" />
+          <Heading text={name} className="text-4xl" width="medium" />
 
           <p className="flex items-start gap-x-2">
             <PiQuotesLight size={20} className="text-primary rotate-180 min-w-5 min-h-5" />
-            <span className="max-w-[634px] text-neutral-grey-80 font-normal text-lg">
-              Every accomplishment begins with the decision to try but it&lsquo;s the perseverance
-              to finish that makes it extraordinary
-            </span>
+            <span className="max-w-[634px] text-neutral-grey-80 font-normal text-lg">{quote}</span>
             <PiQuotesLight size={20} className="text-primary min-w-5 min-h-5" />
           </p>
 
           <div className="flex flex-wrap gap-6">
-            {contacts.map(({ icon, label }, i) => (
-              <div
-                className={`flex items-center gap-x-2 ${icon === link ? '!w-full' : 'w-fit'}`}
+            {contact.map(({ icon, label }, i) => (
+              <Link
                 key={i}
+                target={label === link ? '_blank' : undefined}
+                href={label === (link ?? '#') ? (link ?? '#') : '#'}
+                onClick={({ preventDefault }) => label !== link && preventDefault}
+                className={`flex items-center gap-x-2 ${label === link ? '!w-full' : 'w-fit !cursor-default'}`}
               >
                 <Image src={icon} alt="icon" width={18} height={18} />
                 <span
-                  className={`truncate text-neutral-grey-100 font-normal ${icon === link ? '!text-blue !w-full' : ''}`}
+                  className={`truncate text-neutral-grey-100 font-normal ${label === link ? '!text-blue !w-full' : ''}`}
                 >
                   {label}
                 </span>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
 
-        <Image src={profile} alt="profile" width={154} height={154} />
+        <Image
+          src={profile_photo_url ?? '/'}
+          className="rounded-lg"
+          alt="profile"
+          height={154}
+          width={154}
+        />
       </div>
 
       <hr />
@@ -57,21 +87,19 @@ const About = (): JSX.Element => {
       <div className="flex items-center gap-x-3">
         <div className="flex items-center gap-x-1">
           <Image src={school} alt="school" width={20} height={20} />
-          <p className="text-xs font-normal text-neutral-grey-100">
-            Springfield Central High School
-          </p>
+          <p className="text-xs font-normal text-neutral-grey-100">{organization_name}</p>
         </div>
 
         <div className="size-1.5 rounded-full bg-[#B2B0B2]" />
 
-        <p className="text-xs font-normal text-neutral-grey-80">8th Grade</p>
+        <p className="text-xs font-normal text-neutral-grey-80">{grade}</p>
 
         <div className="size-1.5 rounded-full bg-[#B2B0B2]" />
 
         <div className="flex items-center h-fit gap-x-1">
           <TiStar className="text-yellow" size={20} />
           <p className="text-black text-xs font-normal">
-            GPA<span className="font-medium"> {3.5}</span>
+            GPA<span className="font-medium"> {gpa}</span>
           </p>
         </div>
       </div>

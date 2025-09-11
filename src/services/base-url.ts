@@ -1,7 +1,7 @@
 const localhost = 'http://localhost:3000/api';
 const live = process.env.API_URL;
 
-const isLive = false;
+const isLive = true;
 const baseUrl = isLive ? live : localhost;
 
 export const URLS = {
@@ -27,7 +27,7 @@ export const URLS = {
   ME: `${baseUrl}/me`,
 
   // =========================== Folio ===================== //
-  GET_CANDIDATE_FOLIO: `${baseUrl}/candidate/get-candidate-folio`,
+  GET_CANDIDATE_FOLIO: `${baseUrl}/folio/get-candidate-folio`,
 
   // =========================== Favorite ===================== //
   TOGGLE_FAVORITE_CANDIDATE: `${baseUrl}/favorite/toggle-favorite-candidate`,

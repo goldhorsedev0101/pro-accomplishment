@@ -9,9 +9,14 @@ import percentage from 'public/icons/percentage.svg';
 import teacher from 'public/icons/teacher.svg';
 
 // Types
-import { JSX } from 'react';
+import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
+import { FC, JSX } from 'react';
 
-const AcademicsCard = (): JSX.Element => {
+interface IProps {
+  form_data: FormData;
+}
+
+const AcademicsCard: FC<IProps> = (): JSX.Element => {
   const data = [
     { icon: book, label: 'Math' },
     { icon: percentage, label: '95%' },

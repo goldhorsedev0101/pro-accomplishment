@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'klfjpkpxgrwdqvpozizo.supabase.co',
       },
+      {
+        protocol: 'https',
+        hostname: 'zenkoders.com',
+      },
     ],
   },
 };

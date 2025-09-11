@@ -20,6 +20,8 @@ import { FC, JSX, useState } from 'react';
 // Queries
 import Loader from '@/components/common/loader';
 import NoData from '@/components/common/no-data';
+
+// Queries
 import { useGetCandidateQuery } from '@/services/others/candidate/get-candidate-query';
 import { useGetSubCategoriesQuery } from '@/services/others/categories/get-sub-categories-query';
 
@@ -45,9 +47,9 @@ const CategoryView: FC<IParams & { name: string }> = ({ category, name }): JSX.E
     category: item.organization_name,
     profile: item.profile_photo_url,
     location: item.country,
+    id: item.candidate_id,
     grade: item.grade,
     gpa: item.gpa,
-    id: item.id,
   }));
 
   const subCategoriesData = subCategories?.data;

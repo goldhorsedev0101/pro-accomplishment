@@ -1,7 +1,7 @@
 const localhost = 'http://localhost:3000/api';
 const live = process.env.API_URL;
 
-const isLive = false;
+const isLive = true;
 const baseUrl = isLive ? live : localhost;
 
 export const URLS = {
@@ -28,4 +28,5 @@ export const URLS = {
 
   // =========================== Favorite ===================== //
   TOGGLE_FAVORITE_CANDIDATE: `${baseUrl}/favorite/toggle-favorite-candidate`,
+  GET_FAVORITE_CANDIDATES: `${baseUrl}/favorite/get-favorite-candidates`,
 };

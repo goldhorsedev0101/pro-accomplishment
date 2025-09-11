@@ -14,17 +14,17 @@ import SearchInput from '@/components/common/search-input';
 import Image from 'next/image';
 
 // Types
-import { useGetCandidateQuery } from '@/services/others/candidate/get-candidate-query';
+import { useGetFavoriteCandidateQuery } from '@/services/others/favorite/get-favorite-candidate';
 import { JSX, useState } from 'react';
 
 const HomeView = (): JSX.Element => {
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState(1);
 
-  const { data, isPending } = useGetCandidateQuery({
+  const { data, isPending } = useGetFavoriteCandidateQuery({
     skip: (page - 1) * 10,
-    searchTerm: search,
     take: 10,
+    search,
   });
 
   const { candidates, meta_data } = data?.data || {};

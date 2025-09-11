@@ -59,7 +59,16 @@ function DialogContent({
 }) {
   return (
     <DialogPortal data-slot="dialog-portal">
-      <DialogOverlay />
+      <DialogOverlay>
+        {!showCloseButton && (
+          <div
+            onClick={onClick}
+            className="absolute border bottom-[850px] z-[999999] left-8 p-2.5 cursor-pointer bg-white rounded-full"
+          >
+            <XIcon />
+          </div>
+        )}
+      </DialogOverlay>
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(

@@ -19,7 +19,7 @@ const AcademicsCard = (): JSX.Element => {
   ];
 
   return (
-    <Box className="shadow-sm w-full !gap-y-3">
+    <Box className="shadow-sm w-full !gap-y-3 !text-start">
       <div className="flex justify-between items-start">
         <div>
           <Heading

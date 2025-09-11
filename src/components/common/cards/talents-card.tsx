@@ -13,10 +13,10 @@ const TalentsCard = (): JSX.Element => {
   const actress = ['Memorization', 'Stage Presence', 'Acting'];
 
   return (
-    <Box className="shadow-sm w-full !gap-y-3">
+    <Box className="shadow-sm w-full !gap-y-3 !text-start">
       <div className="flex items-center gap-x-3">
-        <div className="w-9 h-9 rounded-full bg-neutral-grey-10 flex items-center justify-center">
-          <Image src={start} alt="start" sizes="24" />
+        <div className="w-10 h-9 rounded-full bg-neutral-grey-10 flex items-center justify-center">
+          <Image src={start} alt="start" className="min-w-6 min-h-6" />
         </div>
         <div className="flex items-center w-full justify-between">
           <Heading

@@ -12,7 +12,7 @@ import { JSX } from 'react';
 
 const AwardsCard = (): JSX.Element => {
   return (
-    <Box className="shadow-sm w-full !gap-y-3">
+    <Box className="shadow-sm w-full !gap-y-3 !text-start">
       <div className="flex items-center gap-x-3">
         <div className="w-9 h-9 rounded-full bg-yellow-light flex items-center justify-center">
           <Image src={cup} alt="cup" sizes="24" />

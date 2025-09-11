@@ -15,7 +15,7 @@ const EmploymentCard = (): JSX.Element => {
   const skills = ['React.js', 'TypeScript', 'Tailwind CSS'];
 
   return (
-    <Box className="shadow-sm w-full !gap-y-3">
+    <Box className="shadow-sm w-full !text-start !gap-y-3">
       <div className="flex items-start gap-x-3">
         <div className="w-9 h-9 rounded-full bg-blue-light flex items-center justify-center">
           <Image src={briefcase} alt="start" sizes="24" />

@@ -12,7 +12,7 @@ import { JSX } from 'react';
 
 const CertificationsCard = (): JSX.Element => {
   return (
-    <Box className="shadow-sm w-full !gap-y-3">
+    <Box className="shadow-sm w-full !gap-y-3 !text-start">
       <div className="flex items-center gap-x-3">
         <div className="w-9 h-9 rounded-full bg-purple-light flex items-center justify-center">
           <Image src={start} alt="start" sizes="24" />

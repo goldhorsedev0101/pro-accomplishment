@@ -13,7 +13,7 @@ import { JSX } from 'react';
 
 const AthleticsCard = (): JSX.Element => {
   return (
-    <Box className="shadow-sm">
+    <Box className="shadow-sm !text-start">
       <div className="flex justify-between items-start">
         <div>
           <Heading

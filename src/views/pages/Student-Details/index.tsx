@@ -10,6 +10,7 @@ import CertificationsCard from '@/components/common/cards/certifications-card';
 import EmploymentCard from '@/components/common/cards/employment-card';
 import TalentsCard from '@/components/common/cards/talents-card';
 import Heading from '@/components/common/heading';
+import DetailsModalLayout from '@/components/common/modals/details-modal-layout';
 import { Button } from '@/components/ui/button';
 import About from './about';
 
@@ -18,7 +19,6 @@ import { IParams } from '@/types/params.type';
 import { FC, JSX, useState } from 'react';
 
 // Icons
-import DetailsModalLayout from '@/components/common/modals/details-modal-layout';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { HiOutlineDownload } from 'react-icons/hi';
 
@@ -70,14 +70,18 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
         <div className="flex flex-col gap-y-6">
           <Box className="!gap-y-4 !border-none !p-0">
             <Heading text="Athletics" className="!text-lg !text-neutral-grey-60" width="medium" />
-            <AthleticsCard />
+            <DetailsModalLayout trigger={<AthleticsCard />}>
+              <></>
+            </DetailsModalLayout>
           </Box>
           <Box className="!gap-y-4 !border-none !p-0">
             <Heading text="Academics" className="!text-lg !text-neutral-grey-60" width="medium" />
             {Array(2)
               .fill(0)
               .map((_, i) => (
-                <AcademicsCard key={i} />
+                <DetailsModalLayout key={i} trigger={<AcademicsCard />}>
+                  <></>
+                </DetailsModalLayout>
               ))}
           </Box>
           <Box className="!gap-y-4 !border-none !p-0">
@@ -85,7 +89,9 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
             {Array(5)
               .fill(0)
               .map((_, i) => (
-                <AwardsCard key={i} />
+                <DetailsModalLayout key={i} trigger={<AwardsCard />}>
+                  <></>
+                </DetailsModalLayout>
               ))}
           </Box>
         </div>
@@ -100,7 +106,9 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
             {Array(3)
               .fill(0)
               .map((_, i) => (
-                <CertificationsCard key={i} />
+                <DetailsModalLayout key={i} trigger={<CertificationsCard />}>
+                  <></>
+                </DetailsModalLayout>
               ))}
           </Box>
           <Box className="!gap-y-4 !border-none !p-0">
@@ -109,17 +117,19 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
             {Array(3)
               .fill(0)
               .map((_, i) => (
-                <TalentsCard key={i} />
+                <DetailsModalLayout key={i} trigger={<TalentsCard />}>
+                  <></>
+                </DetailsModalLayout>
               ))}
           </Box>
           <Box className="!gap-y-4 !border-none !p-0">
             <Heading text="Employment" className="!text-lg !text-neutral-grey-60" width="medium" />
-            <EmploymentCard />
+            <DetailsModalLayout trigger={<EmploymentCard />}>
+              <></>
+            </DetailsModalLayout>
           </Box>
         </div>
       </div>
-
-      <DetailsModalLayout />
     </div>
   );
 };

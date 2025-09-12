@@ -5,8 +5,8 @@ import locationIcon from 'public/icons/location-colored.svg';
 
 // Components
 import Image from 'next/image';
-import Box from '../box';
-import Heading from '../heading';
+import Box from '../../box';
+import Heading from '../../heading';
 
 // Types
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
@@ -16,11 +16,11 @@ import { FC, JSX } from 'react';
 import { formatToMDYYYY } from '@/utils/date-format';
 
 interface IProps {
-  form_data: FormData;
+  form_data?: FormData;
 }
 
 const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
-  const { date, title_or_award, location, event_name, name, region } = form_data;
+  const { date, title_or_award, location, event_name, name, region } = form_data || {};
 
   return (
     <Box className="shadow-sm !text-start">

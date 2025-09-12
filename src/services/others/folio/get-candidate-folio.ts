@@ -15,6 +15,7 @@ const useGetCandidateFolioQuery = (payload: GetCandidateFolioPayloadT) => {
   const getCandidateFolioFn = async (): Promise<GetCandidateFolioResponseT> => {
     const { data } = await axios.get(URLS.GET_CANDIDATE_FOLIO, { params: payload });
     return data as GetCandidateFolioResponseT;
+    // return dummyData as GetCandidateFolioResponseT;
   };
 
   return useQuery({ queryKey: ['get-candidate-folio', payload], queryFn: getCandidateFolioFn });

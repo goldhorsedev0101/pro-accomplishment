@@ -72,7 +72,7 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
 
       <Heading text="Accomplishment" size="22" width="medium" />
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 h-fit gap-6">
         <RenderCards accomplishments={accomplishments} />
       </div>
     </div>

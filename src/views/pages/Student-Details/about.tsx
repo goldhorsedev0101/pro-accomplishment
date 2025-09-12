@@ -39,7 +39,7 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
   const name = first_name + ' ' + last_name;
   const address = city + ', ' + country;
 
-  const contact = contacts({ email, phone_number, address, link });
+  const contact = contacts({ email, phone_number, address, link: link ?? '' });
 
   return (
     <Box className="shadow-sm">

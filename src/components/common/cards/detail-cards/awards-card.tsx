@@ -4,8 +4,8 @@ import cup from 'public/icons/cup.svg';
 
 // Components
 import Image from 'next/image';
-import Box from '../box';
-import Heading from '../heading';
+import Box from '../../box';
+import Heading from '../../heading';
 
 // Types
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
@@ -15,11 +15,11 @@ import { FC, JSX } from 'react';
 import { formatToMDYYYY } from '@/utils/date-format';
 
 interface IProps {
-  form_data: FormData;
+  form_data?: FormData;
 }
 
 const AwardsCard: FC<IProps> = ({ form_data }): JSX.Element => {
-  const { award_title = '', date_received, institution } = form_data;
+  const { award_title = '', date_received, institution } = form_data || {};
 
   return (
     <Box className="shadow-sm w-full !gap-y-3 !text-start">
@@ -30,7 +30,7 @@ const AwardsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         <div>
           <Heading
             className="!text-sm !text-heading font-quicksand"
-            text={award_title}
+            text={award_title ?? 'N/A'}
             width="medium"
           />
           <p className="font-quicksand text-neutral-grey-70 font-normal text-xs">

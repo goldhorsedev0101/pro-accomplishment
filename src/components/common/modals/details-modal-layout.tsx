@@ -1,6 +1,6 @@
 'use client';
 
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Fragment, useState } from 'react';
 
 interface IProps {
@@ -14,13 +14,14 @@ const DetailsModalLayout = ({ trigger, children }: IProps) => {
   return (
     <Fragment>
       <Dialog onOpenChange={setIsOpen} open={isOpen}>
-        <DialogTrigger>{trigger}</DialogTrigger>
+        <DialogTrigger className="outline-none"> {trigger}</DialogTrigger>
         <DialogContent
-          className="bg-neutral-grey-0 max-h-[836px] max-w-[764px] w-full overflow-y-auto"
+          className="!bg-[#E9EDEE] max-h-[836px] max-w-[764px] w-full overflow-y-auto outline-none rounded-[20px] !p-3"
           onInteractOutside={(e) => e.preventDefault()}
           onClick={() => setIsOpen(false)}
           showCloseButton={false}
         >
+          <DialogTitle className="hidden">Details</DialogTitle>
           {children}
         </DialogContent>
       </Dialog>

@@ -35,6 +35,7 @@ export interface CandidateData {
   profile_status: string;
   active_folio_id: string;
   cover_photo_url: string;
+  is_favorite: boolean;
   organization_name: string;
   profile_photo_url: string;
   objective_for_summary: string | null;

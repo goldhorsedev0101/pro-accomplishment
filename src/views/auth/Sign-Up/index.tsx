@@ -127,6 +127,8 @@ const SignUpView = (): JSX.Element => {
           type="password"
           required
         />
+
+        {/* <CustomPhoneInput /> */}
       </div>
 
       <Button type="submit" disabled={isPending}>

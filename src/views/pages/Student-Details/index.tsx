@@ -11,7 +11,7 @@ import About from './about';
 
 // Types
 import { IParams } from '@/types/params.type';
-import { FC, JSX, useState } from 'react';
+import { FC, JSX, useEffect, useState } from 'react';
 
 // Icons
 import { GoHeart, GoHeartFill } from 'react-icons/go';
@@ -25,12 +25,16 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
   const { data, isPending } = useGetCandidateFolioQuery({ candidateId: id ?? '' });
   const { mutateAsync: toggle } = useToggleFavoriteCandidateMutation();
   const { accomplishments, candidate_data } = data?.data || {};
-  const [isFav, setIsFav] = useState<boolean>(false);
+  const [isFav, setIsFav] = useState<boolean>(candidate_data?.is_favorite || false);
 
   const handleToggle = async () => {
     await toggle({ candidateId: id || '' });
     setIsFav(!isFav);
   };
+
+  useEffect(() => {
+    setIsFav(candidate_data?.is_favorite || false);
+  }, [candidate_data?.is_favorite]);
 
   if (isPending) {
     return (

@@ -23,6 +23,7 @@ export const dummyData: Partial<GetCandidateFolioResponseT> = {
       date_of_birth: '1986-08-20',
       profile_status: 'complete',
       active_folio_id: '79e621e7-b798-4d3b-bf38-bc3282768d13',
+      is_favorite: false,
       cover_photo_url:
         'https://klfjpkpxgrwdqvpozizo.supabase.co/storage/v1/object/public/user-photos/C8C0F78B-B36C-45A8-8C51-BED08823A61F___55562___1755709676771.jpg',
       organization_name: 'school',

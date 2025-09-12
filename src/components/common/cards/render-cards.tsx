@@ -23,10 +23,8 @@ const RenderCards: FC<IProps> = ({ accomplishments }) => {
             />
           )}
 
-          <DetailsModalLayout
-            trigger={Cards({ form_type: item?.form_type, form_data: item.form_data })}
-          >
-            {Modals({ form_type: item?.form_type, form_data: item.form_data })}
+          <DetailsModalLayout trigger={Cards({ ...item })}>
+            {Modals({ ...item })}
           </DetailsModalLayout>
         </Box>
       ))}

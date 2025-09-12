@@ -17,15 +17,26 @@ import { EditProfileSchema } from '@/schemas/edit-profile.schema';
 import { useFormik } from 'formik';
 
 // Types
-import { JSX, useState } from 'react';
+import { useEditProfileMutation } from '@/services/others/profile/edit-recruiter-profile';
+import { FC, JSX, useState } from 'react';
 
-const EditProfileModal = (): JSX.Element => {
+interface IProps {
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+}
+
+const EditProfileModal: FC<IProps> = ({ first_name, last_name, email }): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  const { mutateAsync } = useEditProfileMutation();
+
   const { touched, errors, values, handleChange, handleSubmit, resetForm } = useFormik({
-    initialValues: { firstName: '', lastName: '' },
+    initialValues: { firstName: first_name ?? '', lastName: last_name ?? '' },
     validationSchema: EditProfileSchema,
-    onSubmit: () => {
+    enableReinitialize: true,
+    onSubmit: async (values) => {
+      await mutateAsync(values);
       setIsOpen(false);
       resetForm();
     },
@@ -60,7 +71,7 @@ const EditProfileModal = (): JSX.Element => {
             />
           </div>
 
-          <Input value={'janecooper@gmail.com'} disabled label="Email Address" />
+          <Input value={email} disabled label="Email Address" />
 
           <DialogClose asChild>
             <Button className="w-full h-14 rounded-xl" type="submit">

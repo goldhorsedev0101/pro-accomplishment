@@ -25,6 +25,8 @@ export const URLS = {
 
   // =========================== Profile ===================== //
   ME: `${baseUrl}/me`,
+  EDIT_RECRUITER_PROFILE: `${baseUrl}/profile/edit-recruiter-profile`,
+  GET_RECRUITER_PROFILE: `${baseUrl}/profile/get-recruiter-profile`,
 
   // =========================== Folio ===================== //
   GET_CANDIDATE_FOLIO: `${baseUrl}/folio/get-candidate-folio`,

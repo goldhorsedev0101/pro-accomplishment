@@ -7,7 +7,7 @@ export const getCandidateFolio = async ({
   recruiterId: string;
   candidateId: string;
 }) => {
-  const { data, error } = await supabase.rpc('get_candidate_folio', {
+  const { data, error } = await supabase.rpc('web_get_candidate_folio', {
     p_recruiter_id: recruiterId,
     p_candidate_id: candidateId,
   });

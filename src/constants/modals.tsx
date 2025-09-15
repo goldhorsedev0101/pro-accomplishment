@@ -1,6 +1,11 @@
 // Components
 import AcademicsDetailsModal from '@/components/common/modals/detail-modals/academics-details-modal';
+import ArtDetailsModal from '@/components/common/modals/detail-modals/art-details-modal';
 import AthleticDetailsModal from '@/components/common/modals/detail-modals/athletic-details-modal';
+import AwardsDetailsModal from '@/components/common/modals/detail-modals/awards-details-modal';
+import CertificationsDetailsModal from '@/components/common/modals/detail-modals/certifications-details-modal';
+import TalentsDetailsModal from '@/components/common/modals/detail-modals/talents-details-modal';
+import VolunteerDetailsModal from '@/components/common/modals/detail-modals/volunteer-details-modal';
 
 // Enum
 import { FORM_TYPE_ENUM } from '@/enum/form-type.enum';
@@ -26,7 +31,7 @@ export const Modals = ({ form_type, form_data }: IProps): JSX.Element => {
       return <></>;
 
     case FORM_TYPE_ENUM.Certification:
-      return <></>;
+      return <CertificationsDetailsModal form_data={form_data} />;
 
     case FORM_TYPE_ENUM.GelSemesterAtSea:
       return <></>;
@@ -47,7 +52,7 @@ export const Modals = ({ form_type, form_data }: IProps): JSX.Element => {
       return <AthleticDetailsModal form_data={form_data} />;
 
     case FORM_TYPE_ENUM.Volunteer:
-      return <></>;
+      return <VolunteerDetailsModal form_data={form_data} />;
 
     case FORM_TYPE_ENUM.Academic:
       return <AcademicsDetailsModal form_data={form_data} />;
@@ -56,10 +61,10 @@ export const Modals = ({ form_type, form_data }: IProps): JSX.Element => {
       return <></>;
 
     case FORM_TYPE_ENUM.Talent:
-      return <></>;
+      return <TalentsDetailsModal form_data={form_data} />;
 
     case FORM_TYPE_ENUM.Award:
-      return <></>;
+      return <AwardsDetailsModal form_data={form_data} />;
 
     case FORM_TYPE_ENUM.Custom:
       return <></>;
@@ -74,7 +79,7 @@ export const Modals = ({ form_type, form_data }: IProps): JSX.Element => {
       return <></>;
 
     case FORM_TYPE_ENUM.Art:
-      return <></>;
+      return <ArtDetailsModal form_data={form_data} />;
 
     default:
       return <></>;

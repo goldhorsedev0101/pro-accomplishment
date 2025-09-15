@@ -1,9 +1,8 @@
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
 import { formatToMMMMDYYYY } from '@/utils/date-format';
+import Image from 'next/image';
 import mobileProgramming from 'public/pdf/mobile-programming.svg';
 import { FC } from 'react';
-import Image from 'next/image';
-import Box from '../../box';
 
 interface IProps {
   form_data?: FormData;

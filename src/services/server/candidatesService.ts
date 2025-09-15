@@ -24,7 +24,7 @@ export const getCandidates = async ({
   skip: number;
   take: number;
 }) => {
-  const { data, error } = await supabase.rpc('get_candidates', {
+  const { data, error } = await supabase.rpc('web_get_candidates', {
     p_recruiter_id: recruiterId,
     p_search_term: searchTerm,
     p_category_id: categoryId,

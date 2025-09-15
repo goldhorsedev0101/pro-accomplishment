@@ -4,8 +4,11 @@ import { FC } from 'react';
 
 // Components
 import Image from 'next/image';
-import Link from 'next/link';
 import Box from '../../box';
+import Document from '../../studets-details/document';
+import Links from '../../studets-details/links';
+import Media from '../../studets-details/media';
+import Note from '../../studets-details/note';
 
 // Util
 import { formatToMDYYYY } from '@/utils/date-format';
@@ -14,9 +17,7 @@ import { formatToMDYYYY } from '@/utils/date-format';
 import calenderTick from 'public/icons/calendar-tick.svg';
 import calender from 'public/icons/calendar.svg';
 import cup from 'public/icons/cup.svg';
-import download from 'public/icons/download.svg';
 import location from 'public/icons/location-colored.svg';
-import note from 'public/icons/note.svg';
 
 interface IProps {
   form_data?: FormData;
@@ -99,63 +100,19 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => (
       </Box>
     )}
 
-    <Box className="!border-none !p-3 !gap-2">
-      <p className="text-heading font-medium">PDF/Document</p>
-
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-x-1">
-          <p className="text-red font-semibold text-sm bg-[#FCDBDB] size-10 rounded-lg flex items-center justify-center">
-            PDF
-          </p>
-          <div>
-            <p className="text-neutral-grey-100 text-sm font-medium">
-              {form_data?.certification_title ?? 'Certificate'}
-            </p>
-            <p className="text-neutral-grey-70 text-sm">782.3Kb</p>
-          </div>
-        </div>
-
-        <Image alt="download" src={download} width={24} height={24} />
-      </div>
-    </Box>
+    {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
+      <Document
+        certificate_urls={form_data?.certificate_urls}
+        certification_title={form_data?.certification_title}
+      />
+    )}
 
     {form_data?.media_urls && form_data?.media_urls?.length > 0 && (
-      <Box className="!border-none !p-3 !gap-2">
-        <p className="text-heading font-medium">Media</p>
-
-        <div className="flex flex-wrap gap-4">
-          {form_data?.media_urls?.map((url, i) => (
-            <Image
-              className="rounded-md"
-              alt="chaseBanner"
-              height={150}
-              width={150}
-              src={url}
-              key={i}
-            />
-          ))}
-        </div>
-      </Box>
+      <Media media_urls={form_data?.media_urls} />
     )}
 
-    {form_data?.link && (
-      <Box className="!border-none !p-3 !gap-2">
-        <p className="text-heading font-medium">Link</p>
-        <Link target="_blank" href={form_data?.link} className="text-blue text-xs">
-          {form_data?.link}
-        </Link>
-      </Box>
-    )}
-
-    {form_data?.notes && (
-      <Box className="!border-none !p-3 !gap-2">
-        <div className="flex items-center gap-x-1">
-          <Image alt="title/award" src={note} width={20} height={20} />
-          <p className="text-heading font-medium">Notes</p>
-        </div>
-        <p className="text-neutral-grey-70 text-sm">{form_data?.notes}</p>
-      </Box>
-    )}
+    {form_data?.link && <Links link={form_data?.link} />}
+    {form_data?.notes && <Note note={form_data?.notes} />}
   </div>
 );
 

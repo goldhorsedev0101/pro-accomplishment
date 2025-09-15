@@ -4,17 +4,18 @@ import { FC } from 'react';
 
 // Components
 import Image from 'next/image';
-import Link from 'next/link';
 import Box from '../../box';
+import Document from '../../studets-details/document';
+import Links from '../../studets-details/links';
+import Media from '../../studets-details/media';
+import Note from '../../studets-details/note';
+import Skills from '../../studets-details/skills';
 
 // Utils
 import { formatToDDMMMYYYY } from '@/utils/date-format';
 
 // Icons
-import downloadDoc from '@/utils/download-doc';
-import download from 'public/icons/download.svg';
 import magicStar from 'public/icons/magic-star.svg';
-import note from 'public/icons/note.svg';
 
 interface IProps {
   form_data?: FormData;
@@ -38,87 +39,22 @@ const TalentsDetailsModal: FC<IProps> = ({ form_data }) => {
       )}
 
       {form_data?.skill_required && form_data?.skill_required?.length > 0 && (
-        <Box className="!border-none !p-3 !gap-2">
-          <p className="text-heading font-medium">Skills Required</p>
-          <div className="flex flex-wrap gap-2">
-            {form_data?.skill_required?.map((skill, i) => (
-              <p key={i} className="text-neutral-grey-100 text-sm font-normal">
-                {skill}
-              </p>
-            ))}
-          </div>
-        </Box>
+        <Skills skills={form_data?.skill_required} title="Skills Required" />
       )}
 
-      <Box className="!border-none !p-3 !gap-2">
-        <p className="text-heading font-medium">PDF/Document</p>
-
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-x-1">
-            <p className="text-red font-semibold text-sm bg-[#FCDBDB] size-10 rounded-lg flex items-center justify-center">
-              PDF
-            </p>
-            <div>
-              <p className="text-neutral-grey-100 text-sm font-medium">
-                {form_data?.certification_title ?? 'Certificate'}
-              </p>
-              <p className="text-neutral-grey-70 text-sm">782.3Kb</p>
-            </div>
-          </div>
-
-          <Image
-            width={24}
-            height={24}
-            alt="download"
-            src={download}
-            onClick={() =>
-              downloadDoc(
-                form_data?.award_certificate_urls?.[0] ?? '',
-                form_data?.certification_title ?? 'Certificate',
-              )
-            }
-            className="cursor-pointer"
-          />
-        </div>
-      </Box>
+      {form_data?.award_certificate_urls && form_data?.award_certificate_urls?.length > 0 && (
+        <Document
+          certificate_urls={form_data?.award_certificate_urls}
+          certification_title={form_data?.award_title}
+        />
+      )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (
-        <Box className="!border-none !p-3 !gap-2">
-          <p className="text-heading font-medium">Media</p>
-
-          <div className="flex flex-wrap gap-4">
-            {form_data?.media_urls?.map((url, i) => (
-              <Image
-                className="rounded-md"
-                alt="chaseBanner"
-                height={150}
-                width={150}
-                src={url}
-                key={i}
-              />
-            ))}
-          </div>
-        </Box>
+        <Media media_urls={form_data?.media_urls} />
       )}
 
-      {form_data?.link && (
-        <Box className="!border-none !p-3 !gap-2">
-          <p className="text-heading font-medium">Link</p>
-          <Link target="_blank" href={form_data?.link} className="text-blue text-xs">
-            {form_data?.link}
-          </Link>
-        </Box>
-      )}
-
-      {form_data?.notes && (
-        <Box className="!border-none !p-3 !gap-2">
-          <div className="flex items-center gap-x-1">
-            <Image alt="title/award" src={note} width={20} height={20} />
-            <p className="text-heading font-medium">Notes</p>
-          </div>
-          <p className="text-neutral-grey-70 text-sm">{form_data?.notes}</p>
-        </Box>
-      )}
+      {form_data?.link && <Links link={form_data?.link} />}
+      {form_data?.notes && <Note note={form_data?.notes} />}
     </div>
   );
 };

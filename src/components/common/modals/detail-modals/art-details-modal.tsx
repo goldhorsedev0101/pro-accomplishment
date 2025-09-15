@@ -3,17 +3,16 @@ import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candi
 import { FC } from 'react';
 
 // Components
-import Image from 'next/image';
-import Link from 'next/link';
 import Box from '../../box';
 
 // Util
 
 // Icons
 import { formatToMDYYYY } from '@/utils/date-format';
-import downloadDoc from '@/utils/download-doc';
-import download from 'public/icons/download.svg';
-import note from 'public/icons/note.svg';
+import Document from '../../studets-details/document';
+import Links from '../../studets-details/links';
+import Media from '../../studets-details/media';
+import Note from '../../studets-details/note';
 
 interface IProps {
   form_data?: FormData;
@@ -33,75 +32,19 @@ const ArtDetailsModal: FC<IProps> = ({ form_data }) => {
         </Box>
       )}
 
-      <Box className="!border-none !p-3 !gap-2">
-        <p className="text-heading font-medium">PDF/Document</p>
-
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-x-1">
-            <p className="text-red font-semibold text-sm bg-[#FCDBDB] size-10 rounded-lg flex items-center justify-center">
-              PDF
-            </p>
-            <div>
-              <p className="text-neutral-grey-100 text-sm font-medium">
-                {form_data?.accomplishment_name ?? 'Certificate'}
-              </p>
-              <p className="text-neutral-grey-70 text-sm">782.3Kb</p>
-            </div>
-          </div>
-
-          <Image
-            width={24}
-            height={24}
-            alt="download"
-            src={download}
-            onClick={() =>
-              downloadDoc(
-                form_data?.award_certificate_urls?.[0] ?? '',
-                form_data?.accomplishment_name ?? 'Certificate',
-              )
-            }
-            className="cursor-pointer"
-          />
-        </div>
-      </Box>
+      {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
+        <Document
+          certificate_urls={form_data?.certificate_urls}
+          certification_title={form_data?.certification_title}
+        />
+      )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (
-        <Box className="!border-none !p-3 !gap-2">
-          <p className="text-heading font-medium">Media</p>
-
-          <div className="flex flex-wrap gap-4">
-            {form_data?.media_urls?.map((url, i) => (
-              <Image
-                className="rounded-md"
-                alt="chaseBanner"
-                height={150}
-                width={150}
-                src={url}
-                key={i}
-              />
-            ))}
-          </div>
-        </Box>
+        <Media media_urls={form_data?.media_urls} />
       )}
 
-      {form_data?.link && (
-        <Box className="!border-none !p-3 !gap-2">
-          <p className="text-heading font-medium">Link</p>
-          <Link target="_blank" href={form_data?.link} className="text-blue text-xs">
-            {form_data?.link}
-          </Link>
-        </Box>
-      )}
-
-      {form_data?.notes && (
-        <Box className="!border-none !p-3 !gap-2">
-          <div className="flex items-center gap-x-1">
-            <Image alt="title/award" src={note} width={20} height={20} />
-            <p className="text-heading font-medium">Notes</p>
-          </div>
-          <p className="text-neutral-grey-70 text-sm">{form_data?.notes}</p>
-        </Box>
-      )}
+      {form_data?.link && <Links link={form_data?.link} />}
+      {form_data?.notes && <Note note={form_data?.notes} />}
     </div>
   );
 };

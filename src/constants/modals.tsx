@@ -4,6 +4,8 @@ import ArtDetailsModal from '@/components/common/modals/detail-modals/art-detail
 import AthleticDetailsModal from '@/components/common/modals/detail-modals/athletic-details-modal';
 import AwardsDetailsModal from '@/components/common/modals/detail-modals/awards-details-modal';
 import CertificationsDetailsModal from '@/components/common/modals/detail-modals/certifications-details-modal';
+import EmploymentDetailsModal from '@/components/common/modals/detail-modals/employment-details-modal';
+import InternshipsDetailsModal from '@/components/common/modals/detail-modals/internships-details-modal';
 import TalentsDetailsModal from '@/components/common/modals/detail-modals/talents-details-modal';
 import VolunteerDetailsModal from '@/components/common/modals/detail-modals/volunteer-details-modal';
 
@@ -40,10 +42,10 @@ export const Modals = ({ form_type, form_data }: IProps): JSX.Element => {
       return <></>;
 
     case FORM_TYPE_ENUM.Internship:
-      return <></>;
+      return <InternshipsDetailsModal form_data={form_data} />;
 
     case FORM_TYPE_ENUM.Employment:
-      return <></>;
+      return <EmploymentDetailsModal form_data={form_data} />;
 
     case FORM_TYPE_ENUM.Investment:
       return <></>;

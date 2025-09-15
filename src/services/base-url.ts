@@ -2,36 +2,36 @@ const localhost = 'http://localhost:3000';
 const live = process.env.API_URL;
 
 const isLive = false;
-const baseUrl = isLive ? live : localhost;
+const baseUrl = isLive ? live + '/api' : localhost + '/api';
 
 export const URLS = {
   // =========================== Auth ===================== //
-  FORGET_PASSWORD: `${baseUrl}/api/auth/forgot-password`,
-  RESET_PASSWORD: `${baseUrl}/api/auth/reset-password`,
-  VERIFY_OTP: `${baseUrl}/api/auth/verify-otp`,
-  RESEND_OTP: `${baseUrl}/api/auth/resend-otp`,
-  SIGN_IN: `${baseUrl}/api/auth/login`,
-  SIGN_UP: `${baseUrl}/api/auth/signup`,
+  FORGET_PASSWORD: `${baseUrl}/auth/forgot-password`,
+  RESET_PASSWORD: `${baseUrl}/auth/reset-password`,
+  VERIFY_OTP: `${baseUrl}/auth/verify-otp`,
+  RESEND_OTP: `${baseUrl}/auth/resend-otp`,
+  SIGN_IN: `${baseUrl}/auth/login`,
+  SIGN_UP: `${baseUrl}/auth/signup`,
 
   // =========================== Image Upload ===================== //
-  IMAGE_UPLOADER: `${baseUrl}/api/auth/image-uploader`,
+  IMAGE_UPLOADER: `${baseUrl}/auth/image-uploader`,
 
   // =========================== Candidate ===================== //
-  GET_CANDIDATES: `${baseUrl}/api/candidate/get-candidates`,
+  GET_CANDIDATES: `${baseUrl}/candidate/get-candidates`,
 
   // =========================== Category ===================== //
-  GET_CATEGORIES: `${baseUrl}/api/category/get-categories`,
-  GET_SUB_CATEGORIES: `${baseUrl}/api/category/get-sub-categories`,
+  GET_CATEGORIES: `${baseUrl}/category/get-categories`,
+  GET_SUB_CATEGORIES: `${baseUrl}/category/get-sub-categories`,
 
   // =========================== Profile ===================== //
-  ME: `${baseUrl}/api/me`,
-  EDIT_RECRUITER_PROFILE: `${baseUrl}/api/profile/edit-recruiter-profile`,
-  GET_RECRUITER_PROFILE: `${baseUrl}/api/profile/get-recruiter-profile`,
+  ME: `${baseUrl}/me`,
+  EDIT_RECRUITER_PROFILE: `${baseUrl}/profile/edit-recruiter-profile`,
+  GET_RECRUITER_PROFILE: `${baseUrl}/profile/get-recruiter-profile`,
 
   // =========================== Folio ===================== //
-  GET_CANDIDATE_FOLIO: `${baseUrl}/api/folio/get-candidate-folio`,
+  GET_CANDIDATE_FOLIO: `${baseUrl}/folio/get-candidate-folio`,
 
   // =========================== Favorite ===================== //
-  TOGGLE_FAVORITE_CANDIDATE: `${baseUrl}/api/favorite/toggle-favorite-candidate`,
-  GET_FAVORITE_CANDIDATES: `${baseUrl}/api/favorite/get-favorite-candidates`,
+  TOGGLE_FAVORITE_CANDIDATE: `${baseUrl}/favorite/toggle-favorite-candidate`,
+  GET_FAVORITE_CANDIDATES: `${baseUrl}/favorite/get-favorite-candidates`,
 };

@@ -6,6 +6,7 @@ import { FC } from 'react';
 import Image from 'next/image';
 import Box from '../../box';
 import Document from '../../studets-details/document';
+import Items from '../../studets-details/items';
 import Links from '../../studets-details/links';
 import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
@@ -45,39 +46,14 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => (
     )}
 
     {(form_data?.event_name || form_data?.date || form_data?.location) && (
-      <Box className="!border-none !p-3 !gap-2">
-        <p className="text-heading font-medium">Event Details</p>
-
-        {form_data?.event_name && (
-          <div className="flex items-center gap-x-1">
-            <Image alt="title/award" src={calenderTick} width={20} height={20} />
-            <div>
-              <p className="text-neutral-grey-60 text-xs">Event Name</p>
-              <p className="text-neutral-grey-70 text-sm">{form_data?.event_name}</p>
-            </div>
-          </div>
-        )}
-
-        {form_data?.date && (
-          <div className="flex items-center gap-x-1">
-            <Image alt="title/award" src={calender} width={20} height={20} />
-            <div>
-              <p className="text-neutral-grey-60 text-xs">Date</p>
-              <p className="text-neutral-grey-70 text-sm">{formatToMDYYYY(form_data?.date)}</p>
-            </div>
-          </div>
-        )}
-
-        {form_data?.location && (
-          <div className="flex items-center gap-x-1">
-            <Image alt="title/award" src={location} width={20} height={20} />
-            <div>
-              <p className="text-neutral-grey-60 text-xs">Location</p>
-              <p className="text-neutral-grey-70 text-sm">{form_data?.location}</p>
-            </div>
-          </div>
-        )}
-      </Box>
+      <Items
+        label="Event Details"
+        items={[
+          { icon: calenderTick, label: 'Event Name', value: form_data?.event_name },
+          { icon: calender, label: 'Date', value: formatToMDYYYY(form_data?.date ?? '') },
+          { icon: location, label: 'Location', value: form_data?.location },
+        ]}
+      />
     )}
 
     {(form_data?.team_name || form_data?.opposing_team) && (

@@ -7,16 +7,15 @@ import Image from 'next/image';
 import Box from '../../box';
 import Document from '../../studets-details/document';
 import FavoritePart from '../../studets-details/favorite-part';
+import Items from '../../studets-details/items';
 import Links from '../../studets-details/links';
 import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-
 import { formatToDDMMMYYYY } from '@/utils/date-format';
 
 // Icons
-import calender from 'public/icons/calendar.svg';
 import internships from 'public/pdf/internships.svg';
 import Skills from '../../studets-details/skills';
 
@@ -40,31 +39,12 @@ const InternshipsDetailsModal: FC<IProps> = ({ form_data }) => {
       )}
 
       {(form_data?.start_date || form_data?.end_date) && (
-        <Box className="!border-none !p-3 !gap-2">
-          {form_data?.start_date && (
-            <div className="flex items-center gap-x-1">
-              <Image alt="title/award" src={calender} width={20} height={20} />
-              <div>
-                <p className="text-neutral-grey-60 text-xs">Start Date</p>
-                <p className="text-neutral-grey-70 text-sm">
-                  {formatToDDMMMYYYY(form_data?.start_date)}
-                </p>
-              </div>
-            </div>
-          )}
-
-          {form_data?.end_date && (
-            <div className="flex items-center gap-x-1">
-              <Image alt="title/award" src={calender} width={20} height={20} />
-              <div>
-                <p className="text-neutral-grey-60 text-xs">End Date</p>
-                <p className="text-neutral-grey-70 text-sm">
-                  {formatToDDMMMYYYY(form_data?.end_date)}
-                </p>
-              </div>
-            </div>
-          )}
-        </Box>
+        <Items
+          items={[
+            { label: 'Start Date', value: formatToDDMMMYYYY(form_data?.start_date ?? '') },
+            { label: 'End Date', value: formatToDDMMMYYYY(form_data?.end_date ?? '') },
+          ]}
+        />
       )}
 
       {form_data?.previous_skills && form_data?.previous_skills?.length > 0 && (

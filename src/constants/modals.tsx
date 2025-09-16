@@ -4,9 +4,13 @@ import ArtDetailsModal from '@/components/common/modals/detail-modals/art-detail
 import AthleticDetailsModal from '@/components/common/modals/detail-modals/athletic-details-modal';
 import AwardsDetailsModal from '@/components/common/modals/detail-modals/awards-details-modal';
 import CertificationsDetailsModal from '@/components/common/modals/detail-modals/certifications-details-modal';
+import ClubsDetailsModal from '@/components/common/modals/detail-modals/clubs-details-modal';
 import EmploymentDetailsModal from '@/components/common/modals/detail-modals/employment-details-modal';
+import EntrepreneurshipDetailsModal from '@/components/common/modals/detail-modals/entrepreneurship-details-modal';
 import InternshipsDetailsModal from '@/components/common/modals/detail-modals/internships-details-modal';
+import InvestingDetailsModal from '@/components/common/modals/detail-modals/investing-details-modal';
 import TalentsDetailsModal from '@/components/common/modals/detail-modals/talents-details-modal';
+import TechDetailsModal from '@/components/common/modals/detail-modals/tech-details-modal';
 import VolunteerDetailsModal from '@/components/common/modals/detail-modals/volunteer-details-modal';
 
 // Enum
@@ -30,7 +34,7 @@ export const Modals = ({ form_type, form_data }: IProps): JSX.Element => {
       return <></>;
 
     case FORM_TYPE_ENUM.Entrepreneurship:
-      return <></>;
+      return <EntrepreneurshipDetailsModal form_data={form_data} />;
 
     case FORM_TYPE_ENUM.Certification:
       return <CertificationsDetailsModal form_data={form_data} />;
@@ -48,7 +52,7 @@ export const Modals = ({ form_type, form_data }: IProps): JSX.Element => {
       return <EmploymentDetailsModal form_data={form_data} />;
 
     case FORM_TYPE_ENUM.Investment:
-      return <></>;
+      return <InvestingDetailsModal form_data={form_data} />;
 
     case FORM_TYPE_ENUM.Athletic:
       return <AthleticDetailsModal form_data={form_data} />;
@@ -75,10 +79,10 @@ export const Modals = ({ form_type, form_data }: IProps): JSX.Element => {
       return <></>;
 
     case FORM_TYPE_ENUM.Club:
-      return <></>;
+      return <ClubsDetailsModal form_data={form_data} />;
 
     case FORM_TYPE_ENUM.Tech:
-      return <></>;
+      return <TechDetailsModal form_data={form_data} />;
 
     case FORM_TYPE_ENUM.Art:
       return <ArtDetailsModal form_data={form_data} />;

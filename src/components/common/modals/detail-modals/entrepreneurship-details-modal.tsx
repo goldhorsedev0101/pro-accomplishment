@@ -3,46 +3,41 @@ import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candi
 import { FC } from 'react';
 
 // Components
-import Image from 'next/image';
 import Box from '../../box';
 import Document from '../../studets-details/document';
-import Items from '../../studets-details/items';
+import FavoritePart from '../../studets-details/favorite-part';
 import Links from '../../studets-details/links';
 import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
-import Skills from '../../studets-details/skills';
 
 // Util
 import { formatToDDMMMYYYY } from '@/utils/date-format';
 
 // Icons
-import briefcase from 'public/icons/briefcase.svg';
-import heart from 'public/pdf/heart.svg';
+import Items from '../../studets-details/items';
+import Skills from '../../studets-details/skills';
 
 interface IProps {
   form_data?: FormData;
 }
 
-const EmploymentDetailsModal: FC<IProps> = ({ form_data }) => {
+const EntrepreneurshipDetailsModal: FC<IProps> = ({ form_data }) => {
   return (
     <div className="flex flex-col gap-y-4 font-quicksand">
-      {(form_data?.job_title || form_data?.company) && (
+      {form_data?.venture_name && (
         <Box className="!border-none !flex-row items-center !p-3 !gap-2">
-          <div className="flex items-center justify-center size-9 bg-blue-light rounded-full">
-            <Image alt="title/award" src={briefcase} width={24} height={24} />
-          </div>
-          <div className="gap-x-1">
-            <p className="text-heading font-medium capitalize">{form_data?.job_title}</p>
-            <p className="text-neutral-grey-70 text-sm">{form_data?.company}</p>
-          </div>
+          <p className="text-heading font-medium capitalize">{form_data?.venture_name}</p>
         </Box>
       )}
 
-      {(form_data?.start_date || form_data?.end_date) && (
+      {(form_data?.started_date || form_data?.completion_date) && (
         <Items
           items={[
-            { label: 'Start Date', value: formatToDDMMMYYYY(form_data?.start_date ?? '') },
-            { label: 'End Date', value: formatToDDMMMYYYY(form_data?.end_date ?? '') },
+            { label: 'Started Date', value: formatToDDMMMYYYY(form_data?.started_date ?? '') },
+            {
+              label: 'Completion Date',
+              value: formatToDDMMMYYYY(form_data?.completion_date ?? ''),
+            },
           ]}
         />
       )}
@@ -55,15 +50,7 @@ const EmploymentDetailsModal: FC<IProps> = ({ form_data }) => {
         <Skills skills={form_data?.acquired_skills} title="Acquired Skills" />
       )}
 
-      {form_data?.favorite_part && (
-        <Box className="!border-none !p-3 !gap-2">
-          <div className="flex items-center gap-x-1">
-            <Image alt="title/award" src={heart} width={20} height={20} />
-            <p className="text-heading font-medium">Favorite Part of the Experience </p>
-          </div>
-          <p className="text-neutral-grey-70 text-sm">{form_data?.favorite_part}</p>
-        </Box>
-      )}
+      {form_data?.favorite_part && <FavoritePart favorite_part={form_data?.favorite_part} />}
 
       {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
         <Document
@@ -82,4 +69,4 @@ const EmploymentDetailsModal: FC<IProps> = ({ form_data }) => {
   );
 };
 
-export default EmploymentDetailsModal;
+export default EntrepreneurshipDetailsModal;

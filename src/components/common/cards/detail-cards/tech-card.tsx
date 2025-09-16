@@ -3,6 +3,7 @@ import { formatToMMMMDYYYY } from '@/utils/date-format';
 import Image from 'next/image';
 import mobileProgramming from 'public/pdf/mobile-programming.svg';
 import { FC } from 'react';
+import Box from '../../box';
 
 interface IProps {
   form_data?: FormData;
@@ -12,7 +13,7 @@ const TechCard: FC<IProps> = ({ form_data }) => {
   const { accomplishment_name, date } = form_data || {};
 
   return (
-    <div className="w-full !gap-y-3">
+    <Box className="w-full !gap-y-3">
       <div className="flex items-center gap-x-3">
         <Image src={mobileProgramming} alt="star" className="size-6" />
         <div>
@@ -28,7 +29,7 @@ const TechCard: FC<IProps> = ({ form_data }) => {
           )}
         </div>
       </div>
-    </div>
+    </Box>
   );
 };
 

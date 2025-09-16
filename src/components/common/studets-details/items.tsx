@@ -11,10 +11,11 @@ interface Items {
 
 interface IProps {
   items: Array<Items>;
+  className?: string;
   label?: string;
 }
 
-const Items: FC<IProps> = ({ items, label }) => {
+const Items: FC<IProps> = ({ items, label, className }) => {
   return (
     <Box className="!border-none !p-3 !gap-2">
       {label && <p className="text-heading font-medium">{label}</p>}
@@ -23,11 +24,11 @@ const Items: FC<IProps> = ({ items, label }) => {
         if (!value) return null;
 
         return (
-          <div className="flex items-center gap-x-1" key={i}>
+          <div className={`flex items-center gap-x-1 ${className}`} key={i}>
             <Image alt={value} src={icon} width={20} height={20} />
             <div>
-              <p className="text-neutral-grey-60 text-xs">{label}</p>
-              <p className="text-neutral-grey-70 text-sm">{value}</p>
+              {label && <p className="text-neutral-grey-60 text-xs">{label}</p>}
+              <p className={`text-neutral-grey-70 text-sm ${className}`}>{value}</p>
             </div>
           </div>
         );

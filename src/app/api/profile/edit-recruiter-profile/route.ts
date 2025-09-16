@@ -10,12 +10,12 @@ export async function OPTIONS() {
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
-    const { firstName, lastName } = body;
+    const { firstName, lastName, phoneNumber } = body;
 
-    if (!firstName || !lastName) {
+    if (!firstName || !lastName || !phoneNumber) {
       return response(
         {
-          message: 'firstName and lastName are required.',
+          message: 'First name, last name and phone number are required.',
           data: null,
           error: 'Validation error',
         },
@@ -44,6 +44,7 @@ export async function PUT(request: NextRequest) {
         profileId: tokenCheckResponse?.id,
         firstName,
         lastName,
+        phoneNumber,
       },
     });
 

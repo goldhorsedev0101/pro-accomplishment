@@ -39,12 +39,14 @@ export const editRecruiterProfile = async ({
   profileId,
   firstName,
   lastName,
+  phoneNumber,
 }: {
   profileId: string;
   firstName: string;
   lastName: string;
+  phoneNumber: string;
 }) => {
-  const { data, error } = await supabase
+  const { data: updateProfileData, error: updateProfileError } = await supabase
     .from('profile')
     .update({
       first_name: firstName,
@@ -54,6 +56,17 @@ export const editRecruiterProfile = async ({
     .eq('id', profileId)
     .select('*')
     .single();
+  if (updateProfileError) {
+    return { data: updateProfileData, error: updateProfileError };
+  }
 
+  const { data, error } = await supabase
+    .from('recruiter')
+    .update({
+      phone_number: phoneNumber,
+    })
+    .eq('profile_id', profileId)
+    .select('*')
+    .single();
   return { data, error };
 };

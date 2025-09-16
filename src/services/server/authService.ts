@@ -145,6 +145,7 @@ export const createProfile = async ({
   email,
   role,
   profileImage,
+  phoneNumber,
 }: {
   userId: string;
   firstName: string;
@@ -152,6 +153,7 @@ export const createProfile = async ({
   email: string;
   role: string;
   profileImage: string | null;
+  phoneNumber: string;
 }) => {
   const { data, error } = await supabase.rpc('web_create_profile_and_recruiter', {
     p_profile_id: userId,
@@ -159,7 +161,8 @@ export const createProfile = async ({
     p_last_name: lastName,
     p_email: email,
     p_role: role,
-    p_profile_picture: profileImage, // NEW
+    p_profile_picture: profileImage,
+    p_phone_number: phoneNumber,
   });
 
   return { data, error };

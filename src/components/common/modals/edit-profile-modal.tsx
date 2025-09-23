@@ -19,28 +19,40 @@ import { useFormik } from 'formik';
 // Types
 import { useEditProfileMutation } from '@/services/others/profile/edit-recruiter-profile';
 import { FC, JSX, useState } from 'react';
+import PhoneNumberInput from '../phone-input';
 
 interface IProps {
+  phone_number?: string;
   first_name?: string;
   last_name?: string;
   email?: string;
 }
 
-const EditProfileModal: FC<IProps> = ({ first_name, last_name, email }): JSX.Element => {
+const EditProfileModal: FC<IProps> = ({
+  first_name,
+  last_name,
+  email,
+  phone_number,
+}): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const { mutateAsync } = useEditProfileMutation();
 
-  const { touched, errors, values, handleChange, handleSubmit, resetForm } = useFormik({
-    initialValues: { firstName: first_name ?? '', lastName: last_name ?? '' },
-    validationSchema: EditProfileSchema,
-    enableReinitialize: true,
-    onSubmit: async (values) => {
-      await mutateAsync(values);
-      setIsOpen(false);
-      resetForm();
-    },
-  });
+  const { touched, errors, values, handleChange, handleSubmit, resetForm, setFieldValue } =
+    useFormik({
+      initialValues: {
+        firstName: first_name ?? '',
+        lastName: last_name ?? '',
+        phoneNumber: phone_number ?? '',
+      },
+      validationSchema: EditProfileSchema,
+      enableReinitialize: true,
+      onSubmit: async (values) => {
+        await mutateAsync(values);
+        setIsOpen(false);
+        resetForm();
+      },
+    });
 
   return (
     <BasicModal
@@ -72,6 +84,14 @@ const EditProfileModal: FC<IProps> = ({ first_name, last_name, email }): JSX.Ele
           </div>
 
           <Input value={email} disabled label="Email Address" />
+
+          <PhoneNumberInput
+            required
+            name="phoneNumber"
+            label="Phone Number"
+            value={values['phoneNumber']}
+            setFieldValue={setFieldValue}
+          />
 
           <DialogClose asChild>
             <Button className="w-full h-14 rounded-xl" type="submit">

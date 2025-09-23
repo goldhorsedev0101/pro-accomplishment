@@ -11,13 +11,13 @@ import { JSX } from 'react';
 
 const Profile = (): JSX.Element => {
   const { data, isPending } = useGetProfileQuery();
-  const { first_name, last_name, email } = data?.data || {};
+  const { first_name, last_name, email, phone_number } = data?.data || {};
 
   const Datas = [
     { label: 'First Name', value: first_name },
     { label: 'Last Name', value: last_name },
     { label: 'Email', value: email },
-    { label: 'Phone Number', value: '1234567890' },
+    { label: 'Phone Number', value: phone_number || '1234567890' },
   ];
 
   if (isPending) {
@@ -33,7 +33,12 @@ const Profile = (): JSX.Element => {
       <Box>
         <div className="flex items-center justify-between">
           <Heading text="Profile" width="medium" size="31" />
-          <EditProfileModal first_name={first_name} last_name={last_name} email={email} />
+          <EditProfileModal
+            phone_number={phone_number}
+            first_name={first_name}
+            last_name={last_name}
+            email={email}
+          />
         </div>
 
         <div className="flex flex-col gap-y-3 divide-y">

@@ -30,11 +30,13 @@ import { Verification_Type_Enum } from '@/enum/verification-type.enum';
 import { useRouter } from 'next/navigation';
 
 // Context
+import PhoneNumberInput from '@/components/common/phone-input';
 import { useAuth } from '@/context/auth.context';
 
 const initialValues: SignUpPayloadT = {
   confirmPassword: '',
   profileImage: '',
+  phoneNumber: '',
   firstName: '',
   lastName: '',
   password: '',
@@ -74,7 +76,6 @@ const SignUpView = (): JSX.Element => {
           setFieldValue={setFieldValue}
           name="profileImage"
         />
-
         <div className="flex items-center gap-x-3 w-full">
           <Input
             error={touched.firstName ? errors.firstName : undefined}
@@ -95,7 +96,6 @@ const SignUpView = (): JSX.Element => {
             required
           />
         </div>
-
         <Input
           error={touched.email ? errors.email : undefined}
           placeholder="johndo@example.com"
@@ -104,6 +104,14 @@ const SignUpView = (): JSX.Element => {
           label="Email"
           name="email"
           required
+        />
+
+        <PhoneNumberInput
+          required
+          name="phoneNumber"
+          label="Phone Number"
+          value={values['phoneNumber']}
+          setFieldValue={setFieldValue}
         />
 
         <Input
@@ -116,7 +124,6 @@ const SignUpView = (): JSX.Element => {
           name="password"
           required
         />
-
         <Input
           error={touched.confirmPassword ? errors.confirmPassword : undefined}
           value={values['confirmPassword']}
@@ -127,7 +134,6 @@ const SignUpView = (): JSX.Element => {
           type="password"
           required
         />
-
         {/* <CustomPhoneInput /> */}
       </div>
 

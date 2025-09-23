@@ -6,6 +6,7 @@ export interface GetProfileResponseT {
 
 export interface Data {
   profile_picture: null | string;
+  phone_number: string;
   recruiter_id: string;
   profile_id: string;
   first_name: string;

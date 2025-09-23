@@ -9,6 +9,9 @@ import { Input } from '@/components/ui/input';
 // Routes
 import Routes from '@/constants/routes';
 
+// Enum
+import { Verification_Type_Enum } from '@/enum/verification-type.enum';
+
 // Schema
 import { ForgetPasswordSchema } from '@/schemas/forget-password.schema';
 
@@ -24,18 +27,25 @@ import { useRouter } from 'next/navigation';
 // Type
 import { JSX } from 'react';
 
+// Context
+import { useAuth } from '@/context/auth.context';
+
 const ForgetPasswordView = (): JSX.Element => {
-  const { push } = useRouter();
+  const { isPending, mutateAsync } = useForgetPasswordMutation();
+  const { RECOVERY } = Verification_Type_Enum;
+  const { setEmail, setRoute } = useAuth();
   const { verifyEmail } = Routes;
-  const { isPending } = useForgetPasswordMutation();
+  const { push } = useRouter();
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
-    initialValues: { email: '' },
     validationSchema: ForgetPasswordSchema,
+    initialValues: { email: '' },
     onSubmit: async ({ email }) => {
       try {
-        // await mutateAsync({ email });
-        push(verifyEmail + '?email=' + email + '&route=password');
+        await mutateAsync({ email });
+        setRoute(RECOVERY);
+        push(verifyEmail);
+        setEmail(email);
       } catch (error) {
         console.log('🚀 ~ ForgetPasswordView ~ error:', error);
       }

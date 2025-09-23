@@ -9,7 +9,7 @@ import { sidebar } from '@/constants/profile';
 import Routes from '@/constants/routes';
 
 // Enum
-import { PROFILE_ENUM } from '@/enum/profile-enum';
+import { PROFILE_ENUM } from '@/enum/profile.enum';
 
 // Cookie
 import { deleteCookie } from 'cookies-next';
@@ -35,7 +35,7 @@ const Sidebar = ({ activeTab, setActiveTab, children }: IProps): JSX.Element => 
   const { push, refresh } = useRouter();
 
   const handleLogout = () => {
-    deleteCookie('token');
+    deleteCookie('accessToken');
     push(signIn);
     refresh();
   };

@@ -1,5 +1,5 @@
 // Fonts
-import { fredoka, quicksand } from '@/../public/fonts';
+import { fredoka, quicksand } from 'public/fonts';
 
 // Provider
 import QueryProvider from '@/providers/query-client-provider';

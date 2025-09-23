@@ -23,12 +23,20 @@ import { JSX } from 'react';
 // Formik
 import { useFormik } from 'formik';
 
+// Enum
+import { Verification_Type_Enum } from '@/enum/verification-type.enum';
+
 // Router
 import { useRouter } from 'next/navigation';
 
+// Context
+import PhoneNumberInput from '@/components/common/phone-input';
+import { useAuth } from '@/context/auth.context';
+
 const initialValues: SignUpPayloadT = {
   confirmPassword: '',
-  profile: 'lorem',
+  profileImage: '',
+  phoneNumber: '',
   firstName: '',
   lastName: '',
   password: '',
@@ -36,20 +44,21 @@ const initialValues: SignUpPayloadT = {
 };
 
 const SignUpView = (): JSX.Element => {
-  const { push } = useRouter();
+  const { mutateAsync, isPending } = useSignUpMutation();
+  const { SIGNUP } = Verification_Type_Enum;
+  const { setEmail, setRoute } = useAuth();
   const { signIn, verifyEmail } = Routes;
-  const {
-    //  mutateAsync,
-    isPending,
-  } = useSignUpMutation();
+  const { push } = useRouter();
 
   const { handleChange, handleSubmit, values, errors, touched, setFieldValue } = useFormik({
     initialValues,
     validationSchema: SignUpSchema,
     onSubmit: async (value) => {
       try {
-        // await mutateAsync(value);
-        push(verifyEmail + '?email=' + value.email + '&route=register');
+        await mutateAsync(value);
+        setEmail(value.email);
+        push(verifyEmail);
+        setRoute(SIGNUP);
       } catch (error) {
         console.log('🚀 ~ SignUpView ~ error:', error);
       }
@@ -62,8 +71,11 @@ const SignUpView = (): JSX.Element => {
       <Heading text="Sign up" />
 
       <div className="flex w-full flex-col gap-y-3">
-        <FileUploader name="profile" setFieldValue={setFieldValue} value={values['profile']} />
-
+        <FileUploader
+          value={values['profileImage']}
+          setFieldValue={setFieldValue}
+          name="profileImage"
+        />
         <div className="flex items-center gap-x-3 w-full">
           <Input
             error={touched.firstName ? errors.firstName : undefined}
@@ -84,7 +96,6 @@ const SignUpView = (): JSX.Element => {
             required
           />
         </div>
-
         <Input
           error={touched.email ? errors.email : undefined}
           placeholder="johndo@example.com"
@@ -93,6 +104,14 @@ const SignUpView = (): JSX.Element => {
           label="Email"
           name="email"
           required
+        />
+
+        <PhoneNumberInput
+          required
+          name="phoneNumber"
+          label="Phone Number"
+          value={values['phoneNumber']}
+          setFieldValue={setFieldValue}
         />
 
         <Input
@@ -105,7 +124,6 @@ const SignUpView = (): JSX.Element => {
           name="password"
           required
         />
-
         <Input
           error={touched.confirmPassword ? errors.confirmPassword : undefined}
           value={values['confirmPassword']}
@@ -116,6 +134,7 @@ const SignUpView = (): JSX.Element => {
           type="password"
           required
         />
+        {/* <CustomPhoneInput /> */}
       </div>
 
       <Button type="submit" disabled={isPending}>

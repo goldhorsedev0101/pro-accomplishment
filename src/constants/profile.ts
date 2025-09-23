@@ -1,18 +1,18 @@
 // Icons
-import changePasswordColored from '@/../public/icons/sidebar/change-password-colored.svg';
-import changePassword from '@/../public/icons/sidebar/change-password.svg';
-import logout from '@/../public/icons/sidebar/logout.svg';
-import privacyPolicyColored from '@/../public/icons/sidebar/privacy-policy-colored.svg';
-import privacyPolicy from '@/../public/icons/sidebar/privacy-policy.svg';
-import profileColored from '@/../public/icons/sidebar/profile-colored.svg';
-import profile from '@/../public/icons/sidebar/profile.svg';
-import subscriptionColored from '@/../public/icons/sidebar/subscription-colored.svg';
-import subscription from '@/../public/icons/sidebar/subscription.svg';
-import termsConditionsColored from '@/../public/icons/sidebar/terms-conditions-colored.svg';
-import termsConditions from '@/../public/icons/sidebar/terms-conditions.svg';
+import changePasswordColored from 'public/icons/sidebar/change-password-colored.svg';
+import changePassword from 'public/icons/sidebar/change-password.svg';
+import logout from 'public/icons/sidebar/logout.svg';
+import privacyPolicyColored from 'public/icons/sidebar/privacy-policy-colored.svg';
+import privacyPolicy from 'public/icons/sidebar/privacy-policy.svg';
+import profileColored from 'public/icons/sidebar/profile-colored.svg';
+import profile from 'public/icons/sidebar/profile.svg';
+import subscriptionColored from 'public/icons/sidebar/subscription-colored.svg';
+import subscription from 'public/icons/sidebar/subscription.svg';
+import termsConditionsColored from 'public/icons/sidebar/terms-conditions-colored.svg';
+import termsConditions from 'public/icons/sidebar/terms-conditions.svg';
 
 // Enum
-import { PROFILE_ENUM } from '@/enum/profile-enum';
+import { PROFILE_ENUM } from '@/enum/profile.enum';
 
 // Type
 import { StaticImageData } from 'next/image';

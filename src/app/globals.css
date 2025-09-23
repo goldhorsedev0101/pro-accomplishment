@@ -25,6 +25,8 @@
   --blue: #1f58ea;
   --red: #f14d4d;
   --green-light: #a4ffd873;
+  --primary-20: #f4ffcb;
+  --primary-10: #b5e3cf;
 
   --text-size-32: 32px;
   --text-size-31: 31px;
@@ -190,4 +192,21 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 6px;
 }

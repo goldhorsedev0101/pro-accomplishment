@@ -1,7 +1,7 @@
 'use client';
 
 // Icons
-import edit from '@/../public/icons/edit.svg';
+import edit from 'public/icons/edit.svg';
 
 // Components
 import { Button } from '@/components/ui/button';
@@ -17,19 +17,42 @@ import { EditProfileSchema } from '@/schemas/edit-profile.schema';
 import { useFormik } from 'formik';
 
 // Types
-import { JSX, useState } from 'react';
+import { useEditProfileMutation } from '@/services/others/profile/edit-recruiter-profile';
+import { FC, JSX, useState } from 'react';
+import PhoneNumberInput from '../phone-input';
 
-const EditProfileModal = (): JSX.Element => {
+interface IProps {
+  phone_number?: string;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+}
+
+const EditProfileModal: FC<IProps> = ({
+  first_name,
+  last_name,
+  email,
+  phone_number,
+}): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const { touched, errors, values, handleChange, handleSubmit, resetForm } = useFormik({
-    initialValues: { firstName: '', lastName: '' },
-    validationSchema: EditProfileSchema,
-    onSubmit: () => {
-      setIsOpen(false);
-      resetForm();
-    },
-  });
+  const { mutateAsync } = useEditProfileMutation();
+
+  const { touched, errors, values, handleChange, handleSubmit, resetForm, setFieldValue } =
+    useFormik({
+      initialValues: {
+        firstName: first_name ?? '',
+        lastName: last_name ?? '',
+        phoneNumber: phone_number ?? '',
+      },
+      validationSchema: EditProfileSchema,
+      enableReinitialize: true,
+      onSubmit: async (values) => {
+        await mutateAsync(values);
+        setIsOpen(false);
+        resetForm();
+      },
+    });
 
   return (
     <BasicModal
@@ -60,7 +83,15 @@ const EditProfileModal = (): JSX.Element => {
             />
           </div>
 
-          <Input value={'janecooper@gmail.com'} disabled label="Email Address" />
+          <Input value={email} disabled label="Email Address" />
+
+          <PhoneNumberInput
+            required
+            name="phoneNumber"
+            label="Phone Number"
+            value={values['phoneNumber']}
+            setFieldValue={setFieldValue}
+          />
 
           <DialogClose asChild>
             <Button className="w-full h-14 rounded-xl" type="submit">

@@ -1,5 +1,5 @@
 // Icons
-import check from '@/../public/icons/check.svg';
+import check from 'public/icons/check.svg';
 
 // Components
 import Box from '@/components/common/box';

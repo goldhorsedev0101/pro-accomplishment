@@ -1,0 +1,58 @@
+// Components
+import Image from 'next/image';
+import Box from '../../box';
+import Heading from '../../heading';
+
+// Icons
+import book from 'public/icons/book.svg';
+import percentage from 'public/icons/percentage.svg';
+import teacher from 'public/icons/teacher.svg';
+
+// Types
+import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
+import { formatToYYYY } from '@/utils/date-format';
+import { FC, JSX } from 'react';
+
+interface IProps {
+  form_data?: FormData;
+}
+
+const AcademicsCard: FC<IProps> = ({ form_data }): JSX.Element => {
+  const data = [
+    { icon: book, label: 'Math' },
+    { icon: percentage, label: form_data?.standardized_test_score + '%' },
+    { icon: teacher, label: form_data?.grade_or_gpa },
+  ];
+
+  return (
+    <Box className="shadow-sm w-full !gap-y-3 !text-start">
+      <div className="flex justify-between items-start">
+        <div>
+          <Heading
+            className="!text-sm font-quicksand"
+            text={form_data?.name || ''}
+            width="medium"
+          />
+          <p className="font-quicksand text-neutral-grey-60 font-normal text-sm">
+            {form_data?.school_or_institution || ''}
+          </p>
+        </div>
+        <p className="font-quicksand text-neutral-grey-70 font-normal text-sm rounded-sm py-0.5 px-1.5 bg-green-light">
+          {formatToYYYY(form_data?.academic_year_started ?? '')} -
+          {formatToYYYY(form_data?.academic_year_ended ?? '')}
+        </p>
+      </div>
+
+      <div className="flex justify-between items-center w-full">
+        {data.map(({ icon, label }, i) => (
+          <div key={i} className="flex gap-x-1">
+            <Image src={icon} alt={label ?? ''} sizes="16" />
+            <p className="text-neutral-grey-100 text-sm font-normal font-quicksand">{label}</p>
+          </div>
+        ))}
+      </div>
+    </Box>
+  );
+};
+
+export default AcademicsCard;

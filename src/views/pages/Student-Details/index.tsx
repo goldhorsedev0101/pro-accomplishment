@@ -3,26 +3,46 @@
 // Components
 import BackButton from '@/components/common/back-button';
 import Box from '@/components/common/box';
-import AcademicsCard from '@/components/common/cards/academics-card';
-import AthleticsCard from '@/components/common/cards/athletics-card';
-import AwardsCard from '@/components/common/cards/awards-card';
-import CertificationsCard from '@/components/common/cards/certifications-card';
-import EmploymentCard from '@/components/common/cards/employment-card';
-import TalentsCard from '@/components/common/cards/talents-card';
+import RenderCards from '@/components/common/cards/render-cards';
 import Heading from '@/components/common/heading';
+import Loader from '@/components/common/loader';
 import { Button } from '@/components/ui/button';
 import About from './about';
 
 // Types
 import { IParams } from '@/types/params.type';
-import { FC, JSX, useState } from 'react';
+import { FC, JSX, useEffect, useState } from 'react';
 
 // Icons
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { HiOutlineDownload } from 'react-icons/hi';
 
-const StudentDetails: FC<IParams> = (): JSX.Element => {
-  const [isFav, setIsFav] = useState<boolean>(false);
+// Mutation
+import { useToggleFavoriteCandidateMutation } from '@/services/others/favorite/toggle-favorite-candidate';
+import { useGetCandidateFolioQuery } from '@/services/others/folio/get-candidate-folio';
+
+const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
+  const { data, isPending } = useGetCandidateFolioQuery({ candidateId: id ?? '' });
+  const { mutateAsync: toggle } = useToggleFavoriteCandidateMutation();
+  const { accomplishments, candidate_data } = data?.data || {};
+  const [isFav, setIsFav] = useState<boolean>(candidate_data?.is_favorite || false);
+
+  const handleToggle = async () => {
+    await toggle({ candidateId: id || '' });
+    setIsFav(!isFav);
+  };
+
+  useEffect(() => {
+    setIsFav(candidate_data?.is_favorite || false);
+  }, [candidate_data?.is_favorite]);
+
+  if (isPending) {
+    return (
+      <div className="flex items-center justify-center h-[60dvh]">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-y-6">
@@ -30,10 +50,10 @@ const StudentDetails: FC<IParams> = (): JSX.Element => {
         <BackButton />
         <div className="flex items-center gap-x-2">
           <button
-            onClick={() => setIsFav(!isFav)}
-            className="size-12 rounded-full flex items-center justify-center text-white text-2xl bg-[#0000003D]"
+            onClick={handleToggle}
+            className="size-12 cursor-pointer rounded-full flex items-center justify-center text-white text-2xl bg-[#0000003D]"
           >
-            {isFav ? <GoHeartFill /> : <GoHeart />}
+            {isFav ? <GoHeartFill color="#49909d" /> : <GoHeart />}
           </button>
 
           <Button className="h-12 rounded-lg p-6">
@@ -43,70 +63,21 @@ const StudentDetails: FC<IParams> = (): JSX.Element => {
         </div>
       </div>
 
-      <About />
+      <About candidate_data={candidate_data} />
 
-      <Box className="shadow-sm !gap-y-1">
-        <Heading text="Objective" width="medium" className="!text-xl" />
-        <p className="font-normal text-lg !text-neutral-grey-80">
-          Every accomplishment begins with the decision to try but it&apos;s the perseverance to
-          finish that makes it extraordinary Every accomplishment begins with the decision to try
-          but it&apos;s the perseverance to finish that makes it extraordinary
-        </p>
-      </Box>
+      {candidate_data?.objective_for_summary && (
+        <Box className="shadow-sm !gap-y-1">
+          <Heading text="Objective" width="medium" className="!text-xl" />
+          <p className="font-normal text-lg !text-neutral-grey-80">
+            {candidate_data?.objective_for_summary}
+          </p>
+        </Box>
+      )}
 
       <Heading text="Accomplishment" size="22" width="medium" />
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="flex flex-col gap-y-6">
-          <Box className="!gap-y-4 !border-none !p-0">
-            <Heading text="Athletics" className="!text-lg !text-neutral-grey-60" width="medium" />
-            <AthleticsCard />
-          </Box>
-          <Box className="!gap-y-4 !border-none !p-0">
-            <Heading text="Academics" className="!text-lg !text-neutral-grey-60" width="medium" />
-            {Array(2)
-              .fill(0)
-              .map((_, i) => (
-                <AcademicsCard key={i} />
-              ))}
-          </Box>
-          <Box className="!gap-y-4 !border-none !p-0">
-            <Heading text="Awards" className="!text-lg !text-neutral-grey-60" width="medium" />
-            {Array(5)
-              .fill(0)
-              .map((_, i) => (
-                <AwardsCard key={i} />
-              ))}
-          </Box>
-        </div>
-
-        <div className="flex flex-col gap-y-6">
-          <Box className="!gap-y-4 !border-none !p-0">
-            <Heading
-              text="Certifications"
-              className="!text-lg !text-neutral-grey-60"
-              width="medium"
-            />
-            {Array(3)
-              .fill(0)
-              .map((_, i) => (
-                <CertificationsCard key={i} />
-              ))}
-          </Box>
-          <Box className="!gap-y-4 !border-none !p-0">
-            <Heading text="Talents" className="!text-lg !text-neutral-grey-60" width="medium" />
-
-            {Array(3)
-              .fill(0)
-              .map((_, i) => (
-                <TalentsCard key={i} />
-              ))}
-          </Box>
-          <Box className="!gap-y-4 !border-none !p-0">
-            <Heading text="Employment" className="!text-lg !text-neutral-grey-60" width="medium" />
-            <EmploymentCard />
-          </Box>
-        </div>
+      <div className="grid md:grid-cols-2 h-fit gap-6">
+        <RenderCards accomplishments={accomplishments} />
       </div>
     </div>
   );

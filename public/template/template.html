@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title data-field="page-title">{{title}}</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- =============== About =============== -->
+    <div class="box">
+      <div class="flex justify-between gap-6 items-start">
+        <div class="flex flex-col gap-y-3">
+          <!-- Name -->
+          <p data-field="name" class="font-medium text-[#0e0f0c] text-4xl"></p>
+
+          <!-- About -->
+          <p class="flex items-start gap-x-2" data-field="quote-main">
+            <img
+              class="text-primary rotate-180 min-w-5 min-h-5 size-5"
+              data-field="quote"
+              alt="quote"
+              src="/"
+            />
+
+            <span
+              class="font-normal max-w-[480px] text-lg text-[var(--gray-80)]"
+              data-field="about"
+            ></span>
+
+            <img
+              class="text-primary min-w-5 min-h-5 size-5"
+              data-field="quote"
+              alt="quote"
+              src="/"
+            />
+          </p>
+
+          <!-- Contacts -->
+          <div class="flex flex-wrap gap-x-6 gap-y-1" data-field="contacts"></div>
+        </div>
+
+        <img
+          class="object-cover rounded-lg w-[154px] h-[154px]"
+          data-field="profile"
+          alt="Profile"
+          src="/"
+        />
+      </div>
+
+      <hr class="border border-[var(--gray-10)]" />
+
+      <div class="flex items-center gap-x-3">
+        <div class="flex items-center gap-x-1" data-field="school"></div>
+
+        <div class="size-1.5 rounded-full bg-[#B2B0B2]"></div>
+
+        <p class="text-lg font-normal text-[var(--gray-80)]">8th Grade</p>
+
+        <div class="size-1.5 rounded-full bg-[#B2B0B2]"></div>
+
+        <div class="flex items-center h-fit gap-x-1" data-field="gpa"></div>
+      </div>
+    </div>
+    <!-- =============== About End =============== -->
+
+    <!-- =============== Objective =============== -->
+    <div class="box !gap-y-1" data-field="objective-main">
+      <p class="font-medium text-[var(--heading)] text-xl">Objective</p>
+      <p data-field="objective" class="font-normal text-lg text-[var(--gray-80)]" />
+    </div>
+    <!-- =============== Objective End =============== -->
+
+    <!-- =============== Accomplishment =============== -->
+    <p class="font-medium text-[var(--black)] text-2xl">Accomplishment</p>
+    <div data-field="categories" class="columns-2"></div>
+    <!-- =============== Accomplishment End =============== -->
+
+    <!-- =============== Scripts =============== -->
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Dayjs CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+
+    <!-- Main Script -->
+    <script src="script.js" defer></script>
+    <!-- =============== Scripts End =============== -->
+  </body>
+</html>

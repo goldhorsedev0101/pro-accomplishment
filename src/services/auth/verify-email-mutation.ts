@@ -1,6 +1,6 @@
 // Types
-import { VerifyEmailPayloadT } from '@/types/auth/verify-email/verify-email-payload';
-import { VerifyEmailResponseT } from '@/types/auth/verify-email/verify-email-response';
+import { VerifyOtpPayloadT } from '@/types/auth/verify-otp/verify-otp-payload';
+import { VerifyOtpResponseT } from '@/types/auth/verify-otp/verify-otp-response';
 
 // Mutation
 import { useMutation } from '@tanstack/react-query';
@@ -14,17 +14,20 @@ import toast from 'react-hot-toast';
 // URL
 import { URLS } from '../base-url';
 
-const useVerifyEmailMutation = () => {
-  const verifyEmailFn = async (payload: VerifyEmailPayloadT): Promise<VerifyEmailResponseT> => {
-    const res: VerifyEmailResponseT = await axios.post(URLS.VERIFY_EMAIL, payload);
-    return res;
+// Util
+import { errorFn } from '@/utils/error-fn';
+
+const useVerifyOTPMutation = () => {
+  const verifyOTPFn = async (payload: VerifyOtpPayloadT): Promise<VerifyOtpResponseT> => {
+    const { data } = await axios.post(URLS.VERIFY_OTP, payload);
+    return data as VerifyOtpResponseT;
   };
 
   return useMutation({
-    mutationFn: verifyEmailFn,
-    onSuccess: () => toast.success('Email verified successful'),
-    onError: () => toast.error('Email verification failed'),
+    onSuccess: () => toast.success('OTP verified successful'),
+    mutationFn: verifyOTPFn,
+    onError: errorFn,
   });
 };
 
-export { useVerifyEmailMutation };
+export { useVerifyOTPMutation };

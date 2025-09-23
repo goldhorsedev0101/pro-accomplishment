@@ -1,11 +1,18 @@
 // Component
 import AuthLayout from '@/components/layouts/auth-layout';
 
+// Context
+import { AuthProvider } from '@/context/auth.context';
+
 // Type
 import { JSX, ReactNode } from 'react';
 
-const layout = ({ children }: { children: ReactNode }): JSX.Element => {
-  return <AuthLayout>{children}</AuthLayout>;
+const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
+  return (
+    <AuthProvider>
+      <AuthLayout>{children}</AuthLayout>
+    </AuthProvider>
+  );
 };
 
-export default layout;
+export default Layout;

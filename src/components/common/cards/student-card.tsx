@@ -1,6 +1,6 @@
 // Icons
-import locationIcon from '@/../public/icons/location.svg';
-import school from '@/../public/icons/school.svg';
+import locationIcon from 'public/icons/location.svg';
+import school from 'public/icons/school.svg';
 import { TiStar } from 'react-icons/ti';
 
 // Constant
@@ -21,7 +21,7 @@ interface IProps {
   grade: string;
   about: string;
   name: string;
-  gpa: string;
+  gpa: number;
   id: string;
 }
 
@@ -43,7 +43,7 @@ const StudentCard = ({
       className="shadow-sm border border-neutral-grey-10 bg-white rounded-lg p-3.5 w-full flex gap-x-2 justify-between"
     >
       <div className="flex gap-x-3">
-        <Image src={profile} alt="profile" width={66} height={68} />
+        <Image src={profile} alt="profile" width={66} height={68} className="rounded-lg" />
         <div className="flex flex-col gap-y-1">
           <h3 className="text-[#0E0F0C] font-medium text-base">{name}</h3>
           <p className="text-neutral-grey-100 text-xs">{about}</p>

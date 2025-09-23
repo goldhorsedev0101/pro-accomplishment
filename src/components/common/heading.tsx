@@ -2,7 +2,7 @@
 import { FC, JSX } from 'react';
 
 interface IProps {
-  text: string;
+  text?: string;
   className?: string;
   width?: 'semibold' | 'medium';
   size?: '32' | '31' | '28' | '22';

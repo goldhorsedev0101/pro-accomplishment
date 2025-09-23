@@ -11,7 +11,7 @@ import Routes from '@/constants/routes';
 
 // Mutation
 import { useResendOTPMutation } from '@/services/auth/resend-otp-mutation';
-import { useVerifyEmailMutation } from '@/services/auth/verify-email-mutation';
+import { useVerifyOTPMutation } from '@/services/auth/verify-email-mutation';
 
 // Cookie
 import { setCookie } from 'cookies-next';
@@ -23,47 +23,36 @@ import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 
 // Types
-import { FC, JSX } from 'react';
+import { JSX } from 'react';
 
-// Toast
-import toast from 'react-hot-toast';
+// Enum
+import { Verification_Type_Enum } from '@/enum/verification-type.enum';
 
 // Hoot
 import { useTimer } from 'react-timer-hook';
 
-interface IProps {
-  email: string;
-  route: string;
-}
+// Context
+import { useAuth } from '@/context/auth.context';
 
-const VerifyEmailView: FC<IProps> = ({ email, route }): JSX.Element => {
-  const { push, refresh } = useRouter();
+const VerifyEmailView = (): JSX.Element => {
+  const { RECOVERY } = Verification_Type_Enum;
   const { home, resetPassword } = Routes;
+  const { push, refresh } = useRouter();
+  const { email, route } = useAuth();
 
-  const {
-    // mutateAsync: verifyEmail,
-    isPending,
-  } = useVerifyEmailMutation();
-
-  const {
-    // mutateAsync: resendOTP,
-    isPending: resendPending,
-  } = useResendOTPMutation();
+  const { mutateAsync: resendOTP, isPending: resendPending } = useResendOTPMutation();
+  const { mutateAsync: verifyOTP, isPending } = useVerifyOTPMutation();
 
   const { handleSubmit, setFieldValue, values } = useFormik({
-    initialValues: { email, otp: '' },
+    initialValues: { otp: '' },
     onSubmit: async ({ otp }) => {
       try {
-        if (otp !== '000000') {
-          toast.error('Invalid OTP');
-          return;
-        }
+        const { data } = await verifyOTP({ email, otp, type: route });
+        const { access_token } = data.session;
 
-        // const { token } = await verifyEmail({ email, otp });
-
-        if (route === 'password') push(resetPassword);
+        if (route === RECOVERY) push(resetPassword);
         else {
-          setCookie('token', 'lorem');
+          setCookie('accessToken', access_token);
           push(home);
           refresh();
         }
@@ -83,8 +72,8 @@ const VerifyEmailView: FC<IProps> = ({ email, route }): JSX.Element => {
     try {
       const resendTime = new Date();
       resendTime.setSeconds(resendTime.getSeconds() + totalSeconds);
+      resendOTP({ email, type: route });
       restart(resendTime);
-      // resendOTP({ email });
     } catch (error) {
       console.log('🚀 ~ handleResend ~ error:', error);
     }

@@ -28,6 +28,7 @@ export async function GET(request: NextRequest) {
         401,
       );
     }
+
     const getRecruiterResponse = await supabasePromiseResolver({
       requestFunction: getRecruiter,
       requestBody: {

@@ -1,6 +1,6 @@
 // Types
 import { ResetPasswordPayloadT } from '@/types/auth/reset-password/reset-password-payload';
-import { ResetPasswordResponseT } from '@/types/auth/reset-password/reset-password-responsive';
+import { ResetPasswordResponseT } from '@/types/auth/reset-password/reset-password-response';
 
 // Mutation
 import { useMutation } from '@tanstack/react-query';
@@ -14,18 +14,21 @@ import toast from 'react-hot-toast';
 // URL
 import { URLS } from '../base-url';
 
+// Util
+import { errorFn } from '@/utils/error-fn';
+
 const useResetPasswordMutation = () => {
   const resetPasswordFn = async (
     payload: ResetPasswordPayloadT,
   ): Promise<ResetPasswordResponseT> => {
-    const res: ResetPasswordResponseT = await axios.post(URLS.RESET_PASSWORD, payload);
-    return res;
+    const { data } = await axios.post(URLS.RESET_PASSWORD, payload);
+    return data as ResetPasswordResponseT;
   };
 
   return useMutation({
-    mutationFn: resetPasswordFn,
     onSuccess: () => toast.success('Password reset successfully'),
-    onError: () => toast.error('Password reset failed'),
+    mutationFn: resetPasswordFn,
+    onError: errorFn,
   });
 };
 

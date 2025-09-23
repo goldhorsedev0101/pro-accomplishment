@@ -7,13 +7,6 @@ import { JSX } from 'react';
 
 export const metadata: Metadata = { title: 'Verify Email - Accomplishment' };
 
-const VerifyEmailPage = async ({
-  searchParams,
-}: {
-  searchParams: Promise<{ email: string | undefined; route: string | undefined }>;
-}): Promise<JSX.Element> => {
-  const { email, route } = await searchParams;
-  return <VerifyEmailView email={email || 'alex@example.com'} route={route || 'register'} />;
-};
+const VerifyEmailPage = (): JSX.Element => <VerifyEmailView />;
 
 export default VerifyEmailPage;

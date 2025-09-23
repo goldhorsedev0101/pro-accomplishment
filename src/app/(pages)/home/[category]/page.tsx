@@ -8,9 +8,17 @@ import { JSX } from 'react';
 
 export const metadata: Metadata = { title: 'Category - Accomplishment' };
 
-const CategoryPage = async ({ params }: { params: Promise<IParams> }): Promise<JSX.Element> => {
+const CategoryPage = async ({
+  searchParams,
+  params,
+}: {
+  params: Promise<IParams>;
+  searchParams: Promise<{ name: string }>;
+}): Promise<JSX.Element> => {
   const { category } = await params;
-  return <CategoryView category={category} />;
+  const { name } = await searchParams;
+
+  return <CategoryView category={category} name={name} />;
 };
 
 export default CategoryPage;

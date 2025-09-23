@@ -1,6 +1,6 @@
 // Types
 import { SignInPayloadT } from '@/types/auth/sign-in/sign-in-payload';
-import { SignInResponseT } from '@/types/auth/sign-in/sign-in-responsive';
+import { SignInResponseT } from '@/types/auth/sign-in/sign-in-response';
 
 // Mutation
 import { useMutation } from '@tanstack/react-query';
@@ -14,16 +14,19 @@ import toast from 'react-hot-toast';
 // URL
 import { URLS } from '../base-url';
 
+// Util
+import { errorFn } from '@/utils/error-fn';
+
 const useSignInMutation = () => {
   const signInFn = async (payload: SignInPayloadT): Promise<SignInResponseT> => {
-    const res: SignInResponseT = await axios.post(URLS.SIGN_IN, payload);
-    return res;
+    const { data } = await axios.post(URLS.SIGN_IN, payload);
+    return data as SignInResponseT;
   };
 
   return useMutation({
-    mutationFn: signInFn,
     onSuccess: () => toast.success('Login successful'),
-    onError: () => toast.error('Login failed'),
+    mutationFn: signInFn,
+    onError: errorFn,
   });
 };
 

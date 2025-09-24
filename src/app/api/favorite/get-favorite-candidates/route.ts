@@ -1,6 +1,6 @@
 import { corsOptions, response, supabasePromiseResolver, verifyToken } from '@/lib/supabase/helper';
-import { getRecruiter } from '@/services/server/candidatesService';
 import { getFavoriteCandidates } from '@/services/server/favoriteService';
+import { getRecruiterByProfileId } from '@/services/server/recruiterService';
 import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
     }
 
     const getRecruiterResponse = await supabasePromiseResolver({
-      requestFunction: getRecruiter,
+      requestFunction: getRecruiterByProfileId,
       requestBody: { profileId: tokenCheckResponse?.id },
     });
 

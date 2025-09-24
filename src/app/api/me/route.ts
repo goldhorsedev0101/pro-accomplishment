@@ -2,7 +2,7 @@
 import { response, supabasePromiseResolver, verifyToken } from '@/lib/supabase/helper';
 
 // Services
-import { isUserExist } from '@/services/server/authService';
+import { getRecruiterProfileByEmail } from '@/services/server/authService';
 
 // Header
 import { headers } from 'next/headers';
@@ -32,10 +32,9 @@ export async function GET() {
     }
 
     const { success, data, error } = await supabasePromiseResolver({
-      requestFunction: isUserExist,
+      requestFunction: getRecruiterProfileByEmail,
       requestBody: { email: tokenCheckResponse?.email },
     });
-
     if (!success) {
       const errorMsg = error || 'User not found.';
       return response({ error: errorMsg, data: null, message: errorMsg }, 400);

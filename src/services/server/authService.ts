@@ -6,6 +6,14 @@ export interface ICustomError {
   code?: string;
 }
 
+interface IUserLookup {
+  id: string;
+  email: string;
+  role: string;
+  is_deactivated: boolean;
+  deleted_at: string | null;
+}
+
 export const signUp = async ({ email, password }: { email: string; password: string }) => {
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -171,8 +179,9 @@ export const createProfile = async ({
 export const isUserNotExist = async ({ email }: { email: string }) => {
   const { data, error } = await supabase
     .from('profile')
-    .select('email')
+    .select('id, email, role, is_deactivated, deleted_at')
     .eq('email', email)
+    .eq('role', 'recruiter')
     .maybeSingle();
 
   let customError: ICustomError | null = error ? error : null;
@@ -180,29 +189,42 @@ export const isUserNotExist = async ({ email }: { email: string }) => {
   if (data?.email && !customError) {
     customError = { message: 'User already exists.' };
   }
+
+  if (!customError && data) {
+    if (data.is_deactivated === true || data.deleted_at !== null) {
+      customError = { message: 'User account is deactivated or deleted.' };
+    }
+  }
+  console.log('here', data, customError, email);
+
   return {
     error: customError,
     data: data ? data : { email },
   };
 };
 
-export const isUserExist = async ({ email }: { email: string }) => {
+export const getRecruiterProfileByEmail = async ({
+  email,
+}: {
+  email: string;
+}): Promise<{ data: IUserLookup | null; error: ICustomError | null }> => {
   const { data, error } = await supabase
     .from('profile')
-    .select('id, email, role')
+    .select('id, email, role, is_deactivated, deleted_at')
     .eq('email', email)
     .eq('role', 'recruiter')
     .maybeSingle();
 
   let customError: ICustomError | null = error ? error : null;
 
-  if (!data && !customError) {
-    customError = { message: 'User does not exist or is not a recruiter.' };
+  if (data) {
+    if (data.is_deactivated || data.deleted_at) {
+      customError = { message: 'User account is deactivated or deleted.' };
+    }
   }
-
   return {
     error: customError,
-    data,
+    data: customError ? null : data,
   };
 };
 

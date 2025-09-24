@@ -1,12 +1,36 @@
 import { supabase } from '@/lib/supabase/server';
+import { ICustomError } from './authService';
 
 export const getRecruiterByProfileId = async ({ profileId }: { profileId: string }) => {
   const { data, error } = await supabase
     .from('recruiter')
-    .select('*')
+    .select(
+      `
+      *,
+      profile:profile_id (
+        *
+      )
+    `,
+    )
     .eq('profile_id', profileId)
-    .single();
-  return { data, error };
+    .maybeSingle();
+
+  let customError: ICustomError | null = error ? error : null;
+
+  if (data) {
+    if (data.profile?.is_deactivated || data.profile?.deleted_at) {
+      customError = { message: 'User account is deactivated or deleted.' };
+    }
+
+    if (data.profile?.role !== 'recruiter') {
+      customError = { message: 'Profile is not a recruiter.' };
+    }
+  }
+
+  return {
+    error: customError,
+    data: customError ? null : data,
+  };
 };
 
 export const getProfileById = async ({ profileId }: { profileId: string }) => {
@@ -19,18 +43,15 @@ export const getRecruiterProfile = async ({ profileId }: { profileId: string }) 
   if (recruiterError || !recruiter) {
     return { data: null, error: recruiterError || 'Recruiter not found' };
   }
-  const { data: profile, error: profileError } = await getProfileById({ profileId });
-  if (profileError || !profile) {
-    return { data: null, error: profileError || 'Profile not found' };
-  }
+
   const flattened = {
     recruiter_id: recruiter.id,
     profile_picture: recruiter.profile_picture,
-    profile_id: profile.id,
-    first_name: profile.first_name,
-    last_name: profile.last_name,
-    email: profile.email,
-    role: profile.role,
+    profile_id: recruiter?.profile.id,
+    first_name: recruiter?.profile.first_name,
+    last_name: recruiter?.profile.last_name,
+    email: recruiter?.profile.email,
+    role: recruiter?.profile.role,
   };
   return { data: flattened, error: null };
 };

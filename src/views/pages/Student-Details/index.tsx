@@ -20,12 +20,27 @@ import { HiOutlineDownload } from 'react-icons/hi';
 // Mutation
 import { useToggleFavoriteCandidateMutation } from '@/services/others/favorite/toggle-favorite-candidate';
 import { useGetCandidateFolioQuery } from '@/services/others/folio/get-candidate-folio';
+import { Accomplishment } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
 
 const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
   const { data, isPending } = useGetCandidateFolioQuery({ candidateId: id ?? '' });
   const { mutateAsync: toggle } = useToggleFavoriteCandidateMutation();
   const { accomplishments, candidate_data } = data?.data || {};
   const [isFav, setIsFav] = useState<boolean>(candidate_data?.is_favorite || false);
+
+  function groupByFormType(data?: Array<Accomplishment>) {
+    const grouped: { [key: string]: Array<Accomplishment> } = {};
+
+    data?.forEach((item) => {
+      const formType = item.form_type;
+      if (!grouped[formType]) grouped[formType] = [];
+      grouped[formType].push(item);
+    });
+
+    return Object.values(grouped);
+  }
+
+  const groupedData = groupByFormType(accomplishments);
 
   const handleToggle = async () => {
     await toggle({ candidateId: id || '' });
@@ -76,8 +91,14 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
 
       <Heading text="Accomplishment" size="22" width="medium" />
 
-      <div className="grid md:grid-cols-2 h-fit gap-6">
-        <RenderCards accomplishments={accomplishments} />
+      <div className="h-fit gap-6 md:columns-2 space-y-6">
+        {groupedData?.map((group, i) => (
+          <div className="!h-fit flex flex-col gap-y-6" key={i}>
+            {group?.map((accomplishment, j) => (
+              <RenderCards key={j} accomplishments={[accomplishment]} />
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );

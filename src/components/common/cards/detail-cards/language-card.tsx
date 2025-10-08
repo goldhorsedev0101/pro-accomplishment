@@ -1,11 +1,11 @@
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
 import { formatToMDYYYY } from '@/utils/date-format';
+import Image from 'next/image';
 import book from 'public/icons/book.svg';
 import building from 'public/icons/building.svg';
 import note from 'public/icons/note.svg';
 import language from 'public/pdf/language.svg';
 import { FC } from 'react';
-import Image from 'next/image';
 import Box from '../../box';
 
 interface IProps {
@@ -27,7 +27,9 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
   return (
     <Box>
       <div>
-        {title && <p className="font-medium text-[var(--heading)] quicksand !text-sm">{title}</p>}
+        {title && (
+          <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">{title}</p>
+        )}
         {date && (
           <p className="quicksand text-[var(--gray-60)] font-normal text-xs">
             {formatToMDYYYY(date)}
@@ -75,7 +77,7 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
       {notes && (
         <div className="flex gap-x-1.5 items-start">
           <Image src={note} alt="note" className="size-5" />
-          <p className="text-[var(--gray-70)] text-sm font-normal quicksand">{notes}</p>
+          <p className="text-[var(--gray-70)] text-sm font-normal quicksand break-all">{notes}</p>
         </div>
       )}
     </Box>

@@ -26,11 +26,11 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
         </div>
         <div>
           <Heading
-            className="!text-sm !text-heading font-quicksand"
+            className="!text-sm !text-heading font-quicksand !break-all"
             text={form_data?.job_title ?? 'N/A'}
             width="semibold"
           />
-          <p className="font-quicksand text-neutral-grey-70 font-normal text-xs">
+          <p className="font-quicksand text-neutral-grey-70 font-normal text-xs break-all">
             {form_data?.company}
           </p>
           <p className="mt-2 text-black text-xs font-medium font-quicksand">

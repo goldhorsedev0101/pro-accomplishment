@@ -25,15 +25,21 @@ const SemesterAtSeaCard: FC<IProps> = ({ form_data }) => {
 
   return (
     <Box className="w-full !gap-y-3">
-      {title && <p className="font-semibold text-[var(--heading)] quicksand">{title}</p>}
+      {title && <p className="font-semibold text-[var(--heading)] quicksand break-all">{title}</p>}
       {(destination || date) && (
         <div className="flex items-center gap-x-3">
           <Image src={routing} alt="routing" className="size-6" />
           <div>
             {destination && (
-              <p className="font-medium text-[var(--heading)] quicksand !text-sm">{destination}</p>
+              <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
+                {destination}
+              </p>
             )}
-            {date && <p className="quicksand text-[var(--gray-60)] font-normal text-xs">{date}</p>}
+            {date && (
+              <p className="quicksand text-[var(--gray-60)] font-normal text-xs break-all">
+                {date}
+              </p>
+            )}
           </div>
         </div>
       )}

@@ -27,7 +27,7 @@ const CertificationsCard: FC<IProps> = ({ form_data }) => {
         </div>
         <div>
           <Heading
-            className="!text-sm !text-heading font-quicksand"
+            className="!text-sm !text-heading font-quicksand !break-all"
             text={certification_title ?? 'N/A'}
             width="medium"
           />

@@ -17,8 +17,12 @@ const EntrepreneurshipCard: FC<IProps> = ({ form_data }) => {
   return (
     <Box className="w-full !gap-y-3">
       <div>
-        {title && <p className="font-medium text-[var(--heading)] quicksand !text-sm">{title}</p>}
-        {date && <p className="quicksand text-[var(--gray-60)] font-normal text-xs">{date}</p>}
+        {title && (
+          <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">{title}</p>
+        )}
+        {date && (
+          <p className="quicksand text-[var(--gray-60)] font-normal text-xs break-all">{date}</p>
+        )}
       </div>
     </Box>
   );

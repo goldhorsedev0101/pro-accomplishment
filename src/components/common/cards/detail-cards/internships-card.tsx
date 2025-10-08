@@ -32,9 +32,15 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
           <Image src={internships} alt="internship" className="size-6" />
         </div>
         <div>
-          {title && <p className="font-medium text-[var(--heading)] quicksand !text-sm">{title}</p>}
+          {title && (
+            <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
+              {title}
+            </p>
+          )}
           {organization && (
-            <p className="quicksand text-[var(--gray-70)] font-normal text-xs">{organization}</p>
+            <p className="quicksand text-[var(--gray-70)] font-normal text-xs break-all">
+              {organization}
+            </p>
           )}
           {(startDate || endDate) && (
             <p className="mt-2 text-[var(--black)] text-xs font-medium quicksand">

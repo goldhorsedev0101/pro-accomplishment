@@ -16,7 +16,7 @@ const ArtCard: FC<IProps> = ({ form_data }) => {
     <Box className="w-full !gap-y-3">
       <div>
         {accomplishment_name && (
-          <p className="font-medium text-[var(--heading)] quicksand !text-sm">
+          <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
             {accomplishment_name}
           </p>
         )}

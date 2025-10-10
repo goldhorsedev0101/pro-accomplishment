@@ -41,6 +41,7 @@ const initialValues: SignUpPayloadT = {
   lastName: '',
   password: '',
   email: '',
+  iso2: '',
 };
 
 const SignUpView = (): JSX.Element => {
@@ -53,9 +54,9 @@ const SignUpView = (): JSX.Element => {
   const { handleChange, handleSubmit, values, errors, touched, setFieldValue } = useFormik({
     initialValues,
     validationSchema: SignUpSchema,
-    onSubmit: async (value) => {
+    onSubmit: async ({ phoneNumber, ...value }) => {
       try {
-        await mutateAsync(value);
+        await mutateAsync({ ...value, phoneNumber: '+' + phoneNumber });
         setEmail(value.email);
         push(verifyEmail);
         setRoute(SIGNUP);
@@ -96,6 +97,7 @@ const SignUpView = (): JSX.Element => {
             required
           />
         </div>
+
         <Input
           error={touched.email ? errors.email : undefined}
           placeholder="johndo@example.com"
@@ -112,6 +114,8 @@ const SignUpView = (): JSX.Element => {
           label="Phone Number"
           value={values['phoneNumber']}
           setFieldValue={setFieldValue}
+          iso2={values['iso2']}
+          setIso2={(e) => setFieldValue('iso2', e)}
         />
 
         <Input

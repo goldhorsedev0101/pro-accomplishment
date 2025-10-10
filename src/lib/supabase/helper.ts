@@ -133,3 +133,20 @@ export function verifyToken(accessToken?: string) {
     };
   }
 }
+
+import { cookies } from 'next/headers';
+import { NextRequest } from 'next/server';
+
+export async function getAccessToken(request: NextRequest): Promise<string | null> {
+  const cookieStore = await cookies();
+  const cookieToken = cookieStore.get('accessToken')?.value;
+
+  if (cookieToken) return cookieToken;
+
+  const authHeader = request.headers.get('authorization') || request.headers.get('Authorization');
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    return authHeader.slice(7).trim();
+  }
+
+  return null;
+}

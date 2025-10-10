@@ -1,5 +1,5 @@
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
-import { isUserExist, resetPassword } from '@/services/server/authService';
+import { getRecruiterProfileByEmail, resetPassword } from '@/services/server/authService';
 import { NextRequest } from 'next/server';
 
 export async function OPTIONS() {
@@ -11,15 +11,16 @@ export async function POST(request: NextRequest) {
     const { email } = await request.json();
     const lowerCased = email.toLowerCase();
     const isUserExistResponse = await supabasePromiseResolver({
-      requestFunction: isUserExist,
-      requestBody: { email: lowerCased },
+      requestFunction: getRecruiterProfileByEmail,
+      requestBody: { email: email },
     });
+
     if (!isUserExistResponse?.success) {
       return response(
         {
+          error: isUserExistResponse?.error || 'User not found.',
           data: null,
           message: isUserExistResponse?.error || 'User not found.',
-          error: isUserExistResponse?.error || 'User not found.',
         },
         400,
       );

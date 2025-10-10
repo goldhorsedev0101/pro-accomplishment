@@ -13,7 +13,7 @@ export async function OPTIONS() {
 
 export async function POST(request: NextRequest) {
   try {
-    const { firstName, lastName, email, password, phoneNumber } = await request.json();
+    const { firstName, lastName, email, password, phoneNumber, iso2 } = await request.json();
 
     const lowerCased = email.toLowerCase();
     const isUserNotExistResponse = await supabasePromiseResolver({
@@ -57,6 +57,7 @@ export async function POST(request: NextRequest) {
         email: lowerCased,
         role: T_ROLE.recruiter,
         phoneNumber,
+        iso2,
       },
     });
     if (!createProfileResponse.success) {

@@ -1,25 +1,32 @@
 // Helper
-import { response, supabasePromiseResolver, verifyToken } from '@/lib/supabase/helper';
+import {
+  getAccessToken,
+  response,
+  supabasePromiseResolver,
+  verifyToken,
+} from '@/lib/supabase/helper';
 
 // Services
-import { isUserExist } from '@/services/server/authService';
+import { getRecruiterProfileByEmail } from '@/services/server/authService';
 
 // Header
 import { headers } from 'next/headers';
+import { NextRequest } from 'next/server';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const { get } = await headers();
-
-    const accessToken = get('authorization')?.split(' ')[1];
-
+    const accessToken = await getAccessToken(request);
     if (!accessToken) {
-      const errorMsg = 'Please login first';
-      return response({ error: errorMsg, data: null, message: errorMsg }, 401);
+      return response(
+        {
+          message: 'Unauthorized',
+          data: null,
+          error: 'Unauthorized',
+        },
+        404,
+      );
     }
-
     const tokenCheckResponse = verifyToken(accessToken);
-
     if (!tokenCheckResponse?.valid) {
       return response(
         {
@@ -32,10 +39,9 @@ export async function GET() {
     }
 
     const { success, data, error } = await supabasePromiseResolver({
-      requestFunction: isUserExist,
+      requestFunction: getRecruiterProfileByEmail,
       requestBody: { email: tokenCheckResponse?.email },
     });
-
     if (!success) {
       const errorMsg = error || 'User not found.';
       return response({ error: errorMsg, data: null, message: errorMsg }, 400);

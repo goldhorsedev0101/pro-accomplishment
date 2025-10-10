@@ -1,5 +1,5 @@
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
-import { isUserExist, signIn } from '@/services/server/authService';
+import { getRecruiterProfileByEmail, signIn } from '@/services/server/authService';
 import { NextRequest } from 'next/server';
 
 export const T_ROLE = {
@@ -26,9 +26,10 @@ export async function POST(request: NextRequest) {
     }
     const lowerCasedEmail = email.toLowerCase();
     const isUserExistResponse = await supabasePromiseResolver({
-      requestFunction: isUserExist,
+      requestFunction: getRecruiterProfileByEmail,
       requestBody: { email: lowerCasedEmail },
     });
+
     if (!isUserExistResponse?.success) {
       return response(
         {

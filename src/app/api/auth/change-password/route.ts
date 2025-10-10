@@ -1,4 +1,9 @@
-import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
+import {
+  corsOptions,
+  getAccessToken,
+  response,
+  supabasePromiseResolver,
+} from '@/lib/supabase/helper';
 import { signIn, updatePassword } from '@/services/server/authService';
 import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
@@ -29,8 +34,7 @@ function isTokenExpired(token: string): boolean {
 export async function POST(request: NextRequest) {
   try {
     const { currentPassword, newPassword } = await request.json();
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get('accessToken')?.value;
+    const accessToken = await getAccessToken(request);
 
     if (!accessToken) {
       return response(
@@ -39,7 +43,7 @@ export async function POST(request: NextRequest) {
           data: null,
           error: 'Unauthorized',
         },
-        401,
+        404,
       );
     }
     const decodedToken = jwt.jwtDecode<CustomJwtPayload>(accessToken);

@@ -74,15 +74,28 @@ export async function POST(request: NextRequest) {
       request.headers.get('origin') ||
       `${request.headers.get('x-forwarded-proto') || 'https'}://${request.headers.get('host')}`;
 
-    const priceId = process.env.STRIPE_RECRUITER_MONTHLY_SUBSCRIPTION;
-    // subscriptionType === SubscriptionType.ANNUALLY
-    //   ? process.env.STRIPE_RECRUITER_ANNUAL_SUBSCRIPTION
-    //   : process.env.STRIPE_RECRUITER_MONTHLY_SUBSCRIPTION;
+    const priceId =
+      subscriptionType === SubscriptionType.MONTHLY
+        ? process.env.STRIPE_RECRUITER_MONTHLY_SUBSCRIPTION
+        : // Uncomment and add your annual plan env variable if needed
+          // : process.env.STRIPE_RECRUITER_ANNUAL_SUBSCRIPTION
+          process.env.STRIPE_RECRUITER_MONTHLY_SUBSCRIPTION;
+
+    if (!priceId) {
+      return response(
+        {
+          message: 'Stripe price ID not configured.',
+          data: null,
+          error: 'Stripe price ID not configured.',
+        },
+        500,
+      );
+    }
 
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
-          price: process.env.STRIPE_RECRUITER_MONTHLY_SUBSCRIPTION!,
+          price: priceId ?? '',
           quantity: 1,
         },
       ],
@@ -90,7 +103,7 @@ export async function POST(request: NextRequest) {
       success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/?canceled=true`,
       metadata: {
-        profileId: profileId,
+        profileId: profileId ?? '',
         type: subscriptionType || '',
       },
     });

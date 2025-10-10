@@ -1,4 +1,10 @@
-import { corsOptions, response, supabasePromiseResolver, verifyToken } from '@/lib/supabase/helper';
+import {
+  corsOptions,
+  getAccessToken,
+  response,
+  supabasePromiseResolver,
+  verifyToken,
+} from '@/lib/supabase/helper';
 import { getSubCategories } from '@/services/server/categoryService';
 import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
@@ -21,8 +27,17 @@ export async function GET(request: NextRequest) {
         400,
       );
     }
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get('accessToken')?.value;
+    const accessToken = await getAccessToken(request);
+    if (!accessToken) {
+      return response(
+        {
+          message: 'Unauthorized',
+          data: null,
+          error: 'Unauthorized',
+        },
+        404,
+      );
+    }
     const tokenCheckResponse = verifyToken(accessToken);
     if (!tokenCheckResponse?.valid) {
       return response(
@@ -34,6 +49,7 @@ export async function GET(request: NextRequest) {
         401,
       );
     }
+
     const getSubCategoriesResponse = await supabasePromiseResolver({
       requestFunction: getSubCategories,
       requestBody: { categoryId },

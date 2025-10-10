@@ -52,6 +52,8 @@ export const getRecruiterProfile = async ({ profileId }: { profileId: string }) 
     last_name: recruiter?.profile.last_name,
     email: recruiter?.profile.email,
     role: recruiter?.profile.role,
+    phone_number: recruiter?.phone_number,
+    iso2: recruiter?.iso2,
   };
   return { data: flattened, error: null };
 };
@@ -61,11 +63,13 @@ export const editRecruiterProfile = async ({
   firstName,
   lastName,
   phoneNumber,
+  iso2,
 }: {
   profileId: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
+  iso2: string;
 }) => {
   const { data: updateProfileData, error: updateProfileError } = await supabase
     .from('profile')
@@ -85,9 +89,20 @@ export const editRecruiterProfile = async ({
     .from('recruiter')
     .update({
       phone_number: phoneNumber,
+      iso2: iso2,
     })
     .eq('profile_id', profileId)
     .select('*')
     .single();
+  return { data, error };
+};
+
+export const recruiterSubscription = async ({ session }: { session: any }) => {
+  const payload = JSON.parse(JSON.stringify(session));
+  const { data, error } = await supabase.rpc('web_stripe_subscription_webhook_event', {
+    session_data: payload,
+  });
+
+  console.log('returned', JSON.stringify({ data, error }, null, 2));
   return { data, error };
 };

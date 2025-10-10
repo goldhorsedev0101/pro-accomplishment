@@ -1,4 +1,10 @@
-import { corsOptions, response, supabasePromiseResolver, verifyToken } from '@/lib/supabase/helper';
+import {
+  corsOptions,
+  getAccessToken,
+  response,
+  supabasePromiseResolver,
+  verifyToken,
+} from '@/lib/supabase/helper';
 import { getCandidates } from '@/services/server/candidatesService';
 import { getRecruiterByProfileId } from '@/services/server/recruiterService';
 import { cookies } from 'next/headers';
@@ -16,8 +22,17 @@ export async function GET(request: NextRequest) {
     const subCategoryId = searchParams.get('subCategoryId') ?? null;
     const skip = Number(searchParams.get('skip') ?? 0);
     const take = Number(searchParams.get('take') ?? 25);
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get('accessToken')?.value;
+    const accessToken = await getAccessToken(request);
+    if (!accessToken) {
+      return response(
+        {
+          message: 'Unauthorized',
+          data: null,
+          error: 'Unauthorized',
+        },
+        404,
+      );
+    }
     const tokenCheckResponse = verifyToken(accessToken);
     if (!tokenCheckResponse?.valid) {
       return response(

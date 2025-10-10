@@ -5,10 +5,15 @@ import {
   supabasePromiseResolver,
   verifyToken,
 } from '@/lib/supabase/helper';
-import { toggleFavoriteCandidate } from '@/services/server/favoriteService';
 import { getRecruiterByProfileId } from '@/services/server/recruiterService';
-import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
+import 'server-only';
+import { stripe } from '../../../../lib/stripe';
+
+export enum SubscriptionType {
+  MONTHLY = 'monthly_plan',
+  // ANNUALLY = 'annual_plan',
+}
 
 export async function OPTIONS() {
   return corsOptions();
@@ -17,17 +22,14 @@ export async function OPTIONS() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { candidateId } = body;
-    if (!candidateId) {
-      return response(
-        {
-          message: 'Candidate ID is required.',
-          data: null,
-          error: 'Missing candidateId',
-        },
-        400,
-      );
-    }
+    const { subscription_type }: { subscription_type?: SubscriptionType } = body;
+
+    const subscriptionType = Object.values(SubscriptionType).includes(
+      subscription_type as SubscriptionType,
+    )
+      ? subscription_type
+      : SubscriptionType.MONTHLY;
+
     const accessToken = await getAccessToken(request);
     if (!accessToken) {
       return response(
@@ -50,11 +52,12 @@ export async function POST(request: NextRequest) {
         401,
       );
     }
-
+    const profileId = tokenCheckResponse?.id;
     const getRecruiterResponse = await supabasePromiseResolver({
       requestFunction: getRecruiterByProfileId,
-      requestBody: { profileId: tokenCheckResponse?.id },
+      requestBody: { profileId },
     });
+
     if (!getRecruiterResponse?.success) {
       return response(
         {
@@ -65,31 +68,40 @@ export async function POST(request: NextRequest) {
         404,
       );
     }
+
     const recruiterId = getRecruiterResponse?.data?.id;
-    const toggleFavoriteCandidateResponse = await supabasePromiseResolver({
-      requestFunction: toggleFavoriteCandidate,
-      requestBody: {
-        recruiterId,
-        candidateId,
+    const origin =
+      request.headers.get('origin') ||
+      `${request.headers.get('x-forwarded-proto') || 'https'}://${request.headers.get('host')}`;
+
+    const priceId = process.env.STRIPE_RECRUITER_MONTHLY_SUBSCRIPTION;
+    // subscriptionType === SubscriptionType.ANNUALLY
+    //   ? process.env.STRIPE_RECRUITER_ANNUAL_SUBSCRIPTION
+    //   : process.env.STRIPE_RECRUITER_MONTHLY_SUBSCRIPTION;
+
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          price: process.env.STRIPE_RECRUITER_MONTHLY_SUBSCRIPTION!,
+          quantity: 1,
+        },
+      ],
+      mode: 'subscription',
+      success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/?canceled=true`,
+      metadata: {
+        profileId: profileId,
+        type: subscriptionType || '',
       },
     });
-    if (!toggleFavoriteCandidateResponse?.success) {
-      return response(
-        {
-          message: toggleFavoriteCandidateResponse?.error.message || 'Failed to toggle favorite.',
-          data: null,
-          error: toggleFavoriteCandidateResponse?.error || 'Failed to toggle favorite.',
-        },
-        400,
-      );
-    }
+
     return response(
       {
-        message: 'Favorite toggled successfully.',
-        data: toggleFavoriteCandidateResponse?.data?.data || {},
-        error: null,
+        message: 'Redirecting to checkout page',
+        data: session,
+        error: 'Canceled',
       },
-      200,
+      404,
     );
   } catch (error) {
     return response(

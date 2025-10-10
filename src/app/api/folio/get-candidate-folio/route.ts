@@ -1,4 +1,10 @@
-import { corsOptions, response, supabasePromiseResolver, verifyToken } from '@/lib/supabase/helper';
+import {
+  corsOptions,
+  getAccessToken,
+  response,
+  supabasePromiseResolver,
+  verifyToken,
+} from '@/lib/supabase/helper';
 import { getCandidateFolio } from '@/services/server/folioService';
 import { getRecruiterByProfileId } from '@/services/server/recruiterService';
 import { cookies } from 'next/headers';
@@ -22,8 +28,17 @@ export async function GET(request: NextRequest) {
         400,
       );
     }
-    const cookieStore = await cookies();
-    const accessToken = cookieStore.get('accessToken')?.value;
+    const accessToken = await getAccessToken(request);
+    if (!accessToken) {
+      return response(
+        {
+          message: 'Unauthorized',
+          data: null,
+          error: 'Unauthorized',
+        },
+        404,
+      );
+    }
     const tokenCheckResponse = verifyToken(accessToken);
     if (!tokenCheckResponse?.valid) {
       return response(
@@ -35,6 +50,7 @@ export async function GET(request: NextRequest) {
         401,
       );
     }
+
     const getRecruiterResponse = await supabasePromiseResolver({
       requestFunction: getRecruiterByProfileId,
       requestBody: { profileId: tokenCheckResponse?.id },

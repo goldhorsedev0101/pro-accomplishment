@@ -40,6 +40,11 @@ const FileUploader: FC<IProps> = ({ setFieldValue, value, name }): JSX.Element =
     formData.append('file', file);
     formData.append('oldUrl', value || 'null');
 
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image size must be less than 5MB!');
+      return;
+    }
+
     try {
       const { data } = await mutateAsync(formData as unknown as UploadPayloadT);
       setImg(data?.publicUrl ?? 'lorem');

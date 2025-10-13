@@ -8,6 +8,7 @@ export const URLS = {
   // =========================== Auth ===================== //
   FORGET_PASSWORD: `${baseUrl}/auth/forgot-password`,
   RESET_PASSWORD: `${baseUrl}/auth/reset-password`,
+  CHANGE_PASSWORD: `${baseUrl}/auth/change-password`,
   VERIFY_OTP: `${baseUrl}/auth/verify-otp`,
   RESEND_OTP: `${baseUrl}/auth/resend-otp`,
   SIGN_IN: `${baseUrl}/auth/login`,

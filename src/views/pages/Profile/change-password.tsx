@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 
 // Schema
 import { ChangePasswordSchema } from '@/schemas/change-password.schema';
+import { useChangePasswordMutation } from '@/services/auth/change-password-mutation';
 
 // Formik
 import { useFormik } from 'formik';
@@ -14,14 +15,20 @@ import { useFormik } from 'formik';
 import { JSX } from 'react';
 
 // Toast
-import toast from 'react-hot-toast';
 
 const ChangePassword = (): JSX.Element => {
-  const { handleChange, handleSubmit, values, errors, touched } = useFormik({
+  const { mutateAsync } = useChangePasswordMutation();
+
+  const { handleChange, handleSubmit, values, errors, touched, resetForm } = useFormik({
     initialValues: { oldPassword: '', newPassword: '', confirmPassword: '' },
     validationSchema: ChangePasswordSchema,
-    onSubmit: () => {
-      toast.success('Password changed successfully');
+    onSubmit: async ({ newPassword, oldPassword }) => {
+      try {
+        await mutateAsync({ newPassword, currentPassword: oldPassword });
+        resetForm();
+      } catch (error) {
+        console.log('🚀 ~ ChangePassword ~ error:', error);
+      }
     },
   });
 

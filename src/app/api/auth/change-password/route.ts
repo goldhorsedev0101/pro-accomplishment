@@ -78,8 +78,8 @@ export async function POST(request: NextRequest) {
     if (!loginResponse?.success) {
       return response(
         {
-          error: loginResponse?.error || 'Current password is incorrect.',
-          message: loginResponse?.error || 'Current password is incorrect.',
+          error: 'Old password is incorrect.',
+          message: 'Old password is incorrect.',
           data: null,
         },
         400,

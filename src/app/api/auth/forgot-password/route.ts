@@ -18,9 +18,9 @@ export async function POST(request: NextRequest) {
     if (!isUserExistResponse?.success) {
       return response(
         {
-          error: isUserExistResponse?.error || 'User not found.',
+          error: isUserExistResponse?.error || 'Email not found.',
           data: null,
-          message: isUserExistResponse?.error || 'User not found.',
+          message: isUserExistResponse?.error || 'Email not found.',
         },
         400,
       );

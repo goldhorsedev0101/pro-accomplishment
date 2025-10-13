@@ -111,7 +111,7 @@ export const uploadProfilePicture = async ({
   }
 
   const storageResponse = await supabase.storage.from('user-photos').upload(filePath, file, {
-    contentType: file.type, // e.g. "image/png"
+    contentType: file.type,
     upsert: true,
   });
 
@@ -224,6 +224,8 @@ export const getRecruiterProfileByEmail = async ({
     if (data.is_deactivated || data.deleted_at) {
       customError = { message: 'User account is deactivated or deleted.' };
     }
+  } else {
+    customError = { message: 'User not found' };
   }
   return {
     error: customError,

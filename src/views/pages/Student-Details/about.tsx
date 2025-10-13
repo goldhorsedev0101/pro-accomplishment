@@ -1,3 +1,4 @@
+'use client';
 // Component
 import Box from '@/components/common/box';
 import Heading from '@/components/common/heading';
@@ -39,6 +40,9 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
   const name = first_name + ' ' + last_name;
   const address = city + ', ' + country;
 
+  const validUrl =
+    link?.startsWith('http://') || link?.startsWith('https://') ? link : `https://${link}`;
+
   const contact = contacts({ email, phone_number, address, link: link ?? '' });
 
   return (
@@ -57,9 +61,10 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
             {contact.map(({ icon, label }, i) => (
               <Link
                 key={i}
+                href={validUrl ?? '#'}
+                rel="noopener noreferrer"
                 target={label === link ? '_blank' : undefined}
-                href={label === (link ?? '#') ? (link ?? '#') : '#'}
-                onClick={({ preventDefault }) => label !== link && preventDefault}
+                onClick={({ preventDefault }) => label !== link && preventDefault()}
                 className={`flex items-center gap-x-2 ${label === link ? '!w-full' : 'w-fit !cursor-default'}`}
               >
                 <Image src={icon} alt="icon" width={18} height={18} />

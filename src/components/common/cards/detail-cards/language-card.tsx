@@ -24,6 +24,9 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
     link,
   } = form_data || {};
 
+  const validUrl =
+    link?.startsWith('http://') || link?.startsWith('https://') ? link : `https://${link}`;
+
   return (
     <Box>
       <div>
@@ -70,7 +73,7 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
         <hr className="-my-2 border border-[var(--gray-10)]" />
       )}
       {link && (
-        <a href="/" className="text-[var(--blue)] text-xs font-normal quicksand">
+        <a href={validUrl} className="text-[var(--blue)] text-xs font-normal quicksand">
           {link}
         </a>
       )}

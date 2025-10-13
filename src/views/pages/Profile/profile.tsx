@@ -7,17 +7,17 @@ import EditProfileModal from '@/components/common/modals/edit-profile-modal';
 import { useGetProfileQuery } from '@/services/others/profile/get-recruiter-profile';
 
 // Type
-import { JSX } from 'react';
+import { Fragment, JSX } from 'react';
 
 const Profile = (): JSX.Element => {
   const { data, isPending } = useGetProfileQuery();
   const { first_name, last_name, email, phone_number, iso2 } = data?.data || {};
 
-  const Datas = [
+  const info = [
     { label: 'First Name', value: first_name },
     { label: 'Last Name', value: last_name },
     { label: 'Email', value: email },
-    { label: 'Phone Number', value: phone_number || '1234567890' },
+    { label: 'Phone Number', value: phone_number },
   ];
 
   if (isPending) {
@@ -43,11 +43,15 @@ const Profile = (): JSX.Element => {
         </div>
 
         <div className="flex flex-col gap-y-3 divide-y">
-          {Datas.map(({ label, value }, i) => (
-            <div key={i} className={`flex flex-col gap-y-1 pb-2`}>
-              <p className="text-base font-medium text-neutral-grey-100">{label}</p>
-              <p className="text-base font-normal text-neutral-grey-70">{value}</p>
-            </div>
+          {info?.map(({ label, value }, i) => (
+            <Fragment key={i}>
+              {value && (
+                <div className={`flex flex-col gap-y-1 pb-2`}>
+                  <p className="text-base font-medium text-neutral-grey-100">{label}</p>
+                  <p className="text-base font-normal text-neutral-grey-70">{value}</p>
+                </div>
+              )}
+            </Fragment>
           ))}
         </div>
       </Box>

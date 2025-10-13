@@ -41,7 +41,7 @@ const initialValues: SignUpPayloadT = {
   lastName: '',
   password: '',
   email: '',
-  iso2: '',
+  iso2: 'us',
 };
 
 const SignUpView = (): JSX.Element => {
@@ -54,6 +54,7 @@ const SignUpView = (): JSX.Element => {
   const { handleChange, handleSubmit, values, errors, touched, setFieldValue } = useFormik({
     initialValues,
     validationSchema: SignUpSchema,
+
     onSubmit: async ({ phoneNumber, ...value }) => {
       try {
         await mutateAsync({ ...value, phoneNumber: '+' + phoneNumber });
@@ -72,11 +73,18 @@ const SignUpView = (): JSX.Element => {
       <Heading text="Sign up" />
 
       <div className="flex w-full flex-col gap-y-3">
-        <FileUploader
-          value={values['profileImage']}
-          setFieldValue={setFieldValue}
-          name="profileImage"
-        />
+        <div className="flex flex-col items-center gap-y-1">
+          <FileUploader
+            value={values['profileImage']}
+            setFieldValue={setFieldValue}
+            name="profileImage"
+          />
+
+          {touched.profileImage && errors.profileImage && (
+            <span className="text-destructive text-sm font-normal">{errors.profileImage}</span>
+          )}
+        </div>
+
         <div className="flex items-center gap-x-3 w-full">
           <Input
             error={touched.firstName ? errors.firstName : undefined}
@@ -85,7 +93,6 @@ const SignUpView = (): JSX.Element => {
             placeholder="James"
             label="First Name"
             name="firstName"
-            required
           />
           <Input
             error={touched.lastName ? errors.lastName : undefined}
@@ -94,7 +101,6 @@ const SignUpView = (): JSX.Element => {
             placeholder="Shawn"
             label="Last Name"
             name="lastName"
-            required
           />
         </div>
 
@@ -105,11 +111,9 @@ const SignUpView = (): JSX.Element => {
           value={values['email']}
           label="Email"
           name="email"
-          required
         />
 
         <PhoneNumberInput
-          required
           name="phoneNumber"
           label="Phone Number"
           value={values['phoneNumber']}
@@ -126,7 +130,6 @@ const SignUpView = (): JSX.Element => {
           label="Password"
           type="password"
           name="password"
-          required
         />
         <Input
           error={touched.confirmPassword ? errors.confirmPassword : undefined}
@@ -136,7 +139,6 @@ const SignUpView = (): JSX.Element => {
           onChange={handleChange}
           name="confirmPassword"
           type="password"
-          required
         />
         {/* <CustomPhoneInput /> */}
       </div>

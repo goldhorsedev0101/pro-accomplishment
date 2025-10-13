@@ -30,11 +30,11 @@ interface IProps {
 }
 
 const EditProfileModal: FC<IProps> = ({
-  phone_number,
-  first_name,
-  last_name,
-  email,
-  iso2,
+  phone_number = '',
+  first_name = '',
+  last_name = '',
+  email = '',
+  iso2 = '',
 }): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -42,12 +42,7 @@ const EditProfileModal: FC<IProps> = ({
 
   const { touched, errors, values, handleChange, handleSubmit, resetForm, setFieldValue } =
     useFormik({
-      initialValues: {
-        phoneNumber: phone_number ?? '',
-        firstName: first_name ?? '',
-        lastName: last_name ?? '',
-        iso2: iso2 ?? '',
-      },
+      initialValues: { phoneNumber: phone_number, firstName: first_name, lastName: last_name },
       validationSchema: EditProfileSchema,
       enableReinitialize: true,
       onSubmit: async (values) => {
@@ -90,8 +85,8 @@ const EditProfileModal: FC<IProps> = ({
 
           <PhoneNumberInput
             required
+            iso2={iso2}
             name="phoneNumber"
-            iso2={values.iso2}
             label="Phone Number"
             value={values['phoneNumber']}
             setFieldValue={setFieldValue}

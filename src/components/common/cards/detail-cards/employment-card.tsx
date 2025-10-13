@@ -18,6 +18,10 @@ interface IProps {
 }
 
 const EmploymentCard: FC<IProps> = ({ form_data }) => {
+  const { link } = form_data ?? {};
+  const validUrl =
+    link?.startsWith('http://') || link?.startsWith('https://') ? link : `https://${link}`;
+
   return (
     <Box className="shadow-sm w-full !text-start !gap-y-3">
       <div className="flex items-start gap-x-3">
@@ -71,7 +75,7 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
       </div>
 
       {form_data?.link && (
-        <Link href={form_data?.link} className="text-blue text-xs font-normal font-quicksand">
+        <Link href={validUrl} className="text-blue text-xs font-normal font-quicksand">
           {form_data?.link}
         </Link>
       )}

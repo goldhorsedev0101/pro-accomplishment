@@ -18,12 +18,12 @@ const TechCard: FC<IProps> = ({ form_data }) => {
         <Image src={mobileProgramming} alt="star" className="size-6" />
         <div>
           {accomplishment_name && (
-            <p className="font-medium text-[var(--heading)] quicksand !text-sm">
+            <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
               {accomplishment_name}
             </p>
           )}
           {date && (
-            <p className="quicksand text-[var(--gray-70)] font-normal text-xs">
+            <p className="quicksand text-[var(--gray-70)] font-normal text-xs break-all">
               {formatToMMMMDYYYY(date)}
             </p>
           )}

@@ -909,7 +909,7 @@ const accomplishmentLayout = ({ header, form_data, form_type, category_name }, i
     <div class="box !border-none !shadow-none !gap-y-3 !p-0 ${i !== 0 ? 'mt-4' : ''} ">
     ${
       header
-        ? `<p class="font-medium text-[var(--gray-60)] text-lg">
+        ? `<p class="break-all font-medium text-[var(--gray-60)] text-lg">
             ${category_name}
           </p>`
         : ''
@@ -928,20 +928,20 @@ const athleticsCard = ({ title, date, location, position, place }) => {
         ${
           title
             ? `
-            <p class="font-medium quicksand text-[var(--heading)]">${title}</p>
+            <p class="break-all font-medium quicksand text-[var(--heading)]">${title}</p>
           `
             : ''
         }
         ${
           date
             ? `
-            <p class="quicksand text-[var(--gray-70)] font-normal text-sm">${date}</p>
+            <p class="break-all quicksand text-[var(--gray-70)] font-normal text-sm">${date}</p>
           `
             : ''
         }
       </div>
       <p
-        class="quicksand text-[var(--black)] font-normal text-sm rounded-sm py-0.5 px-1.5 bg-[var(--primary-0)]"
+        class="break-all quicksand text-[var(--black)] font-normal text-sm rounded-sm py-0.5 px-1.5 bg-[var(--primary-0)]"
       >
         State
       </p>
@@ -956,7 +956,7 @@ const athleticsCard = ({ title, date, location, position, place }) => {
               ? `
               <div class="flex items-center gap-x-2">
                 <img class="size-5" alt="" src="${icons.calendarTick}" />
-                <p class="quicksand font-normal text-sm text-[var(--gray-70)]">${place}</p>
+                <p class="break-all quicksand font-normal text-sm text-[var(--gray-70)]">${place}</p>
               </div>
             `
               : ''
@@ -966,7 +966,7 @@ const athleticsCard = ({ title, date, location, position, place }) => {
               ? `
               <div class="flex items-center gap-x-2">
                 <img class="size-5" alt="" src="${icons.locationColored}" />
-                <p class="quicksand font-normal text-sm text-[var(--gray-70)]">${location}</p>
+                <p class="break-all quicksand font-normal text-sm text-[var(--gray-70)]">${location}</p>
               </div>
             `
               : ''
@@ -989,7 +989,7 @@ const athleticsCard = ({ title, date, location, position, place }) => {
         ? `
         <div class="flex items-center gap-x-2">
           <img class="size-5" alt="" src="${icons.cup}" />
-          <p class="quicksand font-normal text-sm text-[var(--black)]">${position}</p>
+          <p class="break-all quicksand font-normal text-sm text-[var(--black)]">${position}</p>
         </div>
       `
         : ''
@@ -1012,14 +1012,14 @@ const academicsCard = ({ percentage, subTitle, subject, title, grade, year }) =>
         ${
           title
             ? `
-            <p class="font-medium quicksand text-[var(--heading)] text-sm">${title}</p>
+            <p class="break-all font-medium quicksand text-[var(--heading)] text-sm">${title}</p>
           `
             : ''
         }
         ${
           subTitle
             ? `
-            <p class="quicksand text-[var(--gray-60)] font-normal text-sm">${subTitle}</p>
+            <p class="break-all quicksand text-[var(--gray-60)] font-normal text-sm">${subTitle}</p>
           `
             : ''
         }
@@ -1027,7 +1027,7 @@ const academicsCard = ({ percentage, subTitle, subject, title, grade, year }) =>
       ${
         year
           ? `
-          <p class="quicksand text-[var(--gray-70)] font-normal text-sm rounded-sm py-0.5 px-1.5 bg-[var(--green-light)]">${year}</p>
+          <p class="break-all quicksand text-[var(--gray-70)] font-normal text-sm rounded-sm py-0.5 px-1.5 bg-[var(--green-light)]">${year}</p>
         `
           : ''
       }
@@ -1042,7 +1042,7 @@ const academicsCard = ({ percentage, subTitle, subject, title, grade, year }) =>
               ({ icon, label }, i) =>
                 `<div key="${i}" class="flex items-center justify-between gap-x-1">
                   <img src="${icon}" alt="${label}" class="size-4" />
-                  <p class="text-[var(--black)] text-sm font-normal quicksand">${label}</p>
+                  <p class="break-all text-[var(--black)] text-sm font-normal quicksand">${label}</p>
                 </div>`,
             )
             .join('')}
@@ -1067,14 +1067,14 @@ const awardsCard = ({ title, date, institution }) => {
         ${
           title
             ? `
-            <p class="font-medium quicksand text-[var(--heading)] text-sm">${title}</p>
+            <p class="break-all font-medium quicksand text-[var(--heading)] text-sm">${title}</p>
           `
             : ''
         }
         ${
           date
             ? `
-            <p class="quicksand text-[var(--gray-70)] font-normal text-xs">${date}</p>
+            <p class="break-all quicksand text-[var(--gray-70)] font-normal text-xs">${date}</p>
           `
             : ''
         }
@@ -1085,7 +1085,7 @@ const awardsCard = ({ title, date, institution }) => {
         ? `
         <div class="flex gap-x-2 items-center">
           <img src="${icons.building}" alt="building" class="size-4" />
-          <p class="text-[var(--black)] text-sm font-normal quicksand">${institution}</p>
+          <p class="break-all text-[var(--black)] text-sm font-normal quicksand">${institution}</p>
         </div>
       `
         : ''
@@ -1107,14 +1107,14 @@ const talentsCard = ({ title, date, skill_required }) => {
         ${
           title
             ? `
-            <p class="font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
+            <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
           `
             : ''
         }
         ${
           date
             ? `
-            <p class="quicksand text-[var(--black)] font-normal text-sm">${date}</p>
+            <p class="break-all quicksand text-[var(--black)] font-normal text-sm">${date}</p>
           `
             : ''
         }
@@ -1125,7 +1125,10 @@ const talentsCard = ({ title, date, skill_required }) => {
         ? `
         <div class="flex gap-x-3 items-center">
           ${skill_required
-            .map((skill) => `<p class="text-[var(--black)] text-sm font-normal">${skill}</p>`)
+            .map(
+              (skill) =>
+                `<p class="break-all text-[var(--black)] text-sm font-normal">${skill}</p>`,
+            )
             .join('')}
         </div>
       `
@@ -1148,14 +1151,14 @@ const certificationsCard = ({ title, date, institution }) => {
         ${
           title
             ? `
-            <p class="font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
+            <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
           `
             : ''
         }
         ${
           date
             ? `
-            <p class="quicksand text-[var(--gray-70)] font-normal text-xs">${date}</p>
+            <p class="break-all quicksand text-[var(--gray-70)] font-normal text-xs">${date}</p>
           `
             : ''
         }
@@ -1166,7 +1169,7 @@ const certificationsCard = ({ title, date, institution }) => {
         ? `
         <div class="flex gap-x-2 items-center">
           <img src="${icons.building}" alt="building" class="size-4" />
-          <p class="text-[var(--black)] text-sm font-normal quicksand">${institution}</p>
+          <p class="break-all text-[var(--black)] text-sm font-normal quicksand">${institution}</p>
         </div>
       `
         : ''
@@ -1184,14 +1187,14 @@ const specializedSkillsCard = ({ title, notes, date }) => {
           ${
             title
               ? `
-              <p class="font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
+              <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
             `
               : ''
           }
           ${
             date
               ? `
-              <p class="quicksand text-[var(--gray-70)] font-normal text-xs">${date}</p>
+              <p class="break-all quicksand text-[var(--gray-70)] font-normal text-xs">${date}</p>
             `
               : ''
           }
@@ -1200,7 +1203,7 @@ const specializedSkillsCard = ({ title, notes, date }) => {
       ${
         notes
           ? `
-          <p class="text-[var(--gray-70)] text-xs font-normal quicksand break-all">${notes}</p>
+          <p class="break-all text-[var(--gray-70)] text-xs font-normal quicksand">${notes}</p>
         `
           : ''
       }
@@ -1215,14 +1218,14 @@ const customCard = ({ title, date, notes }) => {
           ${
             title
               ? `
-              <p class="font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
+              <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
             `
               : ''
           }
           ${
             date
               ? `
-              <p class="quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
+              <p class="break-all quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
             `
               : ''
           }
@@ -1230,7 +1233,7 @@ const customCard = ({ title, date, notes }) => {
         ${
           notes
             ? `
-            <p class="text-[var(--gray-70)] text-xs font-normal quicksand break-all">${notes}</p>
+            <p class="break-all text-[var(--gray-70)] text-xs font-normal quicksand">${notes}</p>
           `
             : ''
         }
@@ -1245,14 +1248,14 @@ const artsCard = ({ title, date, notes }) => {
         ${
           title
             ? `
-            <p class="font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
+            <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
           `
             : ''
         }
         ${
           date
             ? `
-            <p class="quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
+            <p class="break-all quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
           `
             : ''
         }
@@ -1262,7 +1265,7 @@ const artsCard = ({ title, date, notes }) => {
           ? `
           <div class="flex gap-x-2 items-start">
             <img src="${icons.note}" alt="note" class="size-4" />
-            <p class="text-[var(--gray-80)] text-xs font-normal quicksand break-all line-clamp-2">${notes}</p>
+            <p class="break-all text-[var(--gray-80)] text-xs font-normal quicksand line-clamp-2">${notes}</p>
           </div>
         `
           : ''
@@ -1293,21 +1296,21 @@ const employmentCard = ({
           ${
             title
               ? `
-              <p class="font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
+              <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
             `
               : ''
           }
           ${
             organization
               ? `
-              <p class="quicksand text-[var(--gray-70)] font-normal text-xs">${organization}</p>
+              <p class="break-all quicksand text-[var(--gray-70)] font-normal text-xs">${organization}</p>
             `
               : ''
           }
           ${
             startDate || endDate
               ? `
-              <p class="mt-2 text-[var(--black)] text-xs font-medium quicksand">
+              <p class="break-all mt-2 text-[var(--black)] text-xs font-medium quicksand">
                 ${startDate || ''}${startDate && endDate ? ' - ' : ''}${endDate || ''}
               </p>
             `
@@ -1328,7 +1331,7 @@ const employmentCard = ({
         previous_skills?.length > 0
           ? `
           <div class="flex gap-y-3 flex-col">
-            <p class="font-medium quicksand text-xs text-[var(--heading)]">
+            <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
               Previous Skills
             </p>
             <div class="flex items-center gap-x-3">
@@ -1337,7 +1340,7 @@ const employmentCard = ({
                   (skill) => `
                     <p
                       key="${skill}"
-                      class="bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
+                      class="break-all bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
                     >
                       ${skill}
                     </p>
@@ -1354,7 +1357,7 @@ const employmentCard = ({
         acquired_skills?.length > 0
           ? `
           <div class="flex gap-y-3 flex-col">
-            <p class="font-medium quicksand text-xs text-[var(--heading)]">
+            <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
               Acquired Skills
             </p>
             <div class="flex items-center gap-x-3">
@@ -1389,7 +1392,7 @@ const employmentCard = ({
           ? `
           <div class="flex gap-x-1.5 items-start">
             <img src="${icons.note}" alt="note" class="size-5" />
-            <p class="text-[var(--gray-70)] text-sm font-normal quicksand">${doc}</p>
+            <p class="break-all text-[var(--gray-70)] text-sm font-normal quicksand">${doc}</p>
           </div>
         `
           : ''
@@ -1405,14 +1408,14 @@ const clubsCard = ({ title, date, location, tag }) => {
         ${
           title
             ? `
-            <p class="font-medium quicksand text-[var(--heading)]">${title}</p>
+            <p class="break-all font-medium quicksand text-[var(--heading)]">${title}</p>
           `
             : ''
         }
         ${
           date
             ? `
-            <p class="quicksand text-[var(--gray-70)] font-normal text-sm">${date}</p>
+            <p class="break-all quicksand text-[var(--gray-70)] font-normal text-sm">${date}</p>
           `
             : ''
         }
@@ -1426,7 +1429,7 @@ const clubsCard = ({ title, date, location, tag }) => {
                 ? `
                 <div class="flex items-center gap-x-2">
                   <img class="size-5" alt="" src="${icons.bill}" />
-                  <p class="quicksand font-normal text-sm text-[var(--heading)]">${tag}</p>
+                  <p class="break-all quicksand font-normal text-sm text-[var(--heading)]">${tag}</p>
                 </div>
               `
                 : ''
@@ -1436,7 +1439,7 @@ const clubsCard = ({ title, date, location, tag }) => {
                 ? `
                 <div class="flex items-center gap-x-2">
                   <img class="size-5" alt="" src="${icons.locationColored}" />
-                  <p class="quicksand font-normal text-sm text-[var(--heading)]">${location}</p>
+                  <p class="break-all quicksand font-normal text-sm text-[var(--heading)]">${location}</p>
                 </div>
               `
                 : ''
@@ -1458,14 +1461,14 @@ const techCard = ({ title, date }) => {
           ${
             title
               ? `
-              <p class="font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
+              <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
             `
               : ''
           }
           ${
             date
               ? `
-              <p class="quicksand text-[var(--gray-70)] font-normal text-xs">${date}</p>
+              <p class="break-all quicksand text-[var(--gray-70)] font-normal text-xs">${date}</p>
             `
               : ''
           }
@@ -1482,14 +1485,14 @@ const entrepreneurshipCard = ({ title, date }) => {
         ${
           title
             ? `
-            <p class="font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
+            <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
           `
             : ''
         }
         ${
           date
             ? `
-            <p class="quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
+            <p class="break-all quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
           `
             : ''
         }
@@ -1505,14 +1508,14 @@ const investingCard = ({ title, date, notes }) => {
         ${
           title
             ? `
-            <p class="font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
+            <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
           `
             : ''
         }
         ${
           date
             ? `
-            <p class="quicksand flex items-center justify-between text-[var(--gray-60)] font-normal text-xs">
+            <p class="break-all quicksand flex items-center justify-between text-[var(--gray-60)] font-normal text-xs">
               <span>Stocks</span>
               <span>${date}</span>
             </p>
@@ -1523,7 +1526,7 @@ const investingCard = ({ title, date, notes }) => {
       ${
         notes
           ? `
-          <p class="text-[var(--gray-80)] text-xs font-normal quicksand break-all line-clamp-2">${notes}</p>
+          <p class="break-all text-[var(--gray-80)] text-xs font-normal quicksand line-clamp-2">${notes}</p>
         `
           : ''
       }
@@ -1537,7 +1540,7 @@ const travelCard = ({ title, date, destination }) => {
       ${
         title
           ? `
-          <p class="font-medium text-[var(--heading)] quicksand">${title}</p>
+          <p class="break-all font-medium text-[var(--heading)] quicksand">${title}</p>
         `
           : ''
       }
@@ -1547,14 +1550,14 @@ const travelCard = ({ title, date, destination }) => {
           ${
             destination
               ? `
-              <p class="font-medium text-[var(--heading)] quicksand !text-sm">${destination}</p>
+              <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${destination}</p>
             `
               : ''
           }
           ${
             date
               ? `
-              <p class="quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
+              <p class="break-all quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
             `
               : ''
           }
@@ -1570,7 +1573,7 @@ const studyAbroadCard = ({ title, date, destination, institution }) => {
       ${
         title
           ? `
-          <p class="font-medium text-[var(--heading)] quicksand">${title}</p>
+          <p class="break-all font-medium text-[var(--heading)] quicksand">${title}</p>
         `
           : ''
       }
@@ -1580,14 +1583,14 @@ const studyAbroadCard = ({ title, date, destination, institution }) => {
           ${
             destination
               ? `
-              <p class="font-medium text-[var(--heading)] quicksand !text-sm">${destination}</p>
+              <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${destination}</p>
             `
               : ''
           }
           ${
             date
               ? `
-              <p class="quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
+              <p class="break-all quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
             `
               : ''
           }
@@ -1598,7 +1601,7 @@ const studyAbroadCard = ({ title, date, destination, institution }) => {
           ? `
           <div class="flex gap-x-2 items-center">
             <img src="${icons.building}" alt="building" class="size-4" />
-            <p class="text-[var(--black)] text-sm font-normal quicksand">${institution}</p>
+            <p class="break-all text-[var(--black)] text-sm font-normal quicksand">${institution}</p>
           </div>
         `
           : ''
@@ -1613,7 +1616,7 @@ const semesterAtSeaCard = ({ title, date, destination, institution }) => {
       ${
         title
           ? `
-          <p class="font-semibold text-[var(--heading)] quicksand">${title}</p>
+          <p class="break-all font-semibold text-[var(--heading)] quicksand">${title}</p>
         `
           : ''
       }
@@ -1626,14 +1629,14 @@ const semesterAtSeaCard = ({ title, date, destination, institution }) => {
               ${
                 destination
                   ? `
-                  <p class="font-medium text-[var(--heading)] quicksand !text-sm">${destination}</p>
+                  <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${destination}</p>
                 `
                   : ''
               }
               ${
                 date
                   ? `
-                  <p class="quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
+                  <p class="break-all quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
                 `
                   : ''
               }
@@ -1647,7 +1650,7 @@ const semesterAtSeaCard = ({ title, date, destination, institution }) => {
           ? `
           <div class="flex gap-x-2 items-center">
             <img src="${icons.building}" alt="building" class="size-4" />
-            <p class="text-[var(--black)] text-sm font-normal quicksand">${institution}</p>
+            <p class="break-all text-[var(--black)] text-sm font-normal quicksand">${institution}</p>
           </div>
         `
           : ''
@@ -1665,14 +1668,14 @@ const internshipAbroadCard = ({ title, date, location, company }) => {
           ${
             title
               ? `
-              <p class="font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
+              <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
             `
               : ''
           }
           ${
             date
               ? `
-              <p class="quicksand text-[var(--gray-70)] font-normal text-sm">${date}</p>
+              <p class="break-all quicksand text-[var(--gray-70)] font-normal text-sm">${date}</p>
             `
               : ''
           }
@@ -1684,7 +1687,7 @@ const internshipAbroadCard = ({ title, date, location, company }) => {
           <div class="space-y-2">
             <div class="flex items-center gap-x-2">
               <img class="size-5" alt="" src="${icons.locationColored}" />
-              <p class="quicksand font-normal text-sm text-[var(--black)]">${location}</p>
+              <p class="break-all quicksand font-normal text-sm text-[var(--black)]">${location}</p>
             </div>
           </div>
         `
@@ -1695,7 +1698,7 @@ const internshipAbroadCard = ({ title, date, location, company }) => {
           ? `
           <div class="flex items-center gap-x-2">
             <img class="size-5" alt="" src="${icons.agency}" />
-            <p class="quicksand font-normal text-sm text-[var(--black)]">${company}</p>
+            <p class="break-all quicksand font-normal text-sm text-[var(--black)]">${company}</p>
           </div>
         `
           : ''
@@ -1726,14 +1729,14 @@ const volunteerCard = ({
           ${
             title
               ? `
-              <p class="font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
+              <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
             `
               : ''
           }
           ${
             startDate || endDate
               ? `
-              <p class="quicksand text-[var(--gray-70)] font-normal text-xs">
+              <p class="break-all quicksand text-[var(--gray-70)] font-normal text-xs">
                 ${startDate || ''}${startDate && endDate ? ' - ' : ''}${endDate || ''}
               </p>
             `
@@ -1746,7 +1749,7 @@ const volunteerCard = ({
           ? `
           <div class="flex gap-x-1.5 items-center">
             <img src="${icons.building}" alt="building" class="size-4" />
-            <p class="text-[var(--black)] text-sm font-normal quicksand">${organization}</p>
+            <p class="break-all text-[var(--black)] text-sm font-normal quicksand">${organization}</p>
           </div>
         `
           : ''
@@ -1762,7 +1765,7 @@ const volunteerCard = ({
         previous_skills?.length > 0
           ? `
           <div class="flex gap-y-3 flex-col">
-            <p class="font-medium quicksand text-xs text-[var(--heading)]">
+            <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
               Previous Skills
             </p>
             <div class="flex items-center gap-x-3">
@@ -1787,7 +1790,7 @@ const volunteerCard = ({
         acquired_skills?.length > 0
           ? `
           <div class="flex gap-y-3 flex-col">
-            <p class="font-medium quicksand text-xs text-[var(--heading)]">
+            <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
               Acquired Skills
             </p>
             <div class="flex items-center gap-x-3">
@@ -1796,7 +1799,7 @@ const volunteerCard = ({
                   (skill) => `
                     <p
                       key="${skill}"
-                      class="bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
+                      class="bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium break-all"
                     >
                       ${skill}
                     </p>
@@ -1820,7 +1823,7 @@ const volunteerCard = ({
           ? `
           <div class="flex gap-x-1.5 items-start">
             <img src="${icons.note}" alt="note" class="size-5" />
-            <p class="text-[var(--gray-70)] text-sm font-normal quicksand">${doc}</p>
+            <p class="break-all text-[var(--gray-70)] text-sm font-normal quicksand">${doc}</p>
           </div>
         `
           : ''
@@ -1851,21 +1854,21 @@ const internshipsCard = ({
           ${
             title
               ? `
-              <p class="font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
+              <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
             `
               : ''
           }
           ${
             organization
               ? `
-              <p class="quicksand text-[var(--gray-70)] font-normal text-xs">${organization}</p>
+              <p class="break-all quicksand text-[var(--gray-70)] font-normal text-xs">${organization}</p>
             `
               : ''
           }
           ${
             startDate || endDate
               ? `
-              <p class="mt-2 text-[var(--black)] text-xs font-medium quicksand">
+              <p class="break-all mt-2 text-[var(--black)] text-xs font-medium quicksand">
                 ${startDate || ''}${startDate && endDate ? ' - ' : ''}${endDate || ''}
               </p>
             `
@@ -1884,7 +1887,7 @@ const internshipsCard = ({
         previous_skills?.length > 0
           ? `
           <div class="flex gap-y-3 flex-col">
-            <p class="font-medium quicksand text-xs text-[var(--heading)]">
+            <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
               Previous Skills
             </p>
             <div class="flex items-center gap-x-3">
@@ -1893,7 +1896,7 @@ const internshipsCard = ({
                   (skill) => `
                     <p
                       key="${skill}"
-                      class="bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
+                      class="break-all bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
                     >
                       ${skill}
                     </p>
@@ -1909,7 +1912,7 @@ const internshipsCard = ({
         acquired_skills?.length > 0
           ? `
           <div class="flex gap-y-3 flex-col">
-            <p class="font-medium quicksand text-xs text-[var(--heading)]">
+            <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
               Acquired Skills
             </p>
             <div class="flex items-center gap-x-3">
@@ -1918,7 +1921,7 @@ const internshipsCard = ({
                   (skill) => `
                     <p
                       key="${skill}"
-                      class="bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
+                      class="break-all bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
                     >
                       ${skill}
                     </p>
@@ -1942,7 +1945,7 @@ const internshipsCard = ({
           ? `
           <div class="flex gap-x-1.5 items-start">
             <img src="${icons.note}" alt="note" class="size-5" />
-            <p class="text-[var(--gray-70)] text-sm font-normal quicksand">${doc}</p>
+            <p class="break-all text-[var(--gray-70)] text-sm font-normal quicksand">${doc}</p>
           </div>
         `
           : ''
@@ -1958,14 +1961,14 @@ const languageCard = ({ yearsOfStudy, institute, language, apScore, title, notes
         ${
           title
             ? `
-            <p class="font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
+            <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
           `
             : ''
         }
         ${
           date
             ? `
-            <p class="quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
+            <p class="break-all quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
           `
             : ''
         }
@@ -1979,7 +1982,7 @@ const languageCard = ({ yearsOfStudy, institute, language, apScore, title, notes
                 ? `
                 <div class="flex items-center gap-x-2">
                   <img class="size-5" alt="" src="${icons.language}" />
-                  <p class="quicksand font-semibold text-sm text-[var(--black)]">${language}</p>
+                  <p class="break-all quicksand font-semibold text-sm text-[var(--black)]">${language}</p>
                 </div>
               `
                 : ''
@@ -1989,7 +1992,7 @@ const languageCard = ({ yearsOfStudy, institute, language, apScore, title, notes
                 ? `
                 <div class="flex items-center gap-x-2">
                   <img class="size-5" alt="" src="${icons.book}" />
-                  <p class="quicksand font-normal w-full flex items-center justify-between text-sm text-[var(--black)]">
+                  <p class="break-all quicksand font-normal w-full flex items-center justify-between text-sm text-[var(--black)]">
                     Years of Study
                     <span class="font-medium">${yearsOfStudy}</span>
                   </p>
@@ -2002,7 +2005,7 @@ const languageCard = ({ yearsOfStudy, institute, language, apScore, title, notes
                 ? `
                 <div class="flex items-center gap-x-2">
                   <img class="size-5" alt="" src="${icons.building}" />
-                  <p class="quicksand font-normal text-sm text-[var(--gray-70)]">${institute}</p>
+                  <p class="break-all quicksand font-normal text-sm text-[var(--gray-70)]">${institute}</p>
                 </div>
               `
                 : ''
@@ -2037,7 +2040,7 @@ const languageCard = ({ yearsOfStudy, institute, language, apScore, title, notes
           ? `
           <div class="flex gap-x-1.5 items-start">
             <img src="${icons.note}" alt="note" class="size-5" />
-            <p class="text-[var(--gray-70)] text-sm font-normal quicksand">${notes}</p>
+            <p class="break-all text-[var(--gray-70)] text-sm font-normal quicksand">${notes}</p>
           </div>
         `
           : ''

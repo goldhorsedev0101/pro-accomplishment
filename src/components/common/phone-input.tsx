@@ -1,8 +1,9 @@
 import { FormikValues } from 'formik';
-import PhoneInput from 'react-phone-input-2';
+import PhoneInput, { CountryData } from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 
 interface IProps {
+  setIso2?: (iso2: string) => void;
   setFieldValue?: FormikValues['setFieldValue'];
   value: string;
   name: string;
@@ -14,9 +15,11 @@ interface IProps {
   error?: string;
   touched?: boolean;
   required?: boolean;
+  iso2?: string;
 }
 
 const PhoneNumberInput = ({
+  setIso2,
   setFieldValue,
   value,
   name,
@@ -25,6 +28,7 @@ const PhoneNumberInput = ({
   label,
   error,
   touched,
+  iso2,
   required,
 }: IProps) => {
   const isError = error && touched;
@@ -42,9 +46,12 @@ const PhoneNumberInput = ({
         containerClass={`${`!border w-full !border-[#E9EDEE] !rounded-md p-1 !min-w-[10px] !font-medium selection:bg-primary !placeholder:text-sm selection:text-primary-foreground ${className} border`}`}
         inputClass={`!text-black !min-w-[150px] sm:!w-[380px] !w-full !border-none !bg-transparent border disabled:opacity-55`}
         buttonClass="!border-none !ml-2 !p-0 !bg-transparent !text-black"
-        country={'us'}
+        country={iso2 ?? 'us'}
         value={value}
-        onChange={(phone) => setFieldValue(name, phone)}
+        onChange={(phone, data: CountryData) => {
+          setIso2?.(data?.countryCode || '');
+          setFieldValue(name, phone);
+        }}
         placeholder={placeholder}
       />
 

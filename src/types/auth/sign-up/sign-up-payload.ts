@@ -6,4 +6,5 @@ export type SignUpPayloadT = {
   lastName: string;
   password: string;
   email: string;
+  iso2: string;
 };

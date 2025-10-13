@@ -11,7 +11,7 @@ import { JSX } from 'react';
 
 const Profile = (): JSX.Element => {
   const { data, isPending } = useGetProfileQuery();
-  const { first_name, last_name, email, phone_number } = data?.data || {};
+  const { first_name, last_name, email, phone_number, iso2 } = data?.data || {};
 
   const Datas = [
     { label: 'First Name', value: first_name },
@@ -38,6 +38,7 @@ const Profile = (): JSX.Element => {
             first_name={first_name}
             last_name={last_name}
             email={email}
+            iso2={iso2}
           />
         </div>
 

@@ -34,9 +34,13 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
           <Image src={info} alt="info" className="size-6" />
         </div>
         <div>
-          {title && <p className="font-medium text-[var(--heading)] quicksand !text-sm">{title}</p>}
+          {title && (
+            <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
+              {title}
+            </p>
+          )}
           {(startDate || endDate) && (
-            <p className="quicksand text-[var(--gray-70)] font-normal text-xs">
+            <p className="quicksand text-[var(--gray-70)] font-normal text-xs break-all">
               {startDate}
               {startDate && endDate ? ' - ' : ''}
               {endDate}
@@ -47,7 +51,9 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
       {organization && (
         <div className="flex gap-x-1.5 items-center">
           <Image src={building} alt="building" className="size-4" />
-          <p className="text-[var(--black)] text-sm font-normal quicksand">{organization}</p>
+          <p className="text-[var(--black)] text-sm font-normal quicksand break-all">
+            {organization}
+          </p>
         </div>
       )}
       {previous_skills &&

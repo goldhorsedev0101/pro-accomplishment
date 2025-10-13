@@ -45,8 +45,8 @@ const StudentCard = ({
       <div className="flex gap-x-3">
         <Image src={profile} alt="profile" width={66} height={68} className="rounded-lg" />
         <div className="flex flex-col gap-y-1">
-          <h3 className="text-[#0E0F0C] font-medium text-base">{name}</h3>
-          <p className="text-neutral-grey-100 text-xs">{about}</p>
+          <h3 className="text-[#0E0F0C] font-medium text-base break-all">{name}</h3>
+          <p className="text-neutral-grey-100 text-xs break-all">{about}</p>
           <div className="flex items-center gap-x-3">
             <div className="flex items-center gap-x-1">
               <Image src={school} alt="school" width={20} height={20} />

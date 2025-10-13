@@ -56,7 +56,7 @@ const HomeView = (): JSX.Element => {
         <div className="w-full self-center h-[40dvh] flex items-center justify-center">
           <Loader />
         </div>
-      ) : (meta_data?.total || 0) <= 0 ? (
+      ) : (meta_data?.total || 0) < 0 ? (
         <div className="w-full self-center h-[40dvh] flex items-center justify-center">
           <NoData />
         </div>

@@ -19,7 +19,7 @@ const RenderCards: FC<IProps> = ({ accomplishments }) => {
           <Box className="!gap-y-4 !border-none !p-0" key={i}>
             {item.header && (
               <Heading
-                className="!text-lg !text-neutral-grey-60"
+                className="!text-lg !text-neutral-grey-60 break-all"
                 text={
                   isGlobal ? (item.sub_category_name ?? item.category_name) : item.category_name
                 }

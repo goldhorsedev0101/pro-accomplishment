@@ -13,4 +13,5 @@ export interface Data {
   last_name: string;
   email: string;
   role: string;
+  iso2: string;
 }

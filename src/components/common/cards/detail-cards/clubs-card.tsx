@@ -16,7 +16,7 @@ const ClubsCard: FC<IProps> = ({ form_data }) => {
   return (
     <Box>
       <div>
-        {title && <p className="font-medium quicksand text-[var(--heading)]">{title}</p>}
+        {title && <p className="font-medium quicksand text-[var(--heading)] break-all">{title}</p>}
         {date_joined && (
           <p className="quicksand text-[var(--gray-70)] font-normal text-sm">
             {formatToMDYYYY(date_joined)}

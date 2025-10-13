@@ -29,7 +29,7 @@ const AwardsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         </div>
         <div>
           <Heading
-            className="!text-sm !text-heading font-quicksand"
+            className="!text-sm !text-heading font-quicksand !break-all"
             text={award_title ?? 'N/A'}
             width="medium"
           />

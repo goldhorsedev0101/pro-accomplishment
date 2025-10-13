@@ -42,7 +42,10 @@ const InternshipsDetailsModal: FC<IProps> = ({ form_data }) => {
         <Items
           items={[
             { label: 'Start Date', value: formatToDDMMMYYYY(form_data?.start_date ?? '') },
-            { label: 'End Date', value: formatToDDMMMYYYY(form_data?.end_date ?? '') },
+            {
+              label: 'End Date',
+              value: form_data?.end_date ? formatToDDMMMYYYY(form_data?.end_date ?? '') : 'Ongoing',
+            },
           ]}
         />
       )}

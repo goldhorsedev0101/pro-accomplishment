@@ -23,7 +23,7 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
     notes: doc,
   } = form_data || {};
   const startDate = start_date ? formatToDDMMMYYYY(start_date) : '';
-  const endDate = end_date ? formatToDDMMMYYYY(end_date) : '';
+  const endDate = end_date ? formatToDDMMMYYYY(end_date) : 'Ongoing';
 
   const validUrl =
     link?.startsWith('http://') || link?.startsWith('https://') ? link : `https://${link}`;

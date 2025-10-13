@@ -8,7 +8,7 @@ interface IProps {
 }
 
 const InvestingCard: FC<IProps> = ({ form_data }) => {
-  const { accomplishment_name: title, date, notes } = form_data || {};
+  const { accomplishment_name: title, date, notes, investment_type } = form_data || {};
 
   return (
     <Box className="w-full !gap-y-3">
@@ -18,7 +18,7 @@ const InvestingCard: FC<IProps> = ({ form_data }) => {
         )}
         {date && (
           <p className="quicksand flex items-center justify-between text-[var(--gray-60)] font-normal text-xs">
-            <span>Stocks</span>
+            {investment_type && <span>{investment_type}</span>}
             <span>{formatToMDYYYY(date)}</span>
           </p>
         )}

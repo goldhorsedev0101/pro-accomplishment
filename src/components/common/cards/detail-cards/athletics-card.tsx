@@ -20,7 +20,7 @@ interface IProps {
 }
 
 const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
-  const { date, title_or_award, location, event_name, name, region } = form_data || {};
+  const { date, title_or_award, location, event_name, name } = form_data || {};
 
   return (
     <Box className="shadow-sm !text-start">
@@ -36,10 +36,10 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         </p>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 capitalize">
         <div className="flex items-center gap-x-2">
           <Image alt="" src={calendar} sizes="20" />
-          <p className="font-quicksand font-normal text-sm text-neutral-grey-70">{region}</p>
+          <p className="font-quicksand font-normal text-sm text-neutral-grey-70">{event_name}</p>
         </div>
 
         <div className="flex items-center gap-x-2">
@@ -52,9 +52,7 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
 
       <div className="flex items-center gap-x-2">
         <Image alt="" src={cup} sizes="20" />
-        <p className="font-quicksand font-normal text-sm text-neutral-grey-100">
-          {title_or_award} - {event_name}
-        </p>
+        <p className="font-quicksand font-normal text-sm text-neutral-grey-100">{title_or_award}</p>
       </div>
     </Box>
   );

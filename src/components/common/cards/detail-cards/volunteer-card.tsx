@@ -27,6 +27,9 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
   const startDate = start_date ? formatToDDMMMYYYY(start_date) : '';
   const endDate = end_date ? formatToDDMMMYYYY(end_date) : '';
 
+  const validUrl =
+    link?.startsWith('http://') || link?.startsWith('https://') ? link : `https://${link}`;
+
   return (
     <Box className="!gap-y-3">
       <div className="flex items-start gap-x-3">
@@ -92,7 +95,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
         </div>
       )}
       {link && (
-        <Link href={link} className="text-[var(--blue)] text-xs font-normal quicksand">
+        <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal quicksand">
           {link}
         </Link>
       )}

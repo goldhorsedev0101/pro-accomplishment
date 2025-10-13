@@ -1,9 +1,9 @@
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
 import { formatToDDMMMYYYY } from '@/utils/date-format';
+import Image from 'next/image';
 import building from 'public/icons/building.svg';
 import routing from 'public/pdf/routing.svg';
 import { FC } from 'react';
-import Image from 'next/image';
 import Box from '../../box';
 
 interface IProps {

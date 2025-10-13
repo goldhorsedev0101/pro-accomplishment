@@ -6,7 +6,6 @@ import Box from '@/components/common/box';
 import RenderCards from '@/components/common/cards/render-cards';
 import Heading from '@/components/common/heading';
 import Loader from '@/components/common/loader';
-import { Button } from '@/components/ui/button';
 import About from './about';
 
 // Types
@@ -21,9 +20,11 @@ import { HiOutlineDownload } from 'react-icons/hi';
 import { useToggleFavoriteCandidateMutation } from '@/services/others/favorite/toggle-favorite-candidate';
 import { useGetCandidateFolioQuery } from '@/services/others/folio/get-candidate-folio';
 import { Accomplishment } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
+import Link from 'next/link';
 
 const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
   const { data, isPending } = useGetCandidateFolioQuery({ candidateId: id ?? '' });
+
   const { mutateAsync: toggle } = useToggleFavoriteCandidateMutation();
   const { accomplishments, candidate_data } = data?.data || {};
   const [isFav, setIsFav] = useState<boolean>(candidate_data?.is_favorite || false);
@@ -71,10 +72,14 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
             {isFav ? <GoHeartFill color="#49909d" /> : <GoHeart />}
           </button>
 
-          <Button className="h-12 rounded-lg p-6">
+          <Link
+            className="h-12 rounded-lg p-6 bg-primary text-white flex items-center gap-x-1"
+            href={candidate_data?.pdf_url || ''}
+            target="_blank"
+          >
             <HiOutlineDownload size={20} />
             Download PDF
-          </Button>
+          </Link>
         </div>
       </div>
 

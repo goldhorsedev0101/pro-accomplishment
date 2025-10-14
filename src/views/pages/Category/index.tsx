@@ -65,24 +65,26 @@ const CategoryView: FC<IParams & { name: string }> = ({ category, name }): JSX.E
       <div className="flex items-center gap-x-3 w-full">
         <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-        <Select onValueChange={setSubCategoryId} value={subCategoryId}>
-          <SelectTrigger className="w-full h-10 py-6 max-w-[200px] text-neutral-grey-100">
-            <SelectValue placeholder="Sub-Category" />
-          </SelectTrigger>
-          <SelectContent className="max-h-[400px]">
-            {isSubCategoriesPending ? (
-              <Loader width="150" />
-            ) : (subCategoriesData?.length || 0) > 0 ? (
-              subCategoriesData?.map((item) => (
-                <SelectItem key={item.id} value={item.id}>
-                  {item.name}
-                </SelectItem>
-              ))
-            ) : (
-              <span className="text-xs px-5">No Sub Categories Available</span>
-            )}
-          </SelectContent>
-        </Select>
+        {(subCategoriesData?.length || 0) > 0 && (
+          <Select onValueChange={setSubCategoryId} value={subCategoryId}>
+            <SelectTrigger className="w-full h-10 py-6 max-w-[200px] text-neutral-grey-100">
+              <SelectValue placeholder="Sub-Category" />
+            </SelectTrigger>
+            <SelectContent className="max-h-[400px]">
+              {isSubCategoriesPending ? (
+                <Loader width="150" />
+              ) : (subCategoriesData?.length || 0) > 0 ? (
+                subCategoriesData?.map((item) => (
+                  <SelectItem key={item.id} value={item.id}>
+                    {item.name}
+                  </SelectItem>
+                ))
+              ) : (
+                <span className="text-xs px-5">No Sub Categories Available</span>
+              )}
+            </SelectContent>
+          </Select>
+        )}
       </div>
 
       {isCandidatePending ? (

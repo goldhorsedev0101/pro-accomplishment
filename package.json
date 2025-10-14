@@ -40,7 +40,6 @@
     "react-loader-spinner": "^6.1.6",
     "react-paginate": "^8.3.0",
     "react-phone-input-2": "^2.15.1",
-    "react-simple-image-viewer": "^1.2.2",
     "react-spinners": "^0.17.0",
     "react-timer-hook": "^4.0.5",
     "stripe": "^19.1.0",

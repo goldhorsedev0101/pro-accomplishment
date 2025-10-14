@@ -1,10 +1,18 @@
 import { corsOptions, response } from '@/lib/supabase/helper';
 import { uploadProfilePicture } from '@/services/server/authService';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 
 export async function OPTIONS() {
   return corsOptions();
 }
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
+};
 
 export async function POST(request: NextRequest) {
   try {

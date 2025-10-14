@@ -37,7 +37,7 @@ const SignInView = (): JSX.Element => {
     onSubmit: async () => {
       try {
         const { data } = await mutateAsync(values);
-        setCookie('accessToken', data.session.access_token);
+        setCookie('accessToken', data?.session?.access_token);
         push(home);
         refresh();
       } catch (error) {

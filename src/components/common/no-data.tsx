@@ -14,7 +14,7 @@ const NoData = (): JSX.Element => {
       <Image src={heart} alt="heart" sizes="94" />
       <Heading text="No Favorite Yet" width="medium" size="22" />
       <p className="text-secondary text-lg font-normal -mt-4">
-        There is not favorite student profile at the moment
+        There is no favorite student profile at the moment
       </p>
     </div>
   );

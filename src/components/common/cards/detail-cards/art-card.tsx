@@ -1,5 +1,5 @@
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
-import { formatToMDYYYY } from '@/utils/date-format';
+import { formatToDDMMYYYY } from '@/utils/date-format';
 import Image from 'next/image';
 import note from 'public/icons/note.svg';
 import { FC } from 'react';
@@ -23,7 +23,7 @@ const ArtCard: FC<IProps> = ({ form_data }) => {
 
         {date && (
           <p className="quicksand text-[var(--gray-60)] font-normal text-xs">
-            {formatToMDYYYY(date)}
+            {formatToDDMMYYYY(date)}
           </p>
         )}
       </div>

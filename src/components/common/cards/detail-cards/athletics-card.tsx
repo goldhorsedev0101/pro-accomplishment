@@ -20,7 +20,7 @@ interface IProps {
 }
 
 const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
-  const { date, title_or_award, location, event_name, name } = form_data || {};
+  const { date, title_or_award, location, event_name, name, region } = form_data || {};
 
   return (
     <Box className="shadow-sm !text-start">
@@ -32,7 +32,7 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
           </p>
         </div>
         <p className="font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5 bg-primary-0">
-          State
+          {region}
         </p>
       </div>
 

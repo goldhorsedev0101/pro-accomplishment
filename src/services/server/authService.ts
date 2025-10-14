@@ -60,6 +60,7 @@ export const signIn = async ({ email, password }: { email: string; password: str
   });
   if (error?.code == 'email_not_confirmed') {
     return {
+      message: 'OTP send successfully',
       data: { code: 'verification_email_resend' },
       error: null,
     };

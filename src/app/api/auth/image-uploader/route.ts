@@ -2,6 +2,15 @@ import { corsOptions, response } from '@/lib/supabase/helper';
 import { uploadProfilePicture } from '@/services/server/authService';
 import { NextRequest, NextResponse } from 'next/server';
 
+export const runtime = 'nodejs';
+export const maxDuration = 60;
+export const config = {
+  api: {
+    bodyParser: false,
+    sizeLimit: '10mb',
+  },
+};
+
 export async function OPTIONS() {
   return corsOptions();
 }

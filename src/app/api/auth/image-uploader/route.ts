@@ -4,6 +4,7 @@ import { NextRequest } from 'next/server';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
+
 export const config = {
   api: {
     bodyParser: false,
@@ -14,14 +15,6 @@ export const config = {
 export async function OPTIONS() {
   return corsOptions();
 }
-
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '10mb',
-    },
-  },
-};
 
 export async function POST(request: NextRequest) {
   try {

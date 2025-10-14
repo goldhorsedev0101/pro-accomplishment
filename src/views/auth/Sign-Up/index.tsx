@@ -94,6 +94,7 @@ const SignUpView = (): JSX.Element => {
             label="First Name"
             name="firstName"
           />
+
           <Input
             error={touched.lastName ? errors.lastName : undefined}
             value={values['lastName']}
@@ -114,12 +115,12 @@ const SignUpView = (): JSX.Element => {
         />
 
         <PhoneNumberInput
-          name="phoneNumber"
-          label="Phone Number"
-          value={values['phoneNumber']}
-          setFieldValue={setFieldValue}
-          iso2={values['iso2']}
           setIso2={(e) => setFieldValue('iso2', e)}
+          setFieldValue={setFieldValue}
+          value={values['phoneNumber']}
+          iso2={values['iso2']}
+          label="Phone Number"
+          name="phoneNumber"
         />
 
         <Input
@@ -131,6 +132,7 @@ const SignUpView = (): JSX.Element => {
           type="password"
           name="password"
         />
+
         <Input
           error={touched.confirmPassword ? errors.confirmPassword : undefined}
           value={values['confirmPassword']}
@@ -140,7 +142,6 @@ const SignUpView = (): JSX.Element => {
           name="confirmPassword"
           type="password"
         />
-        {/* <CustomPhoneInput /> */}
       </div>
 
       <Button type="submit" disabled={isPending}>
@@ -150,8 +151,8 @@ const SignUpView = (): JSX.Element => {
       <div className="flex items-center gap-x-1 w-full justify-center -mt-4">
         <p className="font-normal">Already have an account?</p>
         <Button
-          onClick={() => push(signIn)}
           className="w-fit p-0 underline text-base font-semibold"
+          onClick={() => push(signIn)}
           variant={'link'}
           type="button"
         >

@@ -19,6 +19,7 @@ interface IProps {
 
 const EmploymentCard: FC<IProps> = ({ form_data }) => {
   const { link } = form_data ?? {};
+
   const validUrl =
     link?.startsWith('http://') || link?.startsWith('https://') ? link : `https://${link}`;
 
@@ -39,40 +40,45 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
           </p>
           <p className="mt-2 text-black text-xs font-medium font-quicksand">
             {formatToDDMMMYYYY(form_data?.start_date ?? '')} -{' '}
-            {formatToDDMMMYYYY(form_data?.end_date ?? '')}
+            {!form_data?.end_date ? 'Ongoing' : formatToDDMMMYYYY(form_data?.end_date ?? '')}
           </p>
         </div>
       </div>
 
-      <hr />
+      {((form_data?.previous_skills?.length || 0) > 0 ||
+        (form_data?.acquired_skills?.length || 0) > 0) && <hr />}
 
-      <div className="flex gap-y-3 flex-col">
-        <p className="font-medium font-quicksand text-xs text-heading">Previous Skills</p>
-        <div className="flex items-center gap-x-3">
-          {form_data?.previous_skills?.map((skill) => (
-            <p
-              key={skill}
-              className="bg-neutral-grey-0 p-1 rounded-md text-heading font-quicksand font-medium text-base"
-            >
-              {skill}
-            </p>
-          ))}
+      {(form_data?.previous_skills?.length || 0) > 0 && (
+        <div className="flex gap-y-3 flex-col">
+          <p className="font-medium font-quicksand text-xs text-heading">Previous Skills</p>
+          <div className="flex items-center gap-x-3">
+            {form_data?.previous_skills?.map((skill) => (
+              <p
+                key={skill}
+                className="bg-neutral-grey-0 p-1 rounded-md text-heading font-quicksand font-medium text-base"
+              >
+                {skill}
+              </p>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="flex gap-y-3 flex-col">
-        <p className="font-medium font-quicksand text-xs text-heading">Acquired Skills</p>
-        <div className="flex items-center gap-x-3">
-          {form_data?.acquired_skills?.map((skill) => (
-            <p
-              key={skill}
-              className="bg-neutral-grey-0 p-1 rounded-md text-heading font-quicksand font-medium text-base"
-            >
-              {skill}
-            </p>
-          ))}
+      {(form_data?.acquired_skills?.length || 0) > 0 && (
+        <div className="flex gap-y-3 flex-col">
+          <p className="font-medium font-quicksand text-xs text-heading">Acquired Skills</p>
+          <div className="flex items-center gap-x-3">
+            {form_data?.acquired_skills?.map((skill) => (
+              <p
+                key={skill}
+                className="bg-neutral-grey-0 p-1 rounded-md text-heading font-quicksand font-medium text-base"
+              >
+                {skill}
+              </p>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {form_data?.link && (
         <Link href={validUrl} className="text-blue text-xs font-normal font-quicksand">

@@ -40,17 +40,26 @@ const EditProfileModal: FC<IProps> = ({
 
   const { mutateAsync } = useEditProfileMutation();
 
-  const { touched, errors, values, handleChange, handleSubmit, resetForm, setFieldValue } =
-    useFormik({
-      initialValues: { phoneNumber: phone_number, firstName: first_name, lastName: last_name },
-      validationSchema: EditProfileSchema,
-      enableReinitialize: true,
-      onSubmit: async (values) => {
-        await mutateAsync(values);
-        setIsOpen(false);
-        resetForm();
-      },
-    });
+  const {
+    touched,
+    errors,
+    values,
+    handleChange,
+    handleSubmit,
+    resetForm,
+    setFieldValue,
+    dirty,
+    isValid,
+  } = useFormik({
+    initialValues: { phoneNumber: phone_number, firstName: first_name, lastName: last_name },
+    validationSchema: EditProfileSchema,
+    enableReinitialize: true,
+    onSubmit: async (values) => {
+      await mutateAsync(values);
+      setIsOpen(false);
+      resetForm();
+    },
+  });
 
   return (
     <BasicModal
@@ -94,7 +103,7 @@ const EditProfileModal: FC<IProps> = ({
           />
 
           <DialogClose asChild>
-            <Button className="w-full h-14 rounded-xl" type="submit">
+            <Button className="w-full h-14 rounded-xl" type="submit" disabled={!dirty || !isValid}>
               Save Changes
             </Button>
           </DialogClose>

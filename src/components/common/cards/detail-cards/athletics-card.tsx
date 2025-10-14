@@ -32,14 +32,14 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
           </p>
         </div>
         <p className="font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5 bg-primary-0">
-          State
+          {region}
         </p>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 capitalize">
         <div className="flex items-center gap-x-2">
           <Image alt="" src={calendar} sizes="20" />
-          <p className="font-quicksand font-normal text-sm text-neutral-grey-70">{region}</p>
+          <p className="font-quicksand font-normal text-sm text-neutral-grey-70">{event_name}</p>
         </div>
 
         <div className="flex items-center gap-x-2">
@@ -52,9 +52,7 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
 
       <div className="flex items-center gap-x-2">
         <Image alt="" src={cup} sizes="20" />
-        <p className="font-quicksand font-normal text-sm text-neutral-grey-100">
-          {title_or_award} - {event_name}
-        </p>
+        <p className="font-quicksand font-normal text-sm text-neutral-grey-100">{title_or_award}</p>
       </div>
     </Box>
   );

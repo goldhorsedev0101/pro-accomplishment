@@ -43,7 +43,13 @@ const StudentCard = ({
       className="shadow-sm border border-neutral-grey-10 bg-white rounded-lg p-3.5 w-full flex gap-x-2"
     >
       <div className="flex gap-x-3">
-        <Image src={profile} alt="profile" width={66} height={68} className="rounded-lg" />
+        <Image
+          src={profile}
+          alt="profile"
+          width={66}
+          height={68}
+          className="rounded-lg w-[66px] h-[66px] min-w-[66px] min-h-[66px] max-w-[66px] max-h-[66px]"
+        />
       </div>
 
       <div className="w-full flex flex-col gap-y-1">

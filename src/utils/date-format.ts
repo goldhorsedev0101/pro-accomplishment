@@ -5,6 +5,11 @@ const formatToMDYYYY = (date?: string) => {
   else return '';
 };
 
+const formatToDDMMYYYY = (date?: string) => {
+  if (date && dayjs(date).isValid()) return dayjs(date).format('D/M/YYYY');
+  else return '';
+};
+
 const formatToDDMMMYYYY = (date?: string) => {
   if (date && dayjs(date).isValid()) return dayjs(date).format('DD MMM YYYY');
   else return '';
@@ -20,4 +25,4 @@ const formatToMMMMDYYYY = (date?: string) => {
   else return '';
 };
 
-export { formatToDDMMMYYYY, formatToMDYYYY, formatToMMMMDYYYY, formatToYYYY };
+export { formatToDDMMMYYYY, formatToMDYYYY, formatToMMMMDYYYY, formatToYYYY, formatToDDMMYYYY };

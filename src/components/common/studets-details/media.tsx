@@ -1,12 +1,17 @@
+'use client';
+
 import Image from 'next/image';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import Box from '../box';
+import ImageViewer from '../imageViewer';
 
 interface IProps {
   media_urls: string[];
 }
 
 const Media: FC<IProps> = ({ media_urls }) => {
+  const [selectedImg, setSelectedImg] = useState<string>('');
+
   return (
     <Box className="!border-none !p-3 !gap-2">
       <p className="text-heading font-medium">Media</p>
@@ -14,6 +19,7 @@ const Media: FC<IProps> = ({ media_urls }) => {
       <div className="flex flex-wrap gap-4">
         {media_urls?.map((url, i) => (
           <Image
+            onClick={() => setSelectedImg(url)}
             className="rounded-md"
             alt="chaseBanner"
             height={150}
@@ -23,6 +29,10 @@ const Media: FC<IProps> = ({ media_urls }) => {
           />
         ))}
       </div>
+
+      {selectedImg && (
+        <ImageViewer onOpenChange={() => setSelectedImg('')} selectedImage={selectedImg} />
+      )}
     </Box>
   );
 };

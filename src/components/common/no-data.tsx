@@ -2,20 +2,32 @@
 import heart from 'public/icons/heart.svg';
 
 // Component
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import Heading from './heading';
 
 // Types
-import { JSX } from 'react';
+import { FC, JSX } from 'react';
 
-const NoData = (): JSX.Element => {
+interface IProps {
+  title?: string;
+  className?: string;
+  description?: string;
+  img?: StaticImageData;
+}
+
+const NoData: FC<IProps> = ({
+  description = 'There is no favorite student profile at the moment',
+  title = 'No Favorite Yet',
+  img = heart,
+  className,
+}): JSX.Element => {
   return (
-    <div className="max-w-[434px] flex flex-col items-center gap-y-6 self-center w-full">
-      <Image src={heart} alt="heart" sizes="94" />
-      <Heading text="No Favorite Yet" width="medium" size="22" />
-      <p className="text-secondary text-lg font-normal -mt-4">
-        There is no favorite student profile at the moment
-      </p>
+    <div
+      className={`max-w-[434px] flex flex-col items-center gap-y-6 self-center w-full ${className}`}
+    >
+      <Image src={img} alt="heart" sizes="94" />
+      <Heading text={title} width="medium" size="22" />
+      <p className="text-[#666566] text-lg font-normal -mt-4 text-center">{description}</p>
     </div>
   );
 };

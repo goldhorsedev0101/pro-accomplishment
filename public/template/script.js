@@ -38,6 +38,11 @@ const formatToMDYYYY = (date) => {
   else return '';
 };
 
+const formatToDDMMYYYY = (date) => {
+  if (date && dayjs(date).isValid()) return dayjs(date).format('D/M/YYYY');
+  else return '';
+};
+
 const formatToDDMMMYYYY = (date) => {
   if (date && dayjs(date).isValid()) return dayjs(date).format('DD MMM YYYY');
   else return '';
@@ -147,24 +152,26 @@ const accomplishmentLayout = (
   const renderCard = (form_type) => {
     if (form_type === 'athletic') {
       return athleticsCard({
-        date: formatToMDYYYY(form_data?.date),
+        date: formatToDDMMYYYY(form_data?.date),
         position: form_data?.title_or_award,
         location: form_data?.location,
         place: form_data?.event_name,
+        region: form_data?.region,
         title: form_data?.name,
       });
     }
 
     if (form_type === 'academic') {
+      const startYear = formatToYYYY(form_data?.academic_year_started ?? '');
+      const endYear = formatToYYYY(form_data?.academic_year_ended ?? '');
+
       return academicsCard({
         subject: 'Math',
         title: form_data?.name,
         subTitle: form_data?.notes,
         grade: `Grade/GPA ${form_data?.grade_or_gpa}`,
         percentage: form_data?.standardized_test_score + '%',
-        year: `${formatToYYYY(
-          form_data?.academic_year_started,
-        )} - ${formatToYYYY(form_data?.academic_year_ended)}`,
+        year: startYear === endYear ? startYear : `${startYear} - ${endYear}`,
       });
     }
 
@@ -215,16 +222,16 @@ const accomplishmentLayout = (
 
     if (form_type === 'specialized_skill') {
       return specializedSkillsCard({
+        date: formatToDDMMYYYY(form_data?.date),
         title: form_data?.accomplishment_name,
-        date: formatToMDYYYY(form_data?.date),
         notes: form_data?.notes,
       });
     }
 
     if (form_type === 'art') {
       return artsCard({
+        date: formatToDDMMYYYY(form_data?.date),
         title: form_data?.accomplishment_name,
-        date: formatToMDYYYY(form_data?.date),
         notes: form_data?.notes,
       });
     }
@@ -362,7 +369,7 @@ const accomplishmentLayout = (
     `;
 };
 
-const athleticsCard = ({ title, date, location, position, place }) => {
+const athleticsCard = ({ title, date, location, position, place, region }) => {
   return `
   <div class="box">
     <div class="flex justify-between items-start">
@@ -382,11 +389,14 @@ const athleticsCard = ({ title, date, location, position, place }) => {
             : ''
         }
       </div>
-      <p
-        class="break-all quicksand text-[var(--black)] font-normal text-sm rounded-sm py-0.5 px-1.5 bg-[var(--primary-0)]"
-      >
-        State
-      </p>
+     ${
+       region &&
+       `
+         <p class="break-all quicksand text-[var(--black)] font-normal text-sm rounded-sm py-0.5 px-1.5 bg-[#E7D3EE] capitalize">
+           ${region}
+         </p>
+       `
+     }
     </div>
 
     ${

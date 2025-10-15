@@ -138,7 +138,12 @@ const contact = (item, i) => {
   `;
 };
 
-const accomplishmentLayout = ({ header, form_data, form_type, category_name }, i) => {
+const accomplishmentLayout = (
+  { header, form_data, form_type, category_name, sub_category_name },
+  i,
+) => {
+  const isGlobal = category_name === 'Global Experience and Languages';
+
   const renderCard = (form_type) => {
     if (form_type === 'athletic') {
       return athleticsCard({
@@ -348,14 +353,13 @@ const accomplishmentLayout = ({ header, form_data, form_type, category_name }, i
     ${
       header
         ? `<p class="break-all font-medium text-[var(--gray-60)] text-lg">
-            ${category_name}
+              ${isGlobal ? (sub_category_name ?? category_name) : category_name}
           </p>`
         : ''
     }
-
-    ${renderCard(form_type)}
+      ${renderCard(form_type)}
     </div>
-  `;
+    `;
 };
 
 const athleticsCard = ({ title, date, location, position, place }) => {

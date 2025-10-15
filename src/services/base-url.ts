@@ -1,7 +1,7 @@
 const localhost = 'http://localhost:3000';
 const live = process.env.API_URL;
 
-const isLive = true;
+const isLive = process.env.NODE_ENV === 'production';
 const baseUrl = isLive ? live + '/api' : localhost + '/api';
 
 export const URLS = {

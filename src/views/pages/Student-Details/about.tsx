@@ -93,7 +93,7 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
 
       <hr />
 
-      <div className="flex items-center gap-x-3">
+      <div className="flex items-center gap-3 flex-wrap">
         <div className="flex items-center gap-x-1">
           <Image src={school} alt="school" width={20} height={20} />
           <p className="text-xs font-normal text-neutral-grey-100">{organization_name}</p>

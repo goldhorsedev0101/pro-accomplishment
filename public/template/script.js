@@ -384,7 +384,7 @@ const athleticsCard = ({ title, date, location, position, place, region }) => {
         ${
           date
             ? `
-            <p class="break-all quicksand text-[var(--gray-70)] font-normal text-sm">${date}</p>
+            <p class="break-all quicksand text-[var(--gray-70)] font-normal text-sm !min-w-fit">${date}</p>
           `
             : ''
         }
@@ -392,7 +392,7 @@ const athleticsCard = ({ title, date, location, position, place, region }) => {
      ${
        region &&
        `
-         <p class="break-all quicksand text-[var(--black)] font-normal text-sm rounded-sm py-0.5 px-1.5 bg-[#E7D3EE] capitalize">
+         <p class="break-all quicksand !min-w-fit text-[var(--black)] font-normal text-sm rounded-sm py-0.5 px-1.5 bg-[#E7D3EE] capitalize">
            ${region}
          </p>
        `
@@ -479,7 +479,7 @@ const academicsCard = ({ percentage, subTitle, subject, title, grade, year }) =>
       ${
         year
           ? `
-          <p class="break-all quicksand text-[var(--gray-70)] font-normal text-sm rounded-sm py-0.5 px-1.5 bg-[var(--green-light)]">${year}</p>
+          <p class="break-all quicksand text-[var(--gray-70)] font-normal text-sm rounded-sm py-0.5 px-1.5 bg-[var(--green-light)] !min-w-fit">${year}</p>
         `
           : ''
       }
@@ -526,7 +526,7 @@ const awardsCard = ({ title, date, institution }) => {
         ${
           date
             ? `
-            <p class="break-all quicksand text-[var(--gray-70)] font-normal text-xs">${date}</p>
+            <p class="break-all quicksand text-[var(--gray-70)] font-normal text-xs !min-w-fit">${date}</p>
           `
             : ''
         }
@@ -566,7 +566,7 @@ const talentsCard = ({ title, date, skill_required }) => {
         ${
           date
             ? `
-            <p class="break-all quicksand text-[var(--black)] font-normal text-sm">${date}</p>
+            <p class="break-all quicksand text-[var(--black)] font-normal text-sm !min-w-fit">${date}</p>
           `
             : ''
         }
@@ -610,7 +610,7 @@ const certificationsCard = ({ title, date, institution }) => {
         ${
           date
             ? `
-            <p class="break-all quicksand text-[var(--gray-70)] font-normal text-xs">${date}</p>
+            <p class="break-all quicksand text-[var(--gray-70)] font-normal text-xs !min-w-fit">${date}</p>
           `
             : ''
         }
@@ -646,7 +646,7 @@ const specializedSkillsCard = ({ title, notes, date }) => {
           ${
             date
               ? `
-              <p class="break-all quicksand text-[var(--gray-70)] font-normal text-xs">${date}</p>
+              <p class="break-all quicksand text-[var(--gray-70)] font-normal text-xs !min-w-fit">${date}</p>
             `
               : ''
           }
@@ -677,7 +677,7 @@ const customCard = ({ title, date, notes }) => {
           ${
             date
               ? `
-              <p class="break-all quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
+              <p class="break-all quicksand text-[var(--gray-60)] font-normal text-xs !min-w-fit">${date}</p>
             `
               : ''
           }
@@ -707,7 +707,7 @@ const artsCard = ({ title, date, notes }) => {
         ${
           date
             ? `
-            <p class="break-all quicksand text-[var(--gray-60)] font-normal text-xs">${date}</p>
+            <p class="break-all quicksand text-[var(--gray-60)] font-normal text-xs !min-w-fit">${date}</p>
           `
             : ''
         }

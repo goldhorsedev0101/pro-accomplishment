@@ -51,11 +51,15 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
         <div className="flex flex-col gap-y-3">
           <Heading text={name} className="text-4xl" width="medium" />
 
-          <p className="flex items-start gap-x-2">
-            <PiQuotesLight size={20} className="text-primary rotate-180 min-w-5 min-h-5" />
-            <span className="max-w-[634px] text-neutral-grey-80 font-normal text-lg">{quote}</span>
-            <PiQuotesLight size={20} className="text-primary min-w-5 min-h-5" />
-          </p>
+          {quote && (
+            <p className="flex items-start gap-x-2">
+              <PiQuotesLight size={20} className="text-primary rotate-180 min-w-5 min-h-5" />
+              <span className="max-w-[634px] text-neutral-grey-80 font-normal text-lg">
+                {quote}
+              </span>
+              <PiQuotesLight size={20} className="text-primary min-w-5 min-h-5" />
+            </p>
+          )}
 
           <div className="flex flex-wrap gap-6">
             {contact.map(({ icon, label }, i) => (
@@ -101,12 +105,14 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
 
         <div className="size-1.5 rounded-full bg-[#B2B0B2]" />
 
-        <div className="flex items-center h-fit gap-x-1">
-          <TiStar className="text-yellow" size={20} />
-          <p className="text-black text-xs font-normal">
-            GPA<span className="font-medium"> {gpa}</span>
-          </p>
-        </div>
+        {gpa && (
+          <div className="flex items-center h-fit gap-x-1">
+            <TiStar className="text-yellow" size={20} />
+            <p className="text-black text-xs font-normal">
+              GPA<span className="font-medium"> {gpa}</span>
+            </p>
+          </div>
+        )}
       </div>
     </Box>
   );

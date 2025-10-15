@@ -30,7 +30,7 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
       {form_data?.name && (
         <Box className="!border-none !p-3 !flex-row justify-between">
           <p className="text-heading font-medium capitalize">{form_data?.name}</p>
-          <p className="py-0.5 px-1.5 rounded-sm text-black text-sm bg-primary-0">
+          <p className="py-0.5 px-1.5 rounded-sm text-black text-sm bg-[#E7D3EE] capitalize">
             {form_data.region}
           </p>
         </Box>
@@ -79,9 +79,9 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
         </Box>
       )}
 
-      {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
+      {form_data?.document_urls && form_data?.document_urls?.length > 0 && (
         <Document
-          certificate_urls={form_data?.certificate_urls}
+          certificate_urls={form_data?.document_urls}
           certification_title={form_data?.certification_title}
         />
       )}

@@ -36,17 +36,25 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         </p>
       </div>
 
-      <div className="space-y-2 capitalize">
-        <div className="flex items-center gap-x-2">
-          <Image alt="" src={calendar} sizes="20" />
-          <p className="font-quicksand font-normal text-sm text-neutral-grey-70">{event_name}</p>
-        </div>
+      {(event_name || location) && (
+        <div className="space-y-2 capitalize">
+          {event_name && (
+            <div className="flex items-center gap-x-2">
+              <Image alt="" src={calendar} sizes="20" />
+              <p className="font-quicksand font-normal text-sm text-neutral-grey-70">
+                {event_name}
+              </p>
+            </div>
+          )}
 
-        <div className="flex items-center gap-x-2">
-          <Image alt="" src={locationIcon} sizes="20" />
-          <p className="font-quicksand font-normal text-sm text-neutral-grey-70">{location}</p>
+          {location && (
+            <div className="flex items-center gap-x-2">
+              <Image alt="" src={locationIcon} sizes="20" />
+              <p className="font-quicksand font-normal text-sm text-neutral-grey-70">{location}</p>
+            </div>
+          )}
         </div>
-      </div>
+      )}
 
       <hr className="-my-2" />
 

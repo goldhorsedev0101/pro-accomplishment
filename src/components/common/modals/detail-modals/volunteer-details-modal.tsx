@@ -60,10 +60,10 @@ const VolunteerDetailsModal: FC<IProps> = ({ form_data }) => {
 
       {form_data?.favorite_part && <FavoritePart favorite_part={form_data?.favorite_part} />}
 
-      {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
+      {form_data?.document_urls && form_data?.document_urls?.length > 0 && (
         <Document
           certification_title={form_data?.certification_title}
-          certificate_urls={form_data?.certificate_urls}
+          certificate_urls={form_data?.document_urls}
         />
       )}
 

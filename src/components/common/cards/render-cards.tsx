@@ -2,8 +2,6 @@ import { Cards } from '@/constants/cards';
 import { Modals } from '@/constants/modals';
 import { Accomplishment } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
 import { FC, Fragment } from 'react';
-import Box from '../box';
-import Heading from '../heading';
 import DetailsModalLayout from '../modals/details-modal-layout';
 
 interface IProps {
@@ -15,22 +13,15 @@ const RenderCards: FC<IProps> = ({ accomplishments }) => {
     <Fragment>
       {accomplishments?.map((item, i) => {
         const isGlobal = item.category_name === 'Global Experience and Languages';
-        return (
-          <Box className="!gap-y-4 !border-none !p-0" key={i}>
-            {item.header && (
-              <Heading
-                className="!text-lg !text-neutral-grey-60 break-all"
-                text={
-                  isGlobal ? (item.sub_category_name ?? item.category_name) : item.category_name
-                }
-                width="medium"
-              />
-            )}
 
-            <DetailsModalLayout trigger={Cards({ ...item })}>
-              {Modals({ ...item })}
-            </DetailsModalLayout>
-          </Box>
+        return (
+          <DetailsModalLayout
+            key={i}
+            trigger={Cards({ ...item })}
+            title={isGlobal ? (item.sub_category_name ?? item.category_name) : item.category_name}
+          >
+            {Modals({ ...item })}
+          </DetailsModalLayout>
         );
       })}
     </Fragment>

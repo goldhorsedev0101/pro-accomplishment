@@ -38,7 +38,7 @@ const TalentsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         </div>
       </div>
 
-      <div className="flex gap-x-3 items-center">
+      <div className="flex gap-3 items-center flex-wrap">
         {skill_required?.map((item, i) => (
           <p key={i} className="text-neutral-grey-100 text-sm font-normal">
             {item}

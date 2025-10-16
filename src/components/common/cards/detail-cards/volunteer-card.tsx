@@ -51,6 +51,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
           )}
         </div>
       </div>
+
       {organization && (
         <div className="flex gap-x-1.5 items-center">
           <Image src={building} alt="building" className="size-4" />
@@ -59,15 +60,17 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
           </p>
         </div>
       )}
+
       {previous_skills &&
         acquired_skills &&
         (previous_skills?.length > 0 || acquired_skills?.length > 0) && (
           <hr className="border border-[var(--gray-10)]" />
         )}
+
       {previous_skills && previous_skills?.length > 0 && (
         <div className="flex gap-y-3 flex-col">
           <p className="font-medium quicksand text-xs text-[var(--heading)]">Previous Skills</p>
-          <div className="flex items-center gap-x-3">
+          <div className="flex items-center gap-3 flex-wrap">
             {previous_skills.map((skill) => (
               <p
                 key={skill}
@@ -79,10 +82,11 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
           </div>
         </div>
       )}
+
       {acquired_skills && acquired_skills?.length > 0 && (
         <div className="flex gap-y-3 flex-col">
           <p className="font-medium quicksand text-xs text-[var(--heading)]">Acquired Skills</p>
-          <div className="flex items-center gap-x-3">
+          <div className="flex items-center gap-3 flex-wrap">
             {acquired_skills.map((skill) => (
               <p
                 key={skill}
@@ -94,11 +98,13 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
           </div>
         </div>
       )}
+
       {link && (
         <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal quicksand">
           {link}
         </Link>
       )}
+
       {doc && (
         <div className="flex gap-x-1.5 items-start">
           <Image src={note} alt="note" className="size-5" />

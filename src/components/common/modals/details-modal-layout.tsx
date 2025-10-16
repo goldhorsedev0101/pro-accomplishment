@@ -1,18 +1,23 @@
 'use client';
 
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
+import Box from '../box';
+import Heading from '../heading';
 
 interface IProps {
+  title: string;
   trigger: React.ReactNode;
   children: React.ReactNode;
 }
 
-const DetailsModalLayout = ({ trigger, children }: IProps) => {
+const DetailsModalLayout = ({ trigger, children, title }: IProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <Fragment>
+    <Box className="!gap-y-4 !border-none !p-0">
+      <Heading className="!text-lg !text-neutral-grey-60 break-all" text={title} width="medium" />
+
       <Dialog onOpenChange={setIsOpen} open={isOpen}>
         <DialogTrigger className="outline-none"> {trigger}</DialogTrigger>
         <DialogContent
@@ -24,7 +29,7 @@ const DetailsModalLayout = ({ trigger, children }: IProps) => {
           {children}
         </DialogContent>
       </Dialog>
-    </Fragment>
+    </Box>
   );
 };
 

@@ -20,8 +20,11 @@ interface IProps {
 const AcademicsCard: FC<IProps> = ({ form_data }): JSX.Element => {
   const data = [
     { icon: book, label: 'Math' },
-    { icon: percentage, label: form_data?.standardized_test_score + '%' },
-    { icon: teacher, label: form_data?.grade_or_gpa },
+    {
+      icon: percentage,
+      label: form_data?.standardized_test_score ? form_data?.standardized_test_score + '%' : '',
+    },
+    { icon: teacher, label: form_data?.grade_or_gpa ? 'Grade/GPA ' + form_data?.grade_or_gpa : '' },
   ];
 
   const startYear = formatToYYYY(form_data?.academic_year_started ?? '');

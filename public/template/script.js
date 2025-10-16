@@ -575,7 +575,7 @@ const talentsCard = ({ title, date, skill_required }) => {
     ${
       skill_required?.length > 0
         ? `
-        <div class="flex gap-x-3 items-center">
+        <div class="flex gap-3 items-center flex-wrap">
           ${skill_required
             .map(
               (skill) =>
@@ -1220,7 +1220,7 @@ const volunteerCard = ({
             <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
               Previous Skills
             </p>
-            <div class="flex items-center gap-x-3">
+            <div class="flex items-center gap-3 flex-wrap">
               ${previous_skills
                 .map(
                   (skill) => `
@@ -1245,7 +1245,7 @@ const volunteerCard = ({
             <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
               Acquired Skills
             </p>
-            <div class="flex items-center gap-x-3">
+            <div class="flex items-center gap-3 flex-wrap">
               ${acquired_skills
                 .map(
                   (skill) => `

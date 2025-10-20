@@ -579,9 +579,6 @@ const talentsCard = ({ title, date, skill_required }) => {
         skill_required?.length > 0
           ? `
           <div class="flex gap-y-3 flex-col">
-            <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
-              Previous Skills
-            </p>
             <div class="flex items-center gap-3 flex-wrap">
               ${skill_required
                 .map(
@@ -982,7 +979,7 @@ const investingCard = ({ title, date, notes, investment_type }) => {
           date
             ? `
             <p class="break-all quicksand flex items-center justify-between text-[var(--gray-60)] font-normal text-xs">
-              ${investment_type && `<span>${investment_type}</span>`}
+              ${investment_type ? `<span>${investment_type}</span>` : ''}
               <span>${date}</span>
             </p>
           `
@@ -1149,12 +1146,13 @@ const internshipAbroadCard = ({ title, date, location, company, internship_type 
         </div>
       </div>
        ${
-         internship_type &&
-         `
+         internship_type
+           ? `
             <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">
               {internship_type}
             </p>
           `
+           : ''
        }
     </div>
 
@@ -1357,9 +1355,11 @@ const internshipsCard = ({
       </div>
 
  ${
-   internship_type && (
+   internship_type
+     ? `
      <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">{internship_type}</p>
-   )
+   `
+     : ''
  }
       </div>
       ${

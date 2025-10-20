@@ -1343,7 +1343,7 @@ const internshipsCard = ({
       ${
         internship_type
           ? `
-          <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">{internship_type}</p>
+          <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">${internship_type}</p>
         `
           : ''
       }

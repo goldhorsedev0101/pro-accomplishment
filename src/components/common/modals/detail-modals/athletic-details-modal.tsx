@@ -12,7 +12,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToMDYYYY } from '@/utils/date-format';
+import { formatToDDMMYYYY } from '@/utils/date-format';
 
 // Icons
 import calenderTick from 'public/icons/calendar-tick.svg';
@@ -53,7 +53,7 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
           label="Event Details"
           items={[
             { icon: calenderTick, label: 'Event Name', value: form_data?.event_name },
-            { icon: calender, label: 'Date', value: formatToMDYYYY(form_data?.date ?? '') },
+            { icon: calender, label: 'Date', value: formatToDDMMYYYY(form_data?.date ?? '') },
             { icon: location, label: 'Location', value: form_data?.location },
           ]}
         />
@@ -80,10 +80,7 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
       )}
 
       {form_data?.document_urls && form_data?.document_urls?.length > 0 && (
-        <Document
-          certificate_urls={form_data?.document_urls}
-          certification_title={form_data?.certification_title}
-        />
+        <Document certificate_urls={form_data?.document_urls} />
       )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (

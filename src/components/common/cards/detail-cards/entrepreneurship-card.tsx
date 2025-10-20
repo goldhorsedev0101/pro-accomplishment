@@ -10,9 +10,9 @@ interface IProps {
 const EntrepreneurshipCard: FC<IProps> = ({ form_data }) => {
   const { venture_name: title, started_date, completion_date } = form_data || {};
   const date =
-    started_date && completion_date
-      ? `${formatToDDMMMYYYY(started_date)} - ${formatToDDMMMYYYY(completion_date)}`
-      : '';
+    started_date || completion_date
+      ? `${formatToDDMMMYYYY(started_date || '')} - ${completion_date ? formatToDDMMMYYYY(completion_date) : 'Ongoing'}`
+      : 'Ongoing';
 
   return (
     <Box className="w-full !gap-y-3">

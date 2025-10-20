@@ -69,10 +69,7 @@ const EmploymentDetailsModal: FC<IProps> = ({ form_data }) => {
       )}
 
       {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
-        <Document
-          certificate_urls={form_data?.certificate_urls}
-          certification_title={form_data?.certification_title}
-        />
+        <Document certificate_urls={form_data?.certificate_urls} />
       )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (

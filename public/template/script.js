@@ -34,7 +34,7 @@ const icons = {
 
 // ============================ Date Formatter Functions ============================ //
 const formatToMDYYYY = (date) => {
-  if (date && dayjs(date).isValid()) return dayjs(date).format('M/D/YYYY');
+  if (date && dayjs(date).isValid()) return dayjs(date).format('D/M/YYYY');
   else return '';
 };
 
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fields = {
     school: contact({ icon: icons.school, value: organization_name }, 1),
     categories: accomplishments?.map(accomplishmentLayout).join(''),
-    gpa: contact({ icon: icons.star, value: `GPA ${gpa}` }, 1),
+    gpa: contact({ icon: icons.star, value: gpa }, 1, true),
     contacts: contacts.map(contact).join(''),
     objective: objective_for_summary,
     profile: profile_photo_url,
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================ Components ============================
-const contact = (item, i) => {
+const contact = (item, i, isGPA) => {
   const { icon, value } = item;
 
   if (!value) return '';
@@ -138,7 +138,7 @@ const contact = (item, i) => {
       <image src="${icon}" alt="icon" class='w-[18px] h-[18px]' />
       <span class="font-normal ${
         i === 3 ? 'text-[var(--blue)]' : 'text-[var(--black)]'
-      }">${value}</span>
+      }">${isGPA ? 'GPA ' : ''} ${value}</span>
     </div>
   `;
 };
@@ -256,13 +256,14 @@ const accomplishmentLayout = (
       return entrepreneurshipCard({
         date: `${formatToDDMMMYYYY(
           form_data?.started_date,
-        )} - ${formatToDDMMMYYYY(form_data?.completion_date)}`,
+        )} - ${form_data?.completion_date ? formatToDDMMMYYYY(form_data?.completion_date) : 'Ongoing'}`,
         title: form_data?.venture_name,
       });
     }
 
     if (form_type === 'investment') {
       return investingCard({
+        investment_type: form_data?.investment_type,
         title: form_data?.accomplishment_name,
         date: formatToMDYYYY(form_data?.date),
         notes: form_data?.notes,
@@ -305,10 +306,11 @@ const accomplishmentLayout = (
       return internshipAbroadCard({
         date: `${formatToDDMMMYYYY(
           form_data?.date_arrived,
-        )} - ${formatToDDMMMYYYY(form_data?.date_departed)}`,
-        title: form_data?.accomplishment_name,
+        )} - ${form_data?.date_departed ? formatToDDMMMYYYY(form_data?.date_departed) : 'Ongoing'}`,
         company: form_data?.company,
         location: form_data?.place_of_work,
+        title: form_data?.accomplishment_name,
+        internship_type: form_data?.internship_type,
       });
     }
 
@@ -327,6 +329,7 @@ const accomplishmentLayout = (
 
     if (form_type === 'internship') {
       return internshipsCard({
+        internship_type: form_data?.internship_type,
         startDate: formatToDDMMMYYYY(form_data?.start_date),
         endDate: formatToDDMMMYYYY(form_data?.end_date),
         previous_skills: form_data?.previous_skills,
@@ -572,20 +575,31 @@ const talentsCard = ({ title, date, skill_required }) => {
         }
       </div>
     </div>
-    ${
-      skill_required?.length > 0
-        ? `
-        <div class="flex gap-3 items-center flex-wrap">
-          ${skill_required
-            .map(
-              (skill) =>
-                `<p class="break-all text-[var(--black)] text-sm font-normal">${skill}</p>`,
-            )
-            .join('')}
-        </div>
-      `
-        : ''
-    }
+      ${
+        skill_required?.length > 0
+          ? `
+          <div class="flex gap-y-3 flex-col">
+            <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
+              Previous Skills
+            </p>
+            <div class="flex items-center gap-3 flex-wrap">
+              ${skill_required
+                .map(
+                  (skill) => `
+                    <p
+                      key="${skill}"
+                      class="break-all bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
+                    >
+                      ${skill}
+                    </p>
+                  `,
+                )
+                .join('')}
+            </div>
+          </div>
+        `
+          : ''
+      }
   </div>
   `;
 };
@@ -786,7 +800,7 @@ const employmentCard = ({
             <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
               Previous Skills
             </p>
-            <div class="flex items-center gap-x-3">
+            <div class="flex items-center gap-3 flex-wrap">
               ${previous_skills
                 .map(
                   (skill) => `
@@ -812,7 +826,7 @@ const employmentCard = ({
             <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
               Acquired Skills
             </p>
-            <div class="flex items-center gap-x-3">
+            <div class="flex items-center gap-3 flex-wrap">
               ${acquired_skills
                 .map(
                   (skill) => `
@@ -953,7 +967,7 @@ const entrepreneurshipCard = ({ title, date }) => {
   `;
 };
 
-const investingCard = ({ title, date, notes }) => {
+const investingCard = ({ title, date, notes, investment_type }) => {
   return `
     <div class="box w-full !gap-y-3">
       <div>
@@ -968,7 +982,7 @@ const investingCard = ({ title, date, notes }) => {
           date
             ? `
             <p class="break-all quicksand flex items-center justify-between text-[var(--gray-60)] font-normal text-xs">
-              <span>Stocks</span>
+              ${investment_type && `<span>${investment_type}</span>`}
               <span>${date}</span>
             </p>
           `
@@ -1111,9 +1125,10 @@ const semesterAtSeaCard = ({ title, date, destination, institution }) => {
   `;
 };
 
-const internshipAbroadCard = ({ title, date, location, company }) => {
+const internshipAbroadCard = ({ title, date, location, company, internship_type }) => {
   return `
     <div class="box">
+    <div class='flex justify-between'>
       <div class="flex items-center gap-x-3">
         <img src="${icons.internshipAbroad}" alt="internship" class="size-6" />
         <div>
@@ -1133,6 +1148,16 @@ const internshipAbroadCard = ({ title, date, location, company }) => {
           }
         </div>
       </div>
+       ${
+         internship_type &&
+         `
+            <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">
+              {internship_type}
+            </p>
+          `
+       }
+    </div>
+
       ${
         location
           ? `
@@ -1285,6 +1310,7 @@ const volunteerCard = ({
 };
 
 const internshipsCard = ({
+  internship_type,
   previous_skills,
   acquired_skills,
   organization,
@@ -1296,6 +1322,7 @@ const internshipsCard = ({
 }) => {
   return `
     <div class="box !gap-y-3">
+    <div class='flex justify-between'>
       <div class="flex items-start gap-x-3">
         <div
           class="w-9 h-9 rounded-full bg-[var(--primary-20)] flex items-center justify-center"
@@ -1328,6 +1355,13 @@ const internshipsCard = ({
           }
         </div>
       </div>
+
+ ${
+   internship_type && (
+     <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">{internship_type}</p>
+   )
+ }
+      </div>
       ${
         previous_skills?.length > 0 || acquired_skills?.length > 0
           ? `
@@ -1342,7 +1376,7 @@ const internshipsCard = ({
             <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
               Previous Skills
             </p>
-            <div class="flex items-center gap-x-3">
+            <div class="flex items-center gap-3 flex-wrap">
               ${previous_skills
                 .map(
                   (skill) => `
@@ -1367,7 +1401,7 @@ const internshipsCard = ({
             <p class="break-all font-medium quicksand text-xs text-[var(--heading)]">
               Acquired Skills
             </p>
-            <div class="flex items-center gap-x-3">
+            <div class="flex items-center gap-3 flex-wrap">
               ${acquired_skills
                 .map(
                   (skill) => `

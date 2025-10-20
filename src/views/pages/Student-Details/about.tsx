@@ -15,7 +15,7 @@ import { TiStar } from 'react-icons/ti';
 // Type
 import { CandidateData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
 import Link from 'next/link';
-import { FC, JSX } from 'react';
+import { FC, Fragment, JSX } from 'react';
 
 interface IProps {
   candidate_data?: CandidateData;
@@ -63,21 +63,25 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
 
           <div className="flex flex-wrap gap-6">
             {contact.map(({ icon, label }, i) => (
-              <Link
-                key={i}
-                href={validUrl ?? '#'}
-                rel="noopener noreferrer"
-                target={label === link ? '_blank' : undefined}
-                onClick={({ preventDefault }) => label !== link && preventDefault()}
-                className={`flex items-center gap-x-2 ${label === link ? '!w-full' : 'w-fit !cursor-default'}`}
-              >
-                <Image src={icon} alt="icon" width={18} height={18} />
-                <span
-                  className={`truncate text-neutral-grey-100 font-normal ${label === link ? '!text-blue !w-full' : ''}`}
-                >
-                  {label}
-                </span>
-              </Link>
+              <Fragment key={i}>
+                {label && (
+                  <Link
+                    prefetch={false}
+                    href={validUrl ?? '#'}
+                    rel="noopener noreferrer"
+                    target={label === link ? '_blank' : undefined}
+                    onClick={({ preventDefault }) => label !== link && preventDefault()}
+                    className={`flex items-center gap-x-2 ${label === link ? '!w-full' : 'w-fit !cursor-default'}`}
+                  >
+                    <Image src={icon} alt="icon" width={18} height={18} />
+                    <span
+                      className={`truncate text-neutral-grey-100 font-normal ${label === link ? '!text-blue !w-full' : ''}`}
+                    >
+                      {label}
+                    </span>
+                  </Link>
+                )}
+              </Fragment>
             ))}
           </div>
         </div>

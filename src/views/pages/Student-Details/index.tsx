@@ -112,7 +112,7 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
 
       <div className="h-fit gap-6 md:columns-2 space-y-6">
         {groupedData?.map((group, i) => (
-          <div className="!h-fit flex flex-col gap-y-6" key={i}>
+          <div className="!h-fit flex flex-col gap-y-6 overflow-hidden" key={i}>
             {group?.map((accomplishment, j) => (
               <RenderCards key={j} accomplishments={[accomplishment]} />
             ))}

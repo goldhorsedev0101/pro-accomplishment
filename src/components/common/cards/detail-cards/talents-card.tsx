@@ -12,6 +12,7 @@ import { FC, JSX } from 'react';
 
 // Utils
 import { formatToDDMMMYYYY } from '@/utils/date-format';
+import Skills from '../../studets-details/skills';
 
 interface IProps {
   form_data?: FormData;
@@ -38,13 +39,9 @@ const TalentsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         </div>
       </div>
 
-      <div className="flex gap-3 items-center flex-wrap">
-        {skill_required?.map((item, i) => (
-          <p key={i} className="text-neutral-grey-100 text-sm font-normal">
-            {item}
-          </p>
-        ))}
-      </div>
+      {form_data?.skill_required && form_data?.skill_required?.length > 0 && (
+        <Skills skills={form_data?.skill_required} title="" />
+      )}
     </Box>
   );
 };

@@ -12,6 +12,7 @@ import Heading from '../../heading';
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
 import { formatToDDMMMYYYY } from '@/utils/date-format';
 import { FC } from 'react';
+import Skills from '../../studets-details/skills';
 
 interface IProps {
   form_data?: FormData;
@@ -48,36 +49,12 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
       {((form_data?.previous_skills?.length || 0) > 0 ||
         (form_data?.acquired_skills?.length || 0) > 0) && <hr />}
 
-      {(form_data?.previous_skills?.length || 0) > 0 && (
-        <div className="flex gap-y-3 flex-col">
-          <p className="font-medium font-quicksand text-xs text-heading">Previous Skills</p>
-          <div className="flex items-center gap-x-3">
-            {form_data?.previous_skills?.map((skill) => (
-              <p
-                key={skill}
-                className="bg-neutral-grey-0 p-1 rounded-md text-heading font-quicksand font-medium text-base"
-              >
-                {skill}
-              </p>
-            ))}
-          </div>
-        </div>
+      {form_data?.previous_skills && form_data?.previous_skills?.length > 0 && (
+        <Skills skills={form_data?.previous_skills} title="Previous Skills" />
       )}
 
-      {(form_data?.acquired_skills?.length || 0) > 0 && (
-        <div className="flex gap-y-3 flex-col">
-          <p className="font-medium font-quicksand text-xs text-heading">Acquired Skills</p>
-          <div className="flex items-center gap-x-3">
-            {form_data?.acquired_skills?.map((skill) => (
-              <p
-                key={skill}
-                className="bg-neutral-grey-0 p-1 rounded-md text-heading font-quicksand font-medium text-base"
-              >
-                {skill}
-              </p>
-            ))}
-          </div>
-        </div>
+      {form_data?.acquired_skills && form_data?.acquired_skills?.length > 0 && (
+        <Skills skills={form_data?.acquired_skills} title="Acquired Skills" />
       )}
 
       {form_data?.link && (

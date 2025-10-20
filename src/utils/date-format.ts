@@ -25,4 +25,4 @@ const formatToMMMMDYYYY = (date?: string) => {
   else return '';
 };
 
-export { formatToDDMMMYYYY, formatToMDYYYY, formatToMMMMDYYYY, formatToYYYY, formatToDDMMYYYY };
+export { formatToDDMMMYYYY, formatToDDMMYYYY, formatToMDYYYY, formatToMMMMDYYYY, formatToYYYY };

@@ -19,9 +19,10 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
     place_of_work: location,
     company,
   } = form_data || {};
+
   const date =
-    date_arrived && date_departed
-      ? `${formatToDDMMMYYYY(date_arrived)} - ${formatToDDMMMYYYY(date_departed)}`
+    date_arrived || date_departed
+      ? `${formatToDDMMMYYYY(date_arrived || '')} - ${date_departed ? formatToDDMMMYYYY(date_departed) : 'Ongoing'}`
       : '';
 
   return (

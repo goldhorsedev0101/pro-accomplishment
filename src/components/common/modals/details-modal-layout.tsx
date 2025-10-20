@@ -9,14 +9,17 @@ interface IProps {
   title: string;
   trigger: React.ReactNode;
   children: React.ReactNode;
+  isHeader?: boolean;
 }
 
-const DetailsModalLayout = ({ trigger, children, title }: IProps) => {
+const DetailsModalLayout = ({ trigger, children, title, isHeader }: IProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <Box className="!gap-y-4 !border-none !p-0">
-      <Heading className="!text-lg !text-neutral-grey-60 break-all" text={title} width="medium" />
+      {isHeader && (
+        <Heading className="!text-lg !text-neutral-grey-60 break-all" text={title} width="medium" />
+      )}
 
       <Dialog onOpenChange={setIsOpen} open={isOpen}>
         <DialogTrigger className="outline-none"> {trigger}</DialogTrigger>

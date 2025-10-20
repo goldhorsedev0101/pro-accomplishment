@@ -24,17 +24,28 @@ interface IProps {
 }
 
 const InternshipsDetailsModal: FC<IProps> = ({ form_data }) => {
+  console.log('🚀 ~ InternshipsDetailsModal ~ form_data:', form_data);
   return (
     <div className="flex flex-col gap-y-4 font-quicksand">
       {(form_data?.accomplishment_name || form_data?.company) && (
-        <Box className="!border-none !flex-row items-center !p-3 !gap-2">
-          <div className="flex items-center justify-center size-9 bg-primary-20 rounded-full">
-            <Image alt="title/award" src={internships} width={24} height={24} />
+        <Box className="!border-none !flex-row items-center justify-between !p-3 !gap-2">
+          <div className="flex items-center">
+            <div className="flex items-center justify-center size-9 bg-primary-20 rounded-full">
+              <Image alt="title/award" src={internships} width={24} height={24} />
+            </div>
+            <div className="gap-x-1">
+              <p className="text-heading font-medium capitalize">
+                {form_data?.accomplishment_name}
+              </p>
+              <p className="text-neutral-grey-70 text-sm">{form_data?.company}</p>
+            </div>
           </div>
-          <div className="gap-x-1">
-            <p className="text-heading font-medium capitalize">{form_data?.accomplishment_name}</p>
-            <p className="text-neutral-grey-70 text-sm">{form_data?.company}</p>
-          </div>
+
+          {form_data?.internship_type && (
+            <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">
+              {form_data?.internship_type}
+            </p>
+          )}
         </Box>
       )}
 
@@ -61,10 +72,7 @@ const InternshipsDetailsModal: FC<IProps> = ({ form_data }) => {
       {form_data?.favorite_part && <FavoritePart favorite_part={form_data?.favorite_part} />}
 
       {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
-        <Document
-          certificate_urls={form_data?.certificate_urls}
-          certification_title={form_data?.certification_title}
-        />
+        <Document certificate_urls={form_data?.certificate_urls} />
       )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (

@@ -43,10 +43,7 @@ const TalentsDetailsModal: FC<IProps> = ({ form_data }) => {
       )}
 
       {form_data?.document_urls && form_data?.document_urls?.length > 0 && (
-        <Document
-          certificate_urls={form_data?.document_urls}
-          certification_title={form_data?.award_title}
-        />
+        <Document certificate_urls={form_data?.document_urls} />
       )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (

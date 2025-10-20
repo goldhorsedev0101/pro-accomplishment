@@ -10,7 +10,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToMDYYYY } from '@/utils/date-format';
+import { formatToDDMMYYYY } from '@/utils/date-format';
 
 interface IProps {
   form_data?: FormData;
@@ -24,16 +24,15 @@ const InvestingDetailsModal: FC<IProps> = ({ form_data }) => {
           <p className="text-heading font-medium capitalize">{form_data?.accomplishment_name}</p>
           <div className="gap-x-1 flex items-center justify-between">
             <p className="text-neutral-grey-60 text-xs capitalize">{form_data?.investment_type}</p>
-            <p className="text-neutral-grey-60 text-xs">{formatToMDYYYY(form_data?.date ?? '')}</p>
+            <p className="text-neutral-grey-60 text-xs">
+              {formatToDDMMYYYY(form_data?.date ?? '')}
+            </p>
           </div>
         </Box>
       )}
 
       {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
-        <Document
-          certificate_urls={form_data?.certificate_urls}
-          certification_title={form_data?.certification_title}
-        />
+        <Document certificate_urls={form_data?.certificate_urls} />
       )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (

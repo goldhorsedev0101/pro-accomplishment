@@ -12,7 +12,7 @@ import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candi
 import { FC, JSX } from 'react';
 
 // Utils
-import { formatToMDYYYY } from '@/utils/date-format';
+import { formatToDDMMYYYY } from '@/utils/date-format';
 
 interface IProps {
   form_data?: FormData;
@@ -34,7 +34,7 @@ const AwardsCard: FC<IProps> = ({ form_data }): JSX.Element => {
             width="medium"
           />
           <p className="font-quicksand text-neutral-grey-70 font-normal text-xs">
-            {formatToMDYYYY(date_received ?? '')}
+            {formatToDDMMYYYY(date_received ?? '')}
           </p>
         </div>
       </div>

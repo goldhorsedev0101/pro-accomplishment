@@ -13,7 +13,7 @@ import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candi
 import { FC, JSX } from 'react';
 
 // Utils
-import { formatToMDYYYY } from '@/utils/date-format';
+import { formatToDDMMYYYY } from '@/utils/date-format';
 
 interface IProps {
   form_data?: FormData;
@@ -28,7 +28,7 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         <div>
           <Heading className="!text-base font-quicksand" text={name ?? ''} width="medium" />
           <p className="font-quicksand text-neutral-grey-60 font-normal text-sm">
-            {formatToMDYYYY(date || '')}
+            {formatToDDMMYYYY(date || '')}
           </p>
         </div>
         <p className="font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5 bg-[#E7D3EE] capitalize">

@@ -17,8 +17,9 @@ const RenderCards: FC<IProps> = ({ accomplishments }) => {
         return (
           <DetailsModalLayout
             key={i}
+            isHeader={item.header}
             trigger={Cards({ ...item })}
-            title={isGlobal ? (item.sub_category_name ?? item.category_name) : item.category_name}
+            title={isGlobal ? (item.sub_category_name ?? '') : item.category_name}
           >
             {Modals({ ...item })}
           </DetailsModalLayout>

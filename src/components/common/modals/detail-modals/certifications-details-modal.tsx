@@ -11,7 +11,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToMDYYYY } from '@/utils/date-format';
+import { formatToDDMMYYYY } from '@/utils/date-format';
 
 // Icons
 import building from 'public/icons/building.svg';
@@ -32,7 +32,7 @@ const CertificationsDetailsModal: FC<IProps> = ({ form_data }) => {
           <div className="gap-x-1">
             <p className="text-heading font-medium capitalize">{form_data?.certification_title}</p>
             <p className="text-neutral-grey-70 text-sm">
-              {formatToMDYYYY(form_data?.date_received ?? '')}
+              {formatToDDMMYYYY(form_data?.date_received ?? '')}
             </p>
           </div>
         </Box>
@@ -49,10 +49,7 @@ const CertificationsDetailsModal: FC<IProps> = ({ form_data }) => {
       )}
 
       {form_data?.award_certificate_urls && form_data?.award_certificate_urls?.length > 0 && (
-        <Document
-          certificate_urls={form_data?.award_certificate_urls}
-          certification_title={form_data?.certification_title}
-        />
+        <Document certificate_urls={form_data?.award_certificate_urls} />
       )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (

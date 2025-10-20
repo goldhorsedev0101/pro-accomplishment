@@ -341,7 +341,6 @@ const accomplishmentLayout = (
       });
     }
 
-    // ap_score
     if (form_type === 'gel_language') {
       return languageCard({
         yearsOfStudy: form_data?.years_of_study,
@@ -1125,37 +1124,24 @@ const semesterAtSeaCard = ({ title, date, destination, institution }) => {
 const internshipAbroadCard = ({ title, date, location, company, internship_type }) => {
   return `
     <div class="box">
-    <div class='flex justify-between'>
-      <div class="flex items-center gap-x-3">
-        <img src="${icons.internshipAbroad}" alt="internship" class="size-6" />
-        <div>
-          ${
-            title
-              ? `
-              <p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>
-            `
-              : ''
-          }
-          ${
-            date
-              ? `
-              <p class="break-all quicksand text-[var(--gray-70)] font-normal text-sm">${date}</p>
-            `
-              : ''
-          }
+      <div class="flex justify-between">
+        <div class="flex items-center gap-x-3">
+          <img src="${icons.internshipAbroad}" alt="internship" class="size-6" />
+          <div>
+            ${title ? `<p class="break-all font-medium text-[var(--heading)] quicksand !text-sm">${title}</p>` : ''}
+            ${date ? `<p class="break-all quicksand text-[var(--gray-70)] font-normal text-sm">${date}</p>` : ''}
+          </div>
         </div>
+        ${
+          internship_type
+            ? `
+              <p class="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm text-[var(--heading)] quicksand font-medium">
+                ${internship_type}
+              </p>
+            `
+            : ''
+        }
       </div>
-       ${
-         internship_type
-           ? `
-            <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">
-              {internship_type}
-            </p>
-          `
-           : ''
-       }
-    </div>
-
       ${
         location
           ? `
@@ -1354,14 +1340,15 @@ const internshipsCard = ({
         </div>
       </div>
 
- ${
-   internship_type
-     ? `
-     <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">{internship_type}</p>
-   `
-     : ''
- }
-      </div>
+      ${
+        internship_type
+          ? `
+          <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">{internship_type}</p>
+        `
+          : ''
+      }
+
+    </div>
       ${
         previous_skills?.length > 0 || acquired_skills?.length > 0
           ? `

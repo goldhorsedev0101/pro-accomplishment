@@ -6,8 +6,7 @@ import {
   verifyToken,
 } from '@/lib/supabase/helper';
 import { getCandidateFolio } from '@/services/server/folioService';
-import { getRecruiterByProfileId } from '@/services/server/recruiterService';
-import { cookies } from 'next/headers';
+import { getRecruiterProfile } from '@/services/server/recruiterService';
 import { NextRequest } from 'next/server';
 
 export async function OPTIONS() {
@@ -52,7 +51,7 @@ export async function GET(request: NextRequest) {
     }
 
     const getRecruiterResponse = await supabasePromiseResolver({
-      requestFunction: getRecruiterByProfileId,
+      requestFunction: getRecruiterProfile,
       requestBody: { profileId: tokenCheckResponse?.id },
     });
     if (!getRecruiterResponse?.success) {

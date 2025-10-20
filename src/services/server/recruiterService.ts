@@ -1,15 +1,29 @@
 import { supabase } from '@/lib/supabase/server';
 import { ICustomError } from './authService';
+import dayjs from 'dayjs';
+export interface RecruiterProfile {
+  recruiter_id: string;
+  profile_picture?: string | null;
+  profile_id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  role?: string;
+  phone_number?: string | null;
+  iso2?: string | null;
+  subscription?: string | null;
+}
 
 export const getRecruiterByProfileId = async ({ profileId }: { profileId: string }) => {
   const { data, error } = await supabase
     .from('recruiter')
     .select(
       `
+    *,
+    profile:profile_id (
       *,
-      profile:profile_id (
-        *
-      )
+      subscription:active_subscription_id (*)
+    )
     `,
     )
     .eq('profile_id', profileId)
@@ -38,26 +52,52 @@ export const getProfileById = async ({ profileId }: { profileId: string }) => {
   return { data, error };
 };
 
-export const getRecruiterProfile = async ({ profileId }: { profileId: string }) => {
+export const getRecruiterProfile = async ({
+  profileId,
+}: {
+  profileId: string;
+}): Promise<{ data: RecruiterProfile | null; error: string | ICustomError | null }> => {
   const { data: recruiter, error: recruiterError } = await getRecruiterByProfileId({ profileId });
   if (recruiterError || !recruiter) {
     return { data: null, error: recruiterError || 'Recruiter not found' };
   }
 
+  const subscription = recruiter?.profile?.subscription;
+
+  if (subscription?.status === 'active' && subscription?.current_period_end) {
+    const now = dayjs();
+    const expiryDate = dayjs(subscription.current_period_end);
+
+    if (expiryDate.isBefore(now)) {
+      const { data: updatedSub, error: updateError } = await updateRecruiterSubscription({
+        subscriptionId: subscription.id,
+        status: 'expired',
+        session: {},
+        type: 'system.subscription.expired',
+      });
+
+      if (!updateError && updatedSub) {
+        subscription.status = 'expired';
+        subscription.auto_renew = false;
+      }
+    }
+  }
+
   const flattened = {
     recruiter_id: recruiter.id,
     profile_picture: recruiter.profile_picture,
-    profile_id: recruiter?.profile.id,
-    first_name: recruiter?.profile.first_name,
-    last_name: recruiter?.profile.last_name,
-    email: recruiter?.profile.email,
-    role: recruiter?.profile.role,
-    phone_number: recruiter?.phone_number,
-    iso2: recruiter?.iso2,
+    profile_id: recruiter.profile.id,
+    first_name: recruiter.profile.first_name,
+    last_name: recruiter.profile.last_name,
+    email: recruiter.profile.email,
+    role: recruiter.profile.role,
+    phone_number: recruiter.phone_number,
+    iso2: recruiter.iso2,
+    subscription,
   };
+
   return { data: flattened, error: null };
 };
-
 export const editRecruiterProfile = async ({
   profileId,
   firstName,
@@ -103,6 +143,43 @@ export const recruiterSubscription = async ({ session }: { session: any }) => {
     session_data: payload,
   });
 
-  console.log('returned', JSON.stringify({ data, error }, null, 2));
   return { data, error };
+};
+
+export const isSubscriptionValid = (subscription?: any): boolean => {
+  if (!subscription) return false;
+
+  const now = dayjs();
+  const periodEnd = dayjs(subscription.current_period_end);
+
+  const validStatus = ['active'].includes(subscription.status?.toLowerCase());
+
+  const withinPeriod = now.isBefore(periodEnd);
+
+  return validStatus && withinPeriod;
+};
+
+export const updateRecruiterSubscription = async ({
+  subscriptionId,
+  status,
+  session,
+  type,
+}: {
+  subscriptionId: string;
+  status: string;
+  session: any;
+  type: string;
+}) => {
+  const payload = JSON.parse(JSON.stringify(session));
+
+  const { data, error } = await supabase?.rpc('web_update_subscription_status', {
+    p_subscription_id: subscriptionId,
+    p_status: status,
+    p_session: payload,
+    p_type: type,
+  });
+  return {
+    data,
+    error,
+  };
 };

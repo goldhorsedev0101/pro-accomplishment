@@ -21,11 +21,11 @@ export async function POST(request: NextRequest) {
     const rawBody = await request.text();
     const sig = request.headers.get('stripe-signature') as string | null;
 
-    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+    const webhookSecret = process.env.STRIPE_CREATE_WEBHOOK_SECRET;
     if (!webhookSecret) {
       return response(
         {
-          message: 'Missing STRIPE_WEBHOOK_SECRET environment variable.',
+          message: 'Missing STRIPE_CREATE_WEBHOOK_SECRET environment variable.',
           data: null,
           error: 'Server misconfiguration',
         },

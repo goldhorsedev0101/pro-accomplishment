@@ -55,6 +55,7 @@ const EditProfileModal: FC<IProps> = ({
     isValid,
   } = useFormik({
     initialValues: {
+      iso2,
       phoneNumber: phone_number,
       firstName: first_name,
       lastName: last_name,

@@ -16,12 +16,12 @@ export async function OPTIONS() {
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
-    const { firstName, lastName, phoneNumber, iso2 } = body;
+    const { firstName, lastName, phoneNumber, iso2, profileImage } = body;
 
-    if (!firstName || !lastName || !phoneNumber || iso2) {
+    if (!firstName || !lastName || !phoneNumber || !iso2 || !profileImage) {
       return response(
         {
-          message: 'First name, last name and phone number are required.',
+          message: 'First name, last name, phone number and profile picture are required.',
           data: null,
           error: 'Validation error',
         },
@@ -60,6 +60,7 @@ export async function PUT(request: NextRequest) {
         lastName,
         phoneNumber,
         iso2,
+        profileImage,
       },
     });
 

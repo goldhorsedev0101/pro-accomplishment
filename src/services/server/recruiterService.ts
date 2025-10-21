@@ -103,12 +103,14 @@ export const editRecruiterProfile = async ({
   firstName,
   lastName,
   phoneNumber,
+  profileImage,
   iso2,
 }: {
   profileId: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
+  profileImage: string | null;
   iso2: string;
 }) => {
   const { data: updateProfileData, error: updateProfileError } = await supabase
@@ -130,6 +132,7 @@ export const editRecruiterProfile = async ({
     .update({
       phone_number: phoneNumber,
       iso2: iso2,
+      profile_picture: profileImage,
     })
     .eq('profile_id', profileId)
     .select('*')

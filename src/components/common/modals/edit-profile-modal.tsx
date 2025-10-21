@@ -38,7 +38,7 @@ const EditProfileModal: FC<IProps> = ({
 }): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const { mutateAsync } = useEditProfileMutation();
+  const { mutateAsync, isPending } = useEditProfileMutation();
 
   const {
     touched,
@@ -103,7 +103,11 @@ const EditProfileModal: FC<IProps> = ({
           />
 
           <DialogClose asChild>
-            <Button className="w-full h-14 rounded-xl" type="submit" disabled={!dirty || !isValid}>
+            <Button
+              className="w-full h-14 rounded-xl"
+              type="submit"
+              disabled={!dirty || !isValid || isPending}
+            >
               Save Changes
             </Button>
           </DialogClose>

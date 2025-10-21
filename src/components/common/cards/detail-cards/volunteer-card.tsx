@@ -7,6 +7,7 @@ import note from 'public/icons/note.svg';
 import info from 'public/pdf/info.svg';
 import { FC } from 'react';
 import Box from '../../box';
+import Note from '../../studets-details/note';
 
 interface IProps {
   form_data?: FormData;
@@ -108,7 +109,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
       {doc && (
         <div className="flex gap-x-1.5 items-start">
           <Image src={note} alt="note" className="size-5" />
-          <p className="text-[var(--gray-70)] text-sm font-normal quicksand">{doc}</p>
+          <p className="text-[var(--gray-70)] text-sm font-normal quicksand break-all">{doc}</p>
         </div>
       )}
     </Box>

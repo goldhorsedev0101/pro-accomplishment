@@ -43,7 +43,7 @@ const VerifyEmailView = (): JSX.Element => {
   const { mutateAsync: resendOTP, isPending: resendPending } = useResendOTPMutation();
   const { mutateAsync: verifyOTP, isPending } = useVerifyOTPMutation();
 
-  const { handleSubmit, setFieldValue, values } = useFormik({
+  const { handleSubmit, setFieldValue, values, resetForm } = useFormik({
     initialValues: { otp: '' },
     onSubmit: async ({ otp }) => {
       try {
@@ -74,6 +74,7 @@ const VerifyEmailView = (): JSX.Element => {
       resendTime.setSeconds(resendTime.getSeconds() + totalSeconds);
       resendOTP({ email, type: route });
       restart(resendTime);
+      resetForm();
     } catch (error) {
       console.log('🚀 ~ handleResend ~ error:', error);
     }
@@ -91,14 +92,14 @@ const VerifyEmailView = (): JSX.Element => {
       </div>
 
       <InputOTP maxLength={6} onChange={(e) => setFieldValue('otp', e)} value={values.otp}>
-        <InputOTPGroup className="gap-x-3">
+        <InputOTPGroup className="gap-x-3 justify-between w-full">
           {Array(6)
             .fill(0)
             .map((_, index) => (
               <InputOTPSlot
                 key={index}
                 index={index}
-                className="w-[63px] h-[56px] rounded-md !border-[#DCE0E5]"
+                className="sm:w-[63px] sm:h-[56px] rounded-md !border-[#DCE0E5]"
               />
             ))}
         </InputOTPGroup>

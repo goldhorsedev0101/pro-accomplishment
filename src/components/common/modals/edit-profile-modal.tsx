@@ -58,7 +58,7 @@ const EditProfileModal: FC<IProps> = ({
       phoneNumber: phone_number,
       firstName: first_name,
       lastName: last_name,
-      profile_picture,
+      profileImage: profile_picture,
     },
     validationSchema: EditProfileSchema,
     enableReinitialize: true,
@@ -78,8 +78,8 @@ const EditProfileModal: FC<IProps> = ({
         <form onSubmit={handleSubmit} className="w-full flex-col flex gap-y-6">
           <FileUploader
             setFieldValue={setFieldValue}
-            value={profile_picture}
-            name="profile_picture"
+            value={values.profileImage}
+            name="profileImage"
           />
 
           <div className="flex items-center gap-x-3">

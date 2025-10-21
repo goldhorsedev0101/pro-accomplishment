@@ -1,7 +1,6 @@
 'use client';
 
 // Icons
-import avatar from 'public/img/avatar.png';
 import logo from 'public/img/logo.png';
 
 // Constant
@@ -29,8 +28,16 @@ const Navbar = (): JSX.Element => {
       </Link>
 
       <Link href={profile} className="flex items-center gap-2" onClick={() => {}}>
-        <Image src={profile_picture ?? avatar} alt="avatar" width={40} height={40} />
-        <p className="text-black font-medium text-base">
+        {profile_picture && (
+          <Image
+            className="rounded-full w-10 h-10 object-cover"
+            src={profile_picture}
+            alt="avatar"
+            height={40}
+            width={40}
+          />
+        )}
+        <p className="text-black font-medium text-base capitalize">
           {first_name} {last_name}
         </p>
       </Link>

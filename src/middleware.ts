@@ -40,7 +40,9 @@ export async function middleware({ url, nextUrl, cookies }: NextRequest) {
 const getUser = async (token?: string) => {
   if (!token) return null;
 
-  const response = await fetch(URLS.ME, { headers: { Authorization: `Bearer ${token}` } });
+  const response = await fetch(URLS.GET_RECRUITER_PROFILE, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
   if (!response.ok) return null;
 

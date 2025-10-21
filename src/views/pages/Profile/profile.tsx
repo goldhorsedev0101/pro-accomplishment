@@ -11,7 +11,7 @@ import { Fragment, JSX } from 'react';
 
 const Profile = (): JSX.Element => {
   const { data, isPending } = useGetProfileQuery();
-  const { first_name, last_name, email, phone_number, iso2 } = data?.data || {};
+  const { first_name, last_name, email, phone_number, iso2, profile_picture } = data?.data || {};
 
   const info = [
     { label: 'First Name', value: first_name },
@@ -34,6 +34,7 @@ const Profile = (): JSX.Element => {
         <div className="flex items-center justify-between">
           <Heading text="Profile" width="medium" size="31" />
           <EditProfileModal
+            profile_picture={profile_picture as string}
             phone_number={phone_number}
             first_name={first_name}
             last_name={last_name}

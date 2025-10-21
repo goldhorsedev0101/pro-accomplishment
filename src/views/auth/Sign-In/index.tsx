@@ -34,9 +34,11 @@ const SignInView = (): JSX.Element => {
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: { email: '', password: '' },
     validationSchema: SignInSchema,
-    onSubmit: async () => {
+    onSubmit: async ({ email, password }) => {
+      const pass = password.trimEnd().trimStart();
+
       try {
-        const { data } = await mutateAsync(values);
+        const { data } = await mutateAsync({ email, password: pass });
         setCookie('accessToken', data?.session?.access_token);
         push(home);
         refresh();

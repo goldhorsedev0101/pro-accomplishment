@@ -6,6 +6,7 @@ import note from 'public/icons/note.svg';
 import internships from 'public/pdf/internships.svg';
 import { FC } from 'react';
 import Box from '../../box';
+import Skills from '../../studets-details/skills';
 
 interface IProps {
   form_data?: FormData;
@@ -34,22 +35,31 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
         <div className="w-9 h-9 rounded-full bg-[var(--primary-20)] flex items-center justify-center">
           <Image src={internships} alt="internship" className="size-6" />
         </div>
-        <div>
-          {title && (
-            <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
-              {title}
-            </p>
-          )}
-          {organization && (
-            <p className="quicksand text-[var(--gray-70)] font-normal text-xs break-all">
-              {organization}
-            </p>
-          )}
-          {(startDate || endDate) && (
-            <p className="mt-2 text-[var(--black)] text-xs font-medium quicksand">
-              {startDate}
-              {startDate && endDate ? ' - ' : ''}
-              {endDate}
+        <div className="flex w-full justify-between">
+          <div className="w-full">
+            {title && (
+              <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
+                {title}
+              </p>
+            )}
+
+            {organization && (
+              <p className="quicksand text-[var(--gray-70)] font-normal text-xs break-all">
+                {organization}
+              </p>
+            )}
+
+            {(startDate || endDate) && (
+              <p className="mt-2 text-[var(--black)] text-xs font-medium quicksand">
+                {startDate}
+                {startDate && endDate ? ' - ' : ''}
+                {endDate}
+              </p>
+            )}
+          </div>
+          {form_data?.internship_type && (
+            <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">
+              {form_data?.internship_type}
             </p>
           )}
         </div>
@@ -59,36 +69,15 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
         (previous_skills?.length > 0 || acquired_skills?.length > 0) && (
           <hr className="border border-[var(--gray-10)]" />
         )}
+
       {previous_skills && previous_skills?.length > 0 && (
-        <div className="flex gap-y-3 flex-col">
-          <p className="font-medium quicksand text-xs text-[var(--heading)]">Previous Skills</p>
-          <div className="flex items-center gap-x-3">
-            {previous_skills.map((skill) => (
-              <p
-                key={skill}
-                className="bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
-              >
-                {skill}
-              </p>
-            ))}
-          </div>
-        </div>
+        <Skills skills={previous_skills} title="Previous Skills" />
       )}
+
       {acquired_skills && acquired_skills?.length > 0 && (
-        <div className="flex gap-y-3 flex-col">
-          <p className="font-medium quicksand text-xs text-[var(--heading)]">Acquired Skills</p>
-          <div className="flex items-center gap-x-3">
-            {acquired_skills.map((skill) => (
-              <p
-                key={skill}
-                className="bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
-              >
-                {skill}
-              </p>
-            ))}
-          </div>
-        </div>
+        <Skills skills={acquired_skills} title="Acquired Skills" />
       )}
+
       {link && (
         <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal quicksand">
           {link}

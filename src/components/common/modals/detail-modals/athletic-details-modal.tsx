@@ -12,7 +12,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToMDYYYY } from '@/utils/date-format';
+import { formatToDDMMYYYY } from '@/utils/date-format';
 
 // Icons
 import calenderTick from 'public/icons/calendar-tick.svg';
@@ -30,7 +30,9 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
       {form_data?.name && (
         <Box className="!border-none !p-3 !flex-row justify-between">
           <p className="text-heading font-medium capitalize">{form_data?.name}</p>
-          <p className="py-0.5 px-1.5 rounded-sm text-black text-sm bg-primary-0">
+          <p
+            className={`font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5 capitalize ${form_data?.region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
+          >
             {form_data.region}
           </p>
         </Box>
@@ -53,7 +55,7 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
           label="Event Details"
           items={[
             { icon: calenderTick, label: 'Event Name', value: form_data?.event_name },
-            { icon: calender, label: 'Date', value: formatToMDYYYY(form_data?.date ?? '') },
+            { icon: calender, label: 'Date', value: formatToDDMMYYYY(form_data?.date ?? '') },
             { icon: location, label: 'Location', value: form_data?.location },
           ]}
         />
@@ -79,11 +81,8 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
         </Box>
       )}
 
-      {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
-        <Document
-          certificate_urls={form_data?.certificate_urls}
-          certification_title={form_data?.certification_title}
-        />
+      {form_data?.document_urls && form_data?.document_urls?.length > 0 && (
+        <Document certificate_urls={form_data?.document_urls} />
       )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (

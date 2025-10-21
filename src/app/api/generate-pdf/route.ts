@@ -3,10 +3,11 @@
 import { response } from '@/lib/supabase/helper';
 import chromium from '@sparticuz/chromium-min';
 import { createClient } from '@supabase/supabase-js';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
+import path from 'path';
 import puppeteer, { Browser } from 'puppeteer-core';
-// import path from "path";
-// import fs from "fs/promises";
+
+import fs from 'fs/promises';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -21,7 +22,7 @@ async function launchChromium(): Promise<Browser> {
       ? await chromium.executablePath(
           'https://github.com/Sparticuz/chromium/releases/download/v129.0.0/chromium-v129.0.0-pack.tar',
         )
-      : //   : "/usr/bin/google-chrome",
+      : // : '/usr/bin/google-chrome',
         '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     // TODO: Remove local path when deploying edge function.
     // executablePath: await chromium.executablePath(
@@ -32,20 +33,19 @@ async function launchChromium(): Promise<Browser> {
   });
 }
 
+// async function getFileText(bucket: string, filePath: string): Promise<string> {
+//   const isLocal = false;
+//   if (isLocal) {
+//     const localPath = path.join(process.cwd(), 'public', 'template', path.basename(filePath));
+//     return await fs.readFile(localPath, 'utf-8');
+//   }
+//   const { data, error } = await supabase.storage.from(bucket).download(filePath);
+//   if (error) throw error;
+//   return await data.text();
+// }
 async function getFileText(bucket: string, filePath: string): Promise<string> {
-  //   const isLocal = false;
-  //   if (isLocal) {
-  //     const localPath = path.join(
-  //       process.cwd(),
-  //       "public",
-  //       "template",
-  //       path.basename(filePath)
-  //     );
-  //     return await fs.readFile(localPath, "utf-8");
-  //   }
-  const { data, error } = await supabase.storage.from(bucket).download(filePath);
-  if (error) throw error;
-  return await data.text();
+  const localPath = path.join(process.cwd(), 'public', 'template', filePath);
+  return await fs.readFile(localPath, 'utf-8');
 }
 
 async function getFinalHtml(folioData: any) {

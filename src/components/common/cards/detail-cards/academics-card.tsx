@@ -11,7 +11,7 @@ import teacher from 'public/icons/teacher.svg';
 // Types
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
 import { formatToYYYY } from '@/utils/date-format';
-import { FC, JSX } from 'react';
+import { FC, Fragment, JSX } from 'react';
 
 interface IProps {
   form_data?: FormData;
@@ -20,9 +20,15 @@ interface IProps {
 const AcademicsCard: FC<IProps> = ({ form_data }): JSX.Element => {
   const data = [
     { icon: book, label: 'Math' },
-    { icon: percentage, label: form_data?.standardized_test_score + '%' },
-    { icon: teacher, label: form_data?.grade_or_gpa },
+    {
+      icon: percentage,
+      label: form_data?.standardized_test_score ? form_data?.standardized_test_score + '%' : '',
+    },
+    { icon: teacher, label: form_data?.grade_or_gpa ? 'Grade/GPA ' + form_data?.grade_or_gpa : '' },
   ];
+
+  const startYear = formatToYYYY(form_data?.academic_year_started ?? '');
+  const endYear = formatToYYYY(form_data?.academic_year_ended ?? '');
 
   return (
     <Box className="shadow-sm w-full !gap-y-3 !text-start">
@@ -37,18 +43,24 @@ const AcademicsCard: FC<IProps> = ({ form_data }): JSX.Element => {
             {form_data?.school_or_institution || ''}
           </p>
         </div>
-        <p className="font-quicksand text-neutral-grey-70 font-normal text-sm rounded-sm py-0.5 px-1.5 bg-green-light">
-          {formatToYYYY(form_data?.academic_year_started ?? '')} -
-          {formatToYYYY(form_data?.academic_year_ended ?? '')}
-        </p>
+
+        {startYear && (
+          <p className="font-quicksand text-neutral-grey-70 font-normal text-sm rounded-sm py-0.5 px-1.5 bg-green-light">
+            {startYear === endYear ? startYear : `${startYear} - ${endYear}`}
+          </p>
+        )}
       </div>
 
       <div className="flex justify-between items-center w-full">
         {data.map(({ icon, label }, i) => (
-          <div key={i} className="flex gap-x-1">
-            <Image src={icon} alt={label ?? ''} sizes="16" />
-            <p className="text-neutral-grey-100 text-sm font-normal font-quicksand">{label}</p>
-          </div>
+          <Fragment key={i}>
+            {label && (
+              <div className="flex gap-x-1">
+                <Image src={icon} alt={label ?? ''} sizes="16" />
+                <p className="text-neutral-grey-100 text-sm font-normal font-quicksand">{label}</p>
+              </div>
+            )}
+          </Fragment>
         ))}
       </div>
     </Box>

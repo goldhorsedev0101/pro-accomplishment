@@ -33,9 +33,12 @@ const ResetPasswordView = (): JSX.Element => {
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: { confirmPassword: '', newPassword: '' },
     validationSchema: ResetPasswordSchema,
-    onSubmit: async () => {
+    onSubmit: async ({ confirmPassword, newPassword }) => {
+      const conPass = confirmPassword.trimEnd().trimStart();
+      const newPass = newPassword.trimEnd().trimStart();
+
       try {
-        await mutateAsync(values);
+        await mutateAsync({ confirmPassword: conPass, newPassword: newPass });
         push(signIn);
         refresh();
       } catch (error) {

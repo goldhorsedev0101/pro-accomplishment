@@ -1,7 +1,7 @@
 const localhost = 'http://localhost:3000';
 const live = process.env.API_URL;
 
-const isLive = true;
+const isLive = process.env.NODE_ENV === 'production';
 const baseUrl = isLive ? live + '/api' : localhost + '/api';
 
 export const URLS = {
@@ -22,10 +22,9 @@ export const URLS = {
 
   // =========================== Category ===================== //
   GET_CATEGORIES: `${baseUrl}/category/get-categories`,
-  GET_SUB_CATEGORIES: `${baseUrl}/category/get-sub-categories`,
+  GET_SUB_CATEGORIES: `${baseUrl}/category/gemm9t-sub-categories`,
 
   // =========================== Profile ===================== //
-  ME: `${baseUrl}/me`,
   EDIT_RECRUITER_PROFILE: `${baseUrl}/profile/edit-recruiter-profile`,
   GET_RECRUITER_PROFILE: `${baseUrl}/profile/get-recruiter-profile`,
 

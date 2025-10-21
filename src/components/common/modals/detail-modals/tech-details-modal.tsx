@@ -11,7 +11,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToMDYYYY } from '@/utils/date-format';
+import { formatToMMMMDYYYY } from '@/utils/date-format';
 
 // Icon
 import programming from 'public/pdf/mobile-programming.svg';
@@ -28,16 +28,15 @@ const TechDetailsModal: FC<IProps> = ({ form_data }) => {
           <Image alt="title/award" src={programming} width={24} height={24} />
           <div className="gap-x-1">
             <p className="text-heading font-medium capitalize">{form_data?.accomplishment_name}</p>
-            <p className="text-neutral-grey-70 text-sm">{formatToMDYYYY(form_data?.date ?? '')}</p>
+            <p className="text-neutral-grey-70 text-sm">
+              {formatToMMMMDYYYY(form_data?.date ?? '')}
+            </p>
           </div>
         </Box>
       )}
 
-      {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
-        <Document
-          certificate_urls={form_data?.certificate_urls}
-          certification_title={form_data?.certification_title}
-        />
+      {form_data?.document_urls && form_data?.document_urls?.length > 0 && (
+        <Document certificate_urls={form_data?.document_urls} />
       )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (

@@ -23,8 +23,11 @@ const ChangePassword = (): JSX.Element => {
     initialValues: { oldPassword: '', newPassword: '', confirmPassword: '' },
     validationSchema: ChangePasswordSchema,
     onSubmit: async ({ newPassword, oldPassword }) => {
+      const oldPass = oldPassword.trimEnd().trimStart();
+      const newPass = newPassword.trimEnd().trimStart();
+
       try {
-        await mutateAsync({ newPassword, currentPassword: oldPassword });
+        await mutateAsync({ newPassword: newPass, currentPassword: oldPass });
         resetForm();
       } catch (error) {
         console.log('🚀 ~ ChangePassword ~ error:', error);

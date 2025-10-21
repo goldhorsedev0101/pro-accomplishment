@@ -7,6 +7,7 @@ import note from 'public/icons/note.svg';
 import info from 'public/pdf/info.svg';
 import { FC } from 'react';
 import Box from '../../box';
+import Skills from '../../studets-details/skills';
 
 interface IProps {
   form_data?: FormData;
@@ -51,6 +52,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
           )}
         </div>
       </div>
+
       {organization && (
         <div className="flex gap-x-1.5 items-center">
           <Image src={building} alt="building" className="size-4" />
@@ -59,50 +61,31 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
           </p>
         </div>
       )}
+
       {previous_skills &&
         acquired_skills &&
         (previous_skills?.length > 0 || acquired_skills?.length > 0) && (
           <hr className="border border-[var(--gray-10)]" />
         )}
+
       {previous_skills && previous_skills?.length > 0 && (
-        <div className="flex gap-y-3 flex-col">
-          <p className="font-medium quicksand text-xs text-[var(--heading)]">Previous Skills</p>
-          <div className="flex items-center gap-x-3">
-            {previous_skills.map((skill) => (
-              <p
-                key={skill}
-                className="bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
-              >
-                {skill}
-              </p>
-            ))}
-          </div>
-        </div>
+        <Skills skills={previous_skills} title="Previous Skills" />
       )}
+
       {acquired_skills && acquired_skills?.length > 0 && (
-        <div className="flex gap-y-3 flex-col">
-          <p className="font-medium quicksand text-xs text-[var(--heading)]">Acquired Skills</p>
-          <div className="flex items-center gap-x-3">
-            {acquired_skills.map((skill) => (
-              <p
-                key={skill}
-                className="bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
-              >
-                {skill}
-              </p>
-            ))}
-          </div>
-        </div>
+        <Skills skills={acquired_skills} title="Acquired Skills" />
       )}
+
       {link && (
         <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal quicksand">
           {link}
         </Link>
       )}
+
       {doc && (
         <div className="flex gap-x-1.5 items-start">
           <Image src={note} alt="note" className="size-5" />
-          <p className="text-[var(--gray-70)] text-sm font-normal quicksand">{doc}</p>
+          <p className="text-[var(--gray-70)] text-sm font-normal quicksand break-all">{doc}</p>
         </div>
       )}
     </Box>

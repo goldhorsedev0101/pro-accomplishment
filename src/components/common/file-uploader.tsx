@@ -1,7 +1,6 @@
 'use client';
 
 // Types
-import { UploadPayloadT } from '@/types/others/upload/upload-payload';
 import { FormikValues } from 'formik';
 import { FC, Fragment, JSX, useEffect, useState } from 'react';
 
@@ -19,9 +18,9 @@ import camera from 'public/icons/camera.svg';
 import gallery from 'public/icons/gallery.svg';
 
 // Mutation
-import { useUploadMutation } from '@/services/others/image-upload';
 
 // Loader
+import { uploadProfilePicture } from '@/services/server/authService';
 import { MoonLoader } from 'react-spinners';
 
 interface IProps {
@@ -31,14 +30,15 @@ interface IProps {
 }
 
 const FileUploader: FC<IProps> = ({ setFieldValue, value, name }): JSX.Element => {
+  const [isPending, setIsPending] = useState<boolean>(false);
   const [img, setImg] = useState<string>(value || '');
-  const { mutateAsync, isPending } = useUploadMutation();
 
   const handleImageUpload = async (newFiles: File[]): Promise<void> => {
+    setIsPending(true);
     const file = newFiles[0];
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('oldUrl', value || 'null');
+    // formData.append('oldUrl', value || 'null');
 
     if (file.size > 5 * 1024 * 1024) {
       toast.error('Image size must be less than 5MB!');
@@ -46,13 +46,19 @@ const FileUploader: FC<IProps> = ({ setFieldValue, value, name }): JSX.Element =
     }
 
     try {
-      const { data } = await mutateAsync(formData as unknown as UploadPayloadT);
-      setImg(data?.publicUrl ?? 'lorem');
+      // const { data } = await mutateAsync(formData as unknown as UploadPayloadT);
+      const { data } = await uploadProfilePicture({ oldUrl: value ?? '', file });
+      setImg(typeof data !== 'string' ? data?.publicUrl || '' : data);
+      setIsPending(false);
     } catch (error) {
       console.log('🚀 ~ handleImageUpload ~ error:', error);
       toast.error('Image upload failed!');
     }
   };
+
+  useEffect(() => {
+    if (value) setImg(value);
+  }, [value]);
 
   useEffect(() => {
     if (img) setFieldValue(name, img);

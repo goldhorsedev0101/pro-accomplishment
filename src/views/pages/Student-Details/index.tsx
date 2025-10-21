@@ -6,6 +6,7 @@ import Box from '@/components/common/box';
 import RenderCards from '@/components/common/cards/render-cards';
 import Heading from '@/components/common/heading';
 import Loader from '@/components/common/loader';
+import NoData from '@/components/common/no-data';
 import About from './about';
 
 // Types
@@ -13,6 +14,7 @@ import { IParams } from '@/types/params.type';
 import { FC, JSX, useEffect, useState } from 'react';
 
 // Icons
+import profile from 'public/icons/profile-2user.svg';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { HiOutlineDownload } from 'react-icons/hi';
 
@@ -60,6 +62,18 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
     );
   }
 
+  if (!data) {
+    return (
+      <div className="flex items-center justify-center h-[60dvh]">
+        <NoData
+          img={profile}
+          title="No Students Found"
+          description="Once students are added, their profiles and achievements will appear here"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-y-6">
       <div className="flex items-center justify-between">
@@ -98,7 +112,7 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
 
       <div className="h-fit gap-6 md:columns-2 space-y-6">
         {groupedData?.map((group, i) => (
-          <div className="!h-fit flex flex-col gap-y-6" key={i}>
+          <div className="!h-fit flex flex-col gap-y-6 overflow-hidden" key={i}>
             {group?.map((accomplishment, j) => (
               <RenderCards key={j} accomplishments={[accomplishment]} />
             ))}

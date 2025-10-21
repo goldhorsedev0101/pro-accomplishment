@@ -13,7 +13,7 @@ import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candi
 import { FC, JSX } from 'react';
 
 // Utils
-import { formatToMDYYYY } from '@/utils/date-format';
+import { formatToDDMMYYYY } from '@/utils/date-format';
 
 interface IProps {
   form_data?: FormData;
@@ -28,25 +28,35 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         <div>
           <Heading className="!text-base font-quicksand" text={name ?? ''} width="medium" />
           <p className="font-quicksand text-neutral-grey-60 font-normal text-sm">
-            {formatToMDYYYY(date || '')}
+            {formatToDDMMYYYY(date || '')}
           </p>
         </div>
-        <p className="font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5 bg-primary-0">
+        <p
+          className={`font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5 capitalize ${region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
+        >
           {region}
         </p>
       </div>
 
-      <div className="space-y-2 capitalize">
-        <div className="flex items-center gap-x-2">
-          <Image alt="" src={calendar} sizes="20" />
-          <p className="font-quicksand font-normal text-sm text-neutral-grey-70">{event_name}</p>
-        </div>
+      {(event_name || location) && (
+        <div className="space-y-2 capitalize">
+          {event_name && (
+            <div className="flex items-center gap-x-2">
+              <Image alt="" src={calendar} sizes="20" />
+              <p className="font-quicksand font-normal text-sm text-neutral-grey-70">
+                {event_name}
+              </p>
+            </div>
+          )}
 
-        <div className="flex items-center gap-x-2">
-          <Image alt="" src={locationIcon} sizes="20" />
-          <p className="font-quicksand font-normal text-sm text-neutral-grey-70">{location}</p>
+          {location && (
+            <div className="flex items-center gap-x-2">
+              <Image alt="" src={locationIcon} sizes="20" />
+              <p className="font-quicksand font-normal text-sm text-neutral-grey-70">{location}</p>
+            </div>
+          )}
         </div>
-      </div>
+      )}
 
       <hr className="-my-2" />
 

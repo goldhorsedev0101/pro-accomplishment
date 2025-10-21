@@ -19,9 +19,11 @@ import { useFormik } from 'formik';
 // Types
 import { useEditProfileMutation } from '@/services/others/profile/edit-recruiter-profile';
 import { FC, JSX, useState } from 'react';
+import FileUploader from '../file-uploader';
 import PhoneNumberInput from '../phone-input';
 
 interface IProps {
+  profile_picture?: string;
   phone_number?: string;
   first_name?: string;
   last_name?: string;
@@ -30,6 +32,7 @@ interface IProps {
 }
 
 const EditProfileModal: FC<IProps> = ({
+  profile_picture = '',
   phone_number = '',
   first_name = '',
   last_name = '',
@@ -38,7 +41,7 @@ const EditProfileModal: FC<IProps> = ({
 }): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const { mutateAsync } = useEditProfileMutation();
+  const { mutateAsync, isPending } = useEditProfileMutation();
 
   const {
     touched,
@@ -51,7 +54,12 @@ const EditProfileModal: FC<IProps> = ({
     dirty,
     isValid,
   } = useFormik({
-    initialValues: { phoneNumber: phone_number, firstName: first_name, lastName: last_name },
+    initialValues: {
+      phoneNumber: phone_number,
+      firstName: first_name,
+      lastName: last_name,
+      profile_picture,
+    },
     validationSchema: EditProfileSchema,
     enableReinitialize: true,
     onSubmit: async (values) => {
@@ -68,6 +76,12 @@ const EditProfileModal: FC<IProps> = ({
       }}
       footer={
         <form onSubmit={handleSubmit} className="w-full flex-col flex gap-y-6">
+          <FileUploader
+            setFieldValue={setFieldValue}
+            value={profile_picture}
+            name="profile_picture"
+          />
+
           <div className="flex items-center gap-x-3">
             <Input
               error={touched.firstName ? errors.firstName : undefined}
@@ -103,7 +117,11 @@ const EditProfileModal: FC<IProps> = ({
           />
 
           <DialogClose asChild>
-            <Button className="w-full h-14 rounded-xl" type="submit" disabled={!dirty || !isValid}>
+            <Button
+              className="w-full h-14 rounded-xl"
+              type="submit"
+              disabled={!dirty || !isValid || isPending}
+            >
               Save Changes
             </Button>
           </DialogClose>

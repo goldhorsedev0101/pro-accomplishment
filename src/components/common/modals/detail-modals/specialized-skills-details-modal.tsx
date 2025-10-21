@@ -11,7 +11,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToMDYYYY } from '@/utils/date-format';
+import { formatToDDMMYYYY } from '@/utils/date-format';
 
 // Icon
 import ranking from 'public/pdf/ranking.svg';
@@ -28,16 +28,15 @@ const SpecializedSkillsDetailsModal: FC<IProps> = ({ form_data }) => {
           <Image alt="title/award" src={ranking} width={24} height={24} />
           <div className="gap-x-1">
             <p className="text-heading font-medium capitalize">{form_data?.accomplishment_name}</p>
-            <p className="text-neutral-grey-70 text-sm">{formatToMDYYYY(form_data?.date ?? '')}</p>
+            <p className="text-neutral-grey-70 text-sm">
+              {formatToDDMMYYYY(form_data?.date ?? '')}
+            </p>
           </div>
         </Box>
       )}
 
       {form_data?.document_urls && form_data?.document_urls?.length > 0 && (
-        <Document
-          certificate_urls={form_data?.document_urls}
-          certification_title={form_data?.certification_title}
-        />
+        <Document certificate_urls={form_data?.document_urls} />
       )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (
@@ -45,6 +44,7 @@ const SpecializedSkillsDetailsModal: FC<IProps> = ({ form_data }) => {
       )}
 
       {form_data?.link && <Links link={form_data?.link} />}
+
       {form_data?.notes && <Note note={form_data?.notes} />}
     </div>
   );

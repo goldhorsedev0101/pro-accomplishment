@@ -1,5 +1,5 @@
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
-import { formatToMDYYYY } from '@/utils/date-format';
+import { formatToDDMMYYYY } from '@/utils/date-format';
 import { FC } from 'react';
 import Box from '../../box';
 
@@ -19,7 +19,7 @@ const InvestingCard: FC<IProps> = ({ form_data }) => {
         {date && (
           <p className="quicksand flex items-center justify-between text-[var(--gray-60)] font-normal text-xs">
             {investment_type && <span>{investment_type}</span>}
-            <span>{formatToMDYYYY(date)}</span>
+            <span>{formatToDDMMYYYY(date)}</span>
           </p>
         )}
       </div>

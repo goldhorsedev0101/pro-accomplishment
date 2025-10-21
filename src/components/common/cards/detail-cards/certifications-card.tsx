@@ -9,7 +9,7 @@ import Heading from '../../heading';
 
 // Type
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
-import { formatToMDYYYY } from '@/utils/date-format';
+import { formatToDDMMYYYY } from '@/utils/date-format';
 import { FC } from 'react';
 
 interface IProps {
@@ -32,7 +32,7 @@ const CertificationsCard: FC<IProps> = ({ form_data }) => {
             width="medium"
           />
           <p className="font-quicksand text-neutral-grey-70 font-normal text-xs">
-            {formatToMDYYYY(date_received ?? '')}
+            {formatToDDMMYYYY(date_received ?? '')}
           </p>
         </div>
       </div>

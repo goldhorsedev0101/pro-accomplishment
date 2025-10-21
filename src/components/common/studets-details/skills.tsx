@@ -15,7 +15,7 @@ const Skills = ({ skills, title }: IProps) => {
             key={i}
             className="!border-none !p-2 !py-1 !bg-neutral-grey-0 !rounded-md !w-fit !gap-2"
           >
-            <p className="text-heading capitalize font-medium text-sm">{skill}</p>
+            <p className="text-heading capitalize text-sm">{skill}</p>
           </Box>
         ))}
       </div>

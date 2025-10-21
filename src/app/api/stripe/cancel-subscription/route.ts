@@ -5,10 +5,15 @@ import {
   supabasePromiseResolver,
   verifyToken,
 } from '@/lib/supabase/helper';
-import { toggleFavoriteCandidate } from '@/services/server/favoriteService';
-import { getRecruiterProfile } from '@/services/server/recruiterService';
+import {
+  getRecruiterProfile,
+  isSubscriptionValid,
+  updateRecruiterSubscription,
+} from '@/services/server/recruiterService';
 import { NextRequest } from 'next/server';
-
+import 'server-only';
+import { stripe } from '../../../../lib/stripe';
+import { error } from 'console';
 export async function OPTIONS() {
   return corsOptions();
 }
@@ -16,17 +21,7 @@ export async function OPTIONS() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { candidateId } = body;
-    if (!candidateId) {
-      return response(
-        {
-          message: 'Candidate ID is required.',
-          data: null,
-          error: 'Missing candidateId',
-        },
-        400,
-      );
-    }
+
     const accessToken = await getAccessToken(request);
     if (!accessToken) {
       return response(
@@ -49,43 +44,47 @@ export async function POST(request: NextRequest) {
         401,
       );
     }
-
-    const getRecruiterResponse = await supabasePromiseResolver({
+    const profileId = tokenCheckResponse?.id;
+    const recruiterProfileResponse = await supabasePromiseResolver({
       requestFunction: getRecruiterProfile,
-      requestBody: { profileId: tokenCheckResponse?.id },
+      requestBody: { profileId },
     });
-    if (!getRecruiterResponse?.success) {
+
+    if (!recruiterProfileResponse?.success) {
       return response(
         {
           message: 'Recruiter not found',
           data: null,
-          error: getRecruiterResponse?.error || 'Recruiter not found.',
+          error: recruiterProfileResponse?.error || 'Recruiter not found.',
         },
         404,
       );
     }
-    const recruiterId = getRecruiterResponse?.data?.id;
-    const toggleFavoriteCandidateResponse = await supabasePromiseResolver({
-      requestFunction: toggleFavoriteCandidate,
-      requestBody: {
-        recruiterId,
-        candidateId,
-      },
-    });
-    if (!toggleFavoriteCandidateResponse?.success) {
+    const subscription = recruiterProfileResponse?.data?.subscription;
+    if (!isSubscriptionValid(subscription)) {
       return response(
         {
-          message: toggleFavoriteCandidateResponse?.error.message || 'Failed to toggle favorite.',
+          message: 'No active subscription found',
           data: null,
-          error: toggleFavoriteCandidateResponse?.error || 'Failed to toggle favorite.',
+          error: 'No active subscription found',
         },
-        400,
+        404,
       );
     }
+
+    const canceled = await stripe.subscriptions.update(subscription.transaction_id, {
+      cancel_at_period_end: true,
+      metadata: {
+        subscriptionId: subscription?.id,
+        status: 'canceled',
+        canceled_at: new Date().toISOString(),
+      },
+    });
+
     return response(
       {
-        message: 'Favorite toggled successfully.',
-        data: toggleFavoriteCandidateResponse?.data?.data || {},
+        message: 'Cancellation requested. Waiting for Stripe confirmation.',
+        data: { pending: true },
         error: null,
       },
       200,

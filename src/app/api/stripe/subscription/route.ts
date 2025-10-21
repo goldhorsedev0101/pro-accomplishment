@@ -5,7 +5,7 @@ import {
   supabasePromiseResolver,
   verifyToken,
 } from '@/lib/supabase/helper';
-import { getRecruiterByProfileId } from '@/services/server/recruiterService';
+import { getRecruiterProfile, isSubscriptionValid } from '@/services/server/recruiterService';
 import { NextRequest } from 'next/server';
 import 'server-only';
 import { stripe } from '../../../../lib/stripe';
@@ -53,23 +53,34 @@ export async function POST(request: NextRequest) {
       );
     }
     const profileId = tokenCheckResponse?.id;
-    const getRecruiterResponse = await supabasePromiseResolver({
-      requestFunction: getRecruiterByProfileId,
+    const recruiterProfileResponse = await supabasePromiseResolver({
+      requestFunction: getRecruiterProfile,
       requestBody: { profileId },
     });
 
-    if (!getRecruiterResponse?.success) {
+    if (!recruiterProfileResponse?.success) {
       return response(
         {
           message: 'Recruiter not found',
           data: null,
-          error: getRecruiterResponse?.error || 'Recruiter not found.',
+          error: recruiterProfileResponse?.error || 'Recruiter not found.',
+        },
+        404,
+      );
+    }
+    const subscription = recruiterProfileResponse?.data?.subscription;
+    if (isSubscriptionValid(subscription)) {
+      return response(
+        {
+          message:
+            'You currently have an active subscription. Please wait until it expires before purchasing another.',
+          data: null,
+          error: 'Already Subscribed',
         },
         404,
       );
     }
 
-    const recruiterId = getRecruiterResponse?.data?.id;
     const origin =
       request.headers.get('origin') ||
       `${request.headers.get('x-forwarded-proto') || 'https'}://${request.headers.get('host')}`;

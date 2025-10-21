@@ -44,6 +44,7 @@ export async function GET(request: NextRequest) {
         profileId: tokenCheckResponse?.id,
       },
     });
+
     if (!recruiterProfileResponse?.success) {
       return response(
         {
@@ -54,6 +55,8 @@ export async function GET(request: NextRequest) {
         404,
       );
     }
+
+    console.log(JSON.stringify(recruiterProfileResponse, null, 2));
     return response(
       {
         message: 'Recruiter profile retrieved successfully.',

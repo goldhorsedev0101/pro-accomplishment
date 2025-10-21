@@ -30,7 +30,9 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
       {form_data?.name && (
         <Box className="!border-none !p-3 !flex-row justify-between">
           <p className="text-heading font-medium capitalize">{form_data?.name}</p>
-          <p className="py-0.5 px-1.5 rounded-sm text-black text-sm bg-[#E7D3EE] capitalize">
+          <p
+            className={`font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5 capitalize ${form_data?.region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
+          >
             {form_data.region}
           </p>
         </Box>

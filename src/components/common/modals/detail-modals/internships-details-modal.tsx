@@ -24,7 +24,6 @@ interface IProps {
 }
 
 const InternshipsDetailsModal: FC<IProps> = ({ form_data }) => {
-  console.log('🚀 ~ InternshipsDetailsModal ~ form_data:', form_data);
   return (
     <div className="flex flex-col gap-y-4 font-quicksand">
       {(form_data?.accomplishment_name || form_data?.company) && (
@@ -71,8 +70,8 @@ const InternshipsDetailsModal: FC<IProps> = ({ form_data }) => {
 
       {form_data?.favorite_part && <FavoritePart favorite_part={form_data?.favorite_part} />}
 
-      {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
-        <Document certificate_urls={form_data?.certificate_urls} />
+      {form_data?.document_urls && form_data?.document_urls?.length > 0 && (
+        <Document certificate_urls={form_data?.document_urls} />
       )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (

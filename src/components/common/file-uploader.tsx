@@ -57,6 +57,10 @@ const FileUploader: FC<IProps> = ({ setFieldValue, value, name }): JSX.Element =
   };
 
   useEffect(() => {
+    if (value) setImg(value);
+  }, [value]);
+
+  useEffect(() => {
     if (img) setFieldValue(name, img);
   }, [img]);
 

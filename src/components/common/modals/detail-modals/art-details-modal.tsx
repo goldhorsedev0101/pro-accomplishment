@@ -32,8 +32,8 @@ const ArtDetailsModal: FC<IProps> = ({ form_data }) => {
         </Box>
       )}
 
-      {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
-        <Document certificate_urls={form_data?.certificate_urls} />
+      {form_data?.document_urls && form_data?.document_urls?.length > 0 && (
+        <Document certificate_urls={form_data?.document_urls} />
       )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (

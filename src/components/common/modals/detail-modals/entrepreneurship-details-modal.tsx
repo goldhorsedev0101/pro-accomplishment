@@ -36,7 +36,9 @@ const EntrepreneurshipDetailsModal: FC<IProps> = ({ form_data }) => {
             { label: 'Started Date', value: formatToDDMMMYYYY(form_data?.started_date ?? '') },
             {
               label: 'Completion Date',
-              value: formatToDDMMMYYYY(form_data?.completion_date ?? ''),
+              value: form_data?.completion_date
+                ? formatToDDMMMYYYY(form_data?.completion_date ?? '')
+                : 'Ongoing',
             },
           ]}
         />
@@ -52,8 +54,8 @@ const EntrepreneurshipDetailsModal: FC<IProps> = ({ form_data }) => {
 
       {form_data?.favorite_part && <FavoritePart favorite_part={form_data?.favorite_part} />}
 
-      {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
-        <Document certificate_urls={form_data?.certificate_urls} />
+      {form_data?.document_urls && form_data?.document_urls?.length > 0 && (
+        <Document certificate_urls={form_data?.document_urls} />
       )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (

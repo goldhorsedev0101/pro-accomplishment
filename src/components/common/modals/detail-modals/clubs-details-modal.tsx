@@ -24,7 +24,6 @@ interface IProps {
 }
 
 const ClubsDetailsModal: FC<IProps> = ({ form_data }) => {
-  console.log('🚀 ~ ClubsDetailsModal ~ form_data:', form_data);
   return (
     <div className="flex flex-col gap-y-4 font-quicksand">
       {(form_data?.club_name || form_data?.date_joined) && (
@@ -63,8 +62,8 @@ const ClubsDetailsModal: FC<IProps> = ({ form_data }) => {
         />
       )}
 
-      {form_data?.certificate_urls && form_data?.certificate_urls?.length > 0 && (
-        <Document certificate_urls={form_data?.certificate_urls} />
+      {form_data?.document_urls && form_data?.document_urls?.length > 0 && (
+        <Document certificate_urls={form_data?.document_urls} />
       )}
 
       {form_data?.media_urls && form_data?.media_urls?.length > 0 && (

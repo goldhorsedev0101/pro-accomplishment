@@ -31,7 +31,9 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
             {formatToDDMMYYYY(date || '')}
           </p>
         </div>
-        <p className="font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5 bg-[#E7D3EE] capitalize">
+        <p
+          className={`font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5 capitalize ${region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
+        >
           {region}
         </p>
       </div>

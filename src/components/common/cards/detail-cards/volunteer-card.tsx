@@ -7,7 +7,7 @@ import note from 'public/icons/note.svg';
 import info from 'public/pdf/info.svg';
 import { FC } from 'react';
 import Box from '../../box';
-import Note from '../../studets-details/note';
+import Skills from '../../studets-details/skills';
 
 interface IProps {
   form_data?: FormData;
@@ -69,35 +69,11 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
         )}
 
       {previous_skills && previous_skills?.length > 0 && (
-        <div className="flex gap-y-3 flex-col">
-          <p className="font-medium quicksand text-xs text-[var(--heading)]">Previous Skills</p>
-          <div className="flex items-center gap-3 flex-wrap">
-            {previous_skills.map((skill) => (
-              <p
-                key={skill}
-                className="bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
-              >
-                {skill}
-              </p>
-            ))}
-          </div>
-        </div>
+        <Skills skills={previous_skills} title="Previous Skills" />
       )}
 
       {acquired_skills && acquired_skills?.length > 0 && (
-        <div className="flex gap-y-3 flex-col">
-          <p className="font-medium quicksand text-xs text-[var(--heading)]">Acquired Skills</p>
-          <div className="flex items-center gap-3 flex-wrap">
-            {acquired_skills.map((skill) => (
-              <p
-                key={skill}
-                className="bg-[var(--gray-light)] p-1 rounded-md text-[var(--heading)] text-sm quicksand font-medium"
-              >
-                {skill}
-              </p>
-            ))}
-          </div>
-        </div>
+        <Skills skills={acquired_skills} title="Acquired Skills" />
       )}
 
       {link && (

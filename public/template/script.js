@@ -394,7 +394,7 @@ const athleticsCard = ({ title, date, location, position, place, region }) => {
      ${
        region &&
        `
-         <p class="break-all quicksand !min-w-fit text-[var(--black)] font-normal text-sm rounded-sm py-0.5 px-1.5 bg-[#E7D3EE] capitalize">
+         <p class="break-all quicksand !min-w-fit text-[var(--black)] font-normal text-sm rounded-sm py-0.5 px-1.5 capitalize ${region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'}">
            ${region}
          </p>
        `

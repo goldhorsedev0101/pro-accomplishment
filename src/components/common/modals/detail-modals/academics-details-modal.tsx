@@ -58,6 +58,7 @@ const AcademicsDetailsModal: FC<IProps> = ({ form_data }) => {
         form_data?.class ||
         form_data?.standardized_test_score) && (
         <Items
+          gpa={form_data?.grade_or_gpa as string}
           label="My Academic Details"
           items={[
             { icon: calender, label: 'Date', value: formatToDDMMYYYY(form_data?.date ?? '') },

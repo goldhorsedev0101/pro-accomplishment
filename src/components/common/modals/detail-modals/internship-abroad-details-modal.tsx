@@ -56,7 +56,7 @@ const InternshipAbroadDetailsModal: FC<IProps> = ({ form_data }) => {
 
       {form_data?.company && (
         <Items
-          label="Company"
+          label="Institution"
           className="!gap-x-2 !text-neutral-grey-100"
           items={[{ icon: building, value: form_data?.company }]}
         />

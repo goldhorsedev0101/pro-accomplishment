@@ -38,15 +38,14 @@ const FileUploader: FC<IProps> = ({ setFieldValue, value, name }): JSX.Element =
     const file = newFiles[0];
     const formData = new FormData();
     formData.append('file', file);
-    // formData.append('oldUrl', value || 'null');
 
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error('Image size must be less than 5MB!');
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error('Image size must be less than 10MB!');
+      setIsPending(false);
       return;
     }
 
     try {
-      // const { data } = await mutateAsync(formData as unknown as UploadPayloadT);
       const { data } = await uploadProfilePicture({ oldUrl: value ?? '', file });
       setImg(typeof data !== 'string' ? data?.publicUrl || '' : data);
       setIsPending(false);
@@ -75,7 +74,7 @@ const FileUploader: FC<IProps> = ({ setFieldValue, value, name }): JSX.Element =
     >
       {({ getRootProps, getInputProps }) => (
         <div
-          className={`relative rounded-full h-[130px] w-[130px] flex items-center ${value && 'overflow-hidden'} justify-center cursor-pointer bg-[#F4F5F8] self-center`}
+          className={`relative rounded-full h-[130px] w-[130px] flex items-center justify-center cursor-pointer bg-[#F4F5F8] self-center`}
           {...getRootProps()}
         >
           {isPending ? (
@@ -83,15 +82,20 @@ const FileUploader: FC<IProps> = ({ setFieldValue, value, name }): JSX.Element =
           ) : img ? (
             <Fragment>
               <input {...getInputProps()} />
-              <Image src={img} alt="profile" className="object-cover" fill />
+              <Image
+                src={img}
+                alt="profile"
+                className="object-cover rounded-full h-[130px] w-[130px] overflow-hidden"
+                fill
+              />
             </Fragment>
           ) : (
             <Fragment>
               <input {...getInputProps()} />
               <Image src={gallery} alt="Gallery" sizes="56" />
-              <Image src={camera} alt="Camera" sizes="36" className="absolute bottom-0 right-0" />
             </Fragment>
           )}
+          <Image src={camera} alt="Camera" sizes="36" className="absolute bottom-0 right-0" />
         </div>
       )}
     </Dropzone>

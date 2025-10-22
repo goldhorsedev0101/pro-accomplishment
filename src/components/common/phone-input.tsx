@@ -5,17 +5,17 @@ import 'react-phone-input-2/lib/style.css';
 interface IProps {
   setIso2?: (iso2: string) => void;
   setFieldValue?: FormikValues['setFieldValue'];
-  value: string;
-  name: string;
+  containerClass?: string;
   placeholder?: string;
   className?: string;
-  label: string;
-  disabled?: boolean;
-  containerClass?: string;
-  error?: string;
-  touched?: boolean;
   required?: boolean;
+  disabled?: boolean;
+  touched?: boolean;
+  error?: string;
   iso2?: string;
+  value: string;
+  label: string;
+  name: string;
 }
 
 const PhoneNumberInput = ({

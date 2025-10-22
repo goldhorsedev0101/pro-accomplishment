@@ -55,7 +55,7 @@ const ResetPasswordView = (): JSX.Element => {
 
       <Input
         error={touched.newPassword ? errors.newPassword : undefined}
-        placeholder="ohndoe122&&*^Y"
+        placeholder="Enter New Password"
         value={values['newPassword']}
         onChange={handleChange}
         name="newPassword"
@@ -66,8 +66,8 @@ const ResetPasswordView = (): JSX.Element => {
 
       <Input
         error={touched.confirmPassword ? errors.confirmPassword : undefined}
+        placeholder="Enter Confirm Password"
         value={values['confirmPassword']}
-        placeholder="***********"
         label="Confirm Password"
         onChange={handleChange}
         name="confirmPassword"

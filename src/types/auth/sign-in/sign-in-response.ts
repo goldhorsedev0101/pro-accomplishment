@@ -7,6 +7,7 @@ export interface SignInResponseT {
 export interface Data {
   user: User;
   session: Session;
+  code: string;
 }
 
 export interface User {

@@ -23,7 +23,6 @@ function Input({ className, type, label, error, required, ...props }: IProps) {
         {required && <span className="text-destructive">*</span>}
       </Label>
       <input
-        required={required}
         id={label}
         type={isOpen}
         data-slot="input"

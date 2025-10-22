@@ -91,7 +91,7 @@ const SignUpView = (): JSX.Element => {
             error={touched.firstName ? errors.firstName : undefined}
             value={values['firstName']}
             onChange={handleChange}
-            placeholder="James"
+            placeholder="Enter First Name"
             label="First Name"
             name="firstName"
           />
@@ -100,7 +100,7 @@ const SignUpView = (): JSX.Element => {
             error={touched.lastName ? errors.lastName : undefined}
             value={values['lastName']}
             onChange={handleChange}
-            placeholder="Shawn"
+            placeholder="Enter Last Name"
             label="Last Name"
             name="lastName"
           />
@@ -108,7 +108,7 @@ const SignUpView = (): JSX.Element => {
 
         <Input
           error={touched.email ? errors.email : undefined}
-          placeholder="johndo@example.com"
+          placeholder="Enter Email"
           onChange={handleChange}
           value={values['email']}
           label="Email"
@@ -117,6 +117,7 @@ const SignUpView = (): JSX.Element => {
 
         <PhoneNumberInput
           setIso2={(e) => setFieldValue('iso2', e)}
+          placeholder="Enter Phone Number"
           setFieldValue={setFieldValue}
           value={values['phoneNumber']}
           iso2={values['iso2']}
@@ -126,7 +127,7 @@ const SignUpView = (): JSX.Element => {
 
         <Input
           error={touched.password ? errors.password : undefined}
-          placeholder="ohndoe122&&*^Y"
+          placeholder="Enter Password"
           value={values['password']}
           onChange={handleChange}
           label="Password"
@@ -137,7 +138,7 @@ const SignUpView = (): JSX.Element => {
         <Input
           error={touched.confirmPassword ? errors.confirmPassword : undefined}
           value={values['confirmPassword']}
-          placeholder="***********"
+          placeholder="Enter Confirm Password"
           label="Confirm Password"
           onChange={handleChange}
           name="confirmPassword"

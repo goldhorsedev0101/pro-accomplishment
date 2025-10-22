@@ -6,7 +6,7 @@ export const ChangePasswordSchema = Yup.object({
     .min(8, 'Password must be at least 8 characters')
     .max(128, 'Password cannot exceed 128 characters')
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d\W]{8,}$/,
       'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
     ),
   newPassword: Yup.string()

@@ -25,10 +25,13 @@ import { useRouter } from 'next/navigation';
 
 // Types
 import { JSX } from 'react';
+import { useAuth } from '@/context/auth.context';
+import toast from 'react-hot-toast';
 
 const SignInView = (): JSX.Element => {
+  const { setEmail } = useAuth();
   const { push, refresh } = useRouter();
-  const { forgetPassword, signUp, home } = Routes;
+  const { forgetPassword, signUp, home, verifyEmail } = Routes;
   const { mutateAsync, isPending } = useSignInMutation();
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
@@ -39,9 +42,17 @@ const SignInView = (): JSX.Element => {
 
       try {
         const { data } = await mutateAsync({ email, password: pass });
-        setCookie('accessToken', data?.session?.access_token);
-        push(home);
-        refresh();
+        const code = data?.code;
+
+        if (code == 'verification_email_resend') {
+          toast.success('Verification email has been sent');
+          push(verifyEmail);
+          setEmail(email);
+        } else {
+          setCookie('accessToken', data?.session?.access_token);
+          push(home);
+          refresh();
+        }
       } catch (error) {
         console.error(error);
       }
@@ -55,7 +66,7 @@ const SignInView = (): JSX.Element => {
       <div className="flex w-full flex-col gap-y-3">
         <Input
           error={touched.email ? errors.email : undefined}
-          placeholder="johndo@example.com"
+          placeholder="Enter Email"
           onChange={handleChange}
           value={values['email']}
           label="Email"
@@ -64,7 +75,7 @@ const SignInView = (): JSX.Element => {
         />
         <Input
           error={touched.password ? errors.password : undefined}
-          placeholder="ohndoe122&&*^Y"
+          placeholder="Enter Password"
           value={values['password']}
           onChange={handleChange}
           label="Password"

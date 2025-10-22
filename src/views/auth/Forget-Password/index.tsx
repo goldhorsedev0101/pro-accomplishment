@@ -63,7 +63,7 @@ const ForgetPasswordView = (): JSX.Element => {
 
       <Input
         error={touched.email ? errors.email : undefined}
-        placeholder="johndo@example.com"
+        placeholder="Enter Email"
         value={values['email']}
         onChange={handleChange}
         label="Email"

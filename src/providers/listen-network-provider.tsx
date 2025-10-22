@@ -17,11 +17,13 @@ const ListenNetworkProvider = ({ children }: IProps) => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
+  const { refresh } = router;
+
   useEffect(() => {
     const unsubscribe = listenNetworkStatus(
       async () => {
         setIsOpen(false);
-        router.refresh();
+        refresh();
         queryClient.invalidateQueries();
       },
       () => setIsOpen(true),
@@ -35,7 +37,10 @@ const ListenNetworkProvider = ({ children }: IProps) => {
 
       <BasicModal
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        setIsOpen={(e) => {
+          setIsOpen(e);
+          refresh();
+        }}
         trigger={{ child: null }}
         title={{
           title: 'Please check your internet connection',
@@ -47,7 +52,7 @@ const ListenNetworkProvider = ({ children }: IProps) => {
               Click retry once you are back online
             </p>
             <DialogClose asChild>
-              <Button onClick={() => window.location.reload()} className="w-full h-14 rounded-xl">
+              <Button onClick={refresh} className="w-full h-14 rounded-xl">
                 Retry
               </Button>
             </DialogClose>

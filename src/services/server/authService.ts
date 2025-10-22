@@ -1,3 +1,4 @@
+'use server';
 import { supabasePromiseResolver } from '@/lib/supabase/helper';
 import { supabase } from '@/lib/supabase/server';
 import { EmailOtpType } from '@supabase/supabase-js';

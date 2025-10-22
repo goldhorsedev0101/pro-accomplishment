@@ -2,6 +2,7 @@
 import { fredoka, quicksand } from 'public/fonts';
 
 // Provider
+import ListenNetworkProvider from '@/providers/listen-network-provider';
 import QueryProvider from '@/providers/query-client-provider';
 
 // Types
@@ -32,7 +33,7 @@ export default function RootLayout({
       >
         <QueryProvider>
           <Toaster />
-          {children}
+          <ListenNetworkProvider>{children}</ListenNetworkProvider>
         </QueryProvider>
       </body>
     </html>

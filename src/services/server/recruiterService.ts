@@ -186,3 +186,13 @@ export const updateRecruiterSubscription = async ({
     error,
   };
 };
+
+export const deleteRecruiterProfile = async ({ profileId }: { profileId: string }) => {
+  const { data, error } = await supabase?.rpc('web_delete_recruiter', {
+    p_profile_id: profileId,
+  });
+  return {
+    data,
+    error,
+  };
+};

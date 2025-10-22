@@ -64,7 +64,7 @@ export async function GET(request: NextRequest) {
         404,
       );
     }
-    const recruiterId = getRecruiterResponse?.data?.id;
+    const recruiterId = getRecruiterResponse?.data?.recruiter_id;
     const getCandidateFolioResponse = await supabasePromiseResolver({
       requestFunction: getCandidateFolio,
       requestBody: { recruiterId, candidateId },

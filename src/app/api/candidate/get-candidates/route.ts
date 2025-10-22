@@ -60,10 +60,11 @@ export async function GET(request: NextRequest) {
         404,
       );
     }
+
     const getCandidatesResponse = await supabasePromiseResolver({
       requestFunction: getCandidates,
       requestBody: {
-        recruiterId: getRecruiterResponse?.data?.id,
+        recruiterId: getRecruiterResponse?.data?.recruiter_id,
         searchTerm: searchTerm,
         categoryId: categoryId,
         subCategoryId: subCategoryId,

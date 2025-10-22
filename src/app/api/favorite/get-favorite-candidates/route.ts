@@ -54,7 +54,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const recruiterId = getRecruiterResponse?.data?.id;
+    const recruiterId = getRecruiterResponse?.data?.recruiter_id;
     const { searchParams } = new URL(request.url);
 
     const skip = parseInt(searchParams.get('skip') || '0', 10);

@@ -5,7 +5,7 @@ import {
   supabasePromiseResolver,
   verifyToken,
 } from '@/lib/supabase/helper';
-import { getRecruiterProfile } from '@/services/server/recruiterService';
+import { deleteRecruiterProfile, getRecruiterProfile } from '@/services/server/recruiterService';
 import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 
@@ -56,9 +56,27 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    const deleteRecruiterProfileResponse = await supabasePromiseResolver({
+      requestFunction: deleteRecruiterProfile,
+      requestBody: {
+        profileId: tokenCheckResponse?.id,
+      },
+    });
+
+    if (!deleteRecruiterProfileResponse?.success) {
+      return response(
+        {
+          message: 'Error Occurred deleting recruiter profile.',
+          data: null,
+          error: recruiterProfileResponse?.error || 'Error Occurred deleting recruiter profile.',
+        },
+        404,
+      );
+    }
+
     return response(
       {
-        message: 'Recruiter profile retrieved successfully.',
+        message: 'Recruiter profile deleted successfully.',
         data: recruiterProfileResponse?.data,
         error: null,
       },

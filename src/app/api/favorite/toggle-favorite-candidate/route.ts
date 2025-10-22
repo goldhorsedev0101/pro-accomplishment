@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
         404,
       );
     }
-    const recruiterId = getRecruiterResponse?.data?.id;
+    const recruiterId = getRecruiterResponse?.data?.recruiter_id;
     const toggleFavoriteCandidateResponse = await supabasePromiseResolver({
       requestFunction: toggleFavoriteCandidate,
       requestBody: {

@@ -24,9 +24,8 @@ import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 
 // Types
-import { JSX } from 'react';
 import { useAuth } from '@/context/auth.context';
-import toast from 'react-hot-toast';
+import { JSX } from 'react';
 
 const SignInView = (): JSX.Element => {
   const { setEmail } = useAuth();
@@ -45,7 +44,6 @@ const SignInView = (): JSX.Element => {
         const code = data?.code;
 
         if (code == 'verification_email_resend') {
-          toast.success('Verification email has been sent');
           push(verifyEmail);
           setEmail(email);
         } else {

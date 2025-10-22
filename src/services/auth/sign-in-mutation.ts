@@ -24,7 +24,13 @@ const useSignInMutation = () => {
   };
 
   return useMutation({
-    onSuccess: () => toast.success('Login successful'),
+    onSuccess: ({ data }) => {
+      const msg =
+        data.code === 'verification_email_resend'
+          ? 'Verification email has been sent'
+          : 'Login successful';
+      toast.success(msg);
+    },
     mutationFn: signInFn,
     onError: errorFn,
   });

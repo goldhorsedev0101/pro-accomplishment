@@ -47,11 +47,13 @@ const FileUploader: FC<IProps> = ({ setFieldValue, value, name }): JSX.Element =
 
     try {
       const { data } = await uploadProfilePicture({ oldUrl: value ?? '', file });
+
       setImg(typeof data !== 'string' ? data?.publicUrl || '' : data);
       setIsPending(false);
     } catch (error) {
       console.log('🚀 ~ handleImageUpload ~ error:', error);
       toast.error('Image upload failed!');
+      setIsPending(false);
     }
   };
 

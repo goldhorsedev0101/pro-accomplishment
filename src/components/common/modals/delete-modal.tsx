@@ -10,13 +10,19 @@ import BasicModal from './basic-modal';
 import { JSX, useState } from 'react';
 
 // Toast
+import Routes from '@/constants/routes';
 import { useDeleteProfileMutation } from '@/services/others/profile/delete-recruiter-profile';
+import { deleteCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 const DeleteModal = (): JSX.Element => {
-  const { mutateAsync, isPending } = useDeleteProfileMutation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [deleteText, setDeleteText] = useState<string>('');
+
+  const { push } = useRouter();
+  const { mutateAsync, isPending } = useDeleteProfileMutation();
+
   const handleDeleteAccount = async () => {
     if (deleteText === 'Accomplishment') {
       const res = await mutateAsync();
@@ -24,6 +30,8 @@ const DeleteModal = (): JSX.Element => {
       if (res) {
         setIsOpen(false);
         setDeleteText('');
+        deleteCookie('accessToken');
+        push(Routes.signIn);
       }
     } else toast.error('Invalid input');
   };

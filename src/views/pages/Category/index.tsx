@@ -4,6 +4,8 @@
 import BackButton from '@/components/common/back-button';
 import StudentCard from '@/components/common/cards/student-card';
 import Heading from '@/components/common/heading';
+import Loader from '@/components/common/loader';
+import NoData from '@/components/common/no-data';
 import SearchInput from '@/components/common/search-input';
 import {
   Select,
@@ -16,10 +18,6 @@ import {
 // Types
 import { IParams } from '@/types/params.type';
 import { FC, JSX, useState } from 'react';
-
-// Queries
-import Loader from '@/components/common/loader';
-import NoData from '@/components/common/no-data';
 
 // Queries
 import { useGetCandidateQuery } from '@/services/others/candidate/get-candidate-query';
@@ -93,7 +91,7 @@ const CategoryView: FC<IParams & { name: string }> = ({ category, name }): JSX.E
         </div>
       ) : (meta_data?.total || 0) <= 0 ? (
         <div className="w-full self-center h-[40dvh] flex items-center justify-center">
-          <NoData />
+          <NoData title="No student found" />
         </div>
       ) : (
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">

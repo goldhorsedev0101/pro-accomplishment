@@ -10,17 +10,23 @@ import BasicModal from './basic-modal';
 import { JSX, useState } from 'react';
 
 // Toast
+import { useDeleteProfileMutation } from '@/services/others/profile/delete-recruiter-profile';
 import toast from 'react-hot-toast';
+import Loader from '../loader';
 
 const DeleteModal = (): JSX.Element => {
+  const { mutateAsync } = useDeleteProfileMutation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [deleteText, setDeleteText] = useState<string>('');
-
-  const handleDeleteAccount = () => {
+  const isPending = true;
+  const handleDeleteAccount = async () => {
     if (deleteText === 'Accomplishment') {
-      setIsOpen(false);
-      setDeleteText('');
-      toast.success('Account Deleted successfully');
+      const res = await mutateAsync();
+
+      if (res) {
+        setIsOpen(false);
+        setDeleteText('');
+      }
     } else toast.error('Invalid input');
   };
 
@@ -48,11 +54,12 @@ const DeleteModal = (): JSX.Element => {
           />
           <DialogClose asChild>
             <Button
+              disabled={isPending}
               variant={'destructive'}
               onClick={handleDeleteAccount}
               className="w-full bg-red h-14 rounded-xl"
             >
-              Delete
+              {isPending ? <Loader width="50" /> : 'Delete'}
             </Button>
           </DialogClose>
         </div>

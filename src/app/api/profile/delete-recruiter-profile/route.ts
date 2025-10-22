@@ -6,14 +6,13 @@ import {
   verifyToken,
 } from '@/lib/supabase/helper';
 import { deleteRecruiterProfile, getRecruiterProfile } from '@/services/server/recruiterService';
-import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 
 export async function OPTIONS() {
   return corsOptions();
 }
 
-export async function GET(request: NextRequest) {
+export async function DELETE(request: NextRequest) {
   try {
     const accessToken = await getAccessToken(request);
     if (!accessToken) {

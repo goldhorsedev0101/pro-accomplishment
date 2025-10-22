@@ -1,5 +1,5 @@
 import { corsOptions, response } from '@/lib/supabase/helper';
-import { uploadProfilePicture } from '@/services/server/authService';
+import { uploadProfilePicture } from '@/services/server/recruiterService';
 import { NextRequest } from 'next/server';
 
 export const runtime = 'nodejs';

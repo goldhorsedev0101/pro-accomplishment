@@ -19,6 +19,8 @@ import {
 import { IParams } from '@/types/params.type';
 import { FC, JSX, useState } from 'react';
 
+import students from 'public/icons/students.svg';
+
 // Queries
 import { useGetCandidateQuery } from '@/services/others/candidate/get-candidate-query';
 import { useGetSubCategoriesQuery } from '@/services/others/categories/get-sub-categories-query';
@@ -91,7 +93,11 @@ const CategoryView: FC<IParams & { name: string }> = ({ category, name }): JSX.E
         </div>
       ) : (meta_data?.total || 0) <= 0 ? (
         <div className="w-full self-center h-[40dvh] flex items-center justify-center">
-          <NoData title="No student found" />
+          <NoData
+            img={students}
+            title="No Students Found"
+            description="Once students are added, their profiles and achievements will appear here"
+          />
         </div>
       ) : (
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">

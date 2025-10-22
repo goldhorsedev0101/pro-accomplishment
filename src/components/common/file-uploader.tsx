@@ -20,8 +20,8 @@ import gallery from 'public/icons/gallery.svg';
 // Mutation
 
 // Loader
-import { uploadProfilePicture } from '@/services/server/authService';
 import { MoonLoader } from 'react-spinners';
+import { uploadProfilePicture } from '@/services/server/recruiterService';
 
 interface IProps {
   setFieldValue: FormikValues['setFieldValue'];

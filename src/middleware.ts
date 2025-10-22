@@ -19,19 +19,39 @@ const privateRoutes: Array<string> = [home, profile];
 export async function middleware({ url, nextUrl, cookies }: NextRequest) {
   const accessToken = cookies.get('accessToken')?.value;
   const { redirect, next } = NextResponse;
-  const user = await getUser(accessToken);
   const { pathname } = nextUrl;
+
+  // Early return for root and icons
+  if (pathname === '/' || pathname === '/icons') {
+    return redirect(new URL(home, url));
+  }
 
   const isPublicRoute = publicRoutes.includes(pathname);
   const isPrivateRoute = privateRoutes.includes(pathname);
 
-  if (pathname === '/' || pathname === '/icons') return redirect(new URL(home, url));
+  // If no token and trying to access private route -> redirect to signin
+  if (!accessToken && isPrivateRoute) {
+    return redirect(new URL(signIn, url));
+  }
 
-  // invalid token && private route
-  if (!user && isPrivateRoute) return redirect(new URL(signIn, url));
+  // If has token, validate it
+  if (accessToken) {
+    const user = await getUser(accessToken);
 
-  // valid token && public route
-  if (user && isPublicRoute) return redirect(new URL(home, url));
+    // Invalid token - clear it and redirect if on private route
+    if (!user) {
+      const response = isPrivateRoute ? redirect(new URL(signIn, url)) : next();
+
+      // Clear the invalid cookie
+      response.cookies.delete('accessToken');
+      return response;
+    }
+
+    // Valid token but on public route -> redirect to home
+    if (isPublicRoute) {
+      return redirect(new URL(home, url));
+    }
+  }
 
   // Default: Allow
   return next();

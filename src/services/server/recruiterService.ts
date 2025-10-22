@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase/server';
-import { ICustomError } from './authService';
+import { deleteExistingImage, ICustomError } from './authService';
 import dayjs from 'dayjs';
 export interface RecruiterProfile {
   recruiter_id: string;
@@ -195,4 +195,68 @@ export const deleteRecruiterProfile = async ({ profileId }: { profileId: string 
     data,
     error,
   };
+};
+
+export const uploadProfilePicture = async ({
+  oldUrl,
+  file,
+}: {
+  oldUrl?: string;
+  file: File | string;
+}) => {
+  console.log('🚀 [uploadProfilePicture] Start:', { oldUrl, fileType: typeof file });
+
+  // ✅ If already a string (i.e. existing URL), skip upload
+  if (typeof file === 'string') {
+    console.log('ℹ️ [uploadProfilePicture] File is already a string URL, skipping upload:', file);
+    return { error: null, data: file };
+  }
+
+  const fileExtension = file.name.split('.').pop();
+  const normalizedName = file.name.replace(/\s+/g, '_').replace(/\.[^/.]+$/, '');
+  const fileName = `${normalizedName}___${file.size}___${Date.now()}.${fileExtension}`;
+  const filePath = `${fileName}`;
+
+  console.log('🧩 [uploadProfilePicture] Prepared file details:', {
+    fileName,
+    fileExtension,
+    fileSize: file.size,
+    fileType: file.type,
+  });
+
+  // ✅ Delete old file if exists
+  if (oldUrl) {
+    console.log('🗑️ [uploadProfilePicture] Attempting to delete old file:', oldUrl);
+    const existingFilePath = oldUrl.split('/').pop();
+    if (existingFilePath) {
+      const { error } = await deleteExistingImage(existingFilePath);
+      if (error) {
+        console.error('❌ [uploadProfilePicture] Error deleting old file:', error);
+        return { error, data: null };
+      }
+      console.log('✅ [uploadProfilePicture] Old file deleted successfully');
+    } else {
+      console.warn('⚠️ [uploadProfilePicture] Could not extract file path from oldUrl');
+    }
+  }
+
+  console.log('⬆️ [uploadProfilePicture] Uploading new file to Supabase:', filePath);
+
+  const storageResponse = await supabase.storage.from('user-photos').upload(filePath, file, {
+    contentType: file.type,
+    upsert: true,
+  });
+
+  if (storageResponse?.error) {
+    console.error('❌ [uploadProfilePicture] Upload failed:', storageResponse.error);
+    return { error: storageResponse.error, data: null };
+  }
+
+  console.log('✅ [uploadProfilePicture] File uploaded successfully:', storageResponse.data);
+
+  const { data } = supabase.storage.from('user-photos').getPublicUrl(filePath);
+  console.log('🌐 [uploadProfilePicture] Public URL generated:', data.publicUrl);
+
+  console.log('🏁 [uploadProfilePicture] Upload process completed');
+  return { error: null, data };
 };

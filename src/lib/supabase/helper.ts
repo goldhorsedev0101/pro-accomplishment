@@ -1,4 +1,5 @@
 import * as jwt from 'jwt-decode';
+
 export interface ISupabasePromiseResolver {
   requestFunction: (requestBody: any) => Promise<{ data?: any; error?: any }>;
   requestBody: any;

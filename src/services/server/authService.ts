@@ -1,3 +1,5 @@
+'use server';
+import { supabasePromiseResolver } from '@/lib/supabase/helper';
 import { supabase } from '@/lib/supabase/server';
 import { EmailOtpType } from '@supabase/supabase-js';
 
@@ -59,6 +61,22 @@ export const signIn = async ({ email, password }: { email: string; password: str
     password,
   });
   if (error?.code == 'email_not_confirmed') {
+    const resendOtpResponse = await supabasePromiseResolver({
+      requestFunction: resendOtp,
+      requestBody: {
+        email: email,
+        type: 'signup',
+      },
+    });
+
+    if (!resendOtpResponse?.success) {
+      return {
+        message: 'OTP send failed',
+        data: { code: 'verification_email_resend_failed' },
+        error: null,
+      };
+    }
+
     return {
       message: 'OTP send successfully',
       data: { code: 'verification_email_resend' },

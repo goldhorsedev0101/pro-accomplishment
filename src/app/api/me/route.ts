@@ -10,7 +10,6 @@ import {
 import { getRecruiterProfileByEmail } from '@/services/server/authService';
 
 // Header
-import { headers } from 'next/headers';
 import { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {

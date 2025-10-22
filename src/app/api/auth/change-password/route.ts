@@ -5,9 +5,8 @@ import {
   supabasePromiseResolver,
 } from '@/lib/supabase/helper';
 import { signIn, updatePassword } from '@/services/server/authService';
-import { cookies } from 'next/headers';
-import { NextRequest } from 'next/server';
 import * as jwt from 'jwt-decode';
+import { NextRequest } from 'next/server';
 
 export async function OPTIONS() {
   return corsOptions();

@@ -6,7 +6,6 @@ import {
   verifyToken,
 } from '@/lib/supabase/helper';
 import { getSubCategories } from '@/services/server/categoryService';
-import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 
 export async function OPTIONS() {

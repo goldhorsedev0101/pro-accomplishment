@@ -92,10 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const fields = {
-    school: contact({ icon: icons.school, value: organization_name }, 1),
+    school: contact({ icon: icons.school, value: organization_name }, 1, false),
+    contacts: contacts.map((items, i) => contact(items, i, false)).join(''),
     categories: accomplishments?.map(accomplishmentLayout).join(''),
     gpa: contact({ icon: icons.star, value: gpa }, 1, true),
-    contacts: contacts.map(contact).join(''),
     objective: objective_for_summary,
     profile: profile_photo_url,
     quote: icons.quote,

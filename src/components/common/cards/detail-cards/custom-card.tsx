@@ -14,7 +14,7 @@ const CustomCard: FC<IProps> = ({ form_data }) => {
     <Box className="w-full !gap-y-3">
       <div>
         {accomplishment_name && (
-          <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
+          <p className="!text-sm font-medium !text-heading font-quicksand break-all capitalize">
             {accomplishment_name}
           </p>
         )}

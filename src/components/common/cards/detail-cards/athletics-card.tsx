@@ -26,7 +26,11 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
     <Box className="shadow-sm !text-start">
       <div className="flex justify-between items-start">
         <div>
-          <Heading className="!text-base font-quicksand" text={name ?? ''} width="medium" />
+          <Heading
+            className="!text-sm !text-heading font-quicksand break-all"
+            text={name ?? ''}
+            width="medium"
+          />
           <p className="font-quicksand text-neutral-grey-60 font-normal text-sm">
             {formatToDDMMYYYY(date || '')}
           </p>

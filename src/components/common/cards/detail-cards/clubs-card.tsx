@@ -1,9 +1,9 @@
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
 import { formatToDDMMYYYY } from '@/utils/date-format';
+import Image from 'next/image';
 import locationColored from 'public/icons/location-colored.svg';
 import bill from 'public/pdf/bill.svg';
 import { FC } from 'react';
-import Image from 'next/image';
 import Box from '../../box';
 
 interface IProps {
@@ -16,7 +16,11 @@ const ClubsCard: FC<IProps> = ({ form_data }) => {
   return (
     <Box>
       <div>
-        {title && <p className="font-medium quicksand text-[var(--heading)] break-all">{title}</p>}
+        {title && (
+          <p className="!text-sm font-medium !text-heading font-quicksand break-all capitalize">
+            {title}
+          </p>
+        )}
         {date_joined && (
           <p className="quicksand text-[var(--gray-70)] font-normal text-sm">
             {formatToDDMMYYYY(date_joined)}

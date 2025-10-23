@@ -64,7 +64,7 @@ const StudentCard = ({
             </div>
           )}
         </div>
-        <p className="text-neutral-grey-100 text-xs break-all">{about}</p>
+        <p className="text-neutral-grey-100 text-xs break-all capitalize">{about}</p>
         <div className="flex items-center gap-x-3">
           <div className="flex items-center gap-x-1">
             <Image src={school} alt="school" width={20} height={20} />

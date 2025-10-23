@@ -18,7 +18,7 @@ const TravelCard: FC<IProps> = ({ form_data }) => {
 
   return (
     <Box className="w-full !gap-y-3">
-      {title && <p className="font-medium text-[var(--heading)] quicksand break-all">{title}</p>}
+      {title && <p className="font-medium text-heading quicksand text-sm break-all">{title}</p>}
       <div className="flex items-center gap-x-3">
         <Image src={airplane} alt="airplane" className="size-6" />
         <div>

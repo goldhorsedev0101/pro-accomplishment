@@ -39,7 +39,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
         </div>
         <div>
           {title && (
-            <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
+            <p className="!text-sm font-medium !text-heading font-quicksand break-all capitalize">
               {title}
             </p>
           )}

@@ -44,7 +44,7 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
             )}
 
             {organization && (
-              <p className="quicksand text-[var(--gray-70)] font-normal text-xs break-all">
+              <p className="!text-sm font-medium !text-heading font-quicksand break-all">
                 {organization}
               </p>
             )}

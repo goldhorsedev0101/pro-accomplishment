@@ -31,7 +31,7 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
         <Image src={internshipAbroad} alt="internship" className="size-6" />
         <div>
           {title && (
-            <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
+            <p className="!text-sm font-medium !text-heading font-quicksand break-all capitalize">
               {title}
             </p>
           )}

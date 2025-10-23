@@ -18,7 +18,7 @@ const SpecializedSkillsCard: FC<IProps> = ({ form_data }) => {
         <Image src={ranking} alt="star" className="size-6" />
         <div>
           {accomplishment_name && (
-            <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
+            <p className="!text-sm font-medium !text-heading font-quicksand break-all capitalize">
               {accomplishment_name}
             </p>
           )}

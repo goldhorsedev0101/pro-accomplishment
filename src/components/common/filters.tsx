@@ -18,14 +18,24 @@ import Routes from '@/constants/routes';
 // Types
 import { JSX } from 'react';
 
+type Item = {
+  id: string;
+  name: string;
+  icon_url: string;
+};
+
 export function Filters(): JSX.Element {
   const { category } = Routes;
+
+  function sortAlphabetically(items: Item[]): Item[] {
+    return [...items].sort((a, b) => a.name.localeCompare(b.name));
+  }
 
   return (
     <div className="px-6 sm:px-10 md:px-20">
       <Carousel className="w-full">
         <CarouselContent className="-ml-1">
-          {Categories.map(({ icon_url, id, name }, index) => (
+          {sortAlphabetically(Categories).map(({ icon_url, id, name }, index) => (
             <CarouselItem
               key={index}
               className="pl-1 h-[250px] basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 2xl:basis-1/7 flex items-center justify-center"

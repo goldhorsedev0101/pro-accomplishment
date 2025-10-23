@@ -55,11 +55,16 @@ const SignUpView = (): JSX.Element => {
     initialValues,
     validationSchema: SignUpSchema,
 
-    onSubmit: async ({ phoneNumber, password, ...value }) => {
+    onSubmit: async ({ email, phoneNumber, password, ...value }) => {
       const pass = password.trimEnd().trimStart();
       try {
-        await mutateAsync({ ...value, phoneNumber: '+' + phoneNumber, password: pass });
-        setEmail(value.email);
+        await mutateAsync({
+          ...value,
+          phoneNumber: '+' + phoneNumber,
+          password: pass,
+          email: email.toLocaleLowerCase(),
+        });
+        setEmail(email.toLocaleLowerCase());
         push(verifyEmail);
         setRoute(SIGNUP);
       } catch (error) {

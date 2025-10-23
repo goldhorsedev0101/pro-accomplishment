@@ -34,7 +34,7 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
           <Heading
             className="!text-sm !text-heading font-quicksand !break-all"
             text={form_data?.job_title ?? 'N/A'}
-            width="semibold"
+            width="medium"
           />
           <p className="font-quicksand text-neutral-grey-70 font-normal text-xs break-all">
             {form_data?.company}

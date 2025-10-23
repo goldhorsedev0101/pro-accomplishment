@@ -25,7 +25,11 @@ const StudyAbroadCard: FC<IProps> = ({ form_data }) => {
 
   return (
     <Box className="w-full !gap-y-3">
-      {title && <p className="font-medium text-[var(--heading)] quicksand break-all">{title}</p>}
+      {title && (
+        <p className="!text-sm font-medium !text-heading font-quicksand break-all capitalize">
+          {title}
+        </p>
+      )}
       <div className="flex items-center gap-x-3">
         <Image src={teacherBlue} alt="teacher" className="size-6" />
         <div>

@@ -40,7 +40,7 @@ const SignInView = (): JSX.Element => {
       const pass = password.trimEnd().trimStart();
 
       try {
-        const { data } = await mutateAsync({ email, password: pass });
+        const { data } = await mutateAsync({ email: email.toLocaleLowerCase(), password: pass });
         const code = data?.code;
 
         if (code == 'verification_email_resend') {

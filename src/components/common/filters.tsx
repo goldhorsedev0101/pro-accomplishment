@@ -10,34 +10,22 @@ import {
 } from '@/components/ui/carousel';
 import Image from 'next/image';
 import Link from 'next/link';
-import Loader from './loader';
 
 // Constants
+import { Categories } from '@/constants/catehories';
 import Routes from '@/constants/routes';
+
 // Types
 import { JSX } from 'react';
 
-// Query
-import { useGetCategoriesQuery } from '@/services/others/categories/get-categories-query';
-
 export function Filters(): JSX.Element {
   const { category } = Routes;
-  const { data, isPending } = useGetCategoriesQuery();
-  const categories = data?.data || [];
-
-  if (isPending) {
-    return (
-      <div className="flex items-center justify-center">
-        <Loader />
-      </div>
-    );
-  }
 
   return (
     <div className="px-6 sm:px-10 md:px-20">
       <Carousel className="w-full">
         <CarouselContent className="-ml-1">
-          {categories.map(({ icon_url, id, name }, index) => (
+          {Categories.map(({ icon_url, id, name }, index) => (
             <CarouselItem
               key={index}
               className="pl-1 h-[250px] basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 2xl:basis-1/7 flex items-center justify-center"

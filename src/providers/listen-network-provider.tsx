@@ -3,13 +3,12 @@
 import BasicModal from '@/components/common/modals/basic-modal';
 import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 interface IProps {
   children: React.ReactNode;
 }
 
-// Utility function to double-check if internet is really working
 async function isInternetConnectionWorking() {
   if (!navigator.onLine) return false;
 
@@ -21,9 +20,7 @@ async function isInternetConnectionWorking() {
     await fetch(window.location.origin, { method: 'HEAD', headers, cache: 'no-store' });
     return true;
   } catch (error) {
-    if (error instanceof TypeError) {
-      return false;
-    }
+    if (error instanceof TypeError) return false;
     throw error;
   }
 }
@@ -32,8 +29,6 @@ const ListenNetworkProvider = ({ children }: IProps) => {
   const [isOffline, setIsOffline] = useState<boolean>(false);
 
   useEffect(() => {
-    // Initial checcted = await isInternetConnectionWorking();
-    // if (isConnected) {
     const checkConnection = async () => {
       const isConnected = await isInternetConnectionWorking();
       setIsOffline(!isConnected);
@@ -68,12 +63,7 @@ const ListenNetworkProvider = ({ children }: IProps) => {
               </p>
               <DialogClose asChild>
                 <Button
-                  onClick={async () => {
-                    // const isConnected = await isInternetConnectionWorking();
-                    // if (isConnected) {
-                    window.location.reload();
-                    // }
-                  }}
+                  onClick={async () => window.location.reload()}
                   className="w-full h-14 rounded-xl"
                 >
                   Retry
@@ -86,7 +76,7 @@ const ListenNetworkProvider = ({ children }: IProps) => {
     );
   }
 
-  return <>{children}</>;
+  return <Fragment>{children}</Fragment>;
 };
 
 export default ListenNetworkProvider;

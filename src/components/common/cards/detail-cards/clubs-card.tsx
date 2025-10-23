@@ -22,7 +22,7 @@ const ClubsCard: FC<IProps> = ({ form_data }) => {
           </p>
         )}
         {date_joined && (
-          <p className="quicksand text-[var(--gray-70)] font-normal text-sm">
+          <p className="font-quicksand text-[var(--gray-70)] font-normal text-sm">
             {formatToDDMMYYYY(date_joined)}
           </p>
         )}
@@ -32,13 +32,13 @@ const ClubsCard: FC<IProps> = ({ form_data }) => {
           {tag && (
             <div className="flex items-center gap-x-2">
               <Image className="size-5" alt="" src={bill} />
-              <p className="quicksand font-normal text-sm text-[var(--heading)]">{tag}</p>
+              <p className="font-quicksand font-normal text-sm text-[var(--heading)]">{tag}</p>
             </div>
           )}
           {location && (
             <div className="flex items-center gap-x-2">
               <Image className="size-5" alt="" src={locationColored} />
-              <p className="quicksand font-normal text-sm text-[var(--heading)]">{location}</p>
+              <p className="font-quicksand font-normal text-sm text-[var(--heading)]">{location}</p>
             </div>
           )}
         </div>

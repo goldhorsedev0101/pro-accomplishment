@@ -19,14 +19,14 @@ const InvestingCard: FC<IProps> = ({ form_data }) => {
           </p>
         )}
         {date && (
-          <p className="quicksand flex items-center justify-between text-[var(--gray-60)] font-normal text-xs">
+          <p className="font-quicksand flex items-center justify-between text-[var(--gray-60)] font-normal text-xs">
             {investment_type && <span>{investment_type}</span>}
             <span>{formatToDDMMYYYY(date)}</span>
           </p>
         )}
       </div>
       {notes && (
-        <p className="text-[var(--gray-80)] text-xs font-normal quicksand break-all line-clamp-2">
+        <p className="text-[var(--gray-80)] text-xs font-normal font-quicksand break-all line-clamp-2">
           {notes}
         </p>
       )}

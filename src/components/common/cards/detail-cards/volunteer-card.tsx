@@ -44,7 +44,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
             </p>
           )}
           {(startDate || endDate) && (
-            <p className="quicksand text-[var(--gray-70)] font-normal text-xs break-all">
+            <p className="font-quicksand text-[var(--gray-70)] font-normal text-xs break-all">
               {startDate}
               {startDate && endDate ? ' - ' : ''}
               {endDate}
@@ -56,7 +56,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
       {organization && (
         <div className="flex gap-x-1.5 items-center">
           <Image src={building} alt="building" className="size-4" />
-          <p className="text-[var(--black)] text-sm font-normal quicksand break-all">
+          <p className="text-[var(--black)] text-sm font-normal font-quicksand break-all">
             {organization}
           </p>
         </div>
@@ -77,7 +77,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
       )}
 
       {link && (
-        <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal quicksand">
+        <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal font-quicksand">
           {link}
         </Link>
       )}
@@ -85,7 +85,9 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
       {doc && (
         <div className="flex gap-x-1.5 items-start">
           <Image src={note} alt="note" className="size-5" />
-          <p className="text-[var(--gray-70)] text-sm font-normal quicksand break-all">{doc}</p>
+          <p className="text-[var(--gray-70)] text-sm font-normal font-quicksand break-all">
+            {doc}
+          </p>
         </div>
       )}
     </Box>

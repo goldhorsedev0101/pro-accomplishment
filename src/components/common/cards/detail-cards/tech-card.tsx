@@ -23,7 +23,7 @@ const TechCard: FC<IProps> = ({ form_data }) => {
             </p>
           )}
           {date && (
-            <p className="quicksand text-[var(--gray-70)] font-normal text-xs break-all">
+            <p className="font-quicksand text-[var(--gray-70)] font-normal text-xs break-all">
               {formatToMMMMDYYYY(date)}
             </p>
           )}

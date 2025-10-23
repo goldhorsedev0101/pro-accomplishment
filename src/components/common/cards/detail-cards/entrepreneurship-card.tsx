@@ -23,7 +23,9 @@ const EntrepreneurshipCard: FC<IProps> = ({ form_data }) => {
           </p>
         )}
         {date && (
-          <p className="quicksand text-[var(--gray-60)] font-normal text-xs break-all">{date}</p>
+          <p className="font-quicksand text-[var(--gray-60)] font-normal text-xs break-all">
+            {date}
+          </p>
         )}
       </div>
     </Box>

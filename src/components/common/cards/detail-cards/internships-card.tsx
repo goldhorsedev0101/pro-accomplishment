@@ -38,7 +38,7 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
         <div className="flex w-full justify-between">
           <div className="w-full">
             {title && (
-              <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
+              <p className="font-medium text-[var(--heading)] font-quicksand !text-sm break-all">
                 {title}
               </p>
             )}
@@ -50,7 +50,7 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
             )}
 
             {(startDate || endDate) && (
-              <p className="mt-2 text-[var(--black)] text-xs font-medium quicksand">
+              <p className="mt-2 text-[var(--black)] text-xs font-quicksand">
                 {startDate}
                 {startDate && endDate ? ' - ' : ''}
                 {endDate}
@@ -79,14 +79,14 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
       )}
 
       {link && (
-        <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal quicksand">
+        <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal font-quicksand">
           {link}
         </Link>
       )}
       {doc && (
         <div className="flex gap-x-1.5 items-start">
           <Image src={note} alt="note" className="size-5" />
-          <p className="text-[var(--gray-70)] text-sm font-normal quicksand">{doc}</p>
+          <p className="text-[var(--gray-70)] text-sm font-normal font-quicksand">{doc}</p>
         </div>
       )}
     </Box>

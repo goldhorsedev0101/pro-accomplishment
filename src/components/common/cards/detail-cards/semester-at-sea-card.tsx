@@ -35,12 +35,12 @@ const SemesterAtSeaCard: FC<IProps> = ({ form_data }) => {
           <Image src={routing} alt="routing" className="size-6" />
           <div>
             {destination && (
-              <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
+              <p className="font-medium text-[var(--heading)] font-quicksand !text-sm break-all">
                 {destination}
               </p>
             )}
             {date && (
-              <p className="quicksand text-[var(--gray-60)] font-normal text-xs break-all">
+              <p className="font-quicksand text-[var(--gray-60)] font-normal text-xs break-all">
                 {date}
               </p>
             )}
@@ -50,7 +50,7 @@ const SemesterAtSeaCard: FC<IProps> = ({ form_data }) => {
       {institution && (
         <div className="flex gap-x-2 items-center">
           <Image src={building} alt="building" className="size-4" />
-          <p className="text-[var(--black)] text-sm font-normal quicksand">{institution}</p>
+          <p className="text-[var(--black)] text-sm font-normal font-quicksand">{institution}</p>
         </div>
       )}
     </Box>

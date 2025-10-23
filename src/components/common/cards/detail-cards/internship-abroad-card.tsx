@@ -36,7 +36,9 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
             </p>
           )}
           {date && (
-            <p className="quicksand text-[var(--gray-70)] font-normal text-sm break-all">{date}</p>
+            <p className="font-quicksand text-[var(--gray-70)] font-normal text-sm break-all">
+              {date}
+            </p>
           )}
         </div>
       </div>
@@ -44,14 +46,14 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
         <div className="space-y-2">
           <div className="flex items-center gap-x-2">
             <Image className="size-5" alt="" src={locationColored} />
-            <p className="quicksand font-normal text-sm text-[var(--black)]">{destination}</p>
+            <p className="font-quicksand font-normal text-sm text-[var(--black)]">{destination}</p>
           </div>
         </div>
       )}
       {company && (
         <div className="flex items-center gap-x-2">
           <Image className="size-5" alt="" src={agency} />
-          <p className="quicksand font-normal text-sm text-[var(--black)]">{company}</p>
+          <p className="font-quicksand font-normal text-sm text-[var(--black)]">{company}</p>
         </div>
       )}
     </Box>

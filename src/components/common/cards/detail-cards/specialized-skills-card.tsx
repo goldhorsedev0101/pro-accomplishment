@@ -23,14 +23,16 @@ const SpecializedSkillsCard: FC<IProps> = ({ form_data }) => {
             </p>
           )}
           {date && (
-            <p className="quicksand text-[var(--gray-70)] font-normal text-xs">
+            <p className="font-quicksand text-[var(--gray-70)] font-normal text-xs">
               {formatToDDMMYYYY(date)}
             </p>
           )}
         </div>
       </div>
       {notes && (
-        <p className="text-[var(--gray-70)] text-xs font-normal quicksand break-all">{notes}</p>
+        <p className="text-[var(--gray-70)] text-xs font-normal font-quicksand break-all">
+          {notes}
+        </p>
       )}
     </Box>
   );

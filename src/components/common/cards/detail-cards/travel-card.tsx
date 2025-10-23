@@ -18,16 +18,20 @@ const TravelCard: FC<IProps> = ({ form_data }) => {
 
   return (
     <Box className="w-full !gap-y-3">
-      {title && <p className="font-medium text-heading quicksand text-sm break-all">{title}</p>}
+      {title && (
+        <p className="font-medium text-heading font-quicksand text-sm break-all">{title}</p>
+      )}
       <div className="flex items-center gap-x-3">
         <Image src={airplane} alt="airplane" className="size-6" />
         <div>
           {destination && (
-            <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
+            <p className="font-medium text-[var(--heading)] font-quicksand !text-sm break-all">
               {destination}
             </p>
           )}
-          {date && <p className="quicksand text-[var(--gray-60)] font-normal text-xs">{date}</p>}
+          {date && (
+            <p className="font-quicksand text-[var(--gray-60)] font-normal text-xs">{date}</p>
+          )}
         </div>
       </div>
     </Box>

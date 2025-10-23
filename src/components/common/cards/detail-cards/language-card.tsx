@@ -36,7 +36,7 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
           </p>
         )}
         {date && (
-          <p className="quicksand text-[var(--gray-60)] font-normal text-xs">
+          <p className="font-quicksand text-[var(--gray-60)] font-normal text-xs">
             {formatToDDMMYYYY(date)}
           </p>
         )}
@@ -46,13 +46,13 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
           {lang && (
             <div className="flex items-center gap-x-2">
               <Image className="size-5" alt="" src={language} />
-              <p className="quicksand font-semibold text-sm text-[var(--black)]">{lang}</p>
+              <p className="font-quicksand font-medium text-sm text-[var(--black)]">{lang}</p>
             </div>
           )}
           {yearsOfStudy && (
             <div className="flex items-center gap-x-2">
               <Image className="size-5" alt="" src={book} />
-              <p className="quicksand font-normal w-full flex items-center justify-between text-sm text-[var(--black)]">
+              <p className="font-quicksand font-normal w-full flex items-center justify-between text-sm text-[var(--black)]">
                 Years of Study
                 <span className="font-medium">{yearsOfStudy}</span>
               </p>
@@ -61,7 +61,9 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
           {institute && (
             <div className="flex items-center gap-x-2">
               <Image className="size-5" alt="" src={building} />
-              <p className="quicksand font-normal text-sm text-[var(--gray-70)]">{institute}</p>
+              <p className="font-quicksand font-normal text-sm text-[var(--gray-70)]">
+                {institute}
+              </p>
             </div>
           )}
         </div>
@@ -75,14 +77,16 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
         <hr className="-my-2 border border-[var(--gray-10)]" />
       )}
       {link && (
-        <a href={validUrl} className="text-[var(--blue)] text-xs font-normal quicksand">
+        <a href={validUrl} className="text-[var(--blue)] text-xs font-normal font-quicksand">
           {link}
         </a>
       )}
       {notes && (
         <div className="flex gap-x-1.5 items-start">
           <Image src={note} alt="note" className="size-5" />
-          <p className="text-[var(--gray-70)] text-sm font-normal quicksand break-all">{notes}</p>
+          <p className="text-[var(--gray-70)] text-sm font-normal font-quicksand break-all">
+            {notes}
+          </p>
         </div>
       )}
     </Box>

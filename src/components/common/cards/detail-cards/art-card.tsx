@@ -22,7 +22,7 @@ const ArtCard: FC<IProps> = ({ form_data }) => {
         )}
 
         {date && (
-          <p className="quicksand text-[var(--gray-60)] font-normal text-xs">
+          <p className="font-quicksand text-[var(--gray-60)] font-normal text-xs">
             {formatToDDMMYYYY(date)}
           </p>
         )}
@@ -31,7 +31,7 @@ const ArtCard: FC<IProps> = ({ form_data }) => {
       {notes && (
         <div className="flex gap-x-2 items-start">
           <Image src={note} alt="note" className="size-4" />
-          <p className="text-[var(--gray-80)] text-xs font-normal quicksand break-all line-clamp-2">
+          <p className="text-[var(--gray-80)] text-xs font-normal font-quicksand break-all line-clamp-2">
             {notes}
           </p>
         </div>

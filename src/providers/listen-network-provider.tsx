@@ -32,7 +32,8 @@ const ListenNetworkProvider = ({ children }: IProps) => {
   const [isOffline, setIsOffline] = useState<boolean>(false);
 
   useEffect(() => {
-    // Initial check
+    // Initial checcted = await isInternetConnectionWorking();
+    // if (isConnected) {
     const checkConnection = async () => {
       const isConnected = await isInternetConnectionWorking();
       setIsOffline(!isConnected);
@@ -68,10 +69,10 @@ const ListenNetworkProvider = ({ children }: IProps) => {
               <DialogClose asChild>
                 <Button
                   onClick={async () => {
-                    const isConnected = await isInternetConnectionWorking();
-                    if (isConnected) {
-                      window.location.reload();
-                    }
+                    // const isConnected = await isInternetConnectionWorking();
+                    // if (isConnected) {
+                    window.location.reload();
+                    // }
                   }}
                   className="w-full h-14 rounded-xl"
                 >

@@ -4,8 +4,6 @@ import BasicModal from '@/components/common/modals/basic-modal';
 import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
 import { listenNetworkStatus } from '@/utils/listen-network-status';
-// import { useQueryClient } from '@tanstack/react-query';
-// import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface IProps {
@@ -13,22 +11,27 @@ interface IProps {
 }
 
 const ListenNetworkProvider = ({ children }: IProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  // const queryClient = useQueryClient();
-  // const router = useRouter();
-
-  // const { refresh } = router;
+  const [isOpen, setIsOpen] = useState<boolean>(!navigator.onLine);
 
   useEffect(() => {
+    // Listen to online/offline changes
     const unsubscribe = listenNetworkStatus(
-      async () => {
-        setIsOpen(false);
-        // refresh();
-        // queryClient.invalidateQueries();
-      },
+      () => setIsOpen(false),
       () => setIsOpen(true),
     );
-    return unsubscribe;
+
+    // Handle browser "back/forward" navigation restoring state
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        setIsOpen(!navigator.onLine);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      unsubscribe();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
   }, []);
 
   if (isOpen) {
@@ -36,10 +39,7 @@ const ListenNetworkProvider = ({ children }: IProps) => {
       <div className="h-full w-full">
         <BasicModal
           isOpen={isOpen}
-          setIsOpen={(e) => {
-            // setIsOpen(e);
-            // refresh();
-          }}
+          setIsOpen={() => {}}
           trigger={{ child: null }}
           title={{
             title: 'Please check your internet connection',
@@ -61,7 +61,8 @@ const ListenNetworkProvider = ({ children }: IProps) => {
       </div>
     );
   }
-  return <div>{children}</div>;
+
+  return <>{children}</>;
 };
 
 export default ListenNetworkProvider;

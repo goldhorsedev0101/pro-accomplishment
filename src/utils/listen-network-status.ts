@@ -1,4 +1,7 @@
-export const listenNetworkStatus = (onOnline: () => void, onOffline: () => void) => {
+export const listenNetworkStatus = (
+  onOnline: () => Promise<void>,
+  onOffline: () => Promise<void>,
+) => {
   // Initial check
   if (!navigator.onLine) {
     onOffline();

@@ -3,46 +3,57 @@
 import BasicModal from '@/components/common/modals/basic-modal';
 import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
-import { listenNetworkStatus } from '@/utils/listen-network-status';
 import { useEffect, useState } from 'react';
 
 interface IProps {
   children: React.ReactNode;
 }
 
+// Utility function to double-check if internet is really working
+async function isInternetConnectionWorking() {
+  if (!navigator.onLine) return false;
+
+  const headers = new Headers();
+  headers.append('cache-control', 'no-cache');
+  headers.append('pragma', 'no-cache');
+
+  try {
+    await fetch(window.location.origin, { method: 'HEAD', headers, cache: 'no-store' });
+    return true;
+  } catch (error) {
+    if (error instanceof TypeError) {
+      return false;
+    }
+    throw error;
+  }
+}
+
 const ListenNetworkProvider = ({ children }: IProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(!navigator.onLine);
-  console.log('navigator.onLine', navigator.onLine);
+  const [isOffline, setIsOffline] = useState<boolean>(false);
 
   useEffect(() => {
-    // Listen to online/offline changes
-    const unsubscribe = listenNetworkStatus(
-      () => setIsOpen(false),
-      () => setIsOpen(true),
-    );
-
-    // Handle browser "back/forward" navigation restoring state
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible') {
-        console.log('navigator.onLine with visibility change', navigator.onLine);
-        setIsOpen(!navigator.onLine);
-      }
+    // Initial check
+    const checkConnection = async () => {
+      const isConnected = await isInternetConnectionWorking();
+      setIsOffline(!isConnected);
     };
-    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    checkConnection();
+
+    window.addEventListener('online', checkConnection);
+    window.addEventListener('offline', checkConnection);
 
     return () => {
-      unsubscribe();
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('online', checkConnection);
+      window.removeEventListener('offline', checkConnection);
     };
   }, []);
 
-  console.log('isOpen', isOpen);
-
-  if (isOpen) {
+  if (isOffline) {
     return (
       <div className="h-full w-full">
         <BasicModal
-          isOpen={isOpen}
+          isOpen={true}
           setIsOpen={() => {}}
           trigger={{ child: null }}
           title={{
@@ -55,7 +66,15 @@ const ListenNetworkProvider = ({ children }: IProps) => {
                 Click retry once you are back online
               </p>
               <DialogClose asChild>
-                <Button onClick={() => window.location.reload()} className="w-full h-14 rounded-xl">
+                <Button
+                  onClick={async () => {
+                    const isConnected = await isInternetConnectionWorking();
+                    if (isConnected) {
+                      window.location.reload();
+                    }
+                  }}
+                  className="w-full h-14 rounded-xl"
+                >
                   Retry
                 </Button>
               </DialogClose>

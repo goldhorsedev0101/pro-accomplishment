@@ -21,7 +21,7 @@ export const contacts = ({
   address?: string;
 }): IContact => [
   { icon: sms, label: email },
-  { icon: call, label: phone_number },
+  { icon: call, label: '+' + phone_number },
   { icon: location, label: address },
   { icon: linkIcon, label: link },
 ];

@@ -85,10 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const location = `${city}, ${state}, ${country}`;
 
   const contacts = [
-    { icon: icons.email, value: email },
-    { icon: icons.call, value: phone_number },
-    { icon: icons.location, value: location },
-    { icon: icons.link, value: link },
+    { icon: icons.email, value: email, gpa: false },
+    { icon: icons.call, value: '+' + phone_number, gpa: false },
+    { icon: icons.location, value: location, gpa: false },
+    { icon: icons.link, value: link, gpa: false },
   ];
 
   const fields = {

@@ -18,6 +18,7 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
     date_departed,
     company,
     destination,
+    internship_type,
   } = form_data || {};
 
   const date =
@@ -27,21 +28,22 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
 
   return (
     <Box>
-      <div className="flex items-center gap-x-3">
-        <Image src={internshipAbroad} alt="internship" className="size-6" />
-        <div>
-          {title && (
-            <p className="!text-sm font-medium !text-heading font-quicksand break-all capitalize">
-              {title}
-            </p>
-          )}
-          {date && (
-            <p className="font-quicksand text-[var(--gray-70)] font-normal text-sm break-all">
-              {date}
-            </p>
-          )}
+      <Box className="!border-none !flex-row items-center justify-between !p-0 !gap-2">
+        <div className="flex items-center">
+          <div className="flex items-center justify-center size-9 bg-primary-20 rounded-full">
+            <Image alt="title/award" src={internshipAbroad} width={24} height={24} />
+          </div>
+          <div className="gap-x-1">
+            <p className="text-heading font-medium text-sm font-quicksand capitalize">{title}</p>
+            <p className="text-neutral-grey-70 text-sm">{date}</p>
+          </div>
         </div>
-      </div>
+
+        {internship_type && (
+          <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">{internship_type}</p>
+        )}
+      </Box>
+
       {location && (
         <div className="space-y-2">
           <div className="flex items-center gap-x-2">

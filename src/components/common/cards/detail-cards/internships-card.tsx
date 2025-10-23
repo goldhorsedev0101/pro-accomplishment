@@ -58,7 +58,7 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
             )}
           </div>
           {form_data?.internship_type && (
-            <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">
+            <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-xs w-full max-w-fit h-fit">
               {form_data?.internship_type}
             </p>
           )}

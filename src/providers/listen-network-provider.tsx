@@ -18,26 +18,18 @@ const ListenNetworkProvider = ({ children }: IProps) => {
   const router = useRouter();
 
   const { refresh } = router;
-  const [isOnline, setIsOnline] = useState(true);
 
   useEffect(() => {
-    const updateStatus = () => setIsOnline(navigator.onLine);
-
-    window.addEventListener('online', updateStatus);
-    window.addEventListener('offline', updateStatus);
-
-    updateStatus(); // initialize state
-
-    return () => {
-      window.removeEventListener('online', updateStatus);
-      window.removeEventListener('offline', updateStatus);
-    };
-  }, []);
-
-  if(isOnline){
-    return <div className="">Please check your internet connection</div>;
-  }
-
+    const unsubscribe = listenNetworkStatus(
+      async () => {
+        setIsOpen(false);
+        refresh();
+        queryClient.invalidateQueries();
+      },
+      () => setIsOpen(true),
+    );
+    return unsubscribe;
+  }, [router, queryClient]);
 
   return (
     <div>

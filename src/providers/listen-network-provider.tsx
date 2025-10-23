@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
 import { listenNetworkStatus } from '@/utils/listen-network-status';
 // import { useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface IProps {
@@ -15,9 +15,9 @@ interface IProps {
 const ListenNetworkProvider = ({ children }: IProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   // const queryClient = useQueryClient();
-  const router = useRouter();
+  // const router = useRouter();
 
-  const { refresh } = router;
+  // const { refresh } = router;
 
   useEffect(() => {
     const unsubscribe = listenNetworkStatus(
@@ -51,7 +51,7 @@ const ListenNetworkProvider = ({ children }: IProps) => {
                 Click retry once you are back online
               </p>
               <DialogClose asChild>
-                <Button onClick={refresh} className="w-full h-14 rounded-xl">
+                <Button onClick={() => window.location.reload()} className="w-full h-14 rounded-xl">
                   Retry
                 </Button>
               </DialogClose>

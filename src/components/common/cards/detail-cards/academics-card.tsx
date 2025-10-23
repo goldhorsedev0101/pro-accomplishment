@@ -19,7 +19,7 @@ interface IProps {
 
 const AcademicsCard: FC<IProps> = ({ form_data }): JSX.Element => {
   const data = [
-    { icon: book, label: 'Math' },
+    { icon: book, label: form_data?.class },
     {
       icon: percentage,
       label: form_data?.standardized_test_score ? form_data?.standardized_test_score + '%' : '',

@@ -16,8 +16,8 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
     accomplishment_name: title,
     date_arrived,
     date_departed,
-    place_of_work: location,
     company,
+    destination,
   } = form_data || {};
 
   const date =
@@ -44,7 +44,7 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
         <div className="space-y-2">
           <div className="flex items-center gap-x-2">
             <Image className="size-5" alt="" src={locationColored} />
-            <p className="quicksand font-normal text-sm text-[var(--black)]">{location}</p>
+            <p className="quicksand font-normal text-sm text-[var(--black)]">{destination}</p>
           </div>
         </div>
       )}

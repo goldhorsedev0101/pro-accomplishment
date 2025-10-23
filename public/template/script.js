@@ -166,8 +166,8 @@ const accomplishmentLayout = (
       const endYear = formatToYYYY(form_data?.academic_year_ended ?? '');
 
       return academicsCard({
-        subject: 'Math',
         title: form_data?.name,
+        subject: form_data?.class,
         subTitle: form_data?.notes,
         grade: `Grade/GPA ${form_data?.grade_or_gpa}`,
         percentage: form_data?.standardized_test_score + '%',
@@ -308,7 +308,7 @@ const accomplishmentLayout = (
           form_data?.date_arrived,
         )} - ${form_data?.date_departed ? formatToDDMMMYYYY(form_data?.date_departed) : 'Ongoing'}`,
         company: form_data?.company,
-        location: form_data?.place_of_work,
+        location: form_data?.destination,
         title: form_data?.accomplishment_name,
         internship_type: form_data?.internship_type,
       });

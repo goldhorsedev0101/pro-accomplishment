@@ -52,12 +52,13 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
           <Heading text={name} className="text-4xl" width="medium" />
 
           {quote && (
-            <p className="flex items-start gap-x-2">
-              <PiQuotesLight size={20} className="text-primary rotate-180 min-w-5 min-h-5" />
-              <span className="max-w-[634px] text-neutral-grey-80 font-normal text-lg">
-                {quote}
-              </span>
-              <PiQuotesLight size={20} className="text-primary min-w-5 min-h-5" />
+            <p className="text-neutral-grey-80 font-normal text-lg">
+              <PiQuotesLight
+                size={20}
+                className="text-primary rotate-180 min-w-5 min-h-5 inline mr-1"
+              />
+              {quote}
+              <PiQuotesLight size={20} className="text-primary min-w-5 min-h-5 inline ml-1" />
             </p>
           )}
 

@@ -15,7 +15,7 @@ import { formatToDDMMYYYY } from '@/utils/date-format';
 
 // Icons
 import building from 'public/icons/building.svg';
-import cup from 'public/icons/cup.svg';
+import start from 'public/icons/medal-star.svg';
 
 interface IProps {
   form_data?: FormData;
@@ -26,8 +26,8 @@ const CertificationsDetailsModal: FC<IProps> = ({ form_data }) => {
     <div className="flex flex-col gap-y-4 font-quicksand">
       {(form_data?.certification_title || form_data?.date_received) && (
         <Box className="!border-none !flex-row items-center !p-3 !gap-2">
-          <div className="flex items-center justify-center size-9 bg-yellow-light rounded-full">
-            <Image alt="title/award" src={cup} width={24} height={24} />
+          <div className="w-9 h-9 rounded-full bg-purple-light flex items-center justify-center">
+            <Image src={start} alt="start" sizes="24" />
           </div>
           <div className="gap-x-1">
             <p className="text-heading font-medium capitalize">{form_data?.certification_title}</p>

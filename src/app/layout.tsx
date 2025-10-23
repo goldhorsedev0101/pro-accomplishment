@@ -33,7 +33,7 @@ export default function RootLayout({
       >
         <QueryProvider>
           <Toaster />
-          <ListenNetworkProvider>{children}</ListenNetworkProvider>
+          {children}
         </QueryProvider>
       </body>
     </html>

@@ -12,6 +12,7 @@ interface IProps {
 
 const ListenNetworkProvider = ({ children }: IProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(!navigator.onLine);
+  console.log('navigator.onLine', navigator.onLine);
 
   useEffect(() => {
     // Listen to online/offline changes
@@ -23,6 +24,7 @@ const ListenNetworkProvider = ({ children }: IProps) => {
     // Handle browser "back/forward" navigation restoring state
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') {
+        console.log('navigator.onLine with visibility change', navigator.onLine);
         setIsOpen(!navigator.onLine);
       }
     };
@@ -33,6 +35,8 @@ const ListenNetworkProvider = ({ children }: IProps) => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, []);
+
+  console.log('isOpen', isOpen);
 
   if (isOpen) {
     return (

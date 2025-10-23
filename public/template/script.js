@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================ Components ============================
-const contact = (item, i, isGPA) => {
+const contact = (item, i, isGPA = false) => {
   const { icon, value } = item;
 
   if (!value) return '';

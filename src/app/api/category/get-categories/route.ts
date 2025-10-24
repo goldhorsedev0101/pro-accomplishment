@@ -1,12 +1,9 @@
-import {
-  corsOptions,
-  getAccessToken,
-  response,
-  supabasePromiseResolver,
-  verifyToken,
-} from '@/lib/supabase/helper';
+import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
+import { authGuard } from '@/services/server/authGuard';
 import { getCategories } from '@/services/server/categoryService';
 import { NextRequest } from 'next/server';
+
+export const runtime = 'edge';
 
 export async function OPTIONS() {
   return corsOptions();
@@ -14,33 +11,14 @@ export async function OPTIONS() {
 
 export async function GET(request: NextRequest) {
   try {
-    const accessToken = await getAccessToken(request);
-    if (!accessToken) {
-      return response(
-        {
-          message: 'Unauthorized',
-          data: null,
-          error: 'Unauthorized',
-        },
-        404,
-      );
-    }
-    const tokenCheckResponse = verifyToken(accessToken);
-    if (!tokenCheckResponse?.valid) {
-      return response(
-        {
-          message: tokenCheckResponse.error,
-          data: null,
-          error: tokenCheckResponse.error,
-        },
-        401,
-      );
-    }
-    `~`;
+    const { errorResponse } = await authGuard(request);
+    if (errorResponse) return errorResponse;
+
     const getCategoriesResponse = await supabasePromiseResolver({
       requestFunction: getCategories,
       requestBody: {},
     });
+
     if (!getCategoriesResponse?.success) {
       return response(
         {
@@ -51,6 +29,7 @@ export async function GET(request: NextRequest) {
         400,
       );
     }
+
     return response(
       {
         message: 'Categories retrieved successfully.',

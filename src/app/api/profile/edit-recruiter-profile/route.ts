@@ -1,12 +1,9 @@
-import {
-  corsOptions,
-  getAccessToken,
-  response,
-  supabasePromiseResolver,
-  verifyToken,
-} from '@/lib/supabase/helper';
+import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
+import { authGuard } from '@/services/server/authGuard';
 import { editRecruiterProfile } from '@/services/server/recruiterService';
 import { NextRequest } from 'next/server';
+
+export const runtime = 'edge';
 
 export async function OPTIONS() {
   return corsOptions();
@@ -20,7 +17,7 @@ export async function PUT(request: NextRequest) {
     if (!firstName || !lastName || !phoneNumber || !iso2 || !profileImage) {
       return response(
         {
-          message: 'First name, last name, phone number and profile picture are required.',
+          message: 'First name, last name, phone number, iso2, and profile picture are required.',
           data: null,
           error: 'Validation error',
         },
@@ -28,33 +25,13 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const accessToken = await getAccessToken(request);
-    if (!accessToken) {
-      return response(
-        {
-          message: 'Unauthorized',
-          data: null,
-          error: 'Unauthorized',
-        },
-        404,
-      );
-    }
-    const tokenCheckResponse = verifyToken(accessToken);
-    if (!tokenCheckResponse?.valid) {
-      return response(
-        {
-          message: tokenCheckResponse.error,
-          data: null,
-          error: tokenCheckResponse.error,
-        },
-        401,
-      );
-    }
+    const { recruiter, errorResponse } = await authGuard(request);
+    if (errorResponse) return errorResponse;
 
     const editProfileResponse = await supabasePromiseResolver({
       requestFunction: editRecruiterProfile,
       requestBody: {
-        profileId: tokenCheckResponse?.id,
+        profileId: recruiter?.profile_id,
         firstName,
         lastName,
         phoneNumber,
@@ -77,7 +54,7 @@ export async function PUT(request: NextRequest) {
     return response(
       {
         message: 'Recruiter profile updated successfully.',
-        data: editProfileResponse?.data,
+        data: editProfileResponse?.data || null,
         error: null,
       },
       200,

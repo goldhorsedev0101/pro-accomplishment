@@ -1,8 +1,9 @@
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
 import { authGuard } from '@/services/server/authGuard';
 import { getFavoriteCandidates } from '@/services/server/favoriteService';
-
 import { NextRequest } from 'next/server';
+
+export const runtime = 'edge';
 
 export async function OPTIONS() {
   return corsOptions();
@@ -15,7 +16,7 @@ export async function GET(request: NextRequest) {
 
     const { searchParams } = new URL(request.url);
     const skip = parseInt(searchParams.get('skip') || '0', 10);
-    const take = parseInt(searchParams.get('take') || '25', 10);
+    const take = parseInt(searchParams.get('take') || '10', 10);
     const search = searchParams.get('search') || null;
 
     const favoriteCandidatesResponse = await supabasePromiseResolver({

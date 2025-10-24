@@ -1,13 +1,9 @@
-import {
-  corsOptions,
-  getAccessToken,
-  response,
-  supabasePromiseResolver,
-  verifyToken,
-} from '@/lib/supabase/helper';
+import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
+import { authGuard } from '@/services/server/authGuard';
 import { toggleFavoriteCandidate } from '@/services/server/favoriteService';
-import { getRecruiterProfile } from '@/services/server/recruiterService';
 import { NextRequest } from 'next/server';
+
+export const runtime = 'edge';
 
 export async function OPTIONS() {
   return corsOptions();
@@ -15,8 +11,12 @@ export async function OPTIONS() {
 
 export async function POST(request: NextRequest) {
   try {
+    const { recruiter, errorResponse } = await authGuard(request);
+    if (errorResponse) return errorResponse;
+
     const body = await request.json();
     const { candidateId } = body;
+
     if (!candidateId) {
       return response(
         {
@@ -27,61 +27,26 @@ export async function POST(request: NextRequest) {
         400,
       );
     }
-    const accessToken = await getAccessToken(request);
-    if (!accessToken) {
-      return response(
-        {
-          message: 'Unauthorized',
-          data: null,
-          error: 'Unauthorized',
-        },
-        404,
-      );
-    }
-    const tokenCheckResponse = verifyToken(accessToken);
-    if (!tokenCheckResponse?.valid) {
-      return response(
-        {
-          message: tokenCheckResponse.error,
-          data: null,
-          error: tokenCheckResponse.error,
-        },
-        401,
-      );
-    }
 
-    const getRecruiterResponse = await supabasePromiseResolver({
-      requestFunction: getRecruiterProfile,
-      requestBody: { profileId: tokenCheckResponse?.id },
-    });
-    if (!getRecruiterResponse?.success) {
-      return response(
-        {
-          message: 'Recruiter not found',
-          data: null,
-          error: getRecruiterResponse?.error || 'Recruiter not found.',
-        },
-        404,
-      );
-    }
-    const recruiterId = getRecruiterResponse?.data?.recruiter_id;
     const toggleFavoriteCandidateResponse = await supabasePromiseResolver({
       requestFunction: toggleFavoriteCandidate,
       requestBody: {
-        recruiterId,
+        recruiterId: recruiter?.recruiter_id,
         candidateId,
       },
     });
+
     if (!toggleFavoriteCandidateResponse?.success) {
       return response(
         {
-          message: toggleFavoriteCandidateResponse?.error.message || 'Failed to toggle favorite.',
+          message: toggleFavoriteCandidateResponse?.error?.message || 'Failed to toggle favorite.',
           data: null,
           error: toggleFavoriteCandidateResponse?.error || 'Failed to toggle favorite.',
         },
         400,
       );
     }
+
     return response(
       {
         message: 'Favorite toggled successfully.',

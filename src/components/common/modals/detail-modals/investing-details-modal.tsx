@@ -23,8 +23,8 @@ const InvestingDetailsModal: FC<IProps> = ({ form_data }) => {
         <Box className="!border-none !p-3 !gap-2">
           <p className="text-heading font-medium capitalize">{form_data?.accomplishment_name}</p>
           <div className="gap-x-1 flex items-center justify-between">
-            <p className="text-neutral-grey-60 text-xs capitalize">{form_data?.investment_type}</p>
-            <p className="text-neutral-grey-60 text-xs">
+            <p className="text-neutral-grey-80 text-sm capitalize">{form_data?.investment_type}</p>
+            <p className="text-neutral-grey-80 text-sm">
               {formatToDDMMYYYY(form_data?.date ?? '')}
             </p>
           </div>

@@ -24,7 +24,7 @@ const SpecializedSkillsCard: FC<IProps> = ({ form_data }) => {
             </p>
           )}
           {date && (
-            <p className="font-quicksand text-[var(--gray-70)] font-normal text-xs">
+            <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm">
               {formatToDDMMYYYY(date)}
             </p>
           )}
@@ -33,7 +33,7 @@ const SpecializedSkillsCard: FC<IProps> = ({ form_data }) => {
       {notes && (
         <div className="flex gap-x-1.5">
           <Image src={note} alt="building" sizes="20" />
-          <p className="text-neutral-grey-70 text-sm font-normal font-quicksand">{notes}</p>
+          <p className="text-neutral-grey-80 text-sm font-normal font-quicksand">{notes}</p>
         </div>
       )}
     </Box>

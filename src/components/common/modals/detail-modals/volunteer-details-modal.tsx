@@ -33,7 +33,7 @@ const VolunteerDetailsModal: FC<IProps> = ({ form_data }) => {
           </div>
           <div className="gap-x-1">
             <p className="text-heading font-medium capitalize">{form_data?.volunteer_title}</p>
-            <p className="text-neutral-grey-70 text-sm">{form_data?.company}</p>
+            <p className="text-neutral-grey-80 text-sm">{form_data?.company}</p>
           </div>
         </Box>
       )}

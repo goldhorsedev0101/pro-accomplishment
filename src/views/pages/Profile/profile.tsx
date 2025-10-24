@@ -49,7 +49,7 @@ const Profile = (): JSX.Element => {
               {value && (
                 <div className={`flex flex-col gap-y-1 pb-2`}>
                   <p className="text-base font-medium text-neutral-grey-100">{label}</p>
-                  <p className="text-base font-normal text-neutral-grey-70">{value}</p>
+                  <p className="text-base font-normal text-neutral-grey-80">{value}</p>
                 </div>
               )}
             </Fragment>

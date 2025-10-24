@@ -32,7 +32,7 @@ const TalentsDetailsModal: FC<IProps> = ({ form_data }) => {
           </div>
           <div className="gap-x-1 flex items-center justify-between w-full">
             <p className="text-heading font-medium capitalize">{form_data?.name}</p>
-            <p className="text-neutral-grey-70 text-sm">
+            <p className="text-neutral-grey-80 text-sm">
               {formatToDDMMMYYYY(form_data?.date ?? '')}
             </p>
           </div>

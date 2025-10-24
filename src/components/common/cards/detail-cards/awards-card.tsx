@@ -33,7 +33,7 @@ const AwardsCard: FC<IProps> = ({ form_data }): JSX.Element => {
             text={award_title ?? 'N/A'}
             width="medium"
           />
-          <p className="font-quicksand text-neutral-grey-70 font-normal text-xs">
+          <p className="font-quicksand text-neutral-grey-80 font-normal text-sm">
             {formatToDDMMYYYY(date_received ?? '')}
           </p>
         </div>

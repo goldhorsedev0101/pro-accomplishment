@@ -31,13 +31,13 @@ const AcademicsDetailsModal: FC<IProps> = ({ form_data }) => {
         <Box className="!border-none !p-3 !gap-2">
           <div className="flex items-center justify-between">
             <p className="text-heading font-medium capitalize">{form_data?.name}</p>
-            <p className="py-0.5 px-1.5 rounded-sm text-neutral-grey-70 text-xs bg-green-light">
+            <p className="py-0.5 px-1.5 rounded-sm text-neutral-grey-80 text-sm bg-green-light">
               {formatToYYYY(form_data?.academic_year_started ?? '')} -{' '}
               {formatToYYYY(form_data?.academic_year_ended ?? '')}
             </p>
           </div>
 
-          <p className="text-neutral-grey-70 text-sm">{form_data?.school_or_institution}</p>
+          <p className="text-neutral-grey-80 text-sm">{form_data?.school_or_institution}</p>
         </Box>
       )}
 
@@ -79,14 +79,14 @@ const AcademicsDetailsModal: FC<IProps> = ({ form_data }) => {
 
           {form_data?.team_name && (
             <div className="flex items-center justify-between">
-              <p className="text-neutral-grey-70 text-sm">Team</p>
+              <p className="text-neutral-grey-80 text-sm">Team</p>
               <p className="text-heading text-sm font-medium">{form_data?.team_name}</p>
             </div>
           )}
 
           {form_data?.opposing_team && (
             <div className="flex items-center justify-between">
-              <p className="text-neutral-grey-70 text-sm">Opposing Team</p>
+              <p className="text-neutral-grey-80 text-sm">Opposing Team</p>
               <p className="text-heading text-sm font-medium">{form_data?.opposing_team}</p>
             </div>
           )}

@@ -25,12 +25,17 @@ import students from 'public/icons/students.svg';
 import { useGetCandidateQuery } from '@/services/others/candidate/get-candidate-query';
 import { useGetSubCategoriesQuery } from '@/services/others/categories/get-sub-categories-query';
 
-const CategoryView: FC<IParams & { name: string }> = ({ category, name }): JSX.Element => {
+const CategoryView: FC<IParams & { name: string; isSub: boolean }> = ({
+  category,
+  isSub,
+  name,
+}): JSX.Element => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [subCategoryId, setSubCategoryId] = useState<string>();
+  const [subCategoryId, setSubCategoryId] = useState<string | undefined>(undefined);
 
   const { data: subCategories, isPending: isSubCategoriesPending } = useGetSubCategoriesQuery({
     categoryId: category,
+    isSub,
   });
 
   const { data: candidate, isPending: isCandidatePending } = useGetCandidateQuery({
@@ -65,7 +70,7 @@ const CategoryView: FC<IParams & { name: string }> = ({ category, name }): JSX.E
       <div className="flex items-center gap-x-3 w-full">
         <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-        {(subCategoriesData?.length || 0) > 0 && (
+        {isSub && (
           <Select onValueChange={setSubCategoryId} value={subCategoryId}>
             <SelectTrigger className="w-full h-10 py-6 max-w-[200px] text-neutral-grey-100">
               <SelectValue placeholder="Sub-Category" />
@@ -74,9 +79,9 @@ const CategoryView: FC<IParams & { name: string }> = ({ category, name }): JSX.E
               {isSubCategoriesPending ? (
                 <Loader width="150" />
               ) : (subCategoriesData?.length || 0) > 0 ? (
-                subCategoriesData?.map((item) => (
-                  <SelectItem key={item.id} value={item.id}>
-                    {item.name}
+                subCategoriesData?.map(({ id, name }) => (
+                  <SelectItem key={id} value={id}>
+                    {name}
                   </SelectItem>
                 ))
               ) : (

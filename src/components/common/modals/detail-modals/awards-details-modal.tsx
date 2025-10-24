@@ -31,7 +31,7 @@ const AwardsDetailsModal: FC<IProps> = ({ form_data }) => {
           </div>
           <div className="gap-x-1">
             <p className="text-heading font-medium capitalize">{form_data?.award_title}</p>
-            <p className="text-neutral-grey-70 text-sm">
+            <p className="text-neutral-grey-80 text-sm">
               {formatToDDMMYYYY(form_data?.date_received ?? '')}
             </p>
           </div>
@@ -42,9 +42,9 @@ const AwardsDetailsModal: FC<IProps> = ({ form_data }) => {
         <Box className="!border-none !p-3 !gap-2">
           <div className="flex items-center gap-x-1">
             <Image alt="title/award" src={building} width={20} height={20} />
-            <p className="text-neutral-grey-60 text-xs">Institution</p>
+            <p className="text-neutral-grey-80 text-sm">Institution</p>
           </div>
-          <p className="text-neutral-grey-70 text-sm">{form_data?.institution}</p>
+          <p className="text-neutral-grey-80 text-sm">{form_data?.institution}</p>
         </Box>
       )}
 

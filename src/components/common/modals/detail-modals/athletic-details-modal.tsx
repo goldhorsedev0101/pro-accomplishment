@@ -67,14 +67,14 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
 
           {form_data?.team_name && (
             <div className="flex items-center justify-between">
-              <p className="text-neutral-grey-70 text-sm">Team</p>
+              <p className="text-neutral-grey-80 text-sm">Team</p>
               <p className="text-heading text-sm font-medium">{form_data?.team_name}</p>
             </div>
           )}
 
           {form_data?.opposing_team && (
             <div className="flex items-center justify-between">
-              <p className="text-neutral-grey-70 text-sm">Opposing Team</p>
+              <p className="text-neutral-grey-80 text-sm">Opposing Team</p>
               <p className="text-heading text-sm font-medium">{form_data?.opposing_team}</p>
             </div>
           )}

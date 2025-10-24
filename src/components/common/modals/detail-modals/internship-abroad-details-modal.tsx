@@ -34,7 +34,7 @@ const InternshipAbroadDetailsModal: FC<IProps> = ({ form_data }) => {
               </p>
             )}
             {form_data?.date && (
-              <p className="text-neutral-grey-70 text-sm">{formatToDDMMYYYY(form_data?.date)}</p>
+              <p className="text-neutral-grey-80 text-sm">{formatToDDMMYYYY(form_data?.date)}</p>
             )}
           </div>
 

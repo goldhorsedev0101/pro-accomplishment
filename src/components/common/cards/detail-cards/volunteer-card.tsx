@@ -45,7 +45,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
             </p>
           )}
           {(startDate || endDate) && (
-            <p className="font-quicksand text-[var(--gray-70)] font-normal text-xs break-all">
+            <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm break-all">
               {startDate}
               {startDate && endDate ? ' - ' : ''}
               {endDate}
@@ -56,8 +56,8 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
 
       {organization && (
         <div className="flex gap-x-1.5 items-center">
-          <Image src={building} alt="building" className="size-4" />
-          <p className="text-[var(--black)] text-sm font-normal font-quicksand break-all">
+          <Image src={building} alt="building" className="size-6" />
+          <p className="text-[var(--gray-80)] capitalize text-sm font-normal font-quicksand break-all">
             {organization}
           </p>
         </div>
@@ -78,18 +78,18 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
       )}
 
       {link && (
-        <div className="flex items-center gap-x-2">
+        <div className="flex items-center gap-x-2 pl-3">
           <Image src={linkIcon} sizes="20" alt="" />
-          <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal font-quicksand">
+          <Link href={validUrl} className="text-[var(--blue)] text-sm font-normal font-quicksand">
             {link}
           </Link>
         </div>
       )}
 
       {doc && (
-        <div className="flex gap-x-1.5 items-start">
+        <div className="flex gap-x-1.5 items-start pl-3">
           <Image src={note} alt="note" className="size-5" />
-          <p className="text-[var(--gray-70)] text-sm font-normal font-quicksand break-all">
+          <p className="text-[var(--gray-80)] text-sm font-normal font-quicksand break-all">
             {doc}
           </p>
         </div>

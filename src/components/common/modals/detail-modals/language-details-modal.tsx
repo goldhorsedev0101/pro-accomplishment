@@ -29,7 +29,7 @@ const LanguageDetailsModal: FC<IProps> = ({ form_data }) => {
             <p className="text-heading font-medium capitalize">{form_data?.accomplishment_name}</p>
           )}
           {form_data?.date && (
-            <p className="text-neutral-grey-70 text-sm">{formatToDDMMYYYY(form_data?.date)}</p>
+            <p className="text-neutral-grey-80 text-sm">{formatToDDMMYYYY(form_data?.date)}</p>
           )}
         </Box>
       )}
@@ -37,7 +37,7 @@ const LanguageDetailsModal: FC<IProps> = ({ form_data }) => {
       {form_data?.language && (
         <Box className="!border-none !p-3 !gap-1">
           <p className="text-heading font-medium capitalize">Language</p>
-          <p className="text-neutral-grey-70 text-sm">{form_data?.language}</p>
+          <p className="text-neutral-grey-80 text-sm">{form_data?.language}</p>
         </Box>
       )}
 
@@ -59,7 +59,7 @@ const LanguageDetailsModal: FC<IProps> = ({ form_data }) => {
       {form_data?.institution && (
         <Box className="!border-none !p-3 !gap-1">
           <p className="text-heading font-medium capitalize">Institution or Schools of Study</p>
-          <p className="text-neutral-grey-70 text-sm">{form_data?.institution}</p>
+          <p className="text-neutral-grey-80 text-sm">{form_data?.institution}</p>
         </Box>
       )}
 

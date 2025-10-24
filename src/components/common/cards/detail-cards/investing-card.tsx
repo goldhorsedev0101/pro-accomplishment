@@ -21,7 +21,7 @@ const InvestingCard: FC<IProps> = ({ form_data }) => {
           </p>
         )}
         {date && (
-          <p className="font-quicksand flex items-center justify-between text-[var(--gray-60)] font-normal text-xs">
+          <p className="font-quicksand flex items-center justify-between text-[var(--gray-80)] font-normal text-sm">
             {investment_type && <span>{investment_type}</span>}
             <span>{formatToDDMMYYYY(date)}</span>
           </p>
@@ -31,7 +31,7 @@ const InvestingCard: FC<IProps> = ({ form_data }) => {
       {notes && (
         <div className="flex gap-x-1.5">
           <Image src={note} alt="building" sizes="20" />
-          <p className="text-neutral-grey-70 text-sm font-normal font-quicksand">{notes}</p>
+          <p className="text-neutral-grey-80 text-sm font-normal font-quicksand">{notes}</p>
         </div>
       )}
     </Box>

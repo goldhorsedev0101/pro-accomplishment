@@ -32,7 +32,6 @@ const HomeView = (): JSX.Element => {
   const candidate = candidates?.map((item) => ({
     name: item.first_name + ' ' + item.last_name,
     about: item?.organization_name,
-    category: item.organization_name,
     profile: item.profile_photo_url,
     location: item.country,
     id: item.candidate_id,

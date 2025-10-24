@@ -31,7 +31,7 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
             text={name ?? ''}
             width="medium"
           />
-          <p className="font-quicksand text-neutral-grey-60 font-normal text-sm">
+          <p className="font-quicksand text-neutral-grey-80 font-normal text-sm">
             {formatToDDMMYYYY(date || '')}
           </p>
         </div>
@@ -47,7 +47,7 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
           {event_name && (
             <div className="flex items-center gap-x-2">
               <Image alt="" src={calendar} sizes="20" />
-              <p className="font-quicksand font-normal text-sm text-neutral-grey-70">
+              <p className="font-quicksand font-normal text-sm text-neutral-grey-80">
                 {event_name}
               </p>
             </div>
@@ -56,7 +56,7 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
           {location && (
             <div className="flex items-center gap-x-2">
               <Image alt="" src={locationIcon} sizes="20" />
-              <p className="font-quicksand font-normal text-sm text-neutral-grey-70">{location}</p>
+              <p className="font-quicksand font-normal text-sm text-neutral-grey-80">{location}</p>
             </div>
           )}
         </div>

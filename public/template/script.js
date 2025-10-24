@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     contacts: contacts.map(contact).join(''),
     objective: objective_for_summary,
     profile: profile_photo_url,
-    'page-title': name + ' CV',
+    'page-title': name + ' Accomplishments',
     quote: icons.quote,
     about: quote,
     grade,

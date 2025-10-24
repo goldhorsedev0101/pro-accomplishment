@@ -37,10 +37,10 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
             text={form_data?.job_title ?? 'N/A'}
             width="medium"
           />
-          <p className="font-quicksand text-neutral-grey-70 font-normal text-xs break-all">
+          <p className="font-quicksand text-neutral-grey-80 font-normal text-sm break-all">
             {form_data?.company}
           </p>
-          <p className="mt-2 text-black text-xs font-medium font-quicksand">
+          <p className="mt-2 text-black text-sm font-medium font-quicksand">
             {formatToDDMMMYYYY(form_data?.start_date ?? '')} -{' '}
             {!form_data?.end_date ? 'Ongoing' : formatToDDMMMYYYY(form_data?.end_date ?? '')}
           </p>
@@ -61,7 +61,7 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
       {link && (
         <div className="flex items-center gap-x-2">
           <Image src={linkIcon} sizes="20" alt="" />
-          <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal font-quicksand">
+          <Link href={validUrl} className="text-[var(--blue)] font-normal font-quicksand">
             {link}
           </Link>
         </div>
@@ -70,7 +70,7 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
       {form_data?.notes && (
         <div className="flex gap-x-1.5">
           <Image src={note} alt="building" sizes="20" />
-          <p className="text-neutral-grey-70 text-sm font-normal font-quicksand">
+          <p className="text-neutral-grey-80 text-sm font-normal font-quicksand">
             {form_data?.notes}
           </p>
         </div>

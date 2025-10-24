@@ -31,7 +31,7 @@ const CertificationsCard: FC<IProps> = ({ form_data }) => {
             text={certification_title ?? 'N/A'}
             width="medium"
           />
-          <p className="font-quicksand text-neutral-grey-70 font-normal text-xs">
+          <p className="font-quicksand text-neutral-grey-80 font-normal text-sm">
             {formatToDDMMYYYY(date_received ?? '')}
           </p>
         </div>
@@ -39,7 +39,9 @@ const CertificationsCard: FC<IProps> = ({ form_data }) => {
 
       <div className="flex gap-x-2">
         <Image src={building} alt="building" sizes="16" />
-        <p className="text-neutral-grey-100 text-sm font-normal font-quicksand">{institution}</p>
+        <p className="text-neutral-grey-80 text-sm font-normal font-quicksand capitalize">
+          {institution}
+        </p>
       </div>
     </Box>
   );

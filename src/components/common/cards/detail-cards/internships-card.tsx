@@ -46,13 +46,13 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
             )}
 
             {company && (
-              <p className="!text-xs font-normal text-neutral-grey-70 font-quicksand break-all">
+              <p className="!text-sm font-normal text-neutral-grey-80 font-quicksand break-all">
                 {company}
               </p>
             )}
 
             {(startDate || endDate) && (
-              <p className="mt-2 text-[var(--black)] text-xs font-quicksand">
+              <p className="mt-2 text-[var(--black)] text-sm font-quicksand">
                 {startDate}
                 {startDate && endDate ? ' - ' : ''}
                 {endDate}
@@ -60,7 +60,7 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
             )}
           </div>
           {internship_type && (
-            <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-xs w-full max-w-fit h-fit">
+            <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm w-full max-w-fit h-fit">
               {internship_type}
             </p>
           )}
@@ -83,7 +83,7 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
       {link && (
         <div className="flex items-center gap-x-2">
           <Image src={linkIcon} sizes="20" alt="" />
-          <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal font-quicksand">
+          <Link href={validUrl} className="text-[var(--blue)] font-normal font-quicksand">
             {link}
           </Link>
         </div>
@@ -92,7 +92,7 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
       {doc && (
         <div className="flex gap-x-1.5 items-start">
           <Image src={note} alt="note" className="size-5" />
-          <p className="text-[var(--gray-70)] text-sm font-normal font-quicksand">{doc}</p>
+          <p className="text-[var(--gray-80)] text-sm font-normal font-quicksand">{doc}</p>
         </div>
       )}
     </Box>

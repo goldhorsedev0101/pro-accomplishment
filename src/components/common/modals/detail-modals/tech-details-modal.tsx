@@ -28,7 +28,7 @@ const TechDetailsModal: FC<IProps> = ({ form_data }) => {
           <Image alt="title/award" src={programming} width={24} height={24} />
           <div className="gap-x-1">
             <p className="text-heading font-medium capitalize">{form_data?.accomplishment_name}</p>
-            <p className="text-neutral-grey-70 text-sm">
+            <p className="text-neutral-grey-80 text-sm">
               {formatToMMMMDYYYY(form_data?.date ?? '')}
             </p>
           </div>

@@ -32,7 +32,7 @@ const ClubsDetailsModal: FC<IProps> = ({ form_data }) => {
             <p className="text-heading font-medium capitalize">{form_data?.club_name}</p>
           )}
           {form_data?.date_joined && (
-            <p className="text-neutral-grey-70 text-sm">
+            <p className="text-neutral-grey-80 text-sm">
               {formatToDDMMYYYY(form_data?.date_joined)}
             </p>
           )}

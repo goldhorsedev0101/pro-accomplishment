@@ -30,7 +30,7 @@ const TravelCard: FC<IProps> = ({ form_data }) => {
             </p>
           )}
           {date && (
-            <p className="font-quicksand text-[var(--gray-60)] font-normal text-xs">{date}</p>
+            <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm">{date}</p>
           )}
         </div>
       </div>

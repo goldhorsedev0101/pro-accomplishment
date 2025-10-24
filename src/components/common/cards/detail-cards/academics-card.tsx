@@ -39,13 +39,13 @@ const AcademicsCard: FC<IProps> = ({ form_data }): JSX.Element => {
             text={form_data?.name || ''}
             width="medium"
           />
-          <p className="font-quicksand text-neutral-grey-60 font-normal text-sm break-all">
+          <p className="font-quicksand text-neutral-grey-80 font-normal text-sm break-all">
             {form_data?.school_or_institution || ''}
           </p>
         </div>
 
         {startYear && (
-          <p className="font-quicksand text-neutral-grey-70 font-normal text-sm rounded-sm py-0.5 px-1.5 bg-green-light">
+          <p className="font-quicksand text-neutral-grey-80 font-normal text-sm rounded-sm py-0.5 px-1.5 bg-green-light">
             {startYear === endYear ? startYear : `${startYear} - ${endYear}`}
           </p>
         )}

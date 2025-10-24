@@ -1,12 +1,9 @@
-import {
-  corsOptions,
-  getAccessToken,
-  response,
-  supabasePromiseResolver,
-  verifyToken,
-} from '@/lib/supabase/helper';
+import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
+import { authGuard } from '@/services/server/authGuard';
 import { getRecruiterProfile } from '@/services/server/recruiterService';
 import { NextRequest } from 'next/server';
+
+export const runtime = 'edge';
 
 export async function OPTIONS() {
   return corsOptions();
@@ -14,34 +11,12 @@ export async function OPTIONS() {
 
 export async function GET(request: NextRequest) {
   try {
-    const accessToken = await getAccessToken(request);
-    if (!accessToken) {
-      return response(
-        {
-          message: 'Unauthorized',
-          data: null,
-          error: 'Unauthorized',
-        },
-        404,
-      );
-    }
-    const tokenCheckResponse = verifyToken(accessToken);
-    if (!tokenCheckResponse?.valid) {
-      return response(
-        {
-          message: tokenCheckResponse.error,
-          data: null,
-          error: tokenCheckResponse.error,
-        },
-        401,
-      );
-    }
+    const { recruiter, errorResponse } = await authGuard(request);
+    if (errorResponse) return errorResponse;
 
     const recruiterProfileResponse = await supabasePromiseResolver({
       requestFunction: getRecruiterProfile,
-      requestBody: {
-        profileId: tokenCheckResponse?.id,
-      },
+      requestBody: { profileId: recruiter?.profile_id },
     });
 
     if (!recruiterProfileResponse?.success) {
@@ -58,7 +33,7 @@ export async function GET(request: NextRequest) {
     return response(
       {
         message: 'Recruiter profile retrieved successfully.',
-        data: recruiterProfileResponse?.data,
+        data: recruiterProfileResponse?.data || null,
         error: null,
       },
       200,

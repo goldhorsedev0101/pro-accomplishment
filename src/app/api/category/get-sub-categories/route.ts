@@ -1,12 +1,10 @@
-import {
-  corsOptions,
-  getAccessToken,
-  response,
-  supabasePromiseResolver,
-  verifyToken,
-} from '@/lib/supabase/helper';
+import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
+import { authGuard } from '@/services/server/authGuard';
 import { getSubCategories } from '@/services/server/categoryService';
+
 import { NextRequest } from 'next/server';
+
+export const runtime = 'edge';
 
 export async function OPTIONS() {
   return corsOptions();
@@ -26,28 +24,9 @@ export async function GET(request: NextRequest) {
         400,
       );
     }
-    const accessToken = await getAccessToken(request);
-    if (!accessToken) {
-      return response(
-        {
-          message: 'Unauthorized',
-          data: null,
-          error: 'Unauthorized',
-        },
-        404,
-      );
-    }
-    const tokenCheckResponse = verifyToken(accessToken);
-    if (!tokenCheckResponse?.valid) {
-      return response(
-        {
-          message: tokenCheckResponse.error,
-          data: null,
-          error: tokenCheckResponse.error,
-        },
-        401,
-      );
-    }
+
+    const { errorResponse } = await authGuard(request);
+    if (errorResponse) return errorResponse;
 
     const getSubCategoriesResponse = await supabasePromiseResolver({
       requestFunction: getSubCategories,
@@ -64,6 +43,7 @@ export async function GET(request: NextRequest) {
         400,
       );
     }
+
     if (!getSubCategoriesResponse?.data || getSubCategoriesResponse?.data.length === 0) {
       return response(
         {
@@ -74,6 +54,7 @@ export async function GET(request: NextRequest) {
         404,
       );
     }
+
     return response(
       {
         message: 'Sub categories retrieved successfully.',

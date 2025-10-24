@@ -1,82 +1,41 @@
-import {
-  corsOptions,
-  getAccessToken,
-  response,
-  supabasePromiseResolver,
-  verifyToken,
-} from '@/lib/supabase/helper';
-import { deleteRecruiterProfile, getRecruiterProfile } from '@/services/server/recruiterService';
+import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
+import { authGuard } from '@/services/server/authGuard';
+import { deleteRecruiterProfile } from '@/services/server/recruiterService';
 import { NextRequest } from 'next/server';
+
+export const runtime = 'edge';
 
 export async function OPTIONS() {
   return corsOptions();
 }
 
-export async function GET(request: NextRequest) {
+export async function DELETE(request: NextRequest) {
   try {
-    const accessToken = await getAccessToken(request);
-    if (!accessToken) {
-      return response(
-        {
-          message: 'Unauthorized',
-          data: null,
-          error: 'Unauthorized',
-        },
-        404,
-      );
-    }
-    const tokenCheckResponse = verifyToken(accessToken);
-    if (!tokenCheckResponse?.valid) {
-      return response(
-        {
-          message: tokenCheckResponse.error,
-          data: null,
-          error: tokenCheckResponse.error,
-        },
-        401,
-      );
-    }
-
-    const recruiterProfileResponse = await supabasePromiseResolver({
-      requestFunction: getRecruiterProfile,
-      requestBody: {
-        profileId: tokenCheckResponse?.id,
-      },
-    });
-
-    if (!recruiterProfileResponse?.success) {
-      return response(
-        {
-          message: 'Recruiter profile not found.',
-          data: null,
-          error: recruiterProfileResponse?.error || 'Recruiter profile not found.',
-        },
-        404,
-      );
-    }
+    const { recruiter, errorResponse } = await authGuard(request);
+    if (errorResponse) return errorResponse;
 
     const deleteRecruiterProfileResponse = await supabasePromiseResolver({
       requestFunction: deleteRecruiterProfile,
-      requestBody: {
-        profileId: tokenCheckResponse?.id,
-      },
+      requestBody: { profileId: recruiter?.profile_id },
     });
 
     if (!deleteRecruiterProfileResponse?.success) {
       return response(
         {
-          message: 'Error Occurred deleting recruiter profile.',
+          message: 'Error occurred while deleting recruiter profile.',
           data: null,
-          error: recruiterProfileResponse?.error || 'Error Occurred deleting recruiter profile.',
+          error:
+            deleteRecruiterProfileResponse?.error ||
+            'Error occurred while deleting recruiter profile.',
         },
-        404,
+        400,
       );
     }
 
     return response(
       {
         message: 'Recruiter profile deleted successfully.',
-        data: recruiterProfileResponse?.data,
+        data: deleteRecruiterProfileResponse?.data || null,
         error: null,
       },
       200,

@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================ Components ============================
-const contact = (item, i, isGPA = false) => {
+const contact = (item, i) => {
   const { icon, value } = item;
 
   if (!value) return '';
@@ -138,7 +138,7 @@ const contact = (item, i, isGPA = false) => {
       <image src="${icon}" alt="icon" class='w-[18px] h-[18px]' />
       <span class="font-normal ${
         i === 3 ? 'text-[var(--blue)]' : 'text-[var(--black)]'
-      }">${isGPA ? 'GPA ' : ''} ${value}</span>
+      }">${value}</span>
     </div>
   `;
 };

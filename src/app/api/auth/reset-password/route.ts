@@ -12,17 +12,6 @@ export async function POST(request: NextRequest) {
   try {
     const { newPassword, confirmPassword } = await request.json();
 
-    if (!newPassword || !confirmPassword) {
-      return response(
-        {
-          message: 'Both password fields are required',
-          data: null,
-          error: 'missing_fields',
-        },
-        400,
-      );
-    }
-
     if (newPassword !== confirmPassword) {
       return response(
         {

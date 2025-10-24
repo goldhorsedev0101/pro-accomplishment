@@ -2,6 +2,8 @@ import { NextRequest } from 'next/server';
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
 import { resendOtp, resetPassword } from '@/services/server/authService';
 
+export const runtime = 'edge';
+
 export async function OPTIONS() {
   return corsOptions();
 }
@@ -10,10 +12,23 @@ export async function POST(request: NextRequest) {
   try {
     const { email, type } = await request.json();
 
+    if (!email) {
+      return response(
+        {
+          data: null,
+          error: 'Email is required',
+          message: 'Email is required',
+        },
+        400,
+      );
+    }
+
+    const lowerCasedEmail = email.toLowerCase();
+
     const resendOtpResponse = await supabasePromiseResolver({
       requestFunction: type === 'recovery' ? resetPassword : resendOtp,
       requestBody: {
-        email: email.toLowerCase(),
+        email: lowerCasedEmail,
         type: type || 'signup',
       },
     });
@@ -33,7 +48,10 @@ export async function POST(request: NextRequest) {
       {
         data: null,
         error: null,
-        message: 'OTP resent successfully.',
+        message:
+          type === 'recovery'
+            ? 'Password recovery OTP sent successfully.'
+            : 'Signup OTP resent successfully.',
       },
       200,
     );

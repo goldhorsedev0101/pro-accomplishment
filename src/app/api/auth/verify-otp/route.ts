@@ -1,6 +1,8 @@
+import { NextRequest } from 'next/server';
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
 import { verifyOtp } from '@/services/server/authService';
-import { NextRequest } from 'next/server';
+
+export const runtime = 'edge';
 
 export async function OPTIONS() {
   return corsOptions();
@@ -10,7 +12,18 @@ export async function POST(request: NextRequest) {
   try {
     const { otp, email, type } = await request.json();
 
-    if (otp.length !== 6) {
+    if (!otp || !email) {
+      return response(
+        {
+          data: null,
+          error: 'Email and OTP are required.',
+          message: 'Email and OTP are required.',
+        },
+        400,
+      );
+    }
+
+    if (typeof otp !== 'string' || otp.trim().length !== 6) {
       return response(
         {
           data: null,
@@ -20,21 +33,22 @@ export async function POST(request: NextRequest) {
         400,
       );
     }
+
     const verifyOtpResponse = await supabasePromiseResolver({
       requestFunction: verifyOtp,
       requestBody: {
-        email,
-        token: otp,
-        type,
+        email: email.toLowerCase(),
+        token: otp.trim(),
+        type: type || 'signup',
       },
     });
 
     if (!verifyOtpResponse?.success) {
       return response(
         {
+          data: null,
           error: verifyOtpResponse?.error || 'Verification failed.',
           message: verifyOtpResponse?.error || 'Verification failed.',
-          data: null,
         },
         400,
       );
@@ -49,11 +63,12 @@ export async function POST(request: NextRequest) {
       200,
     );
   } catch (error) {
+    console.error('OTP Verification Error:', error);
     return response(
       {
-        error: (error as Error) || 'Internal Server Error',
         message: (error as Error)?.message || 'Internal Server Error',
         data: null,
+        error: (error as Error)?.message || 'Internal Server Error',
       },
       500,
     );

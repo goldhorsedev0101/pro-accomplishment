@@ -2,10 +2,7 @@ import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/h
 import { getRecruiterProfileByEmail, signIn } from '@/services/server/authService';
 import { NextRequest } from 'next/server';
 
-export const T_ROLE = {
-  candidate: 'candidate',
-  recruiter: 'recruiter',
-};
+export const runtime = 'edge';
 
 export async function OPTIONS() {
   return corsOptions();
@@ -24,36 +21,37 @@ export async function POST(request: NextRequest) {
         400,
       );
     }
-    const lowerCasedEmail = email.toLowerCase();
-    const isUserExistResponse = await supabasePromiseResolver({
-      requestFunction: getRecruiterProfileByEmail,
-      requestBody: { email: lowerCasedEmail },
-    });
 
-    if (!isUserExistResponse?.success) {
-      return response(
-        {
-          error: isUserExistResponse?.error || 'User not found.',
-          data: null,
-          message: isUserExistResponse?.error || 'User not found.',
-        },
-        400,
-      );
-    }
-    const loginResponse = await supabasePromiseResolver({
-      requestFunction: signIn,
-      requestBody: {
-        email: lowerCasedEmail,
-        password,
-      },
-    });
+    const lowerCasedEmail = email.toLowerCase();
+
+    const [loginResponse, recruiterResponse] = await Promise.all([
+      supabasePromiseResolver({
+        requestFunction: signIn,
+        requestBody: { email: lowerCasedEmail, password },
+      }),
+      supabasePromiseResolver({
+        requestFunction: getRecruiterProfileByEmail,
+        requestBody: { email: lowerCasedEmail },
+      }),
+    ]);
 
     if (!loginResponse?.success) {
       return response(
         {
-          error: loginResponse?.error || 'Login error.',
+          message: loginResponse?.error || 'Login failed.',
           data: null,
-          message: loginResponse?.error || 'Login error.',
+          error: loginResponse?.error || 'Login failed.',
+        },
+        400,
+      );
+    }
+
+    if (!recruiterResponse?.success) {
+      return response(
+        {
+          message: recruiterResponse?.error || 'Recruiter not found.',
+          data: null,
+          error: recruiterResponse?.error || 'Recruiter not found.',
         },
         400,
       );
@@ -62,7 +60,10 @@ export async function POST(request: NextRequest) {
     return response(
       {
         message: 'Login successful.',
-        data: loginResponse?.data,
+        data: {
+          ...loginResponse.data,
+          recruiterProfile: recruiterResponse.data,
+        },
         error: null,
       },
       200,
@@ -70,9 +71,9 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return response(
       {
-        message: (error as Error)?.message,
+        message: (error as Error)?.message || 'Internal Server Error',
         data: null,
-        error: (error as Error) ?? 'Internal Server Error',
+        error,
       },
       500,
     );

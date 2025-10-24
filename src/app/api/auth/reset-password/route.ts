@@ -2,6 +2,8 @@ import { NextRequest } from 'next/server';
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
 import { updatePassword } from '@/services/server/authService';
 
+export const runtime = 'edge';
+
 export async function OPTIONS() {
   return corsOptions();
 }
@@ -9,6 +11,17 @@ export async function OPTIONS() {
 export async function POST(request: NextRequest) {
   try {
     const { newPassword, confirmPassword } = await request.json();
+
+    if (!newPassword || !confirmPassword) {
+      return response(
+        {
+          message: 'Both password fields are required',
+          data: null,
+          error: 'missing_fields',
+        },
+        400,
+      );
+    }
 
     if (newPassword !== confirmPassword) {
       return response(

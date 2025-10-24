@@ -1,6 +1,7 @@
 // Icons
 import briefcase from 'public/icons/briefcase.svg';
 import note from 'public/icons/note.svg';
+import linkIcon from 'public/icons/link.svg';
 
 // Components
 import Image from 'next/image';
@@ -57,10 +58,13 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
         <Skills skills={form_data?.acquired_skills} title="Acquired Skills" />
       )}
 
-      {form_data?.link && (
-        <Link href={validUrl} className="text-blue text-xs font-normal font-quicksand">
-          {form_data?.link}
-        </Link>
+      {link && (
+        <div className="flex items-center gap-x-2">
+          <Image src={linkIcon} sizes="20" alt="" />
+          <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal font-quicksand">
+            {link}
+          </Link>
+        </div>
       )}
 
       {form_data?.notes && (

@@ -1,5 +1,7 @@
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
 import { formatToDDMMYYYY } from '@/utils/date-format';
+import Image from 'next/image';
+import note from 'public/icons/note.svg';
 import { FC } from 'react';
 import Box from '../../box';
 
@@ -25,9 +27,10 @@ const CustomCard: FC<IProps> = ({ form_data }) => {
         )}
       </div>
       {notes && (
-        <p className="text-[var(--gray-70)] text-xs font-normal font-quicksand break-all">
-          {notes}
-        </p>
+        <div className="flex gap-x-1.5">
+          <Image src={note} alt="building" sizes="20" />
+          <p className="text-neutral-grey-70 text-sm font-normal font-quicksand">{notes}</p>
+        </div>
       )}
     </Box>
   );

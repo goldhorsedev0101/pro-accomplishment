@@ -2,6 +2,7 @@ import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candi
 import { formatToDDMMMYYYY } from '@/utils/date-format';
 import Image from 'next/image';
 import Link from 'next/link';
+import linkIcon from 'public/icons/link.svg';
 import note from 'public/icons/note.svg';
 import internships from 'public/pdf/internships.svg';
 import { FC } from 'react';
@@ -80,10 +81,14 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
       )}
 
       {link && (
-        <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal font-quicksand">
-          {link}
-        </Link>
+        <div className="flex items-center gap-x-2">
+          <Image src={linkIcon} sizes="20" alt="" />
+          <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal font-quicksand">
+            {link}
+          </Link>
+        </div>
       )}
+
       {doc && (
         <div className="flex gap-x-1.5 items-start">
           <Image src={note} alt="note" className="size-5" />

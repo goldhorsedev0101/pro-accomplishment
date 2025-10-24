@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     contacts: contacts.map(contact).join(''),
     objective: objective_for_summary,
     profile: profile_photo_url,
+    'page-title': name + ' CV',
     quote: icons.quote,
     about: quote,
     grade,
@@ -131,15 +132,47 @@ document.addEventListener('DOMContentLoaded', () => {
 const contact = (item, i) => {
   const { icon, value } = item;
 
+  const isLink = icon === icons.link;
+
+  const validUrl =
+    value?.startsWith('http://') || value?.startsWith('https://') ? value : `https://${value}`;
+
   if (!value) return '';
 
-  return `
+  if (!isLink) {
+    return `
     <div class="flex items-center gap-x-2" key="${i}">
       <image src="${icon}" alt="icon" class='w-[18px] h-[18px]' />
       <span class="font-normal ${
         i === 3 ? 'text-[var(--blue)]' : 'text-[var(--black)]'
       }">${value}</span>
     </div>
+  `;
+  } else {
+    return `
+    <a href="${validUrl}" target="_blank" class="flex items-center gap-x-2" key="${i}">
+      <image src="${icon}" alt="icon" class='w-[18px] h-[18px]' />
+      <span class="font-normal ${
+        i === 3 ? 'text-[var(--blue)]' : 'text-[var(--black)]'
+      }">${value}</span>
+    </a>
+  `;
+  }
+};
+
+const Link = (link) => {
+  const validUrl =
+    link?.startsWith('http://') || link?.startsWith('https://') ? link : `https://${link}`;
+
+  if (!link) return '';
+
+  return `
+    <a href="${validUrl}" target="_blank" class="flex items-center gap-x-2" key="${i}">
+      <image src="${icons.link}" alt="icon" class='w-[18px] h-[18px]' />
+      <span class="font-normal ${
+        i === 3 ? 'text-[var(--blue)]' : 'text-[var(--black)]'
+      }">${link}</span>
+    </a>
   `;
 };
 
@@ -841,13 +874,7 @@ const employmentCard = ({
           : ''
       }
 
-      ${
-        link
-          ? `
-          <a href="/" class="text-[var(--blue)] text-xs font-normal quicksand">${link}</a>
-        `
-          : ''
-      }
+      ${Link(link)}
 
       ${
         doc
@@ -1272,13 +1299,7 @@ const volunteerCard = ({
         `
           : ''
       }
-      ${
-        link
-          ? `
-          <a href="/" class="text-[var(--blue)] text-xs font-normal quicksand">${link}</a>
-        `
-          : ''
-      }
+    ${Link(link)}
       ${
         doc
           ? `
@@ -1408,13 +1429,7 @@ const internshipsCard = ({
         `
           : ''
       }
-      ${
-        link
-          ? `
-          <a href="/" class="text-[var(--blue)] text-xs font-normal quicksand">${link}</a>
-        `
-          : ''
-      }
+      ${Link(link)}
       ${
         doc
           ? `
@@ -1503,23 +1518,19 @@ const languageCard = ({ yearsOfStudy, institute, language, apScore, title, notes
         `
           : ''
       }
-      ${
-        link
-          ? `
-          <a href="/" class="text-[var(--blue)] text-xs font-normal quicksand">${link}</a>
-        `
-          : ''
-      }
-      ${
-        notes
-          ? `
+
+     ${Link(link)}
+      
+     ${
+       notes
+         ? `
           <div class="flex gap-x-1.5 items-start">
             <img src="${icons.note}" alt="note" class="size-5" />
             <p class="break-all text-[var(--gray-70)] text-sm font-normal quicksand">${notes}</p>
           </div>
         `
-          : ''
-      }
+         : ''
+     }
     </div>
   `;
 };

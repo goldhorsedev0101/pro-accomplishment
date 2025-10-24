@@ -3,6 +3,7 @@ import { formatToDDMMMYYYY } from '@/utils/date-format';
 import Image from 'next/image';
 import Link from 'next/link';
 import building from 'public/icons/building.svg';
+import linkIcon from 'public/icons/link.svg';
 import note from 'public/icons/note.svg';
 import info from 'public/pdf/info.svg';
 import { FC } from 'react';
@@ -77,9 +78,12 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
       )}
 
       {link && (
-        <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal font-quicksand">
-          {link}
-        </Link>
+        <div className="flex items-center gap-x-2">
+          <Image src={linkIcon} sizes="20" alt="" />
+          <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal font-quicksand">
+            {link}
+          </Link>
+        </div>
       )}
 
       {doc && (

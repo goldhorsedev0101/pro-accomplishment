@@ -50,7 +50,7 @@ const ListenNetworkProvider = ({ children }: IProps) => {
       <div className="h-full w-full">
         <BasicModal
           isOpen={true}
-          setIsOpen={() => {}}
+          setIsOpen={async () => window.location.reload()}
           trigger={{ child: null }}
           title={{
             title: 'Please check your internet connection',

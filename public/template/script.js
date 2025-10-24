@@ -175,13 +175,13 @@ const accomplishmentLayout = (
       });
     }
 
-    // if (form_type === 'award') {
-    //   return awardsCard({
-    //     date: formatToMDYYYY(form_data?.date_received),
-    //     institution: form_data?.institution,
-    //     title: form_data?.award_title,
-    //   });
-    // }
+    if (form_type === 'award') {
+      return awardsCard({
+        date: formatToMDYYYY(form_data?.date_received),
+        institution: form_data?.institution,
+        title: form_data?.award_title,
+      });
+    }
 
     if (form_type === 'certification') {
       return certificationsCard({
@@ -334,7 +334,7 @@ const accomplishmentLayout = (
         endDate: formatToDDMMMYYYY(form_data?.end_date),
         previous_skills: form_data?.previous_skills,
         acquired_skills: form_data?.acquired_skills,
-        title: form_data?.accomplishment_name,
+        title: form_data?.internship_title,
         organization: form_data?.company,
         link: form_data?.link,
         doc: form_data?.notes,
@@ -1078,7 +1078,7 @@ const semesterAtSeaCard = ({ title, date, destination, institution }) => {
       ${
         title
           ? `
-          <p class="break-all font-semibold text-[var(--heading)] quicksand">${title}</p>
+          <p class="break-all font-medium text-[var(--heading)] quicksand">${title}</p>
         `
           : ''
       }
@@ -1135,7 +1135,7 @@ const internshipAbroadCard = ({ title, date, location, company, internship_type 
         ${
           internship_type
             ? `
-              <p class="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm text-[var(--heading)] quicksand font-medium">
+              <p class="rounded-sm h-fit bg-[#FFFAF1] px-1.5 py-1 text-sm text-[var(--heading)] quicksand font-medium">
                 ${internship_type}
               </p>
             `
@@ -1343,7 +1343,7 @@ const internshipsCard = ({
       ${
         internship_type
           ? `
-          <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">${internship_type}</p>
+          <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm h-fit">${internship_type}</p>
         `
           : ''
       }

@@ -56,6 +56,7 @@ export interface Accomplishment {
 
 export interface FormData {
   id: string;
+  internship_title?: string | null;
   date?: string | null;
   link: string;
   name?: string | null;

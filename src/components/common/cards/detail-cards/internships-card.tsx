@@ -14,12 +14,13 @@ interface IProps {
 
 const InternshipsCard: FC<IProps> = ({ form_data }) => {
   const {
-    accomplishment_name: title,
+    internship_title,
+    company,
     start_date,
     end_date,
+    internship_type,
     previous_skills,
     acquired_skills,
-    company: organization,
     link,
     notes: doc,
   } = form_data || {};
@@ -37,15 +38,15 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
         </div>
         <div className="flex w-full justify-between">
           <div className="w-full">
-            {title && (
+            {internship_title && (
               <p className="font-medium text-[var(--heading)] font-quicksand !text-sm break-all">
-                {title}
+                {internship_title}
               </p>
             )}
 
-            {organization && (
-              <p className="!text-sm font-medium !text-heading font-quicksand break-all">
-                {organization}
+            {company && (
+              <p className="!text-xs font-normal text-neutral-grey-70 font-quicksand break-all">
+                {company}
               </p>
             )}
 
@@ -57,9 +58,9 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
               </p>
             )}
           </div>
-          {form_data?.internship_type && (
+          {internship_type && (
             <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-xs w-full max-w-fit h-fit">
-              {form_data?.internship_type}
+              {internship_type}
             </p>
           )}
         </div>

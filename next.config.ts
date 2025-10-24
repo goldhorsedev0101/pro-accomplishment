@@ -19,6 +19,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  allowedDevOrigins: [
+    'https://dk0hr8rc-3000.uks1.devtunnels.ms/', // your VSCode tunnel / localhost proxy
+    'http://localhost:3000', // local dev if frontend/backend are separate ports
+  ],
 };
 
 export default nextConfig;

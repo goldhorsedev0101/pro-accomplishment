@@ -1,95 +1,56 @@
-import {
-  corsOptions,
-  getAccessToken,
-  response,
-  supabasePromiseResolver,
-} from '@/lib/supabase/helper';
-import { signIn, updatePassword } from '@/services/server/authService';
-import * as jwt from 'jwt-decode';
 import { NextRequest } from 'next/server';
+import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
+import { updatePassword, signIn } from '@/services/server/authService';
+import { authGuard } from '@/services/server/authGuard';
+
+export const runtime = 'edge';
 
 export async function OPTIONS() {
   return corsOptions();
 }
 
-interface CustomJwtPayload {
-  exp?: number;
-  email?: string;
-}
-
-function isTokenExpired(token: string): boolean {
-  try {
-    const decoded = jwt.jwtDecode<CustomJwtPayload>(token);
-    if (!decoded.exp) {
-      return true;
-    }
-    const currentTime = Math.floor(Date.now() / 1000);
-    return decoded.exp < currentTime;
-  } catch {
-    return true;
-  }
-}
-
 export async function POST(request: NextRequest) {
   try {
-    const { currentPassword, newPassword } = await request.json();
-    const accessToken = await getAccessToken(request);
+    const { recruiter, errorResponse } = await authGuard(request);
+    if (errorResponse) return errorResponse;
 
-    if (!accessToken) {
+    const { currentPassword, newPassword } = await request.json();
+
+    if (!currentPassword || !newPassword) {
       return response(
         {
-          message: 'Unauthorized',
+          message: 'Both current and new passwords are required.',
           data: null,
-          error: 'Unauthorized',
-        },
-        404,
-      );
-    }
-    const decodedToken = jwt.jwtDecode<CustomJwtPayload>(accessToken);
-    const tokenExpired = isTokenExpired(accessToken);
-    if (tokenExpired) {
-      return response(
-        {
-          message: 'Token expired. Please login again.',
-          data: null,
-          error: 'Token expired. Please login again.',
-        },
-        401,
-      );
-    }
-    if (!decodedToken.email) {
-      return response(
-        {
-          message: 'Invalid token. Please login again.',
-          data: null,
-          error: 'Invalid token. Please login again.',
-        },
-        401,
-      );
-    }
-    const loginResponse = await supabasePromiseResolver({
-      requestFunction: signIn,
-      requestBody: {
-        email: decodedToken.email,
-        password: currentPassword,
-      },
-    });
-    if (!loginResponse?.success) {
-      return response(
-        {
-          error: 'Old password is incorrect.',
-          message: 'Old password is incorrect.',
-          data: null,
+          error: 'Missing required fields',
         },
         400,
       );
     }
-    const updatePasswordResponse = await supabasePromiseResolver({
-      requestFunction: updatePassword,
+
+    const loginResponse = await supabasePromiseResolver({
+      requestFunction: signIn,
       requestBody: {
-        password: newPassword,
+        email: recruiter?.email,
+        password: currentPassword,
       },
     });
+
+    if (!loginResponse?.success) {
+      return response(
+        {
+          message: 'Old password is incorrect.',
+          data: null,
+          error: 'Old password is incorrect.',
+        },
+        400,
+      );
+    }
+
+    const updatePasswordResponse = await supabasePromiseResolver({
+      requestFunction: updatePassword,
+      requestBody: { password: newPassword },
+    });
+
     if (!updatePasswordResponse?.success) {
       return response(
         {
@@ -100,6 +61,7 @@ export async function POST(request: NextRequest) {
         400,
       );
     }
+
     return response(
       {
         message: 'Password changed successfully.',

@@ -1,6 +1,8 @@
+import { NextRequest } from 'next/server';
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
 import { getRecruiterProfileByEmail, resetPassword } from '@/services/server/authService';
-import { NextRequest } from 'next/server';
+
+export const runtime = 'edge'; // ⚡ Faster cold starts and lower latency
 
 export async function OPTIONS() {
   return corsOptions();
@@ -9,36 +11,53 @@ export async function OPTIONS() {
 export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json();
-    const lowerCased = email.toLowerCase();
-    const isUserExistResponse = await supabasePromiseResolver({
-      requestFunction: getRecruiterProfileByEmail,
-      requestBody: { email: email },
-    });
 
-    if (!isUserExistResponse?.success) {
+    if (!email) {
       return response(
         {
-          error: isUserExistResponse?.error || 'Email not found.',
+          message: 'Email is required.',
           data: null,
-          message: isUserExistResponse?.error || 'Email not found.',
+          error: 'Missing email field.',
         },
         400,
       );
     }
-    const resendOtpResponse = await supabasePromiseResolver({
-      requestFunction: resetPassword,
-      requestBody: { email: lowerCased },
-    });
-    if (!resendOtpResponse?.success) {
+
+    const lowerCased = email.toLowerCase();
+
+    const [userCheck, otpSend] = await Promise.all([
+      supabasePromiseResolver({
+        requestFunction: getRecruiterProfileByEmail,
+        requestBody: { email: lowerCased },
+      }),
+      supabasePromiseResolver({
+        requestFunction: resetPassword,
+        requestBody: { email: lowerCased },
+      }),
+    ]);
+
+    if (!userCheck?.success) {
       return response(
         {
-          message: resendOtpResponse?.error || 'Error while sending OTP.',
+          message: userCheck?.error || 'Email not found.',
           data: null,
-          error: resendOtpResponse?.error || 'Error while sending OTP.',
+          error: userCheck?.error || 'Email not found.',
         },
         400,
       );
     }
+
+    if (!otpSend?.success) {
+      return response(
+        {
+          message: otpSend?.error || 'Error while sending OTP.',
+          data: null,
+          error: otpSend?.error || 'Error while sending OTP.',
+        },
+        400,
+      );
+    }
+
     return response(
       {
         message: 'OTP sent successfully.',
@@ -50,7 +69,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return response(
       {
-        message: (error as Error)?.message || 'Internal Server Error',
+        message: (error as Error)?.message || 'Internal Server Error.',
         data: null,
         error,
       },

@@ -1,11 +1,27 @@
 import { supabase } from '@/lib/supabase/server';
-
 export const getCategories = async () => {
   const { data, error } = await supabase
     .from('category')
-    .select('id, name, icon_url')
+    .select(
+      `
+      id,
+      name,
+      icon_url,
+      sub_category ( id )
+    `,
+    )
     .order('created_at', { ascending: true });
-  return { data, error };
+
+  if (error) return { data: null, error };
+
+  const formatted = data?.map((category) => ({
+    id: category.id,
+    name: category.name,
+    icon_url: category.icon_url,
+    has_sub_categories: category.sub_category?.length > 0,
+  }));
+
+  return { data: formatted, error: null };
 };
 
 export const getSubCategories = async ({ categoryId }: { categoryId: string }) => {

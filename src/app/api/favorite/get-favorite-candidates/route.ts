@@ -1,12 +1,7 @@
-import {
-  corsOptions,
-  getAccessToken,
-  response,
-  supabasePromiseResolver,
-  verifyToken,
-} from '@/lib/supabase/helper';
+import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
+import { authGuard } from '@/services/server/authGuard';
 import { getFavoriteCandidates } from '@/services/server/favoriteService';
-import { getRecruiterProfile } from '@/services/server/recruiterService';
+
 import { NextRequest } from 'next/server';
 
 export async function OPTIONS() {
@@ -15,55 +10,17 @@ export async function OPTIONS() {
 
 export async function GET(request: NextRequest) {
   try {
-    const accessToken = await getAccessToken(request);
-    if (!accessToken) {
-      return response(
-        {
-          message: 'Unauthorized',
-          data: null,
-          error: 'Unauthorized',
-        },
-        404,
-      );
-    }
-    const tokenCheckResponse = verifyToken(accessToken);
-    if (!tokenCheckResponse?.valid) {
-      return response(
-        {
-          message: tokenCheckResponse.error,
-          data: null,
-          error: tokenCheckResponse.error,
-        },
-        401,
-      );
-    }
+    const { recruiter, errorResponse } = await authGuard(request);
+    if (errorResponse) return errorResponse;
 
-    const getRecruiterResponse = await supabasePromiseResolver({
-      requestFunction: getRecruiterProfile,
-      requestBody: { profileId: tokenCheckResponse?.id },
-    });
-
-    if (!getRecruiterResponse?.success) {
-      return response(
-        {
-          message: 'Recruiter not found',
-          data: null,
-          error: getRecruiterResponse?.error || 'Recruiter not found.',
-        },
-        404,
-      );
-    }
-
-    const recruiterId = getRecruiterResponse?.data?.recruiter_id;
     const { searchParams } = new URL(request.url);
-
     const skip = parseInt(searchParams.get('skip') || '0', 10);
     const take = parseInt(searchParams.get('take') || '25', 10);
     const search = searchParams.get('search') || null;
 
     const favoriteCandidatesResponse = await supabasePromiseResolver({
       requestFunction: getFavoriteCandidates,
-      requestBody: { recruiterId, search, skip, take },
+      requestBody: { recruiterId: recruiter?.recruiter_id, search, skip, take },
     });
 
     if (!favoriteCandidatesResponse?.success) {

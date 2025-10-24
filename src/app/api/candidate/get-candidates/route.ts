@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
     const categoryId = searchParams.get('categoryId') ?? null;
     const subCategoryId = searchParams.get('subCategoryId') ?? null;
     const skip = Number(searchParams.get('skip') ?? 0);
-    const take = Number(searchParams.get('take') ?? 25);
+    const take = Number(searchParams.get('take') ?? 10);
     const accessToken = await getAccessToken(request);
     if (!accessToken) {
       return response(

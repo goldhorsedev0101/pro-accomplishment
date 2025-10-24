@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     state,
     email,
     quote,
+    grade,
     country,
     last_name,
     first_name,
@@ -94,21 +95,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const fields = {
     school: contact({ icon: icons.school, value: organization_name }, 1),
     categories: accomplishments?.map(accomplishmentLayout).join(''),
-    gpa: contact({ icon: icons.star, value: gpa }, 1),
+    gpa: contact({ icon: icons.star, value: 'GPA ' + gpa }, 1),
     contacts: contacts.map(contact).join(''),
     objective: objective_for_summary,
     profile: profile_photo_url,
     quote: icons.quote,
     about: quote,
+    grade,
     name,
   };
 
   // Replace all fields
   Object.entries(fields).forEach(([field, value]) => {
     document.querySelectorAll(`[data-field="${field}"]`).forEach((el) => {
-      const forInnerHTML =
-        field === 'categories' || field === 'contacts' || field === 'school' || field === 'gpa';
-
+      const forInnerHTML = ['categories', 'contacts', 'school', 'gpa', 'grade'].includes(field);
       const forSrc = field === 'profile' || field === 'quote';
 
       if (value) {

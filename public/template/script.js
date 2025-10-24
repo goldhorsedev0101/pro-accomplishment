@@ -97,11 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
     gpa: contact({ icon: icons.star, value: gpa }, 1),
     contacts: contacts.map(contact).join(''),
     objective: objective_for_summary,
-    profile: profile_photo_url,
     quote: icons.quote,
     about: quote,
     name,
   };
+  // profile: profile_photo_url,
 
   // Replace all fields
   Object.entries(fields).forEach(([field, value]) => {
@@ -364,7 +364,7 @@ const accomplishmentLayout = (
         ? `<p class="break-all font-medium text-[var(--gray-60)] text-lg">
               ${isGlobal ? (sub_category_name ?? category_name) : category_name}
           </p>`
-        : 'Lorem ipsum dolor sit'
+        : ''
     }
       ${renderCard(form_type)}
     </div>

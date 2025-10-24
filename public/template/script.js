@@ -97,11 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
     gpa: contact({ icon: icons.star, value: gpa }, 1),
     contacts: contacts.map(contact).join(''),
     objective: objective_for_summary,
+    profile: profile_photo_url,
     quote: icons.quote,
     about: quote,
     name,
   };
-  // profile: profile_photo_url,
 
   // Replace all fields
   Object.entries(fields).forEach(([field, value]) => {
@@ -175,13 +175,13 @@ const accomplishmentLayout = (
       });
     }
 
-    if (form_type === 'award') {
-      return awardsCard({
-        date: formatToMDYYYY(form_data?.date_received),
-        institution: form_data?.institution,
-        title: form_data?.award_title,
-      });
-    }
+    // if (form_type === 'award') {
+    //   return awardsCard({
+    //     date: formatToMDYYYY(form_data?.date_received),
+    //     institution: form_data?.institution,
+    //     title: form_data?.award_title,
+    //   });
+    // }
 
     if (form_type === 'certification') {
       return certificationsCard({

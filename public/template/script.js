@@ -167,11 +167,9 @@ const Link = (link) => {
   if (!link) return '';
 
   return `
-    <a href="${validUrl}" target="_blank" class="flex items-center gap-x-2" key="${i}">
-      <image src="${icons.link}" alt="icon" class='w-[18px] h-[18px]' />
-      <span class="font-normal ${
-        i === 3 ? 'text-[var(--blue)]' : 'text-[var(--black)]'
-      }">${link}</span>
+    <a href="${validUrl}" target="_blank" class="flex items-center gap-x-2">
+      <img src="${icons.link}" alt="icon" class='w-[18px] h-[18px]' />
+      <span class="font-normal text-[var(--blue)]">${link}</span>
     </a>
   `;
 };

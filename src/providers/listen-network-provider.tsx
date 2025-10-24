@@ -3,6 +3,7 @@
 import BasicModal from '@/components/common/modals/basic-modal';
 import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
+import { useRouter } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 
 interface IProps {
@@ -28,6 +29,7 @@ async function isInternetConnectionWorking() {
 const ListenNetworkProvider = ({ children }: IProps) => {
   const [isOffline, setIsOffline] = useState<boolean>(false);
 
+  const { refresh } = useRouter();
   useEffect(() => {
     const checkConnection = async () => {
       const isConnected = await isInternetConnectionWorking();
@@ -50,7 +52,7 @@ const ListenNetworkProvider = ({ children }: IProps) => {
       <div className="h-full w-full">
         <BasicModal
           isOpen={true}
-          setIsOpen={async () => window.location.reload()}
+          setIsOpen={refresh}
           trigger={{ child: null }}
           title={{
             title: 'Please check your internet connection',
@@ -62,10 +64,7 @@ const ListenNetworkProvider = ({ children }: IProps) => {
                 Click retry once you are back online
               </p>
               <DialogClose asChild>
-                <Button
-                  onClick={async () => window.location.reload()}
-                  className="w-full h-14 rounded-xl"
-                >
+                <Button onClick={refresh} className="w-full h-14 rounded-xl">
                   Retry
                 </Button>
               </DialogClose>

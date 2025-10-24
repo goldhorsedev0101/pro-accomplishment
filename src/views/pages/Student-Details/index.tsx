@@ -46,8 +46,14 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
   const groupedData = groupByFormType(accomplishments);
 
   const handleToggle = async () => {
-    await toggle({ candidateId: id || '' });
-    setIsFav(!isFav);
+    try {
+      setIsFav(!isFav);
+      const res = await toggle({ candidateId: id || '' });
+      if (res.error) setIsFav(!isFav);
+    } catch (error) {
+      setIsFav(!isFav);
+      console.log('🚀 ~ handleToggle ~ error:', error);
+    }
   };
 
   useEffect(() => {

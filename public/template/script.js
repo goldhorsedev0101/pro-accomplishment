@@ -85,17 +85,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const location = `${city}, ${state}, ${country}`;
 
   const contacts = [
-    { icon: icons.email, value: email, gpa: false },
-    { icon: icons.call, value: '+' + phone_number, gpa: false },
-    { icon: icons.location, value: location, gpa: false },
-    { icon: icons.link, value: link, gpa: false },
+    { icon: icons.email, value: email },
+    { icon: icons.call, value: '+' + phone_number },
+    { icon: icons.location, value: location },
+    { icon: icons.link, value: link },
   ];
 
   const fields = {
-    school: contact({ icon: icons.school, value: organization_name }, 1, false),
-    contacts: contacts.map((items, i) => contact(items, i, false)).join(''),
+    school: contact({ icon: icons.school, value: organization_name }, 1),
     categories: accomplishments?.map(accomplishmentLayout).join(''),
-    gpa: contact({ icon: icons.star, value: gpa }, 1, true),
+    gpa: contact({ icon: icons.star, value: gpa }, 1),
+    contacts: contacts.map(contact).join(''),
     objective: objective_for_summary,
     profile: profile_photo_url,
     quote: icons.quote,
@@ -364,7 +364,7 @@ const accomplishmentLayout = (
         ? `<p class="break-all font-medium text-[var(--gray-60)] text-lg">
               ${isGlobal ? (sub_category_name ?? category_name) : category_name}
           </p>`
-        : ''
+        : 'Lorem ipsum dolor sit'
     }
       ${renderCard(form_type)}
     </div>

@@ -56,7 +56,7 @@ const AcademicsCard: FC<IProps> = ({ form_data }): JSX.Element => {
           <Fragment key={i}>
             {label && (
               <div
-                className={`flex gap-x-1 ${i == 1 ? 'justify-center' : i == 2 && 'justify-end'}`}
+                className={`flex gap-x-1 items-center ${i == 1 ? 'justify-center' : i == 2 && 'justify-end'}`}
               >
                 <Image src={icon} alt={label ?? ''} className="size-6" />
                 <p className="text-neutral-grey-100 text-sm font-normal font-quicksand">{label}</p>

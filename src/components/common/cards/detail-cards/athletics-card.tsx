@@ -46,7 +46,7 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         <div className="space-y-2 capitalize">
           {event_name && (
             <div className="flex items-center gap-x-2">
-              <Image alt="" src={calendar} sizes="20" />
+              <Image alt="" src={calendar} className="size-6" />
               <p className="font-quicksand font-normal text-sm text-neutral-grey-80">
                 {event_name}
               </p>
@@ -55,7 +55,7 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
 
           {location && (
             <div className="flex items-center gap-x-2">
-              <Image alt="" src={locationIcon} sizes="20" />
+              <Image alt="" src={locationIcon} className="size-6" />
               <p className="font-quicksand font-normal text-sm text-neutral-grey-80">{location}</p>
             </div>
           )}
@@ -65,7 +65,7 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
       <hr className="-my-2" />
 
       <div className="flex items-center gap-x-2">
-        <Image alt="" src={cup} sizes="20" />
+        <Image alt="" src={cup} className="size-6" />
         <p className="font-quicksand font-normal text-sm text-neutral-grey-100">{title_or_award}</p>
       </div>
     </Box>

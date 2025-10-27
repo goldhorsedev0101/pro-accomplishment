@@ -101,19 +101,19 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
       <div className="flex items-center gap-3 flex-wrap">
         <div className="flex items-center gap-x-1">
           <Image src={school} alt="school" width={20} height={20} />
-          <p className="text-sm font-normal text-neutral-grey-100">{organization_name}</p>
+          <p className="font-normal text-neutral-grey-100">{organization_name}</p>
         </div>
 
         <div className="size-1.5 rounded-full bg-[#B2B0B2]" />
 
-        <p className="text-sm font-normal text-neutral-grey-80">{grade}</p>
+        <p className="font-normal text-neutral-grey-80">{grade}</p>
 
         <div className="size-1.5 rounded-full bg-[#B2B0B2]" />
 
         {gpa && (
           <div className="flex items-center h-fit gap-x-1">
             <TiStar className="text-yellow" size={20} />
-            <p className="text-black text-sm font-normal">
+            <p className="text-black font-normal">
               GPA<span className="font-medium"> {gpa}</span>
             </p>
           </div>

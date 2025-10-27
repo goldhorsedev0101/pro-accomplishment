@@ -47,14 +47,14 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
       {location && (
         <div className="space-y-2">
           <div className="flex items-center gap-x-2">
-            <Image className="size-5" alt="" src={locationColored} />
+            <Image className="size-6" alt="" src={locationColored} />
             <p className="font-quicksand font-normal text-sm text-[var(--black)]">{destination}</p>
           </div>
         </div>
       )}
       {company && (
         <div className="flex items-center gap-x-2">
-          <Image className="size-5" alt="" src={agency} />
+          <Image className="size-6" alt="" src={agency} />
           <p className="font-quicksand font-normal text-sm text-[var(--black)]">{company}</p>
         </div>
       )}

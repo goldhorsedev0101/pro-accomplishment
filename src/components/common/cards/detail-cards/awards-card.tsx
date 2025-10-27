@@ -25,7 +25,7 @@ const AwardsCard: FC<IProps> = ({ form_data }): JSX.Element => {
     <Box className="shadow-sm w-full !gap-y-3 !text-start">
       <div className="flex items-center gap-x-3">
         <div className="w-9 h-9 rounded-full bg-yellow-light flex items-center justify-center">
-          <Image src={cup} alt="cup" sizes="24" />
+          <Image src={cup} alt="cup" className="size-6" />
         </div>
         <div>
           <Heading
@@ -40,7 +40,7 @@ const AwardsCard: FC<IProps> = ({ form_data }): JSX.Element => {
       </div>
 
       <div className="flex gap-x-2">
-        <Image src={building} alt="building" sizes="16" />
+        <Image src={building} alt="building" className="size-6" />
         <p className="text-neutral-grey-100 text-sm font-normal font-quicksand">{institution}</p>
       </div>
     </Box>

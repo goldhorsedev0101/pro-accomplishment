@@ -27,7 +27,7 @@ const CertificationsDetailsModal: FC<IProps> = ({ form_data }) => {
       {(form_data?.certification_title || form_data?.date_received) && (
         <Box className="!border-none !flex-row items-center !p-3 !gap-2">
           <div className="w-9 h-9 rounded-full bg-purple-light flex items-center justify-center">
-            <Image src={start} alt="start" sizes="24" />
+            <Image src={start} alt="start" className="size-6" />
           </div>
           <div className="gap-x-1">
             <p className="text-heading font-medium capitalize">{form_data?.certification_title}</p>

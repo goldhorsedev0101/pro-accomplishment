@@ -47,7 +47,7 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
         <div className="space-y-2">
           {lang && (
             <div className="flex items-center gap-x-2">
-              <Image className="size-5" alt="" src={language} />
+              <Image className="size-6" alt="" src={language} />
               <p className="font-quicksand font-normal text-sm text-[var(--gray-80)] capitalize">
                 {lang}
               </p>
@@ -55,7 +55,7 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
           )}
           {yearsOfStudy && (
             <div className="flex items-center gap-x-2">
-              <Image className="size-5" alt="" src={book} />
+              <Image className="size-6" alt="" src={book} />
               <p className="font-quicksand font-normal w-full flex items-center justify-between text-sm text-[var(--gray-80)] capitalize">
                 Years of Study
                 <span className="font-medium">{yearsOfStudy}</span>
@@ -64,7 +64,7 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
           )}
           {institute && (
             <div className="flex items-center gap-x-2">
-              <Image className="size-5" alt="" src={building} />
+              <Image className="size-6" alt="" src={building} />
               <p className="font-quicksand font-normal text-sm text-[var(--gray-80)] capitalize">
                 {institute}
               </p>
@@ -83,7 +83,7 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
 
       {link && (
         <div className="flex items-center gap-x-2">
-          <Image src={linkIcon} sizes="20" alt="" />
+          <Image src={linkIcon} className="size-6" alt="" />
           <Link href={validUrl} className="text-[var(--blue)] font-normal font-quicksand">
             {link}
           </Link>
@@ -92,7 +92,7 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
 
       {notes && (
         <div className="flex gap-x-1.5 items-start">
-          <Image src={note} alt="note" className="size-5" />
+          <Image src={note} alt="note" className="size-6" />
           <p className="text-[var(--gray-80)] text-sm font-normal font-quicksand break-all">
             {notes}
           </p>

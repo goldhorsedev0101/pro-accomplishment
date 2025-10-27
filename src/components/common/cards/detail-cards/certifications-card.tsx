@@ -23,7 +23,7 @@ const CertificationsCard: FC<IProps> = ({ form_data }) => {
     <Box className="shadow-sm w-full !gap-y-3 !text-start">
       <div className="flex items-center gap-x-3">
         <div className="w-9 h-9 rounded-full bg-purple-light flex items-center justify-center">
-          <Image src={start} alt="start" sizes="24" />
+          <Image src={start} alt="start" className="size-6" />
         </div>
         <div>
           <Heading
@@ -38,7 +38,7 @@ const CertificationsCard: FC<IProps> = ({ form_data }) => {
       </div>
 
       <div className="flex gap-x-2">
-        <Image src={building} alt="building" sizes="16" />
+        <Image src={building} alt="building" className="size-6" />
         <p className="text-neutral-grey-80 text-sm font-normal font-quicksand capitalize">
           {institution}
         </p>

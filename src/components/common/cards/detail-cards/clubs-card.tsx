@@ -31,7 +31,7 @@ const ClubsCard: FC<IProps> = ({ form_data }) => {
         <div className="space-y-2">
           {tag && (
             <div className="flex items-center gap-x-2">
-              <Image className="size-5" alt="" src={bill} />
+              <Image className="size-6" alt="" src={bill} />
               <p className="font-quicksand font-normal text-sm text-[var(--gray-80)] capitalize">
                 {tag}
               </p>
@@ -39,7 +39,7 @@ const ClubsCard: FC<IProps> = ({ form_data }) => {
           )}
           {location && (
             <div className="flex items-center gap-x-2">
-              <Image className="size-5" alt="" src={locationColored} />
+              <Image className="size-6" alt="" src={locationColored} />
               <p className="font-quicksand font-normal text-sm text-[var(--gray-80)] capitalize">
                 {location}
               </p>

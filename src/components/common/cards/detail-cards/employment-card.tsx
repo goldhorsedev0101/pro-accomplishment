@@ -1,7 +1,7 @@
 // Icons
 import briefcase from 'public/icons/briefcase.svg';
-import note from 'public/icons/note.svg';
 import linkIcon from 'public/icons/link.svg';
+import note from 'public/icons/note.svg';
 
 // Components
 import Image from 'next/image';
@@ -29,7 +29,7 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
     <Box className="shadow-sm w-full !text-start !gap-y-3">
       <div className="flex items-start gap-x-3">
         <div className="w-9 h-9 rounded-full bg-blue-light flex items-center justify-center">
-          <Image src={briefcase} alt="start" sizes="24" />
+          <Image src={briefcase} alt="start" className="size-6" />
         </div>
         <div>
           <Heading
@@ -59,8 +59,8 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
       )}
 
       {link && (
-        <div className="flex items-center gap-x-2">
-          <Image src={linkIcon} sizes="20" alt="" />
+        <div className="flex items-center gap-x-2 pl-3">
+          <Image src={linkIcon} className="size-6" alt="" />
           <Link href={validUrl} className="text-[var(--blue)] font-normal font-quicksand">
             {link}
           </Link>
@@ -68,8 +68,8 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
       )}
 
       {form_data?.notes && (
-        <div className="flex gap-x-1.5">
-          <Image src={note} alt="building" sizes="20" />
+        <div className="flex gap-x-1.5 pl-3">
+          <Image src={note} alt="building" className="size-6" />
           <p className="text-neutral-grey-80 text-sm font-normal font-quicksand">
             {form_data?.notes}
           </p>

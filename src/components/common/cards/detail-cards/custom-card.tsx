@@ -28,8 +28,10 @@ const CustomCard: FC<IProps> = ({ form_data }) => {
       </div>
       {notes && (
         <div className="flex gap-x-1.5">
-          <Image src={note} alt="building" sizes="20" />
-          <p className="text-neutral-grey-80 text-sm font-normal font-quicksand">{notes}</p>
+          <Image src={note} alt="building" className="size-6" />
+          <p className="text-neutral-grey-80 text-sm font-normal font-quicksand break-all">
+            {notes}
+          </p>
         </div>
       )}
     </Box>

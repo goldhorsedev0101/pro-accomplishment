@@ -25,8 +25,8 @@ const Media: FC<IProps> = ({ media_urls, title }) => {
           if (!isVideo) {
             return (
               <Image
+                className="rounded-md cursor-pointer"
                 onClick={() => setSelectedImg(url)}
-                className="rounded-md"
                 alt="chaseBanner"
                 height={150}
                 width={150}
@@ -38,8 +38,9 @@ const Media: FC<IProps> = ({ media_urls, title }) => {
             return (
               <video
                 onClick={() => setSelectedImg(url)}
-                width="150"
+                className="cursor-pointer"
                 height="150"
+                width="150"
                 src={url}
                 controls
                 key={i}

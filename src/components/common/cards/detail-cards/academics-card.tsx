@@ -56,7 +56,7 @@ const AcademicsCard: FC<IProps> = ({ form_data }): JSX.Element => {
           <Fragment key={i}>
             {label && (
               <div className="flex gap-x-1">
-                <Image src={icon} alt={label ?? ''} sizes="16" />
+                <Image src={icon} alt={label ?? ''} className="size-6" />
                 <p className="text-neutral-grey-100 text-sm font-normal font-quicksand">{label}</p>
               </div>
             )}

@@ -83,23 +83,23 @@ const EditProfileModal: FC<IProps> = ({
             name="profileImage"
           />
 
-          <div className="flex items-center gap-x-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <Input
               error={touched.firstName ? errors.firstName : undefined}
+              placeholder="Enter first name"
               value={values.firstName}
               onChange={handleChange}
               className="bg-white"
               label="First Name"
-              placeholder="Jane"
               name="firstName"
             />
 
             <Input
               error={touched.lastName ? errors.lastName : undefined}
+              placeholder="Enter last name"
               value={values.lastName}
               onChange={handleChange}
               className="bg-white"
-              placeholder="Cooper"
               label="Last Name"
               name="lastName"
             />

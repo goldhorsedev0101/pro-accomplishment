@@ -30,7 +30,7 @@ const InvestingCard: FC<IProps> = ({ form_data }) => {
 
       {notes && (
         <div className="flex gap-x-1.5">
-          <Image src={note} alt="building" sizes="20" />
+          <Image src={note} alt="building" className="size-6" />
           <p className="text-neutral-grey-80 text-sm font-normal font-quicksand">{notes}</p>
         </div>
       )}

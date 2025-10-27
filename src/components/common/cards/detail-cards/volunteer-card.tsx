@@ -79,7 +79,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
 
       {link && (
         <div className="flex items-center gap-x-2 pl-3">
-          <Image src={linkIcon} sizes="20" alt="" />
+          <Image src={linkIcon} className="size-6" alt="" />
           <Link href={validUrl} className="text-[var(--blue)] text-sm font-normal font-quicksand">
             {link}
           </Link>
@@ -88,7 +88,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
 
       {doc && (
         <div className="flex gap-x-1.5 items-start pl-3">
-          <Image src={note} alt="note" className="size-5" />
+          <Image src={note} alt="note" className="size-6" />
           <p className="text-[var(--gray-80)] text-sm font-normal font-quicksand break-all">
             {doc}
           </p>

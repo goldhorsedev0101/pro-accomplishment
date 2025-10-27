@@ -45,7 +45,7 @@ const AcademicsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         </div>
 
         {startYear && (
-          <p className="font-quicksand text-neutral-grey-80 font-normal text-sm rounded-sm py-0.5 px-1.5 bg-green-light">
+          <p className="font-quicksand text-neutral-grey-80 font-normal text-sm rounded-sm py-0.5 px-1.5 bg-green-light min-w-fit">
             {startYear === endYear ? startYear : `${startYear} - ${endYear}`}
           </p>
         )}

@@ -53,6 +53,8 @@ const PhoneNumberInput = ({
           setFieldValue(name, phone);
         }}
         placeholder={placeholder}
+        dropdownStyle={{ marginBottom: '4px', bottom: '100%', top: 'auto' }}
+        dropdownClass="!p-2 !rounded-sm"
       />
 
       {error && <span className="text-destructive text-sm font-normal pb-2">{error}</span>}

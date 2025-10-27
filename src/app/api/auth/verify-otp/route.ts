@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server';
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
 import { verifyOtp } from '@/services/server/authService';
 
-export const runtime = 'edge';
+// export const runtime = 'edge';
 
 export async function OPTIONS() {
   return corsOptions();

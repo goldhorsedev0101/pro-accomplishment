@@ -52,7 +52,13 @@ const VerifyEmailView = (): JSX.Element => {
         const { access_token } = data?.session || {};
 
         if (route === RECOVERY) {
-          setCookie('session', data?.session);
+          setCookie('session', JSON.stringify(data?.session), {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+            path: '/',
+          });
+
           push(resetPassword);
         } else {
           setCookie('accessToken', access_token);

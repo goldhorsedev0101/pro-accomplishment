@@ -1,6 +1,7 @@
-import { NextRequest } from 'next/server';
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
-import { updatePassword } from '@/services/server/authService';
+import { restoreSupabaseSession, updatePassword } from '@/services/server/authService';
+import { cookies } from 'next/headers';
+import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';
 
@@ -10,6 +11,12 @@ export async function OPTIONS() {
 
 export async function POST(request: NextRequest) {
   try {
+    const supabaseSession = await restoreSupabaseSession();
+
+    if (supabaseSession?.error) {
+      return supabaseSession?.error;
+    }
+
     const { newPassword, confirmPassword } = await request.json();
 
     if (newPassword !== confirmPassword) {

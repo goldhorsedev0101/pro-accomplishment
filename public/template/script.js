@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const contacts = [
     { icon: icons.email, value: email },
-    { icon: icons.call, value: (getDialCodeByISO(iso2 ?? 'us') || '') + ' ' + phone_number },
+    { icon: icons.call, value: (getDialCodeByISO(iso2 || 'us') || '') + ' ' + phone_number },
     { icon: icons.location, value: location },
     { icon: icons.link, value: link },
   ];

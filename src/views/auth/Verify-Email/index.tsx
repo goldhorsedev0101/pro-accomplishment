@@ -48,10 +48,13 @@ const VerifyEmailView = (): JSX.Element => {
     onSubmit: async ({ otp }) => {
       try {
         const { data } = await verifyOTP({ email, otp, type: route });
-        const { access_token } = data.session;
 
-        if (route === RECOVERY) push(resetPassword);
-        else {
+        const { access_token } = data?.session || {};
+
+        if (route === RECOVERY) {
+          setCookie('session', data?.session);
+          push(resetPassword);
+        } else {
           setCookie('accessToken', access_token);
           push(home);
           refresh();

@@ -29,11 +29,11 @@ const TalentsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         </div>
         <div className="flex items-center w-full justify-between">
           <Heading
-            className="!text-base !text-heading font-quicksand break-all"
+            className="!text-base !text-heading font-quicksand"
             text={name ?? ''}
             width="medium"
           />
-          <p className="font-quicksand text-neutral-grey-100 font-normal text-sm">
+          <p className="font-quicksand text-neutral-grey-100 min-w-fit font-normal text-sm">
             {formatToDDMMMYYYY(date ?? '')}
           </p>
         </div>

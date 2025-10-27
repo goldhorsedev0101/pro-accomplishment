@@ -33,9 +33,7 @@ const StudyAbroadCard: FC<IProps> = ({ form_data }) => {
         <Image src={teacherBlue} alt="teacher" className="size-6" />
         <div>
           {destination && (
-            <p className="font-medium text-[var(--heading)] font-quicksand break-all">
-              {destination}
-            </p>
+            <p className="font-medium text-[var(--heading)] font-quicksand">{destination}</p>
           )}
           {date && (
             <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm break-all">

@@ -55,9 +55,7 @@ const PhoneNumberInput = ({
         placeholder={placeholder}
       />
 
-      <span className={`text-sm ${isError ? 'text-red' : 'invisible'}`}>
-        {isError ? error : 'Error'}
-      </span>
+      {error && <span className="text-destructive text-sm font-normal pb-2">{error}</span>}
     </label>
   );
 };

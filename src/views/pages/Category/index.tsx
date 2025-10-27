@@ -39,8 +39,8 @@ const CategoryView: FC<IParams & { name: string; isSub: boolean }> = ({
   });
 
   const { data: candidate, isPending: isCandidatePending } = useGetCandidateQuery({
+    subCategoryId: subCategoryId === 'all' ? '' : subCategoryId,
     categoryId: category,
-    subCategoryId,
     searchTerm,
   });
 
@@ -57,7 +57,9 @@ const CategoryView: FC<IParams & { name: string; isSub: boolean }> = ({
     gpa: item.gpa,
   }));
 
-  const subCategoriesData = subCategories?.data;
+  const subCategoriesData = subCategories?.data.map(({ id, name }) => ({ id, name }));
+  const items = subCategoriesData && [{ id: 'all', name: 'All' }, ...subCategoriesData];
+
   const title = name.replaceAll('%20', ' ');
 
   return (
@@ -78,9 +80,9 @@ const CategoryView: FC<IParams & { name: string; isSub: boolean }> = ({
             <SelectContent className="max-h-[400px]">
               {isSubCategoriesPending ? (
                 <Loader width="150" />
-              ) : (subCategoriesData?.length || 0) > 0 ? (
-                subCategoriesData?.map(({ id, name }) => (
-                  <SelectItem key={id} value={id}>
+              ) : (items?.length || 0) > 0 ? (
+                items?.map(({ id, name }, i) => (
+                  <SelectItem key={i} value={id}>
                     {name}
                   </SelectItem>
                 ))

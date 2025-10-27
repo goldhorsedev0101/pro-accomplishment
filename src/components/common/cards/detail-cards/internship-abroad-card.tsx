@@ -28,7 +28,7 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
 
   return (
     <Box>
-      <Box className="!border-none !flex-row items-center justify-between !p-0 !gap-2">
+      <Box className="!border-none !flex-row  justify-between !p-0 !gap-2">
         <div className="flex items-center">
           <div className="flex items-center justify-center size-9 bg-primary-20 rounded-full">
             <Image alt="title/award" src={internshipAbroad} width={24} height={24} />
@@ -40,7 +40,9 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
         </div>
 
         {internship_type && (
-          <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">{internship_type}</p>
+          <p className="h-fit rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm min-w-fit">
+            {internship_type}
+          </p>
         )}
       </Box>
 

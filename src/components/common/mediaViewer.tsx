@@ -76,7 +76,7 @@ export default function MediaViewer({ onOpenChange, selectedMedia, isVideo }: Pr
             <button
               type="button"
               onClick={() => onOpenChange()}
-              className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+              className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors cursor-pointer"
             >
               <X size={16} />
             </button>

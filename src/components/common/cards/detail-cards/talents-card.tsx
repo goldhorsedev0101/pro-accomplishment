@@ -29,7 +29,7 @@ const TalentsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         </div>
         <div className="flex items-center w-full justify-between">
           <Heading
-            className="!text-sm !text-heading font-quicksand break-all"
+            className="!text-base !text-heading font-quicksand break-all"
             text={name ?? ''}
             width="medium"
           />

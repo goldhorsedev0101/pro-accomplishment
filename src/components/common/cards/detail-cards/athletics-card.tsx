@@ -27,7 +27,7 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
       <div className="flex justify-between items-start">
         <div>
           <Heading
-            className="!text-sm !text-heading font-quicksand break-all"
+            className="!text-base !text-heading font-quicksand break-all"
             text={name ?? ''}
             width="medium"
           />

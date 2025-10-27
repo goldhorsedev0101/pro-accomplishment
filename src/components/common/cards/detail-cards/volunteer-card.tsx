@@ -40,9 +40,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
         </div>
         <div>
           {title && (
-            <p className="!text-sm font-medium !text-heading font-quicksand break-all capitalize">
-              {title}
-            </p>
+            <p className="font-medium !text-heading font-quicksand break-all capitalize">{title}</p>
           )}
           {(startDate || endDate) && (
             <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm break-all">

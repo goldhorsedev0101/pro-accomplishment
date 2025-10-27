@@ -33,7 +33,7 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
         </div>
         <div>
           <Heading
-            className="!text-sm !text-heading font-quicksand !break-all"
+            className="!text-base !text-heading font-quicksand !break-all"
             text={form_data?.job_title ?? 'N/A'}
             width="medium"
           />

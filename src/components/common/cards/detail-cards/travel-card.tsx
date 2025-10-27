@@ -25,7 +25,7 @@ const TravelCard: FC<IProps> = ({ form_data }) => {
         <Image src={airplane} alt="airplane" className="size-6" />
         <div>
           {destination && (
-            <p className="font-medium text-[var(--heading)] font-quicksand !text-sm break-all">
+            <p className="font-medium text-[var(--heading)] font-quicksand break-all">
               {destination}
             </p>
           )}

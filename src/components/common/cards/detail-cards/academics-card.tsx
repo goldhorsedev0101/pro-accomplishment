@@ -35,7 +35,7 @@ const AcademicsCard: FC<IProps> = ({ form_data }): JSX.Element => {
       <div className="flex justify-between items-start">
         <div>
           <Heading
-            className="!text-sm font-quicksand !text-heading break-all"
+            className="!text-base font-quicksand !text-heading break-all"
             text={form_data?.name || ''}
             width="medium"
           />
@@ -51,11 +51,13 @@ const AcademicsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         )}
       </div>
 
-      <div className="flex justify-between items-center w-full">
+      <div className="grid sm:grid-cols-3">
         {data.map(({ icon, label }, i) => (
           <Fragment key={i}>
             {label && (
-              <div className="flex gap-x-1">
+              <div
+                className={`flex gap-x-1 ${i == 1 ? 'justify-center' : i == 2 && 'justify-end'}`}
+              >
                 <Image src={icon} alt={label ?? ''} className="size-6" />
                 <p className="text-neutral-grey-100 text-sm font-normal font-quicksand">{label}</p>
               </div>

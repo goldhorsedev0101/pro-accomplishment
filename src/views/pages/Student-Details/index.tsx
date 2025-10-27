@@ -114,7 +114,7 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
         </Box>
       )}
 
-      <Heading text="Accomplishment" size="22" width="medium" />
+      <Heading text="Accomplishments" size="22" width="medium" />
 
       <div className="h-fit gap-6 md:columns-2 space-y-6">
         {groupedData?.map((group, i) => (

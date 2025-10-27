@@ -17,9 +17,7 @@ const ClubsCard: FC<IProps> = ({ form_data }) => {
     <Box>
       <div>
         {title && (
-          <p className="!text-sm font-medium !text-heading font-quicksand break-all capitalize">
-            {title}
-          </p>
+          <p className="font-medium !text-heading font-quicksand break-all capitalize">{title}</p>
         )}
         {date_joined && (
           <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm">

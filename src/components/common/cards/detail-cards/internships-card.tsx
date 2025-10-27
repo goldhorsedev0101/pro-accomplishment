@@ -40,7 +40,7 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
         <div className="flex w-full justify-between">
           <div className="w-full">
             {internship_title && (
-              <p className="font-medium text-[var(--heading)] font-quicksand !text-sm break-all">
+              <p className="font-medium text-[var(--heading)] font-quicksand break-all">
                 {internship_title}
               </p>
             )}

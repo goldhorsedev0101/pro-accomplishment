@@ -34,7 +34,7 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
             <Image alt="title/award" src={internshipAbroad} width={24} height={24} />
           </div>
           <div className="gap-x-1">
-            <p className="text-heading font-medium text-sm font-quicksand capitalize">{title}</p>
+            <p className="text-heading font-medium font-quicksand capitalize">{title}</p>
             <p className="text-neutral-grey-80 text-sm">{date}</p>
           </div>
         </div>

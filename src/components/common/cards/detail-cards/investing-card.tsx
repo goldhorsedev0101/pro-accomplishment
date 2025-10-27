@@ -16,9 +16,7 @@ const InvestingCard: FC<IProps> = ({ form_data }) => {
     <Box className="w-full !gap-y-3">
       <div>
         {title && (
-          <p className="!text-sm font-medium !text-heading font-quicksand break-all capitalize">
-            {title}
-          </p>
+          <p className="font-medium !text-heading font-quicksand break-all capitalize">{title}</p>
         )}
         {date && (
           <p className="font-quicksand flex items-center justify-between text-[var(--gray-80)] font-normal text-sm">

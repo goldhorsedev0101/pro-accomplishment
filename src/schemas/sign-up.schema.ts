@@ -1,3 +1,4 @@
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import * as Yup from 'yup';
 
 export const SignUpSchema = Yup.object({
@@ -21,4 +22,11 @@ export const SignUpSchema = Yup.object({
     .required('Confirm password is required')
     .oneOf([Yup.ref('password')], 'Passwords must match'),
   profileImage: Yup.string().required('Profile is required'),
+  phoneNumber: Yup.string()
+    .required('Phone number is required')
+    .test('is-valid-phone', 'Invalid phone number', (value) => {
+      if (!value) return false;
+      const phoneNumber = parsePhoneNumberFromString(`+${value}`);
+      return phoneNumber?.isValid() || false;
+    }),
 });

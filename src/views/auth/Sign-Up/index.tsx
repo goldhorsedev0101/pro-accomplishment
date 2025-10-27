@@ -124,7 +124,9 @@ const SignUpView = (): JSX.Element => {
           setIso2={(e) => setFieldValue('iso2', e)}
           placeholder="Enter Phone Number"
           setFieldValue={setFieldValue}
+          touched={touched.phoneNumber}
           value={values['phoneNumber']}
+          error={errors.phoneNumber}
           iso2={values['iso2']}
           label="Phone Number"
           name="phoneNumber"

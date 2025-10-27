@@ -17,6 +17,7 @@ export interface MetaData {
 }
 
 export interface CandidateData {
+  iso2: string;
   gpa: number;
   city: string;
   link: string | null;

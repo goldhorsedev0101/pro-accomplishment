@@ -43,7 +43,15 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
     return Object.values(grouped);
   }
 
-  const groupedData = groupByFormType(accomplishments);
+  const sortByFormType = (data: Accomplishment[][]) => {
+    return [...data].sort((a, b) => {
+      const formTypeA = a[0]?.form_type?.toLowerCase() ?? '';
+      const formTypeB = b[0]?.form_type?.toLowerCase() ?? '';
+      return formTypeA.localeCompare(formTypeB);
+    });
+  };
+
+  const groupedData = sortByFormType(groupByFormType(accomplishments));
 
   const handleToggle = async () => {
     try {

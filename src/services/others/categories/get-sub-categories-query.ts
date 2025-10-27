@@ -15,7 +15,7 @@ const useGetSubCategoriesQuery = ({
   categoryId,
   isSub,
 }: {
-  categoryId: string;
+  categoryId: string | undefined;
   isSub: boolean;
 }) => {
   const getSubCategoriesFn = async (): Promise<GetSubCategoriesResponseT> => {

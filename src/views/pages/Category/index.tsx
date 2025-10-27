@@ -34,13 +34,13 @@ const CategoryView: FC<IParams & { name: string; isSub: boolean }> = ({
   const [subCategoryId, setSubCategoryId] = useState<string | undefined>(undefined);
 
   const { data: subCategories, isPending: isSubCategoriesPending } = useGetSubCategoriesQuery({
-    categoryId: category,
+    categoryId: category === 'all' ? undefined : category,
     isSub,
   });
 
   const { data: candidate, isPending: isCandidatePending } = useGetCandidateQuery({
-    subCategoryId: subCategoryId === 'all' ? '' : subCategoryId,
-    categoryId: category,
+    subCategoryId: subCategoryId === 'all' ? undefined : subCategoryId,
+    categoryId: category === 'all' ? undefined : category,
     searchTerm,
   });
 

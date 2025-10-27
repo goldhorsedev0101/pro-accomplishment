@@ -14,6 +14,7 @@ import { ResetPasswordSchema } from '@/schemas/reset-password.schema';
 
 // Mutation
 import { useResetPasswordMutation } from '@/services/auth/reset-password-mutation';
+import { deleteCookie } from 'cookies-next';
 
 // Formik
 import { useFormik } from 'formik';
@@ -39,6 +40,7 @@ const ResetPasswordView = (): JSX.Element => {
 
       try {
         await mutateAsync({ confirmPassword: conPass, newPassword: newPass });
+        deleteCookie('session');
         push(signIn);
         refresh();
       } catch (error) {

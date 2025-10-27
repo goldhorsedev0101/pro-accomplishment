@@ -521,7 +521,7 @@ const academicsCard = ({ percentage, subTitle, subject, title, grade, year }) =>
     ${
       data.length > 0
         ? `
-        <div class="grid sm:grid-cols-3">
+        <div class="flex justify-between flex-wrap gap-2">
           ${data
             .map(
               ({ icon, label }, i) =>

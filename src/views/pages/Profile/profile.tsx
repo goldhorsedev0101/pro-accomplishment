@@ -17,7 +17,7 @@ const Profile = (): JSX.Element => {
     { label: 'First Name', value: first_name },
     { label: 'Last Name', value: last_name },
     { label: 'Email', value: email },
-    { label: 'Phone Number', value: phone_number },
+    { label: 'Phone Number', value: '+' + phone_number },
   ];
 
   if (isPending) {

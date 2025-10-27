@@ -23,6 +23,7 @@ interface IProps {
 
 const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
   const {
+    iso2,
     gpa,
     link,
     city,
@@ -43,7 +44,7 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
   const validUrl =
     link?.startsWith('http://') || link?.startsWith('https://') ? link : `https://${link}`;
 
-  const contact = contacts({ email, phone_number, address, link: link ?? '' });
+  const contact = contacts({ email, phone_number, address, link: link ?? '', iso: iso2 || '' });
 
   return (
     <Box className="shadow-sm">

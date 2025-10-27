@@ -38,6 +38,17 @@ export function Filters(): JSX.Element {
     <div className="px-6 sm:px-10 md:px-20">
       <Carousel className="w-full">
         <CarouselContent className="-ml-1">
+          <CarouselItem className="pl-1 h-[250px] basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 2xl:basis-1/7 flex items-center justify-center">
+            <Link
+              href={category('all', 'All', false)}
+              className="relative cursor-pointer border border-neutral-grey-20 !w-[110px] !h-[110px] rounded-full flex items-center justify-center"
+            >
+              <p className="text-2xl font-medium">All</p>
+              <p className="absolute text-center top-32 w-[150px] text-neutral-grey-100 font-medium text-base">
+                All
+              </p>
+            </Link>
+          </CarouselItem>
           {sortAlphabetically(categories).map(
             ({ icon_url, id, name, has_sub_categories }, index) => (
               <CarouselItem

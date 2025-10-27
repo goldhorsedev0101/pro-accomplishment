@@ -1,7 +1,9 @@
 'use server';
-import { supabasePromiseResolver } from '@/lib/supabase/helper';
+import { response, supabasePromiseResolver } from '@/lib/supabase/helper';
 import { supabase } from '@/lib/supabase/server';
 import { EmailOtpType } from '@supabase/supabase-js';
+import { error } from 'console';
+import { cookies } from 'next/headers';
 
 export interface ICustomError {
   message: string;
@@ -38,6 +40,12 @@ export const verifyOtp = async ({
     token,
     type,
   });
+  if (data?.session?.access_token && data?.session?.refresh_token) {
+    await supabase.auth.setSession({
+      access_token: data.session.access_token,
+      refresh_token: data.session.refresh_token,
+    });
+  }
   return { data, error };
 };
 
@@ -323,6 +331,29 @@ export const deleteExistingImage = async (filePath: string) => {
 
 export const getRecruiterProfile = async () => {
   const { data, error } = await supabase.rpc('web_get_recruiter_details');
-  console.log(data, error);
   return { data, error };
+};
+
+export const restoreSupabaseSession = async () => {
+  const cookieStore = await cookies();
+  const cookieSession = cookieStore.get('session');
+
+  if (!cookieSession) {
+    return {
+      data: null,
+      error: response(
+        {
+          message: 'Auth Session not found',
+          data: null,
+          error: 'Auth Session not found',
+        },
+        404,
+      ),
+    };
+  }
+
+  const session = JSON.parse(cookieSession.value);
+  await supabase.auth.setSession(session);
+
+  return { data: true, error: null };
 };

@@ -18,6 +18,7 @@ import { useFormik } from 'formik';
 
 // Types
 import { useEditProfileMutation } from '@/services/others/profile/edit-recruiter-profile';
+import { useQueryClient } from '@tanstack/react-query';
 import { FC, JSX, useState } from 'react';
 import FileUploader from '../file-uploader';
 import PhoneNumberInput from '../phone-input';
@@ -42,6 +43,7 @@ const EditProfileModal: FC<IProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const { mutateAsync, isPending } = useEditProfileMutation();
+  const queryClient = useQueryClient();
 
   const {
     touched,
@@ -65,6 +67,8 @@ const EditProfileModal: FC<IProps> = ({
     enableReinitialize: true,
     onSubmit: async (values) => {
       await mutateAsync(values);
+      queryClient.invalidateQueries({ queryKey: ['get-profile'] });
+
       setIsOpen(false);
       resetForm();
     },

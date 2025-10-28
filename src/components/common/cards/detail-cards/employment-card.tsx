@@ -61,7 +61,7 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
       {link && (
         <div className="flex items-center gap-x-2 pl-3">
           <Image src={linkIcon} className="size-6" alt="" />
-          <Link href={validUrl} className="text-[var(--blue)] font-normal font-quicksand">
+          <Link href={validUrl} className="text-[var(--blue)] font-normal font-quicksand break-all">
             {link}
           </Link>
         </div>

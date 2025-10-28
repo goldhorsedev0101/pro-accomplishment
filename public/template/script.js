@@ -402,7 +402,7 @@ const contact = (item, i) => {
   `;
   } else {
     return `
-    <a href="${validUrl}" target="_blank" class="flex items-center gap-x-2" key="${i}">
+    <a href="${validUrl}" target="_blank" class="flex items-center gap-x-2 break-all" key="${i}">
       <image src="${icon}" alt="icon" class='w-[18px] h-[18px]' />
       <span class="font-normal ${
         i === 3 ? 'text-[var(--blue)]' : 'text-[var(--black)]'
@@ -421,7 +421,7 @@ const Link = (link) => {
   return `
     <a href="${validUrl}" target="_blank" class="flex items-center gap-x-2">
       <img src="${icons.link}" alt="icon" class='size-6' />
-      <span class="font-normal text-[var(--blue)]">${link}</span>
+      <span class="font-normal text-[var(--blue)] break-all">${link}</span>
     </a>
   `;
 };

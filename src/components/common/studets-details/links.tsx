@@ -13,7 +13,7 @@ const Links: FC<IProps> = ({ link }) => {
   return (
     <Box className="!border-none !p-3 !gap-2">
       <p className="text-heading font-medium">Link</p>
-      <Link target="_blank" href={validUrl} className="text-blue text-sm">
+      <Link target="_blank" href={validUrl} className="text-blue text-sm break-all">
         {link}
       </Link>
     </Box>

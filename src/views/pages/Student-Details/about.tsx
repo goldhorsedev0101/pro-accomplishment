@@ -77,7 +77,7 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
                   >
                     <Image src={icon} alt="icon" width={18} height={18} />
                     <span
-                      className={`truncate text-neutral-grey-100 font-normal ${label === link ? '!text-blue !w-full' : ''}`}
+                      className={`text-neutral-grey-100 font-normal break-all ${label === link && '!text-blue'}`}
                     >
                       {label}
                     </span>

@@ -27,7 +27,7 @@ const Navbar = (): JSX.Element => {
         <p className="text-black font-medium text-2xl hidden sm:block">Accomplishment Tracker</p>
       </Link>
 
-      <Link href={profile} className="flex items-center gap-2" onClick={() => {}}>
+      <Link href={profile} className="flex items-center gap-2">
         {profile_picture && (
           <Image
             className="rounded-full w-10 h-10 object-cover"

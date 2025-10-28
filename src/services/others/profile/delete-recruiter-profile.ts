@@ -23,7 +23,7 @@ const useDeleteProfileMutation = () => {
 
   return useMutation({
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['get-profile'] });
+      queryClient.invalidateQueries({ queryKey: ['get-profile'], type: 'all' });
       toast.success('Profile Deleted successfully');
     },
     mutationFn: deleteProfileFn,

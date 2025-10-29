@@ -40,7 +40,7 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
           <p className="font-quicksand text-neutral-grey-80 font-normal text-sm break-all">
             {form_data?.company}
           </p>
-          <p className="mt-2 text-black text-sm font-medium font-quicksand">
+          <p className="mt-2 font-quicksand text-[var(--gray-80)] font-normal text-sm break-all">
             {formatToDDMMMYYYY(form_data?.start_date ?? '')} -{' '}
             {!form_data?.end_date ? 'Ongoing' : formatToDDMMMYYYY(form_data?.end_date ?? '')}
           </p>

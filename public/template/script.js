@@ -1061,7 +1061,7 @@ const employmentCard = ({
           ${
             startDate || endDate
               ? `
-              <p class="break-all mt-2 text-[var(--black)] text-sm font-medium quicksand">
+              <p class="mt-2 font-quicksand text-[var(--gray-80)] font-normal text-sm break-all">
                 ${startDate || ''}${startDate && endDate ? ' - ' : ''}${endDate || ''}
               </p>
             `
@@ -1611,7 +1611,7 @@ const internshipsCard = ({
           ${
             startDate || endDate
               ? `
-              <p class="break-all mt-2 text-[var(--black)] text-sm font-medium quicksand">
+              <p class="mt-2 font-quicksand text-[var(--gray-80)] font-normal text-sm break-all">
                 ${startDate || ''}${startDate && endDate ? ' - ' : ''}${endDate || ''}
               </p>
             `

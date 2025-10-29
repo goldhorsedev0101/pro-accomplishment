@@ -27,7 +27,7 @@ const useEditProfileMutation = () => {
 
   return useMutation({
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['get-profile'], type: 'all' });
+      queryClient.invalidateQueries({ queryKey: ['get-profile'], refetchType: 'all' });
       toast.success('Profile updated successfully');
     },
     mutationFn: editProfileFn,

@@ -2,7 +2,6 @@
 import { response, supabasePromiseResolver } from '@/lib/supabase/helper';
 import { supabase } from '@/lib/supabase/server';
 import { EmailOtpType } from '@supabase/supabase-js';
-import { error } from 'console';
 import { cookies } from 'next/headers';
 
 export interface ICustomError {

@@ -15,17 +15,23 @@ import { useDeleteProfileMutation } from '@/services/others/profile/delete-recru
 import { deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
+import { useQueryClient } from '@tanstack/react-query';
 
 const DeleteModal = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [deleteText, setDeleteText] = useState<string>('');
-
+  const queryClient = useQueryClient();
   const { push } = useRouter();
   const { mutateAsync, isPending } = useDeleteProfileMutation();
 
   const handleDeleteAccount = async () => {
     if (deleteText === 'Accomplishment') {
-      const res = await mutateAsync();
+      const res = await mutateAsync(undefined, {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ['get-profile'], refetchType: 'all' });
+          toast.success('Profile Deleted successfully');
+        },
+      });
 
       if (res) {
         setIsOpen(false);

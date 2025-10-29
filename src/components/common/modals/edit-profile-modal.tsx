@@ -18,7 +18,9 @@ import { useFormik } from 'formik';
 
 // Types
 import { useEditProfileMutation } from '@/services/others/profile/edit-recruiter-profile';
+import { useQueryClient } from '@tanstack/react-query';
 import { FC, JSX, useState } from 'react';
+import toast from 'react-hot-toast';
 import FileUploader from '../file-uploader';
 import PhoneNumberInput from '../phone-input';
 
@@ -40,6 +42,7 @@ const EditProfileModal: FC<IProps> = ({
   iso2 = '',
 }): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const queryClient = useQueryClient();
 
   const { mutateAsync, isPending } = useEditProfileMutation();
 
@@ -64,7 +67,12 @@ const EditProfileModal: FC<IProps> = ({
     validationSchema: EditProfileSchema,
     enableReinitialize: true,
     onSubmit: async (values) => {
-      await mutateAsync(values);
+      await mutateAsync(values, {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ['get-profile'], refetchType: 'all' });
+          toast.success('Profile Deleted successfully');
+        },
+      });
       setIsOpen(false);
       resetForm();
     },

@@ -75,9 +75,8 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
           AP Score {apScore}
         </div>
       )}
-      {(lang || yearsOfStudy || institute || apScore || notes || link) && (
-        <hr className="-my-2 border border-[var(--gray-10)]" />
-      )}
+
+      {(notes || link) && <hr className="-my-2 border border-[var(--gray-10)]" />}
 
       {link && (
         <div className="flex items-center gap-x-2">

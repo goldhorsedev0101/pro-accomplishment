@@ -33,9 +33,10 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
           <div className="flex items-center justify-center size-9 bg-primary-20 rounded-full">
             <Image alt="title/award" src={internshipAbroad} width={24} height={24} />
           </div>
+
           <div className="gap-x-1">
             <p className="text-heading font-medium font-quicksand capitalize">{title}</p>
-            <p className="text-neutral-grey-80 text-sm">{date}</p>
+            <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm">{date}</p>
           </div>
         </div>
 
@@ -46,7 +47,7 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
         )}
       </Box>
 
-      {location && (
+      {destination && (
         <div className="space-y-2">
           <div className="flex items-center gap-x-2">
             <Image className="size-6" alt="" src={locationColored} />
@@ -54,6 +55,7 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
           </div>
         </div>
       )}
+
       {company && (
         <div className="flex items-center gap-x-2">
           <Image className="size-6" alt="" src={agency} />

@@ -18,10 +18,10 @@ const SemesterAtSeaCard: FC<IProps> = ({ form_data }) => {
     travel_path: destination,
     institution,
   } = form_data || {};
-  const date =
-    date_arrived && date_departed
-      ? `${formatToDDMMMYYYY(date_arrived)} - ${formatToDDMMMYYYY(date_departed)}`
-      : '';
+
+  const date = `${date_arrived && formatToDDMMMYYYY(date_arrived)} ${date_departed && '- ' + formatToDDMMMYYYY(date_departed)}`;
+
+  console.log('🚀 ~ SemesterAtSeaCard ~ date:', { date, date_arrived, date_departed });
 
   return (
     <Box className="w-full !gap-y-3">
@@ -35,6 +35,7 @@ const SemesterAtSeaCard: FC<IProps> = ({ form_data }) => {
             {destination && (
               <p className="font-medium text-[var(--heading)] font-quicksand">{destination}</p>
             )}
+
             {date && (
               <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm break-all">
                 {date}
@@ -43,6 +44,7 @@ const SemesterAtSeaCard: FC<IProps> = ({ form_data }) => {
           </div>
         </div>
       )}
+
       {institution && (
         <div className="flex gap-x-2 items-center">
           <Image src={building} alt="building" className="size-6" />

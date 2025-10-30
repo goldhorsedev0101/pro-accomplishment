@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
   } = candidate_data;
 
   const name = `${first_name} ${last_name}`;
-  const location = `${city}, ${state}, ${country}`;
+  const location = `${city}, ${country}`;
 
   const contacts = [
     { icon: icons.email, value: email },
@@ -347,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const fields = {
     school: contact({ icon: icons.school, value: organization_name }, 1),
     categories: accomplishments?.map(accomplishmentLayout).join(''),
-    gpa: contact({ icon: icons.star, value: 'GPA ' + gpa }, 1),
+    gpa: contact({ icon: icons.star, value: gpa ? 'GPA ' + gpa : '' }, 1),
     contacts: contacts.map(contact).join(''),
     objective: objective_for_summary,
     profile: profile_photo_url,
@@ -437,9 +437,9 @@ const accomplishmentLayout = (
       return athleticsCard({
         date: formatToDDMMYYYY(form_data?.date),
         position: form_data?.title_or_award,
+        region: form_data?.region || '',
         location: form_data?.location,
         place: form_data?.event_name,
-        region: form_data?.region,
         title: form_data?.name,
       });
     }
@@ -452,8 +452,10 @@ const accomplishmentLayout = (
         title: form_data?.name,
         subject: form_data?.class,
         subTitle: form_data?.school_or_institution,
-        grade: `Grade/GPA ${form_data?.grade_or_gpa}`,
-        percentage: form_data?.standardized_test_score + '%',
+        grade: form_data?.grade_or_gpa ? `Grade/GPA ${form_data?.grade_or_gpa}` : '',
+        percentage: form_data?.standardized_test_score
+          ? form_data?.standardized_test_score + '%'
+          : '',
         year: startYear === endYear ? startYear : `${startYear} - ${endYear}`,
       });
     }
@@ -557,7 +559,7 @@ const accomplishmentLayout = (
       return travelCard({
         date: `${formatToDDMMMYYYY(
           form_data?.date_arrived,
-        )} - ${formatToDDMMMYYYY(form_data?.date_departed)}`,
+        )} ${form_data?.date_departed ? '- ' + formatToDDMMMYYYY(form_data?.date_departed) : ''}`,
         title: form_data?.accomplishment_name,
         destination: form_data?.destination,
       });
@@ -567,7 +569,7 @@ const accomplishmentLayout = (
       return studyAbroadCard({
         date: `${formatToDDMMMYYYY(
           form_data?.date_arrived,
-        )} - ${formatToDDMMMYYYY(form_data?.date_departed)}`,
+        )} ${form_data?.date_departed ? '- ' + formatToDDMMMYYYY(form_data?.date_departed) : ''}`,
         title: form_data?.accomplishment_name,
         destination: form_data?.destination,
         institution: form_data?.institution,
@@ -578,7 +580,7 @@ const accomplishmentLayout = (
       return semesterAtSeaCard({
         date: `${formatToDDMMMYYYY(
           form_data?.date_arrived,
-        )} - ${formatToDDMMMYYYY(form_data?.date_departed)}`,
+        )} ${form_data?.date_departed ? '- ' + formatToDDMMMYYYY(form_data?.date_departed) : ''}`,
         title: form_data?.accomplishment_name,
         destination: form_data?.travel_path,
         institution: form_data?.institution,
@@ -589,7 +591,7 @@ const accomplishmentLayout = (
       return internshipAbroadCard({
         date: `${formatToDDMMMYYYY(
           form_data?.date_arrived,
-        )} - ${form_data?.date_departed ? formatToDDMMMYYYY(form_data?.date_departed) : 'Ongoing'}`,
+        )} ${form_data?.date_departed ? '- ' + formatToDDMMMYYYY(form_data?.date_departed) : ''}`,
         company: form_data?.company,
         location: form_data?.destination,
         title: form_data?.accomplishment_name,
@@ -1061,7 +1063,7 @@ const employmentCard = ({
           ${
             startDate || endDate
               ? `
-              <p class="mt-2 font-quicksand text-[var(--gray-80)] font-normal text-sm break-all">
+              <p class="mt-2 quicksand text-[var(--gray-80)] font-normal text-sm break-all">
                 ${startDate || ''}${startDate && endDate ? ' - ' : ''}${endDate || ''}
               </p>
             `
@@ -1611,7 +1613,7 @@ const internshipsCard = ({
           ${
             startDate || endDate
               ? `
-              <p class="mt-2 font-quicksand text-[var(--gray-80)] font-normal text-sm break-all">
+              <p class="mt-2 quicksand text-[var(--gray-80)] font-normal text-sm break-all">
                 ${startDate || ''}${startDate && endDate ? ' - ' : ''}${endDate || ''}
               </p>
             `

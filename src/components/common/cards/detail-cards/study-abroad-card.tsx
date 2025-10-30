@@ -18,10 +18,8 @@ const StudyAbroadCard: FC<IProps> = ({ form_data }) => {
     destination,
     institution,
   } = form_data || {};
-  const date =
-    date_arrived && date_departed
-      ? `${formatToDDMMMYYYY(date_arrived)} - ${formatToDDMMMYYYY(date_departed)}`
-      : '';
+
+  const date = `${date_arrived && formatToDDMMMYYYY(date_arrived)} ${date_departed && '- ' + formatToDDMMMYYYY(date_departed)}`;
 
   return (
     <Box className="w-full !gap-y-3">

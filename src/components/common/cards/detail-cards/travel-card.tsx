@@ -11,10 +11,7 @@ interface IProps {
 
 const TravelCard: FC<IProps> = ({ form_data }) => {
   const { accomplishment_name: title, date_arrived, date_departed, destination } = form_data || {};
-  const date =
-    date_arrived && date_departed
-      ? `${formatToDDMMMYYYY(date_arrived)} - ${formatToDDMMMYYYY(date_departed)}`
-      : '';
+  const date = `${date_arrived && formatToDDMMMYYYY(date_arrived)} ${date_departed && '- ' + formatToDDMMMYYYY(date_departed)}`;
 
   return (
     <Box className="w-full !gap-y-3">

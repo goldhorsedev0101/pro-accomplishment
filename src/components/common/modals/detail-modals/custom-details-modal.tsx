@@ -21,7 +21,7 @@ const CustomDetailsModal: FC<IProps> = ({ form_data }) => {
     <div className="flex flex-col gap-y-4 font-quicksand">
       {(form_data?.accomplishment_name || form_data?.date) && (
         <Box className="!border-none !p-3 !gap-1">
-          <p className="text-heading font-medium capitalize">{form_data?.accomplishment_name}</p>
+          <p className="text-heading font-medium ">{form_data?.accomplishment_name}</p>
           <p className="text-neutral-grey-80 text-sm">{formatToDDMMYYYY(form_data?.date ?? '')}</p>
         </Box>
       )}

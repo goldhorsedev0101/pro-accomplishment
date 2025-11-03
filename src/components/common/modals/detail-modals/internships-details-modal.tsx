@@ -33,9 +33,7 @@ const InternshipsDetailsModal: FC<IProps> = ({ form_data }) => {
               <Image alt="title/award" src={internships} width={24} height={24} />
             </div>
             <div className="gap-x-1">
-              <p className="text-heading font-medium capitalize">
-                {form_data?.accomplishment_name}
-              </p>
+              <p className="text-heading font-medium ">{form_data?.accomplishment_name}</p>
               <p className="text-neutral-grey-80 text-sm">{form_data?.company}</p>
             </div>
           </div>

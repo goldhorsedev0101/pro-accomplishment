@@ -30,7 +30,7 @@ const AcademicsDetailsModal: FC<IProps> = ({ form_data }) => {
       {(form_data?.name || form_data?.academic_year_started || form_data?.academic_year_ended) && (
         <Box className="!border-none !p-3 !gap-2">
           <div className="flex items-center justify-between">
-            <p className="text-heading font-medium capitalize">{form_data?.name}</p>
+            <p className="text-heading font-medium ">{form_data?.name}</p>
             <p className="py-0.5 px-1.5 rounded-sm text-neutral-grey-80 text-sm bg-green-light">
               {formatToYYYY(form_data?.academic_year_started ?? '')} -{' '}
               {formatToYYYY(form_data?.academic_year_ended ?? '')}

@@ -27,7 +27,7 @@ const TechDetailsModal: FC<IProps> = ({ form_data }) => {
         <Box className="!border-none !flex-row !p-3 !gap-2">
           <Image alt="title/award" src={programming} width={24} height={24} />
           <div className="gap-x-1">
-            <p className="text-heading font-medium capitalize">{form_data?.accomplishment_name}</p>
+            <p className="text-heading font-medium ">{form_data?.accomplishment_name}</p>
             <p className="text-neutral-grey-80 text-sm">
               {formatToMMMMDYYYY(form_data?.date ?? '')}
             </p>

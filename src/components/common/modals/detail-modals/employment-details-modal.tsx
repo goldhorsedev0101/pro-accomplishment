@@ -32,7 +32,7 @@ const EmploymentDetailsModal: FC<IProps> = ({ form_data }) => {
             <Image alt="title/award" src={briefcase} width={24} height={24} />
           </div>
           <div className="gap-x-1">
-            <p className="text-heading font-medium capitalize">{form_data?.job_title}</p>
+            <p className="text-heading font-medium ">{form_data?.job_title}</p>
             <p className="text-neutral-grey-80 text-sm">{form_data?.company}</p>
           </div>
         </Box>

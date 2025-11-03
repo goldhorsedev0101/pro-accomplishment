@@ -32,9 +32,7 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
   return (
     <Box>
       <div>
-        {title && (
-          <p className="font-medium !text-heading font-quicksand break-all capitalize">{title}</p>
-        )}
+        {title && <p className="font-medium !text-heading font-quicksand break-all ">{title}</p>}
         {date && (
           <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm">
             {formatToDDMMYYYY(date)}
@@ -46,15 +44,13 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
           {lang && (
             <div className="flex items-center gap-x-2">
               <Image className="size-6" alt="" src={language} />
-              <p className="font-quicksand font-normal text-sm text-[var(--gray-80)] capitalize">
-                {lang}
-              </p>
+              <p className="font-quicksand font-normal text-sm text-[var(--gray-80)] ">{lang}</p>
             </div>
           )}
           {yearsOfStudy && (
             <div className="flex items-center gap-x-2">
               <Image className="size-6" alt="" src={book} />
-              <p className="font-quicksand font-normal w-full flex items-center justify-between text-sm text-[var(--gray-80)] capitalize">
+              <p className="font-quicksand font-normal w-full flex items-center justify-between text-sm text-[var(--gray-80)] ">
                 Years of Study
                 <span className="font-medium">{yearsOfStudy}</span>
               </p>
@@ -63,7 +59,7 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
           {institute && (
             <div className="flex items-center gap-x-2">
               <Image className="size-6" alt="" src={building} />
-              <p className="font-quicksand font-normal text-sm text-[var(--gray-80)] capitalize">
+              <p className="font-quicksand font-normal text-sm text-[var(--gray-80)] ">
                 {institute}
               </p>
             </div>

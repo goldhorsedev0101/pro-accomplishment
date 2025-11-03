@@ -37,7 +37,7 @@ const Navbar = (): JSX.Element => {
             width={40}
           />
         )}
-        <p className="text-black font-medium text-base capitalize">
+        <p className="text-black font-medium text-base ">
           {first_name} {last_name}
         </p>
       </Link>

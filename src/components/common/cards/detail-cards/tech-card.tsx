@@ -18,7 +18,7 @@ const TechCard: FC<IProps> = ({ form_data }) => {
         <Image src={mobileProgramming} alt="star" className="size-6" />
         <div>
           {accomplishment_name && (
-            <p className="font-medium !text-heading font-quicksand break-all capitalize">
+            <p className="font-medium !text-heading font-quicksand break-all ">
               {accomplishment_name}
             </p>
           )}

@@ -34,7 +34,7 @@ const PhoneNumberInput = ({
   const isError = error && touched;
 
   return (
-    <label className={`flex flex-col w-full -mb-4`} htmlFor={name}>
+    <label className={`flex flex-col w-full gap-y-2`} htmlFor={name}>
       {label && (
         <span className={`text-sm`}>
           {label} {required && <span className="text-destructive"> *</span>}
@@ -57,7 +57,7 @@ const PhoneNumberInput = ({
         dropdownClass="!p-2 !rounded-sm"
       />
 
-      {error && <span className="text-destructive text-sm font-normal pb-2">{error}</span>}
+      {isError && <span className="text-destructive text-sm font-normal pb-2">{error}</span>}
     </label>
   );
 };

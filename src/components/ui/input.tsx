@@ -17,11 +17,12 @@ function Input({ className, type, label, error, required, ...props }: IProps) {
   );
 
   return (
-    <div className="flex flex-col relative w-full">
+    <div className="flex flex-col gap-y-2 relative w-full">
       <Label className="text-sm flex gap-0.5 font-normal" htmlFor={label}>
         {label}
         {required && <span className="text-destructive">*</span>}
       </Label>
+
       <input
         id={label}
         type={isOpen}
@@ -40,7 +41,7 @@ function Input({ className, type, label, error, required, ...props }: IProps) {
       {type === 'password' && (
         <span
           onClick={() => setIsOpen(isOpen === 'text' ? 'password' : 'text')}
-          className="text-neutral-grey-50 cursor-pointer w-fit absolute right-3 top-11 -translate-y-1/2"
+          className="text-neutral-grey-50 cursor-pointer w-fit absolute right-3 top-13 -translate-y-1/2"
         >
           {isOpen == 'password' ? <AiOutlineEye size={25} /> : <AiOutlineEyeInvisible size={25} />}
         </span>

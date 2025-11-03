@@ -26,7 +26,7 @@ const EntrepreneurshipDetailsModal: FC<IProps> = ({ form_data }) => {
     <div className="flex flex-col gap-y-4 font-quicksand">
       {form_data?.venture_name && (
         <Box className="!border-none !flex-row items-center !p-3 !gap-2">
-          <p className="text-heading font-medium capitalize">{form_data?.venture_name}</p>
+          <p className="text-heading font-medium ">{form_data?.venture_name}</p>
         </Box>
       )}
 

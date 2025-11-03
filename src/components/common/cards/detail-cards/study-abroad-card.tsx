@@ -23,9 +23,7 @@ const StudyAbroadCard: FC<IProps> = ({ form_data }) => {
 
   return (
     <Box className="w-full !gap-y-3">
-      {title && (
-        <p className="font-medium !text-heading font-quicksand break-all capitalize">{title}</p>
-      )}
+      {title && <p className="font-medium !text-heading font-quicksand break-all ">{title}</p>}
 
       <div className="flex items-center gap-x-3">
         <Image src={teacherBlue} alt="teacher" className="size-6" />
@@ -44,9 +42,7 @@ const StudyAbroadCard: FC<IProps> = ({ form_data }) => {
       {institution && (
         <div className="flex gap-x-2 items-center">
           <Image src={building} alt="building" className="size-6" />
-          <p className="text-[var(--gray-80)] text-sm font-normal font-quicksand capitalize">
-            {institution}
-          </p>
+          <p className="text-[var(--gray-80)] text-sm font-normal font-quicksand ">{institution}</p>
         </div>
       )}
     </Box>

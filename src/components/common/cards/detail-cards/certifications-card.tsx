@@ -40,9 +40,7 @@ const CertificationsCard: FC<IProps> = ({ form_data }) => {
       {institution && (
         <div className="flex gap-x-2">
           <Image src={building} alt="building" className="size-6" />
-          <p className="text-neutral-grey-80 text-sm font-normal font-quicksand capitalize">
-            {institution}
-          </p>
+          <p className="text-neutral-grey-80 text-sm font-normal font-quicksand ">{institution}</p>
         </div>
       )}
     </Box>

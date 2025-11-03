@@ -29,9 +29,7 @@ const InternshipAbroadDetailsModal: FC<IProps> = ({ form_data }) => {
         <Box className="!border-none !flex-row justify-between !p-3 !gap-1">
           <div>
             {form_data?.accomplishment_name && (
-              <p className="text-heading font-medium capitalize">
-                {form_data?.accomplishment_name}
-              </p>
+              <p className="text-heading font-medium ">{form_data?.accomplishment_name}</p>
             )}
             {form_data?.date && (
               <p className="text-neutral-grey-80 text-sm">{formatToDDMMYYYY(form_data?.date)}</p>

@@ -52,16 +52,14 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
         <div className="flex flex-col gap-y-3">
           <Heading text={name} className="text-4xl" width="medium" />
 
-          {quote && (
-            <p className="text-neutral-grey-80 font-normal text-lg">
-              <PiQuotesLight
-                size={20}
-                className="text-primary rotate-180 min-w-5 min-h-5 inline mr-1"
-              />
-              {quote}
-              <PiQuotesLight size={20} className="text-primary min-w-5 min-h-5 inline ml-1" />
-            </p>
-          )}
+          <p className="text-neutral-grey-80 font-normal text-lg">
+            <PiQuotesLight
+              size={20}
+              className="text-primary rotate-180 min-w-5 min-h-5 inline mr-1"
+            />
+            {quote || 'Dream big and dare to fail.'}
+            <PiQuotesLight size={20} className="text-primary min-w-5 min-h-5 inline ml-1" />
+          </p>
 
           <div className="flex flex-wrap gap-6">
             {contact.map(({ icon, label }, i) => (

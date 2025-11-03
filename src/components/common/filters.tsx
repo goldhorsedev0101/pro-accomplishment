@@ -18,6 +18,8 @@ import Routes from '@/constants/routes';
 import { useGetCategoriesQuery } from '@/services/others/categories/get-categories-query';
 import { JSX } from 'react';
 
+import allIcon from 'public/icons/all.svg';
+
 type Item = {
   id: string;
   name: string;
@@ -43,7 +45,7 @@ export function Filters(): JSX.Element {
               href={category('all', 'All', false)}
               className="relative cursor-pointer border border-neutral-grey-20 !w-[110px] !h-[110px] rounded-full flex items-center justify-center"
             >
-              <p className="text-2xl font-medium">All</p>
+              <Image src={allIcon} alt={'all'} width={49} height={49} />
               <p className="absolute text-center top-32 w-[150px] text-neutral-grey-100 font-medium text-base">
                 All
               </p>

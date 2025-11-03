@@ -38,7 +38,7 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
 
         {region && (
           <p
-            className={`font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5 capitalize ${region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
+            className={`font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5  ${region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
           >
             {region}
           </p>
@@ -46,7 +46,7 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
       </div>
 
       {(event_name || location) && (
-        <div className="space-y-2 capitalize">
+        <div className="space-y-2 ">
           {event_name && (
             <div className="flex items-center gap-x-2">
               <Image alt="" src={calendar} className="size-6" />

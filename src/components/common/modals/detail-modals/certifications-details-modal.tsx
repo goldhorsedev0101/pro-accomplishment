@@ -30,7 +30,7 @@ const CertificationsDetailsModal: FC<IProps> = ({ form_data }) => {
             <Image src={start} alt="start" className="size-6" />
           </div>
           <div className="gap-x-1">
-            <p className="text-heading font-medium capitalize">{form_data?.certification_title}</p>
+            <p className="text-heading font-medium ">{form_data?.certification_title}</p>
             <p className="text-neutral-grey-80 text-sm">
               {formatToDDMMYYYY(form_data?.date_received ?? '')}
             </p>

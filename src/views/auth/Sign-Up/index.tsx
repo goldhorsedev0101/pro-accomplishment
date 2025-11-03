@@ -78,7 +78,7 @@ const SignUpView = (): JSX.Element => {
       <BackButton />
       <Heading text="Sign up" />
 
-      <div className="flex w-full flex-col gap-y-3">
+      <div className="flex w-full flex-col gap-y-5">
         <div className="flex flex-col items-center gap-y-1">
           <FileUploader
             value={values['profileImage']}
@@ -99,6 +99,7 @@ const SignUpView = (): JSX.Element => {
             placeholder="Enter First Name"
             label="First Name"
             name="firstName"
+            required
           />
 
           <Input
@@ -108,6 +109,7 @@ const SignUpView = (): JSX.Element => {
             placeholder="Enter Last Name"
             label="Last Name"
             name="lastName"
+            required
           />
         </div>
 
@@ -118,6 +120,7 @@ const SignUpView = (): JSX.Element => {
           value={values['email']}
           label="Email"
           name="email"
+          required
         />
 
         <PhoneNumberInput
@@ -130,6 +133,7 @@ const SignUpView = (): JSX.Element => {
           iso2={values['iso2']}
           label="Phone Number"
           name="phoneNumber"
+          required
         />
 
         <Input
@@ -140,6 +144,7 @@ const SignUpView = (): JSX.Element => {
           label="Password"
           type="password"
           name="password"
+          required
         />
 
         <Input
@@ -150,11 +155,12 @@ const SignUpView = (): JSX.Element => {
           onChange={handleChange}
           name="confirmPassword"
           type="password"
+          required
         />
       </div>
 
       <Button type="submit" disabled={isPending}>
-        Sign up
+        Sign Up
       </Button>
 
       <div className="flex items-center gap-x-1 w-full justify-center -mt-4">
@@ -165,7 +171,7 @@ const SignUpView = (): JSX.Element => {
           variant={'link'}
           type="button"
         >
-          Sign in
+          Sign In
         </Button>
       </div>
     </form>

@@ -39,9 +39,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
           <Image src={info} alt="info" className="size-6" />
         </div>
         <div>
-          {title && (
-            <p className="font-medium !text-heading font-quicksand break-all capitalize">{title}</p>
-          )}
+          {title && <p className="font-medium !text-heading font-quicksand break-all ">{title}</p>}
           {(startDate || endDate) && (
             <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm break-all">
               {startDate}
@@ -55,7 +53,7 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
       {organization && (
         <div className="flex gap-x-1.5 items-center">
           <Image src={building} alt="building" className="size-6" />
-          <p className="text-[var(--gray-80)] capitalize text-sm font-normal font-quicksand break-all">
+          <p className="text-[var(--gray-80)]  text-sm font-normal font-quicksand break-all">
             {organization}
           </p>
         </div>

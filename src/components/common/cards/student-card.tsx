@@ -44,7 +44,7 @@ const StudentCard = ({ location, profile, grade, about, name, gpa, id }: IProps)
 
       <div className="w-full flex flex-col gap-y-1">
         <div className="flex items-center justify-between w-full">
-          <h3 className="text-[#0E0F0C] font-medium text-base break-all capitalize">{name}</h3>
+          <h3 className="text-[#0E0F0C] font-medium text-base break-all ">{name}</h3>
           {gpa && (
             <div className="flex items-center h-fit">
               <TiStar className="text-yellow" size={20} />
@@ -54,7 +54,7 @@ const StudentCard = ({ location, profile, grade, about, name, gpa, id }: IProps)
             </div>
           )}
         </div>
-        <p className="text-neutral-grey-100 text-sm break-all capitalize">{about}</p>
+        <p className="text-neutral-grey-100 text-sm break-all ">{about}</p>
         <div className="flex items-center gap-x-3">
           <div className="flex items-center gap-x-1">
             <Image src={school} alt="school" width={20} height={20} />

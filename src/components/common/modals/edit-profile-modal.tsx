@@ -70,7 +70,7 @@ const EditProfileModal: FC<IProps> = ({
       await mutateAsync(values, {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: ['get-profile'], refetchType: 'all' });
-          toast.success('Profile Deleted successfully');
+          toast.success('Profile Edit successfully');
         },
       });
       setIsOpen(false);

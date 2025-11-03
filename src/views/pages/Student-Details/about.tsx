@@ -44,7 +44,8 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
   const validUrl =
     link?.startsWith('http://') || link?.startsWith('https://') ? link : `https://${link}`;
 
-  const contact = contacts({ email, phone_number, address, link: link ?? '', iso: iso2 || '' });
+  const contact = contacts({ email, phone_number, address, link: link || '', iso: iso2 || '' });
+  console.log('🚀 ~ About ~ contact:', contact);
 
   return (
     <Box className="shadow-sm">
@@ -67,7 +68,7 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
                 {label && (
                   <Link
                     prefetch={false}
-                    href={validUrl ?? '#'}
+                    href={label === link ? validUrl || '#' : '#'}
                     rel="noopener noreferrer"
                     target={label === link ? '_blank' : undefined}
                     onClick={({ preventDefault }) => label !== link && preventDefault()}

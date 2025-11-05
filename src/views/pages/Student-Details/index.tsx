@@ -29,6 +29,7 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
 
   const { mutateAsync: toggle } = useToggleFavoriteCandidateMutation();
   const { accomplishments, candidate_data } = data?.data || {};
+  console.log({ pdf_url: candidate_data?.pdf_url });
   const [isFav, setIsFav] = useState<boolean>(candidate_data?.is_favorite || false);
 
   function groupByFormType(data?: Array<Accomplishment>) {
@@ -102,8 +103,8 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
 
           <Link
             className="h-12 rounded-lg p-6 bg-primary text-white flex items-center gap-x-1"
-            href={candidate_data?.pdf_url || ''}
-            target="_blank"
+            target={candidate_data?.pdf_url ? '_blank' : undefined}
+            href={candidate_data?.pdf_url || '#'}
           >
             <HiOutlineDownload size={20} />
             Download PDF

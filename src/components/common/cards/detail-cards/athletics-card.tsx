@@ -13,7 +13,7 @@ import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candi
 import { FC, Fragment, JSX } from 'react';
 
 // Utils
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 
 interface IProps {
   form_data?: FormData;
@@ -24,15 +24,15 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
 
   return (
     <Box className="shadow-sm !text-start">
-      <div className="flex justify-between items-start">
+      <div className="flex justify-between items-start gap-2">
         <div>
           <Heading
-            className="!text-base !text-heading font-quicksand"
+            className="!text-base !text-heading font-quicksand break-all"
             text={name ?? ''}
             width="medium"
           />
           <p className="font-quicksand text-neutral-grey-80 font-normal text-sm">
-            {formatToDDMMYYYY(date || '')}
+            {formatToMDYYYY(date || '')}
           </p>
         </div>
 

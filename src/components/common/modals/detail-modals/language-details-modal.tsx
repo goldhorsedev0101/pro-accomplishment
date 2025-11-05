@@ -11,7 +11,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 
 // Icons
 import book from 'public/icons/book.svg';
@@ -29,7 +29,7 @@ const LanguageDetailsModal: FC<IProps> = ({ form_data }) => {
             <p className="text-heading font-medium ">{form_data?.accomplishment_name}</p>
           )}
           {form_data?.date && (
-            <p className="text-neutral-grey-80 text-sm">{formatToDDMMYYYY(form_data?.date)}</p>
+            <p className="text-neutral-grey-80 text-sm">{formatToMDYYYY(form_data?.date)}</p>
           )}
         </Box>
       )}

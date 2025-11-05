@@ -8,7 +8,7 @@ import Box from '../../box';
 // Util
 
 // Icons
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 import Document from '../../studets-details/document';
 import Links from '../../studets-details/links';
 import Media from '../../studets-details/media';
@@ -27,7 +27,7 @@ const ArtDetailsModal: FC<IProps> = ({ form_data }) => {
             <p className="text-heading font-medium ">{form_data?.accomplishment_name}</p>
           )}
           {form_data?.date && (
-            <p className="text-neutral-grey-80 text-sm">{formatToDDMMYYYY(form_data?.date)}</p>
+            <p className="text-neutral-grey-80 text-sm">{formatToMDYYYY(form_data?.date)}</p>
           )}
         </Box>
       )}

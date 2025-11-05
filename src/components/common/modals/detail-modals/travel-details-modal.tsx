@@ -11,7 +11,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 
 // Icons
 import location from 'public/icons/location-colored.svg';
@@ -31,7 +31,7 @@ const TravelDetailsModal: FC<IProps> = ({ form_data }) => {
             <p className="text-heading font-medium ">{form_data?.accomplishment_name}</p>
           )}
           {form_data?.date && (
-            <p className="text-neutral-grey-80 text-sm">{formatToDDMMYYYY(form_data?.date)}</p>
+            <p className="text-neutral-grey-80 text-sm">{formatToMDYYYY(form_data?.date)}</p>
           )}
         </Box>
       )}
@@ -40,8 +40,8 @@ const TravelDetailsModal: FC<IProps> = ({ form_data }) => {
         <Items
           items={[
             { icon: location, label: 'Destination', value: form_data?.destination },
-            { label: 'Date Arrived', value: formatToDDMMYYYY(form_data?.date_arrived ?? '') },
-            { label: 'Date Departed', value: formatToDDMMYYYY(form_data?.date_departed ?? '') },
+            { label: 'Date Arrived', value: formatToMDYYYY(form_data?.date_arrived ?? '') },
+            { label: 'Date Departed', value: formatToMDYYYY(form_data?.date_departed ?? '') },
           ]}
         />
       )}

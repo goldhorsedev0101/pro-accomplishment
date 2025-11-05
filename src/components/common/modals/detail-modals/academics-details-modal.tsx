@@ -12,7 +12,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToDDMMYYYY, formatToYYYY } from '@/utils/date-format';
+import { formatToMDYYYY, formatToYYYY } from '@/utils/date-format';
 
 // Icons
 import book from 'public/icons/book.svg';
@@ -61,7 +61,7 @@ const AcademicsDetailsModal: FC<IProps> = ({ form_data }) => {
           gpa={form_data?.grade_or_gpa as string}
           label="My Academic Details"
           items={[
-            { icon: calender, label: 'Date', value: formatToDDMMYYYY(form_data?.date ?? '') },
+            { icon: calender, label: 'Date', value: formatToMDYYYY(form_data?.date ?? '') },
             { icon: calender, label: 'Academic Semester', value: form_data?.academic_semester },
             { icon: book, label: 'Class', value: form_data?.class },
             {

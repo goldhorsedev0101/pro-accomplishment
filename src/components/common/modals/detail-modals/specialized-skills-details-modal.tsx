@@ -11,7 +11,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 
 // Icon
 import ranking from 'public/pdf/ranking.svg';
@@ -28,9 +28,7 @@ const SpecializedSkillsDetailsModal: FC<IProps> = ({ form_data }) => {
           <Image alt="title/award" src={ranking} width={24} height={24} />
           <div className="gap-x-1">
             <p className="text-heading font-medium ">{form_data?.accomplishment_name}</p>
-            <p className="text-neutral-grey-80 text-sm">
-              {formatToDDMMYYYY(form_data?.date ?? '')}
-            </p>
+            <p className="text-neutral-grey-80 text-sm">{formatToMDYYYY(form_data?.date ?? '')}</p>
           </div>
         </Box>
       )}

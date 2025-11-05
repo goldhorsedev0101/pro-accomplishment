@@ -1,5 +1,5 @@
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 import Image from 'next/image';
 import locationColored from 'public/icons/location-colored.svg';
 import bill from 'public/pdf/bill.svg';
@@ -19,7 +19,7 @@ const ClubsCard: FC<IProps> = ({ form_data }) => {
         {title && <p className="font-medium !text-heading font-quicksand break-all ">{title}</p>}
         {date_joined && (
           <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm">
-            {formatToDDMMYYYY(date_joined)}
+            {formatToMDYYYY(date_joined)}
           </p>
         )}
       </div>

@@ -11,7 +11,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 
 // Icons
 import building from 'public/icons/building.svg';
@@ -32,12 +32,12 @@ const InternshipAbroadDetailsModal: FC<IProps> = ({ form_data }) => {
               <p className="text-heading font-medium ">{form_data?.accomplishment_name}</p>
             )}
             {form_data?.date && (
-              <p className="text-neutral-grey-80 text-sm">{formatToDDMMYYYY(form_data?.date)}</p>
+              <p className="text-neutral-grey-80 text-sm">{formatToMDYYYY(form_data?.date)}</p>
             )}
           </div>
 
           {form_data?.internship_type && (
-            <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">
+            <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm h-fit">
               {form_data?.internship_type}
             </p>
           )}
@@ -63,11 +63,11 @@ const InternshipAbroadDetailsModal: FC<IProps> = ({ form_data }) => {
       {(form_data?.date_arrived || form_data?.date_departed) && (
         <Items
           items={[
-            { label: 'Date Arrived', value: formatToDDMMYYYY(form_data?.date_arrived ?? '') },
+            { label: 'Date Arrived', value: formatToMDYYYY(form_data?.date_arrived ?? '') },
             {
               label: 'Date Departed',
               value: form_data?.date_departed
-                ? formatToDDMMYYYY(form_data?.date_departed)
+                ? formatToMDYYYY(form_data?.date_departed)
                 : 'Ongoing',
             },
           ]}

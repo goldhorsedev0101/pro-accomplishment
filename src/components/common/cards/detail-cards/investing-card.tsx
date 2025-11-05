@@ -1,5 +1,5 @@
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 import Image from 'next/image';
 import note from 'public/icons/note.svg';
 import { FC } from 'react';
@@ -17,9 +17,9 @@ const InvestingCard: FC<IProps> = ({ form_data }) => {
       <div>
         {title && <p className="font-medium !text-heading font-quicksand break-all ">{title}</p>}
         {date && (
-          <p className="font-quicksand flex items-center justify-between text-[var(--gray-80)] font-normal text-sm">
+          <p className="font-quicksand flex gap-2 justify-between text-[var(--gray-80)] font-normal text-sm">
             {investment_type && <span>{investment_type}</span>}
-            <span>{formatToDDMMYYYY(date)}</span>
+            <span>{formatToMDYYYY(date)}</span>
           </p>
         )}
       </div>
@@ -27,7 +27,9 @@ const InvestingCard: FC<IProps> = ({ form_data }) => {
       {notes && (
         <div className="flex gap-x-1.5">
           <Image src={note} alt="building" className="size-6" />
-          <p className="text-neutral-grey-80 text-sm font-normal font-quicksand">{notes}</p>
+          <p className="text-neutral-grey-80 text-sm font-normal font-quicksand break-all">
+            {notes}
+          </p>
         </div>
       )}
     </Box>

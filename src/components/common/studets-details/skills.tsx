@@ -16,7 +16,7 @@ const Skills = ({ skills, title }: IProps) => {
             key={i}
             className="!border-none !p-2 !py-1 !bg-neutral-grey-0 !rounded-md !w-fit !gap-2"
           >
-            <p className="text-heading  text-sm font-medium font-quicksand">{skill}</p>
+            <p className="text-heading text-sm font-medium font-quicksand truncate">{skill}</p>
           </Box>
         ))}
       </div>

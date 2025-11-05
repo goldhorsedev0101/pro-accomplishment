@@ -34,17 +34,17 @@ const icons = {
 
 // ============================ Date Formatter Functions ============================ //
 const formatToMDYYYY = (date) => {
-  if (date && dayjs(date).isValid()) return dayjs(date).format('D/M/YYYY');
+  if (date && dayjs(date).isValid()) return dayjs(date).format('M/D/YYYY');
   else return '';
 };
 
 const formatToDDMMYYYY = (date) => {
-  if (date && dayjs(date).isValid()) return dayjs(date).format('D/M/YYYY');
+  if (date && dayjs(date).isValid()) return dayjs(date).format('M/D/YYYY');
   else return '';
 };
 
 const formatToDDMMMYYYY = (date) => {
-  if (date && dayjs(date).isValid()) return dayjs(date).format('DD MMM YYYY');
+  if (date && dayjs(date).isValid()) return dayjs(date).format('MMM DD YYYY');
   else return '';
 };
 
@@ -321,9 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gpa,
     city,
     link,
-    state,
     email,
-    quote,
     grade,
     country,
     last_name,
@@ -332,6 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
     profile_photo_url,
     organization_name,
     objective_for_summary,
+    quote = 'Dream big and dare to fail.',
   } = candidate_data;
 
   const name = `${first_name} ${last_name}`;
@@ -348,9 +347,8 @@ document.addEventListener('DOMContentLoaded', () => {
     school: contact({ icon: icons.school, value: organization_name }, 1),
     categories: accomplishments?.map(accomplishmentLayout).join(''),
     gpa: contact({ icon: icons.star, value: gpa ? 'GPA ' + gpa : '' }, 1),
-    about: quote || 'Dream big and dare to fail.',
+    about: quote,
     contacts: contacts.map(contact).join(''),
-
     'page-title': name + ' Accomplishments',
     objective: objective_for_summary,
     profile: profile_photo_url,

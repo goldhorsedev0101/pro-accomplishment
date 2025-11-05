@@ -51,7 +51,7 @@ const Sidebar = ({ activeTab, setActiveTab, children }: IProps): JSX.Element => 
         {sidebar.map(({ icon, label, coloredIcon }, i) => (
           <Fragment key={i}>
             <TabsTrigger
-              className={`${label !== LOGOUT && 'data-[state=active]:text-primary'} text-neutral-grey-80 text-xl font-normal data-[state=active]:shadow-none data-[state=active]:font-medium  cursor-pointer`}
+              className={`${label !== LOGOUT && 'data-[state=active]:text-primary'} text-neutral-grey-80 text-xl font-normal data-[state=active]:shadow-none data-[state=active]:font-medium cursor-pointer capitalize`}
               value={label}
               onClick={() => {
                 if (label === LOGOUT) handleLogout();

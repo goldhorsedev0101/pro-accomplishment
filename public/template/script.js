@@ -330,8 +330,10 @@ document.addEventListener('DOMContentLoaded', () => {
     profile_photo_url,
     organization_name,
     objective_for_summary,
-    quote = 'Dream big and dare to fail.',
+    quote,
   } = candidate_data;
+
+  const quoteText = quote || 'Dream big and dare to fail.';
 
   const name = `${first_name} ${last_name}`;
   const location = `${city}, ${country}`;
@@ -347,7 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
     school: contact({ icon: icons.school, value: organization_name }, 1),
     categories: accomplishments?.map(accomplishmentLayout).join(''),
     gpa: contact({ icon: icons.star, value: gpa ? 'GPA ' + gpa : '' }, 1),
-    about: quote,
+    about: quoteText,
     contacts: contacts.map(contact).join(''),
     'page-title': name + ' Accomplishments',
     objective: objective_for_summary,
@@ -376,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   !objective_for_summary && hideField('objective-main');
-  !quote && hideField('quote-main');
+  !quoteText && hideField('quote-main');
 });
 
 // ============================ Components ============================

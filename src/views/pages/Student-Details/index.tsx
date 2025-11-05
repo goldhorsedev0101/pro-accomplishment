@@ -29,7 +29,7 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
 
   const { mutateAsync: toggle } = useToggleFavoriteCandidateMutation();
   const { accomplishments, candidate_data } = data?.data || {};
-  console.log({ pdf_url: candidate_data?.pdf_url });
+
   const [isFav, setIsFav] = useState<boolean>(candidate_data?.is_favorite || false);
 
   function groupByFormType(data?: Array<Accomplishment>) {

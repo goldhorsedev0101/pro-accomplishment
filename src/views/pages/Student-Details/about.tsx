@@ -45,7 +45,6 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
     link?.startsWith('http://') || link?.startsWith('https://') ? link : `https://${link}`;
 
   const contact = contacts({ email, phone_number, address, link: link || '', iso: iso2 || '' });
-  console.log('🚀 ~ About ~ contact:', contact);
 
   return (
     <Box className="shadow-sm">

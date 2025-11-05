@@ -21,8 +21,6 @@ const SemesterAtSeaCard: FC<IProps> = ({ form_data }) => {
 
   const date = `${date_arrived && formatToDDMMMYYYY(date_arrived)} ${date_departed && '- ' + formatToDDMMMYYYY(date_departed)}`;
 
-  console.log('🚀 ~ SemesterAtSeaCard ~ date:', { date, date_arrived, date_departed });
-
   return (
     <Box className="w-full !gap-y-3">
       {title && <p className="font-medium !text-heading font-quicksand break-all ">{title}</p>}

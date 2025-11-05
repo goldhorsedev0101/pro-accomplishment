@@ -11,7 +11,7 @@ import About from './about';
 
 // Types
 import { IParams } from '@/types/params.type';
-import { FC, JSX, useEffect, useState } from 'react';
+import { FC, Fragment, JSX, useEffect, useState } from 'react';
 
 // Icons
 import profile from 'public/icons/profile-2user.svg';
@@ -19,10 +19,13 @@ import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { HiOutlineDownload } from 'react-icons/hi';
 
 // Mutation
+import { Button } from '@/components/ui/button';
+import { supabase } from '@/lib/supabase/client';
 import { useToggleFavoriteCandidateMutation } from '@/services/others/favorite/toggle-favorite-candidate';
 import { useGetCandidateFolioQuery } from '@/services/others/folio/get-candidate-folio';
 import { Accomplishment } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
-import Link from 'next/link';
+import { listenToIsFolioAvailable } from '@/utils/supabase-listner';
+import { PiSpinner } from 'react-icons/pi';
 
 const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
   const { data, isPending } = useGetCandidateFolioQuery({ candidateId: id ?? '' });
@@ -30,6 +33,7 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
   const { mutateAsync: toggle } = useToggleFavoriteCandidateMutation();
   const { accomplishments, candidate_data } = data?.data || {};
 
+  const [pdfUrl, setPdfUrl] = useState<string | undefined>(undefined);
   const [isFav, setIsFav] = useState<boolean>(candidate_data?.is_favorite || false);
 
   function groupByFormType(data?: Array<Accomplishment>) {
@@ -64,10 +68,23 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
       console.log('🚀 ~ handleToggle ~ error:', error);
     }
   };
+  const active_folio_id = candidate_data?.active_folio_id;
 
   useEffect(() => {
     setIsFav(candidate_data?.is_favorite || false);
   }, [candidate_data?.is_favorite]);
+
+  useEffect(() => {
+    if (active_folio_id) {
+      setPdfUrl(candidate_data?.pdf_url);
+
+      const channel = listenToIsFolioAvailable(active_folio_id, (newVal) => setPdfUrl(newVal));
+
+      return () => {
+        supabase.removeChannel(channel);
+      };
+    }
+  }, [active_folio_id]);
 
   if (isPending) {
     return (
@@ -101,14 +118,23 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
             {isFav ? <GoHeartFill color="#49909d" /> : <GoHeart />}
           </button>
 
-          <Link
-            className="h-12 rounded-lg p-6 bg-primary text-white flex items-center gap-x-1"
-            target={candidate_data?.pdf_url ? '_blank' : undefined}
-            href={candidate_data?.pdf_url || '#'}
+          <Button
+            className="h-12 rounded-lg p-6 bg-primary text-white flex items-center gap-x-1 disabled:opacity-50"
+            onClick={() => window.open(pdfUrl, '_blank')}
+            disabled={!pdfUrl}
           >
-            <HiOutlineDownload size={20} />
-            Download PDF
-          </Link>
+            {pdfUrl ? (
+              <Fragment>
+                <HiOutlineDownload size={20} />
+                Download PDF
+              </Fragment>
+            ) : (
+              <Fragment>
+                <PiSpinner size={40} className="animate-spin" />
+                Generating PDF
+              </Fragment>
+            )}
+          </Button>
         </div>
       </div>
 

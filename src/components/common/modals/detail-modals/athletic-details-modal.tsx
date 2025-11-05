@@ -30,11 +30,13 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
       {form_data?.name && (
         <Box className="!border-none !p-3 !flex-row justify-between">
           <p className="text-heading font-medium break-all">{form_data?.name}</p>
-          <p
-            className={`font-quicksand text-black font-normal h-fit text-sm rounded-sm py-0.5 px-1.5  ${form_data?.region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
-          >
-            {form_data.region}
-          </p>
+          {form_data.region && (
+            <p
+              className={`font-quicksand text-black font-normal h-fit text-sm rounded-sm py-0.5 px-1.5  ${form_data?.region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
+            >
+              {form_data.region}
+            </p>
+          )}
         </Box>
       )}
 
@@ -44,9 +46,7 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
             <Image alt="title/award" src={cup} width={20} height={20} />
             <p className="text-heading font-medium">Title / Award</p>
           </div>
-          <p className="text-heading text-sm">
-            {form_data?.title_or_award} {form_data?.region && '- ' + form_data?.region}
-          </p>
+          <p className="text-heading text-sm">{form_data?.title_or_award}</p>
         </Box>
       )}
 

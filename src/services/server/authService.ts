@@ -210,7 +210,7 @@ export const isUserNotExist = async ({ email }: { email: string }) => {
     .from('profile')
     .select('id, email, role, is_deactivated, deleted_at')
     .eq('email', email)
-    .eq('role', 'recruiter')
+    .in('role', ['recruiter', 'candidate'])
     .maybeSingle();
 
   let customError: ICustomError | null = error ? error : null;

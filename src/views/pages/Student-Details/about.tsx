@@ -71,7 +71,7 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
                     rel="noopener noreferrer"
                     target={label === link ? '_blank' : undefined}
                     onClick={({ preventDefault }) => label !== link && preventDefault()}
-                    className={`flex items-center gap-x-2 ${label === link ? '!w-full' : 'w-fit !cursor-default'}`}
+                    className={`flex items-center gap-x-2 ${label === link ? '' : 'w-fit !cursor-default'}`}
                   >
                     <Image src={icon} alt="icon" width={18} height={18} />
                     <span

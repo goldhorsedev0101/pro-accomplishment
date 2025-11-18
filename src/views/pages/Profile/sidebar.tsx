@@ -19,6 +19,7 @@ import { useRouter } from 'next/navigation';
 
 // Types
 import { Dispatch, Fragment, JSX, ReactNode, SetStateAction } from 'react';
+import toast from 'react-hot-toast';
 
 interface IProps {
   setActiveTab: Dispatch<SetStateAction<PROFILE_ENUM>>;
@@ -38,6 +39,7 @@ const Sidebar = ({ activeTab, setActiveTab, children }: IProps): JSX.Element => 
     deleteCookie('accessToken');
     push(signIn);
     refresh();
+    toast.success('Logged out successfully');
   };
 
   return (

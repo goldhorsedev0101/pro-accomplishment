@@ -16,47 +16,52 @@ const publicRoutes: Array<string> = [forgetPassword, resetPassword, signUp, sign
 const { home, profile } = Routes;
 const privateRoutes: Array<string> = [home, profile];
 
-export async function middleware({ url, nextUrl, cookies }: NextRequest) {
-  const accessToken = cookies.get('accessToken')?.value;
-  const { redirect, next } = NextResponse;
+export async function middleware(req: NextRequest) {
+  const accessToken = req.cookies.get('accessToken')?.value;
+  const { nextUrl } = req;
   const { pathname } = nextUrl;
 
-  // Early return for root and icons
-  if (pathname === '/' || pathname === '/icons') {
-    return redirect(new URL(home, url));
-  }
+  const { redirect, next } = NextResponse;
 
-  const isPublicRoute = publicRoutes.includes(pathname);
-  const isPrivateRoute = privateRoutes.includes(pathname);
+  const publicRoutes = [
+    Routes.forgetPassword,
+    Routes.resetPassword,
+    Routes.signUp,
+    Routes.signIn,
+    Routes.verifyEmail,
+  ];
 
-  // If no token and trying to access private route -> redirect to signin
+  const privateRoutes = [Routes.home, Routes.profile];
+
+  // Match dynamic private routes like /home/[slug]
+  const isPrivateRoute = privateRoutes.some((route) => pathname.startsWith(route));
+  const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
+
+  // If not logged in and accessing private route → redirect
   if (!accessToken && isPrivateRoute) {
-    return redirect(new URL(signIn, url));
+    return redirect(new URL(Routes.signIn, req.url));
   }
 
-  // If has token, validate it
+  // If logged in → validate token
   if (accessToken) {
     const user = await getUser(accessToken);
 
-    // Invalid token - clear it and redirect if on private route
     if (!user) {
-      const response = isPrivateRoute ? redirect(new URL(signIn, url)) : next();
-
-      // Clear the invalid cookie
+      const response = redirect(new URL(Routes.signIn, req.url));
       response.cookies.delete('accessToken');
       return response;
     }
 
-    // Valid token but on public route -> redirect to home
+    // If logged in but trying to access public routes → redirect to /home
     if (isPublicRoute) {
-      return redirect(new URL(home, url));
+      return redirect(new URL(Routes.home, req.url));
     }
   }
 
-  // Default: Allow
   return next();
 }
 
+// Helper function to validate the user by token
 const getUser = async (token?: string) => {
   if (!token) return null;
 

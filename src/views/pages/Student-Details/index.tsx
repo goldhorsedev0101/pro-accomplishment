@@ -99,8 +99,8 @@ const StudentDetails: FC<IParams> = ({ id }): JSX.Element => {
       <div className="flex items-center justify-center h-[60dvh]">
         <NoData
           img={profile}
-          title="No Students Found"
-          description="Once students are added, their profiles and achievements will appear here"
+          title="No Recruits Found"
+          description="Once recruits are added, their profiles and accomplishments will appear here"
         />
       </div>
     );

@@ -102,8 +102,8 @@ const CategoryView: FC<IParams & { name: string; isSub: boolean }> = ({
         <div className="w-full self-center h-[40dvh] flex items-center justify-center">
           <NoData
             img={students}
-            title="No Students Found"
-            description="Once students are added, their profiles and achievements will appear here"
+            title="No Recruits Found"
+            description="Once recruits are added, their profiles and accomplishments will appear here"
           />
         </div>
       ) : (

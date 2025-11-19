@@ -47,7 +47,7 @@ const HomeView = (): JSX.Element => {
 
       <Filters />
 
-      <Heading text="Favorite Talents" width="medium" size="31" />
+      <Heading text="Top Recruits" width="medium" size="31" />
 
       <SearchInput searchTerm={search} setSearchTerm={setSearch} />
 

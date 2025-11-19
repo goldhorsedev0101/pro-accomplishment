@@ -29,7 +29,7 @@ const StudentCard = ({ location, profile, grade, about, name, gpa, id }: IProps)
 
   return (
     <Link
-      href={participantDetail(about, id)}
+      href={participantDetail('en', id)}
       className="shadow-sm border border-neutral-grey-10 bg-white rounded-lg p-3.5 w-full flex gap-x-2"
     >
       <div className="flex gap-x-3">

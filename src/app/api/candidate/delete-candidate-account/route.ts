@@ -1,5 +1,10 @@
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
 import { signOut } from '@/services/server/authService';
+import {
+  candidateSignIn,
+  deleteCandidate,
+  getCandidateDetails,
+} from '@/services/server/candidatesService';
 
 import { NextRequest } from 'next/server';
 
@@ -27,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     const [loginResponse, candidateResponse] = await Promise.all([
       supabasePromiseResolver({
-        requestFunction: userSignIn,
+        requestFunction: candidateSignIn,
         requestBody: { email: lowerCasedEmail, password },
       }),
       supabasePromiseResolver({
@@ -97,15 +102,4 @@ export async function POST(request: NextRequest) {
       500,
     );
   }
-}
-function userSignIn(requestBody: any): Promise<{ data?: any; error?: any }> {
-  throw new Error('Function not implemented.');
-}
-
-function getCandidateDetails(requestBody: any): Promise<{ data?: any; error?: any }> {
-  throw new Error('Function not implemented.');
-}
-
-function deleteCandidate(requestBody: any): Promise<{ data?: any; error?: any }> {
-  throw new Error('Function not implemented.');
 }

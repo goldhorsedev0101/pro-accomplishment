@@ -18,6 +18,8 @@ import { formatToMDYYYY } from '@/utils/date-format';
 import calenderTick from 'public/icons/calendar-tick.svg';
 import calender from 'public/icons/calendar.svg';
 import cup from 'public/icons/cup.svg';
+import groupUser1 from 'public/icons/group-user-1.svg';
+import groupUser from 'public/icons/group-user.svg';
 import location from 'public/icons/location-colored.svg';
 
 interface IProps {
@@ -32,7 +34,7 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
           <p className="text-heading font-medium break-all">{form_data?.name}</p>
           {form_data.region && (
             <p
-              className={`font-quicksand text-black font-normal h-fit text-sm rounded-sm py-0.5 px-1.5  ${form_data?.region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
+              className={`font-quicksand capitalize text-black font-normal h-fit text-sm rounded-sm py-0.5 px-1.5  ${form_data?.region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
             >
               {form_data.region}
             </p>
@@ -62,25 +64,13 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
       )}
 
       {(form_data?.team_name || form_data?.opposing_team) && (
-        <Box className="!border-none !p-3 !gap-2">
-          <p className="text-heading font-medium">Team</p>
-
-          {form_data?.team_name && (
-            <div className="flex items-center justify-between">
-              <p className="text-neutral-grey-80 text-sm">Team</p>
-              <p className="text-heading text-sm font-medium break-all">{form_data?.team_name}</p>
-            </div>
-          )}
-
-          {form_data?.opposing_team && (
-            <div className="flex items-center justify-between">
-              <p className="text-neutral-grey-80 text-sm">Opposing Team</p>
-              <p className="text-heading text-sm font-medium break-all">
-                {form_data?.opposing_team}
-              </p>
-            </div>
-          )}
-        </Box>
+        <Items
+          label="Team"
+          items={[
+            { icon: groupUser1, label: 'Team', value: form_data?.team_name },
+            { icon: groupUser, label: 'Opposing Team', value: form_data?.opposing_team },
+          ]}
+        />
       )}
 
       {form_data?.document_urls && form_data?.document_urls?.length > 0 && (

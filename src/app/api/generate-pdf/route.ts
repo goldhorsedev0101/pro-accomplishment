@@ -8,11 +8,10 @@ import path from 'path';
 import puppeteer, { Browser } from 'puppeteer-core';
 
 import fs from 'fs/promises';
+import { supabase } from '@/lib/supabase/server';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-
-const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
 
 // Launch Chromium
 async function launchChromium(): Promise<Browser> {
@@ -90,6 +89,7 @@ function generateRandomNumberString(length: number) {
 
 export async function POST(request: NextRequest) {
   const { folio_id } = await request.json();
+
   let browser: Browser | null = null;
 
   // base log data
@@ -108,6 +108,7 @@ export async function POST(request: NextRequest) {
       .select('*')
       .eq('id', folio_id)
       .single();
+    console.log('\n${new Date().toLocaleTimeString()} \n ~ POST ~ folioRow:', folioRowError);
 
     if (folioRowError || !folioRow) {
       throw new Error('Folio not found');
@@ -152,7 +153,7 @@ export async function POST(request: NextRequest) {
     // 4. Upload new PDF
     const fileName = `${candidateName}-${generateRandomNumberString(20)}.pdf`;
     const { data: uploadData, error: uploadError } = await supabase.storage
-      .from('generated-folios')
+      .from('generated_folios')
       .upload(fileName, new Uint8Array(pdfBuffer), {
         contentType: 'application/pdf',
         upsert: true,
@@ -160,7 +161,8 @@ export async function POST(request: NextRequest) {
 
     if (uploadError) throw uploadError;
 
-    const publicUrl = `${process.env.SUPABASE_URL}/storage/v1/object/public/generated-folios/${uploadData?.path}`;
+    const publicUrl = `${process.env.SUPABASE_URL}/storage/v1/object/public/generated_folios/${uploadData?.path}`;
+    console.log('\n${new Date().toLocaleTimeString()} \n ~ POST ~ publicUrl:', publicUrl);
 
     // 5. Update folio row with new pdf_url
     const { error: updateError } = await supabase

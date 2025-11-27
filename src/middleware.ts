@@ -1,48 +1,42 @@
-// Types
 import { NextRequest, NextResponse } from 'next/server';
-import { MeResponseT } from './types/others/me/me-response';
-
-// Constant
 import Routes from './constants/routes';
-
-// Url
 import { URLS } from './services/base-url';
-
-// Public Routes
-const { forgetPassword, resetPassword, signUp, signIn, verifyEmail } = Routes;
-const publicRoutes: Array<string> = [forgetPassword, resetPassword, signUp, signIn, verifyEmail];
-
-// Private Routes
-const { home, profile } = Routes;
-const privateRoutes: Array<string> = [home, profile];
+import { MeResponseT } from './types/others/me/me-response';
 
 export async function middleware(req: NextRequest) {
   const accessToken = req.cookies.get('accessToken')?.value;
-  const { nextUrl } = req;
-  const { pathname } = nextUrl;
+  const { pathname } = req.nextUrl;
 
   const { redirect, next } = NextResponse;
 
+  // Routes
   const publicRoutes = [
     Routes.forgetPassword,
     Routes.resetPassword,
+    Routes.verifyEmail,
     Routes.signUp,
     Routes.signIn,
-    Routes.verifyEmail,
   ];
 
   const privateRoutes = [Routes.home, Routes.profile];
 
-  // Match dynamic private routes like /home/[slug]
+  const mixedRoutes = [Routes.deleteCandidateAccount];
+
   const isPrivateRoute = privateRoutes.some((route) => pathname.startsWith(route));
   const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
+  const isMixedRoute = mixedRoutes.some((route) => pathname.startsWith(route));
 
-  // If not logged in and accessing private route → redirect
+  if (pathname === '/') return redirect(new URL(Routes.signIn, req.url));
+
+  // If the route is mixed, always allow it
+  if (isMixedRoute) return next();
+
+  // Not logged in → accessing private route → redirect
   if (!accessToken && isPrivateRoute) {
     return redirect(new URL(Routes.signIn, req.url));
   }
 
-  // If logged in → validate token
+  // Logged in → validate token
   if (accessToken) {
     const user = await getUser(accessToken);
 
@@ -52,7 +46,7 @@ export async function middleware(req: NextRequest) {
       return response;
     }
 
-    // If logged in but trying to access public routes → redirect to /home
+    // Logged in but accessing public route → redirect to /home
     if (isPublicRoute) {
       return redirect(new URL(Routes.home, req.url));
     }
@@ -61,7 +55,7 @@ export async function middleware(req: NextRequest) {
   return next();
 }
 
-// Helper function to validate the user by token
+// Token validation
 const getUser = async (token?: string) => {
   if (!token) return null;
 
@@ -76,5 +70,5 @@ const getUser = async (token?: string) => {
 };
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'],
+  matcher: ['/((?!api|_next|favicon.ico).*)'],
 };

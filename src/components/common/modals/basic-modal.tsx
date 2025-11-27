@@ -17,7 +17,7 @@ import { Dispatch, FC, JSX, ReactNode, SetStateAction } from 'react';
 interface IProps {
   trigger: { className?: string; child: ReactNode };
   title?: { className?: string; title: string };
-  setIsOpen?: Dispatch<SetStateAction<boolean>>;
+  setIsOpen?: (v: boolean) => void;
   footer?: ReactNode;
   isOpen?: boolean;
 }

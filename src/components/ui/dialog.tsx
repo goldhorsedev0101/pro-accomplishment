@@ -63,7 +63,7 @@ function DialogContent({
         {!showCloseButton && (
           <div
             onClick={onClick}
-            className="absolute border bottom-[850px] z-[999999] left-8 p-2.5 cursor-pointer bg-white rounded-full cursor-pointer"
+            className="absolute border bottom-[850px] z-[999999] left-8 p-2.5 cursor-pointer bg-white rounded-full"
           >
             <XIcon />
           </div>

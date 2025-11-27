@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase/server';
+
 export const getCategories = async () => {
   const { data, error } = await supabase
     .from('category')
@@ -10,6 +11,7 @@ export const getCategories = async () => {
       sub_category ( id )
     `,
     )
+    .neq('name', 'Custom')
     .order('created_at', { ascending: true });
 
   if (error) return { data: null, error };
@@ -29,6 +31,7 @@ export const getSubCategories = async ({ categoryId }: { categoryId: string }) =
     .from('sub_category')
     .select('id, name, type, category_id, icon_url')
     .eq('category_id', categoryId)
+    .neq('name', 'Custom')
     .order('name', { ascending: true });
   return { data, error };
 };

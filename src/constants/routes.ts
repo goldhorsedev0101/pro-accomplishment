@@ -1,5 +1,6 @@
 const Routes = {
   // ====================== Auth ====================== //
+  deleteCandidateAccount: '/delete-candidate-account',
   forgetPassword: '/forget-password',
   resetPassword: '/reset-password',
   verifyEmail: '/verify-email',

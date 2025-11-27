@@ -12,10 +12,10 @@ import { JSX, useState } from 'react';
 // Toast
 import Routes from '@/constants/routes';
 import { useDeleteProfileMutation } from '@/services/others/profile/delete-recruiter-profile';
+import { useQueryClient } from '@tanstack/react-query';
 import { deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import { useQueryClient } from '@tanstack/react-query';
 
 const DeleteModal = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

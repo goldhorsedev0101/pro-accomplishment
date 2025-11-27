@@ -6,6 +6,7 @@ const baseUrl = isLive ? live + '/api' : localhost + '/api';
 
 export const URLS = {
   // =========================== Auth ===================== //
+  DELETE_CANDIDATE: `${baseUrl}/candidate/delete-candidate-account`,
   FORGET_PASSWORD: `${baseUrl}/auth/forgot-password`,
   RESET_PASSWORD: `${baseUrl}/auth/reset-password`,
   CHANGE_PASSWORD: `${baseUrl}/auth/change-password`,

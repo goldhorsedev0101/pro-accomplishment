@@ -224,7 +224,6 @@ export const isUserNotExist = async ({ email }: { email: string }) => {
       customError = { message: 'User account is deactivated or deleted.' };
     }
   }
-  console.log('here', data, customError, email);
 
   return {
     error: customError,

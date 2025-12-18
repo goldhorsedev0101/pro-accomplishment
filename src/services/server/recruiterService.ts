@@ -118,7 +118,7 @@ export const getRecruiterProfileByEmail = async ({
     return { data: null, error: customError };
   }
 
-  let subscription = profile?.subscription || null;
+  const subscription = profile?.subscription || null;
 
   if (subscription) {
     if (

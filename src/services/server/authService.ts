@@ -9,14 +9,6 @@ export interface ICustomError {
   code?: string;
 }
 
-interface IUserLookup {
-  id: string;
-  email: string;
-  role: string;
-  is_deactivated: boolean;
-  deleted_at: string | null;
-}
-
 export const signUp = async ({ email, password }: { email: string; password: string }) => {
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -228,33 +220,6 @@ export const isUserNotExist = async ({ email }: { email: string }) => {
   return {
     error: customError,
     data: data ? data : { email },
-  };
-};
-
-export const getRecruiterProfileByEmail = async ({
-  email,
-}: {
-  email: string;
-}): Promise<{ data: IUserLookup | null; error: ICustomError | null }> => {
-  const { data, error } = await supabase
-    .from('profile')
-    .select('id, email, role, is_deactivated, deleted_at')
-    .eq('email', email)
-    .eq('role', 'recruiter')
-    .maybeSingle();
-
-  let customError: ICustomError | null = error ? error : null;
-
-  if (data) {
-    if (data.is_deactivated || data.deleted_at) {
-      customError = { message: 'User account is deactivated or deleted.' };
-    }
-  } else {
-    customError = { message: 'User not found' };
-  }
-  return {
-    error: customError,
-    data: customError ? null : data,
   };
 };
 

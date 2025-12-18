@@ -1,42 +1,61 @@
-// Types
 import { NextRequest, NextResponse } from 'next/server';
+import Routes from './constants/routes';
+import { URLS } from './services/base-url';
 import { MeResponseT } from './types/others/me/me-response';
 
-// Constant
-import Routes from './constants/routes';
+export async function middleware(req: NextRequest) {
+  const accessToken = req.cookies.get('accessToken')?.value;
+  const { pathname } = req.nextUrl;
 
-// Url
-import { URLS } from './services/base-url';
-
-// Public Routes
-const { forgetPassword, resetPassword, signUp, signIn, verifyEmail } = Routes;
-const publicRoutes: Array<string> = [forgetPassword, resetPassword, signUp, signIn, verifyEmail];
-
-// Private Routes
-const { home, profile } = Routes;
-const privateRoutes: Array<string> = [home, profile];
-
-export async function middleware({ url, nextUrl, cookies }: NextRequest) {
-  const accessToken = cookies.get('accessToken')?.value;
   const { redirect, next } = NextResponse;
-  const user = await getUser(accessToken);
-  const { pathname } = nextUrl;
 
-  const isPublicRoute = publicRoutes.includes(pathname);
-  const isPrivateRoute = privateRoutes.includes(pathname);
+  // Routes
+  const publicRoutes = [
+    Routes.forgetPassword,
+    Routes.resetPassword,
+    Routes.verifyEmail,
+    Routes.signUp,
+    Routes.signIn,
+  ];
 
-  if (pathname === '/' || pathname === '/icons') return redirect(new URL(home, url));
+  const privateRoutes = [Routes.home, Routes.profile];
 
-  // invalid token && private route
-  if (!user && isPrivateRoute) return redirect(new URL(signIn, url));
+  const mixedRoutes = [Routes.deleteCandidateAccount];
 
-  // valid token && public route
-  if (user && isPublicRoute) return redirect(new URL(home, url));
+  const isPrivateRoute = privateRoutes.some((route) => pathname.startsWith(route));
+  const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
+  const isMixedRoute = mixedRoutes.some((route) => pathname.startsWith(route));
 
-  // Default: Allow
+  if (pathname === '/') return redirect(new URL(Routes.signIn, req.url));
+
+  // If the route is mixed, always allow it
+  if (isMixedRoute) return next();
+
+  // Not logged in → accessing private route → redirect
+  if (!accessToken && isPrivateRoute) {
+    return redirect(new URL(Routes.signIn, req.url));
+  }
+
+  // Logged in → validate token
+  if (accessToken) {
+    const user = await getUser(accessToken);
+
+    if (!user) {
+      const response = redirect(new URL(Routes.signIn, req.url));
+      response.cookies.delete('accessToken');
+      return response;
+    }
+
+    // Logged in but accessing public route → redirect to /home
+    if (isPublicRoute) {
+      return redirect(new URL(Routes.home, req.url));
+    }
+  }
+
   return next();
 }
 
+// Token validation
 const getUser = async (token?: string) => {
   if (!token) return null;
 
@@ -51,5 +70,5 @@ const getUser = async (token?: string) => {
 };
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'],
+  matcher: ['/((?!api|_next|favicon.ico).*)'],
 };

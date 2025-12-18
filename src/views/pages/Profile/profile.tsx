@@ -13,11 +13,13 @@ const Profile = (): JSX.Element => {
   const { data, isPending } = useGetProfileQuery();
   const { first_name, last_name, email, phone_number, iso2, profile_picture } = data?.data || {};
 
+  const number = phone_number?.startsWith('+') ? phone_number : `+${phone_number}`;
+
   const info = [
     { label: 'First Name', value: first_name },
     { label: 'Last Name', value: last_name },
     { label: 'Email', value: email },
-    { label: 'Phone Number', value: phone_number },
+    { label: 'Phone Number', value: number },
   ];
 
   if (isPending) {
@@ -49,7 +51,7 @@ const Profile = (): JSX.Element => {
               {value && (
                 <div className={`flex flex-col gap-y-1 pb-2`}>
                   <p className="text-base font-medium text-neutral-grey-100">{label}</p>
-                  <p className="text-base font-normal text-neutral-grey-70">{value}</p>
+                  <p className="text-base font-normal text-neutral-grey-80">{value}</p>
                 </div>
               )}
             </Fragment>

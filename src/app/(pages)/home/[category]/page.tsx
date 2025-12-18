@@ -13,12 +13,14 @@ const CategoryPage = async ({
   params,
 }: {
   params: Promise<IParams>;
-  searchParams: Promise<{ name: string }>;
+  searchParams: Promise<{ name: string; isSub: string }>;
 }): Promise<JSX.Element> => {
   const { category } = await params;
-  const { name } = await searchParams;
+  const { name, isSub } = await searchParams;
 
-  return <CategoryView category={category} name={name} />;
+  const isBool = isSub === 'true' ? true : false;
+
+  return <CategoryView category={category} name={name} isSub={isBool} />;
 };
 
 export default CategoryPage;

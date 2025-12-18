@@ -6,6 +6,7 @@ const baseUrl = isLive ? live + '/api' : localhost + '/api';
 
 export const URLS = {
   // =========================== Auth ===================== //
+  DELETE_CANDIDATE: `${baseUrl}/candidate/delete-candidate-account`,
   FORGET_PASSWORD: `${baseUrl}/auth/forgot-password`,
   RESET_PASSWORD: `${baseUrl}/auth/reset-password`,
   CHANGE_PASSWORD: `${baseUrl}/auth/change-password`,
@@ -22,9 +23,10 @@ export const URLS = {
 
   // =========================== Category ===================== //
   GET_CATEGORIES: `${baseUrl}/category/get-categories`,
-  GET_SUB_CATEGORIES: `${baseUrl}/category/gemm9t-sub-categories`,
+  GET_SUB_CATEGORIES: `${baseUrl}/category/get-sub-categories`,
 
   // =========================== Profile ===================== //
+  DELETE_RECRUITER_PROFILE: `${baseUrl}/profile/delete-recruiter-profile`,
   EDIT_RECRUITER_PROFILE: `${baseUrl}/profile/edit-recruiter-profile`,
   GET_RECRUITER_PROFILE: `${baseUrl}/profile/get-recruiter-profile`,
 

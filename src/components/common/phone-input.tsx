@@ -5,17 +5,17 @@ import 'react-phone-input-2/lib/style.css';
 interface IProps {
   setIso2?: (iso2: string) => void;
   setFieldValue?: FormikValues['setFieldValue'];
-  value: string;
-  name: string;
+  containerClass?: string;
   placeholder?: string;
   className?: string;
-  label: string;
-  disabled?: boolean;
-  containerClass?: string;
-  error?: string;
-  touched?: boolean;
   required?: boolean;
+  disabled?: boolean;
+  touched?: boolean;
+  error?: string;
   iso2?: string;
+  value: string;
+  label: string;
+  name: string;
 }
 
 const PhoneNumberInput = ({
@@ -34,7 +34,7 @@ const PhoneNumberInput = ({
   const isError = error && touched;
 
   return (
-    <label className={`flex flex-col w-full -mb-4`} htmlFor={name}>
+    <label className={`flex flex-col w-full gap-y-2`} htmlFor={name}>
       {label && (
         <span className={`text-sm`}>
           {label} {required && <span className="text-destructive"> *</span>}
@@ -53,11 +53,11 @@ const PhoneNumberInput = ({
           setFieldValue(name, phone);
         }}
         placeholder={placeholder}
+        dropdownStyle={{ marginBottom: '4px', bottom: '100%', top: 'auto' }}
+        dropdownClass="!p-2 !rounded-sm"
       />
 
-      <span className={`text-sm ${isError ? 'text-red' : 'invisible'}`}>
-        {isError ? error : 'Error'}
-      </span>
+      {isError && <span className="text-destructive text-sm font-normal pb-2">{error}</span>}
     </label>
   );
 };

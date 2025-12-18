@@ -19,7 +19,7 @@ interface IProps {
 }
 
 const TalentsCard: FC<IProps> = ({ form_data }): JSX.Element => {
-  const { skill_required, date, name } = form_data || {};
+  const { date, name } = form_data || {};
 
   return (
     <Box className="shadow-sm w-full !gap-y-3 !text-start">
@@ -27,13 +27,13 @@ const TalentsCard: FC<IProps> = ({ form_data }): JSX.Element => {
         <div className="w-10 h-9 rounded-full bg-neutral-grey-10 flex items-center justify-center">
           <Image src={start} alt="start" className="min-w-6 min-h-6" />
         </div>
-        <div className="flex items-center w-full justify-between">
+        <div className="flex items-center w-full justify-between gap-x-2">
           <Heading
-            className="!text-sm !text-heading font-quicksand break-all"
+            className="!text-base !text-heading font-quicksand break-all"
             text={name ?? ''}
             width="medium"
           />
-          <p className="font-quicksand text-neutral-grey-100 font-normal text-sm">
+          <p className="font-quicksand text-neutral-grey-100 min-w-fit font-normal text-sm">
             {formatToDDMMMYYYY(date ?? '')}
           </p>
         </div>

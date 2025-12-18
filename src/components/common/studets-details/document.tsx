@@ -34,7 +34,7 @@ const Document: FC<IProps> = ({ certificate_urls, title }) => {
               <p className="text-neutral-grey-100 text-sm font-medium break-all line-clamp-1">
                 {getFileNameFromUrl(url) ?? 'Certificate'}
               </p>
-              <p className="text-neutral-grey-70 text-sm">782.3Kb</p>
+              <p className="text-neutral-grey-80 text-sm">782.3Kb</p>
             </div>
           </div>
 

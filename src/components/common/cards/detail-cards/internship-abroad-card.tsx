@@ -16,8 +16,9 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
     accomplishment_name: title,
     date_arrived,
     date_departed,
-    place_of_work: location,
     company,
+    destination,
+    internship_type,
   } = form_data || {};
 
   const date =
@@ -27,31 +28,38 @@ const InternshipAbroadCard: FC<IProps> = ({ form_data }) => {
 
   return (
     <Box>
-      <div className="flex items-center gap-x-3">
-        <Image src={internshipAbroad} alt="internship" className="size-6" />
-        <div>
-          {title && (
-            <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
-              {title}
-            </p>
-          )}
-          {date && (
-            <p className="quicksand text-[var(--gray-70)] font-normal text-sm break-all">{date}</p>
-          )}
+      <Box className="!border-none !flex-row  justify-between !p-0 !gap-2">
+        <div className="flex items-center">
+          <div className="flex items-center justify-center size-9 bg-primary-20 rounded-full">
+            <Image alt="title/award" src={internshipAbroad} width={24} height={24} />
+          </div>
+
+          <div className="gap-x-1">
+            <p className="text-heading font-medium font-quicksand ">{title}</p>
+            <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm">{date}</p>
+          </div>
         </div>
-      </div>
-      {location && (
+
+        {internship_type && (
+          <p className="h-fit rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm min-w-fit">
+            {internship_type}
+          </p>
+        )}
+      </Box>
+
+      {destination && (
         <div className="space-y-2">
           <div className="flex items-center gap-x-2">
-            <Image className="size-5" alt="" src={locationColored} />
-            <p className="quicksand font-normal text-sm text-[var(--black)]">{location}</p>
+            <Image className="size-6" alt="" src={locationColored} />
+            <p className="font-quicksand font-normal text-sm text-[var(--black)]">{destination}</p>
           </div>
         </div>
       )}
+
       {company && (
         <div className="flex items-center gap-x-2">
-          <Image className="size-5" alt="" src={agency} />
-          <p className="quicksand font-normal text-sm text-[var(--black)]">{company}</p>
+          <Image className="size-6" alt="" src={agency} />
+          <p className="font-quicksand font-normal text-sm text-[var(--black)]">{company}</p>
         </div>
       )}
     </Box>

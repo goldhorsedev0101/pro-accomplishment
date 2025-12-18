@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
-import { getRecruiterProfileByEmail, resetPassword } from '@/services/server/authService';
+import { resetPassword } from '@/services/server/authService';
+import { getRecruiterProfileByEmail } from '@/services/server/recruiterService';
 
 export const runtime = 'edge'; // ⚡ Faster cold starts and lower latency
 
@@ -25,16 +26,10 @@ export async function POST(request: NextRequest) {
 
     const lowerCased = email.toLowerCase();
 
-    const [userCheck, otpSend] = await Promise.all([
-      supabasePromiseResolver({
-        requestFunction: getRecruiterProfileByEmail,
-        requestBody: { email: lowerCased },
-      }),
-      supabasePromiseResolver({
-        requestFunction: resetPassword,
-        requestBody: { email: lowerCased },
-      }),
-    ]);
+    const userCheck = await supabasePromiseResolver({
+      requestFunction: getRecruiterProfileByEmail,
+      requestBody: { email: lowerCased },
+    });
 
     if (!userCheck?.success) {
       return response(
@@ -46,6 +41,11 @@ export async function POST(request: NextRequest) {
         400,
       );
     }
+
+    const otpSend = await supabasePromiseResolver({
+      requestFunction: resetPassword,
+      requestBody: { email: lowerCased },
+    });
 
     if (!otpSend?.success) {
       return response(

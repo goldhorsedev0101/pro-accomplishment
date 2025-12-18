@@ -8,14 +8,15 @@ interface IProps {
 const Skills = ({ skills, title }: IProps) => {
   return (
     <Box className="!border-none !p-3 !gap-2">
-      <p className="text-heading font-medium">{title}</p>
+      <p className="text-heading font-medium text-sm font-quicksand">{title}</p>
+
       <div className="flex flex-wrap gap-2">
         {skills.map((skill, i) => (
           <Box
             key={i}
             className="!border-none !p-2 !py-1 !bg-neutral-grey-0 !rounded-md !w-fit !gap-2"
           >
-            <p className="text-heading capitalize text-sm">{skill}</p>
+            <p className="text-heading text-sm font-medium font-quicksand truncate">{skill}</p>
           </Box>
         ))}
       </div>

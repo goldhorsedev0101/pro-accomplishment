@@ -42,10 +42,10 @@ const ForgetPasswordView = (): JSX.Element => {
     initialValues: { email: '' },
     onSubmit: async ({ email }) => {
       try {
-        await mutateAsync({ email });
+        await mutateAsync({ email: email.toLowerCase() });
         setRoute(RECOVERY);
         push(verifyEmail);
-        setEmail(email);
+        setEmail(email.toLowerCase());
       } catch (error) {
         console.log('🚀 ~ ForgetPasswordView ~ error:', error);
       }
@@ -63,7 +63,7 @@ const ForgetPasswordView = (): JSX.Element => {
 
       <Input
         error={touched.email ? errors.email : undefined}
-        placeholder="johndo@example.com"
+        placeholder="Enter Email"
         value={values['email']}
         onChange={handleChange}
         label="Email"

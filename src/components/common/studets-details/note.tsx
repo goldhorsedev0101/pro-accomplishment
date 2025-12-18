@@ -12,7 +12,7 @@ const Note: FC<IProps> = ({ note }) => (
       <Image alt="title/award" src={noteIcon} width={20} height={20} />
       <p className="text-heading font-medium">Notes</p>
     </div>
-    <p className="text-neutral-grey-70 text-sm break-all">{note}</p>
+    <p className="text-neutral-grey-80 text-sm break-all">{note}</p>
   </Box>
 );
 

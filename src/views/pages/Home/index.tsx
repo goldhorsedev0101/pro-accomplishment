@@ -31,8 +31,7 @@ const HomeView = (): JSX.Element => {
 
   const candidate = candidates?.map((item) => ({
     name: item.first_name + ' ' + item.last_name,
-    about: item?.objective_for_summary,
-    category: item.organization_name,
+    about: item?.organization_name,
     profile: item.profile_photo_url,
     location: item.country,
     id: item.candidate_id,
@@ -48,7 +47,7 @@ const HomeView = (): JSX.Element => {
 
       <Filters />
 
-      <Heading text="Favorite Talents" width="medium" size="31" />
+      <Heading text="Top Recruits" width="medium" size="31" />
 
       <SearchInput searchTerm={search} setSearchTerm={setSearch} />
 
@@ -56,7 +55,7 @@ const HomeView = (): JSX.Element => {
         <div className="w-full self-center h-[40dvh] flex items-center justify-center">
           <Loader />
         </div>
-      ) : (meta_data?.total || 0) < 0 ? (
+      ) : meta_data?.total === 0 ? (
         <div className="w-full self-center h-[40dvh] flex items-center justify-center">
           <NoData />
         </div>

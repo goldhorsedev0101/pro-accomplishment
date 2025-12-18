@@ -17,6 +17,7 @@ export interface MetaData {
 }
 
 export interface CandidateData {
+  iso2: string;
   gpa: number;
   city: string;
   link: string | null;
@@ -56,6 +57,7 @@ export interface Accomplishment {
 
 export interface FormData {
   id: string;
+  internship_title?: string | null;
   date?: string | null;
   link: string;
   name?: string | null;

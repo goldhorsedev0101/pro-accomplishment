@@ -18,7 +18,9 @@ import { useFormik } from 'formik';
 
 // Types
 import { useEditProfileMutation } from '@/services/others/profile/edit-recruiter-profile';
+import { useQueryClient } from '@tanstack/react-query';
 import { FC, JSX, useState } from 'react';
+import toast from 'react-hot-toast';
 import FileUploader from '../file-uploader';
 import PhoneNumberInput from '../phone-input';
 
@@ -40,6 +42,7 @@ const EditProfileModal: FC<IProps> = ({
   iso2 = '',
 }): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const queryClient = useQueryClient();
 
   const { mutateAsync, isPending } = useEditProfileMutation();
 
@@ -55,15 +58,21 @@ const EditProfileModal: FC<IProps> = ({
     isValid,
   } = useFormik({
     initialValues: {
+      iso2,
       phoneNumber: phone_number,
       firstName: first_name,
       lastName: last_name,
-      profile_picture,
+      profileImage: profile_picture,
     },
     validationSchema: EditProfileSchema,
     enableReinitialize: true,
     onSubmit: async (values) => {
-      await mutateAsync(values);
+      await mutateAsync(values, {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ['get-profile'], refetchType: 'all' });
+          toast.success('Profile Edit successfully');
+        },
+      });
       setIsOpen(false);
       resetForm();
     },
@@ -78,27 +87,27 @@ const EditProfileModal: FC<IProps> = ({
         <form onSubmit={handleSubmit} className="w-full flex-col flex gap-y-6">
           <FileUploader
             setFieldValue={setFieldValue}
-            value={profile_picture}
-            name="profile_picture"
+            value={values.profileImage}
+            name="profileImage"
           />
 
-          <div className="flex items-center gap-x-3">
+          <div className="flex flex-col sm:flex-row items-center gap-3">
             <Input
               error={touched.firstName ? errors.firstName : undefined}
+              placeholder="Enter first name"
               value={values.firstName}
               onChange={handleChange}
               className="bg-white"
               label="First Name"
-              placeholder="Jane"
               name="firstName"
             />
 
             <Input
               error={touched.lastName ? errors.lastName : undefined}
+              placeholder="Enter last name"
               value={values.lastName}
               onChange={handleChange}
               className="bg-white"
-              placeholder="Cooper"
               label="Last Name"
               name="lastName"
             />

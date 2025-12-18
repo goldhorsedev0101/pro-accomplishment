@@ -18,7 +18,7 @@ const DetailsModalLayout = ({ trigger, children, title, isHeader }: IProps) => {
   return (
     <Box className="!gap-y-4 !border-none !p-0">
       {isHeader && (
-        <Heading className="!text-lg !text-neutral-grey-60 break-all" text={title} width="medium" />
+        <Heading className="!text-lg !text-neutral-grey-80 break-all" text={title} width="medium" />
       )}
 
       <Dialog onOpenChange={setIsOpen} open={isOpen}>

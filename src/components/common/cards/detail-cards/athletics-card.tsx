@@ -10,10 +10,10 @@ import Heading from '../../heading';
 
 // Types
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
-import { FC, JSX } from 'react';
+import { FC, Fragment, JSX } from 'react';
 
 // Utils
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 
 interface IProps {
   form_data?: FormData;
@@ -24,26 +24,33 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
 
   return (
     <Box className="shadow-sm !text-start">
-      <div className="flex justify-between items-start">
+      <div className="flex justify-between items-start gap-2">
         <div>
-          <Heading className="!text-base font-quicksand" text={name ?? ''} width="medium" />
-          <p className="font-quicksand text-neutral-grey-60 font-normal text-sm">
-            {formatToDDMMYYYY(date || '')}
+          <Heading
+            className="!text-base !text-heading font-quicksand break-all"
+            text={name ?? ''}
+            width="medium"
+          />
+          <p className="font-quicksand text-neutral-grey-80 font-normal text-sm">
+            {formatToMDYYYY(date || '')}
           </p>
         </div>
-        <p
-          className={`font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5 capitalize ${region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
-        >
-          {region}
-        </p>
+
+        {region && (
+          <p
+            className={`font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5  ${region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
+          >
+            {region}
+          </p>
+        )}
       </div>
 
       {(event_name || location) && (
-        <div className="space-y-2 capitalize">
+        <div className="space-y-2 ">
           {event_name && (
             <div className="flex items-center gap-x-2">
-              <Image alt="" src={calendar} sizes="20" />
-              <p className="font-quicksand font-normal text-sm text-neutral-grey-70">
+              <Image alt="" src={calendar} className="size-6" />
+              <p className="font-quicksand font-normal text-sm text-neutral-grey-80">
                 {event_name}
               </p>
             </div>
@@ -51,19 +58,25 @@ const AthleticsCard: FC<IProps> = ({ form_data }): JSX.Element => {
 
           {location && (
             <div className="flex items-center gap-x-2">
-              <Image alt="" src={locationIcon} sizes="20" />
-              <p className="font-quicksand font-normal text-sm text-neutral-grey-70">{location}</p>
+              <Image alt="" src={locationIcon} className="size-6" />
+              <p className="font-quicksand font-normal text-sm text-neutral-grey-80">{location}</p>
             </div>
           )}
         </div>
       )}
 
-      <hr className="-my-2" />
+      {title_or_award && (
+        <Fragment>
+          <hr className="-my-2" />
 
-      <div className="flex items-center gap-x-2">
-        <Image alt="" src={cup} sizes="20" />
-        <p className="font-quicksand font-normal text-sm text-neutral-grey-100">{title_or_award}</p>
-      </div>
+          <div className="flex items-center gap-x-2">
+            <Image alt="" src={cup} className="size-6" />
+            <p className="font-quicksand font-normal text-sm text-neutral-grey-100">
+              {title_or_award}
+            </p>
+          </div>
+        </Fragment>
+      )}
     </Box>
   );
 };

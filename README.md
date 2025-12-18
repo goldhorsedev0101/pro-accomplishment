@@ -126,7 +126,7 @@ This platform allows organizations to:
 - **Update Fonts:** Modify [`public/fonts.ts`](public/fonts.ts)
 - **Edit Profile Sidebar:** See [`src/constants/profile.ts`](src/constants/profile.ts)
 - **API Endpoints:** Update in [`src/services/`](src/services/) and [`src/constants/routes.ts`](src/constants/routes.ts)
-- **Validation Rules:** Edit schemas in [`src/schemas/`](src/schemas/)
+- **Validation Rules:** Edit schemas in [`src/schemas/`](src/schemas/).
 
 ---
 

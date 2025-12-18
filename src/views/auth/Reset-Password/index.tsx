@@ -14,6 +14,7 @@ import { ResetPasswordSchema } from '@/schemas/reset-password.schema';
 
 // Mutation
 import { useResetPasswordMutation } from '@/services/auth/reset-password-mutation';
+import { deleteCookie } from 'cookies-next';
 
 // Formik
 import { useFormik } from 'formik';
@@ -39,6 +40,7 @@ const ResetPasswordView = (): JSX.Element => {
 
       try {
         await mutateAsync({ confirmPassword: conPass, newPassword: newPass });
+        deleteCookie('session');
         push(signIn);
         refresh();
       } catch (error) {
@@ -55,7 +57,7 @@ const ResetPasswordView = (): JSX.Element => {
 
       <Input
         error={touched.newPassword ? errors.newPassword : undefined}
-        placeholder="ohndoe122&&*^Y"
+        placeholder="Enter New Password"
         value={values['newPassword']}
         onChange={handleChange}
         name="newPassword"
@@ -66,8 +68,8 @@ const ResetPasswordView = (): JSX.Element => {
 
       <Input
         error={touched.confirmPassword ? errors.confirmPassword : undefined}
+        placeholder="Enter Confirm Password"
         value={values['confirmPassword']}
-        placeholder="***********"
         label="Confirm Password"
         onChange={handleChange}
         name="confirmPassword"

@@ -11,7 +11,7 @@ interface IProps {
 const Heading: FC<IProps> = ({ text, size = '32', width = 'semibold', className }): JSX.Element => (
   <h2
     style={{ fontSize: `var(--text-size-${size})` }}
-    className={`font-${width} text-neutral-grey-100 capitalize ${className}`}
+    className={`font-${width} text-neutral-grey-100  ${className}`}
   >
     {text}
   </h2>

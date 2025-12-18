@@ -10,17 +10,35 @@ import BasicModal from './basic-modal';
 import { JSX, useState } from 'react';
 
 // Toast
+import Routes from '@/constants/routes';
+import { useDeleteProfileMutation } from '@/services/others/profile/delete-recruiter-profile';
+import { useQueryClient } from '@tanstack/react-query';
+import { deleteCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
 const DeleteModal = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [deleteText, setDeleteText] = useState<string>('');
+  const queryClient = useQueryClient();
+  const { push } = useRouter();
+  const { mutateAsync, isPending } = useDeleteProfileMutation();
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = async () => {
     if (deleteText === 'Accomplishment') {
-      setIsOpen(false);
-      setDeleteText('');
-      toast.success('Account Deleted successfully');
+      const res = await mutateAsync(undefined, {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ['get-profile'], refetchType: 'all' });
+          toast.success('Profile Deleted successfully');
+        },
+      });
+
+      if (res) {
+        setIsOpen(false);
+        setDeleteText('');
+        deleteCookie('accessToken');
+        push(Routes.signIn);
+      }
     } else toast.error('Invalid input');
   };
 
@@ -48,6 +66,7 @@ const DeleteModal = (): JSX.Element => {
           />
           <DialogClose asChild>
             <Button
+              disabled={isPending}
               variant={'destructive'}
               onClick={handleDeleteAccount}
               className="w-full bg-red h-14 rounded-xl"

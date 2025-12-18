@@ -3,6 +3,7 @@ import { formatToDDMMMYYYY } from '@/utils/date-format';
 import Image from 'next/image';
 import Link from 'next/link';
 import building from 'public/icons/building.svg';
+import linkIcon from 'public/icons/link.svg';
 import note from 'public/icons/note.svg';
 import info from 'public/pdf/info.svg';
 import { FC } from 'react';
@@ -38,13 +39,9 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
           <Image src={info} alt="info" className="size-6" />
         </div>
         <div>
-          {title && (
-            <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
-              {title}
-            </p>
-          )}
+          {title && <p className="font-medium !text-heading font-quicksand break-all ">{title}</p>}
           {(startDate || endDate) && (
-            <p className="quicksand text-[var(--gray-70)] font-normal text-xs break-all">
+            <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm break-all">
               {startDate}
               {startDate && endDate ? ' - ' : ''}
               {endDate}
@@ -55,8 +52,8 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
 
       {organization && (
         <div className="flex gap-x-1.5 items-center">
-          <Image src={building} alt="building" className="size-4" />
-          <p className="text-[var(--black)] text-sm font-normal quicksand break-all">
+          <Image src={building} alt="building" className="size-6" />
+          <p className="text-[var(--gray-80)]  text-sm font-normal font-quicksand break-all">
             {organization}
           </p>
         </div>
@@ -77,15 +74,20 @@ const VolunteerCard: FC<IProps> = ({ form_data }) => {
       )}
 
       {link && (
-        <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal quicksand">
-          {link}
-        </Link>
+        <div className="flex items-center gap-x-2 pl-3">
+          <Image src={linkIcon} className="size-6" alt="" />
+          <Link href={validUrl} className="text-[var(--blue)] font-normal font-quicksand break-all">
+            {link}
+          </Link>
+        </div>
       )}
 
       {doc && (
-        <div className="flex gap-x-1.5 items-start">
-          <Image src={note} alt="note" className="size-5" />
-          <p className="text-[var(--gray-70)] text-sm font-normal quicksand break-all">{doc}</p>
+        <div className="flex gap-x-1.5 items-start pl-3">
+          <Image src={note} alt="note" className="size-6" />
+          <p className="text-[var(--gray-80)] text-sm font-normal font-quicksand break-all">
+            {doc}
+          </p>
         </div>
       )}
     </Box>

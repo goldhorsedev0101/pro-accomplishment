@@ -1,5 +1,6 @@
 // Icons
 import briefcase from 'public/icons/briefcase.svg';
+import linkIcon from 'public/icons/link.svg';
 import note from 'public/icons/note.svg';
 
 // Components
@@ -28,18 +29,18 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
     <Box className="shadow-sm w-full !text-start !gap-y-3">
       <div className="flex items-start gap-x-3">
         <div className="w-9 h-9 rounded-full bg-blue-light flex items-center justify-center">
-          <Image src={briefcase} alt="start" sizes="24" />
+          <Image src={briefcase} alt="start" className="size-6" />
         </div>
         <div>
           <Heading
-            className="!text-sm !text-heading font-quicksand !break-all"
+            className="!text-base !text-heading font-quicksand !break-all"
             text={form_data?.job_title ?? 'N/A'}
-            width="semibold"
+            width="medium"
           />
-          <p className="font-quicksand text-neutral-grey-70 font-normal text-xs break-all">
+          <p className="font-quicksand text-neutral-grey-80 font-normal text-sm break-all">
             {form_data?.company}
           </p>
-          <p className="mt-2 text-black text-xs font-medium font-quicksand">
+          <p className="mt-2 font-quicksand text-[var(--gray-80)] font-normal text-sm break-all">
             {formatToDDMMMYYYY(form_data?.start_date ?? '')} -{' '}
             {!form_data?.end_date ? 'Ongoing' : formatToDDMMMYYYY(form_data?.end_date ?? '')}
           </p>
@@ -57,16 +58,19 @@ const EmploymentCard: FC<IProps> = ({ form_data }) => {
         <Skills skills={form_data?.acquired_skills} title="Acquired Skills" />
       )}
 
-      {form_data?.link && (
-        <Link href={validUrl} className="text-blue text-xs font-normal font-quicksand">
-          {form_data?.link}
-        </Link>
+      {link && (
+        <div className="flex items-center gap-x-2 pl-3">
+          <Image src={linkIcon} className="size-6" alt="" />
+          <Link href={validUrl} className="text-[var(--blue)] font-normal font-quicksand break-all">
+            {link}
+          </Link>
+        </div>
       )}
 
       {form_data?.notes && (
-        <div className="flex gap-x-1.5">
-          <Image src={note} alt="building" sizes="20" />
-          <p className="text-neutral-grey-70 text-sm font-normal font-quicksand">
+        <div className="flex gap-x-1.5 pl-3">
+          <Image src={note} alt="building" className="size-6" />
+          <p className="text-neutral-grey-80 text-sm font-normal font-quicksand">
             {form_data?.notes}
           </p>
         </div>

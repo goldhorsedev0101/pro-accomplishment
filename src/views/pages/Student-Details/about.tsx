@@ -23,6 +23,7 @@ interface IProps {
 
 const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
   const {
+    iso2,
     gpa,
     link,
     city,
@@ -43,7 +44,7 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
   const validUrl =
     link?.startsWith('http://') || link?.startsWith('https://') ? link : `https://${link}`;
 
-  const contact = contacts({ email, phone_number, address, link: link ?? '' });
+  const contact = contacts({ email, phone_number, address, link: link || '', iso: iso2 || '' });
 
   return (
     <Box className="shadow-sm">
@@ -51,15 +52,14 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
         <div className="flex flex-col gap-y-3">
           <Heading text={name} className="text-4xl" width="medium" />
 
-          {quote && (
-            <p className="flex items-start gap-x-2">
-              <PiQuotesLight size={20} className="text-primary rotate-180 min-w-5 min-h-5" />
-              <span className="max-w-[634px] text-neutral-grey-80 font-normal text-lg">
-                {quote}
-              </span>
-              <PiQuotesLight size={20} className="text-primary min-w-5 min-h-5" />
-            </p>
-          )}
+          <p className="text-neutral-grey-80 font-normal text-lg">
+            <PiQuotesLight
+              size={20}
+              className="text-primary rotate-180 min-w-5 min-h-5 inline mr-1"
+            />
+            {quote || 'Dream big and dare to fail.'}
+            <PiQuotesLight size={20} className="text-primary min-w-5 min-h-5 inline ml-1" />
+          </p>
 
           <div className="flex flex-wrap gap-6">
             {contact.map(({ icon, label }, i) => (
@@ -67,15 +67,15 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
                 {label && (
                   <Link
                     prefetch={false}
-                    href={validUrl ?? '#'}
+                    href={label === link ? validUrl || '#' : '#'}
                     rel="noopener noreferrer"
                     target={label === link ? '_blank' : undefined}
                     onClick={({ preventDefault }) => label !== link && preventDefault()}
-                    className={`flex items-center gap-x-2 ${label === link ? '!w-full' : 'w-fit !cursor-default'}`}
+                    className={`flex items-center gap-x-2 ${label === link ? '' : 'w-fit !cursor-default'}`}
                   >
                     <Image src={icon} alt="icon" width={18} height={18} />
                     <span
-                      className={`truncate text-neutral-grey-100 font-normal ${label === link ? '!text-blue !w-full' : ''}`}
+                      className={`text-neutral-grey-100 font-normal break-all ${label === link && '!text-blue'}`}
                     >
                       {label}
                     </span>
@@ -100,22 +100,26 @@ const About: FC<IProps> = ({ candidate_data }): JSX.Element => {
       <div className="flex items-center gap-3 flex-wrap">
         <div className="flex items-center gap-x-1">
           <Image src={school} alt="school" width={20} height={20} />
-          <p className="text-xs font-normal text-neutral-grey-100">{organization_name}</p>
+          <p className="font-normal text-neutral-grey-100">{organization_name}</p>
         </div>
 
-        <div className="size-1.5 rounded-full bg-[#B2B0B2]" />
-
-        <p className="text-xs font-normal text-neutral-grey-80">{grade}</p>
-
-        <div className="size-1.5 rounded-full bg-[#B2B0B2]" />
+        {grade && (
+          <Fragment>
+            <div className="size-1.5 rounded-full bg-[#B2B0B2]" />
+            <p className="font-normal text-neutral-grey-80">{grade}</p>
+          </Fragment>
+        )}
 
         {gpa && (
-          <div className="flex items-center h-fit gap-x-1">
-            <TiStar className="text-yellow" size={20} />
-            <p className="text-black text-xs font-normal">
-              GPA<span className="font-medium"> {gpa}</span>
-            </p>
-          </div>
+          <Fragment>
+            <div className="size-1.5 rounded-full bg-[#B2B0B2]" />
+            <div className="flex items-center h-fit gap-x-1">
+              <TiStar className="text-yellow" size={20} />
+              <p className="text-black font-normal">
+                GPA<span className="font-medium"> {gpa}</span>
+              </p>
+            </div>
+          </Fragment>
         )}
       </div>
     </Box>

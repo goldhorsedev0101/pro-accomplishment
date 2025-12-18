@@ -26,7 +26,7 @@ const SearchInput: FC<IProps> = ({ searchTerm, setSearchTerm }): JSX.Element => 
       <IoSearchOutline size={24} color="#828282" />
       <Input
         type="text"
-        className="w-full text-sm !rounded-none !p-0 border-none focus:!outline-none focus:!ring-0 placeholder:text-[#828282]"
+        className="w-full text-sm !rounded-none !p-0 border-none focus:!outline-none -mt-2 focus:!ring-0 placeholder:text-[#828282] !shadow-none"
         placeholder="Search"
         value={search}
         onChange={(e) => setSearch(e.target.value)}

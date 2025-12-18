@@ -12,7 +12,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToDDMMYYYY, formatToYYYY } from '@/utils/date-format';
+import { formatToMDYYYY, formatToYYYY } from '@/utils/date-format';
 
 // Icons
 import book from 'public/icons/book.svg';
@@ -30,14 +30,14 @@ const AcademicsDetailsModal: FC<IProps> = ({ form_data }) => {
       {(form_data?.name || form_data?.academic_year_started || form_data?.academic_year_ended) && (
         <Box className="!border-none !p-3 !gap-2">
           <div className="flex items-center justify-between">
-            <p className="text-heading font-medium capitalize">{form_data?.name}</p>
-            <p className="py-0.5 px-1.5 rounded-sm text-neutral-grey-70 text-xs bg-green-light">
+            <p className="text-heading font-medium ">{form_data?.name}</p>
+            <p className="py-0.5 px-1.5 rounded-sm text-neutral-grey-80 text-sm bg-green-light">
               {formatToYYYY(form_data?.academic_year_started ?? '')} -{' '}
               {formatToYYYY(form_data?.academic_year_ended ?? '')}
             </p>
           </div>
 
-          <p className="text-neutral-grey-70 text-sm">{form_data?.school_or_institution}</p>
+          <p className="text-neutral-grey-80 text-sm">{form_data?.school_or_institution}</p>
         </Box>
       )}
 
@@ -61,7 +61,7 @@ const AcademicsDetailsModal: FC<IProps> = ({ form_data }) => {
           gpa={form_data?.grade_or_gpa as string}
           label="My Academic Details"
           items={[
-            { icon: calender, label: 'Date', value: formatToDDMMYYYY(form_data?.date ?? '') },
+            { icon: calender, label: 'Date', value: formatToMDYYYY(form_data?.date ?? '') },
             { icon: calender, label: 'Academic Semester', value: form_data?.academic_semester },
             { icon: book, label: 'Class', value: form_data?.class },
             {
@@ -79,14 +79,14 @@ const AcademicsDetailsModal: FC<IProps> = ({ form_data }) => {
 
           {form_data?.team_name && (
             <div className="flex items-center justify-between">
-              <p className="text-neutral-grey-70 text-sm">Team</p>
+              <p className="text-neutral-grey-80 text-sm">Team</p>
               <p className="text-heading text-sm font-medium">{form_data?.team_name}</p>
             </div>
           )}
 
           {form_data?.opposing_team && (
             <div className="flex items-center justify-between">
-              <p className="text-neutral-grey-70 text-sm">Opposing Team</p>
+              <p className="text-neutral-grey-80 text-sm">Opposing Team</p>
               <p className="text-heading text-sm font-medium">{form_data?.opposing_team}</p>
             </div>
           )}

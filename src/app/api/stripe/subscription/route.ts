@@ -19,16 +19,15 @@ export async function OPTIONS() {
   return corsOptions();
 }
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { subscription_type }: { subscription_type?: SubscriptionType } = body;
+    const subscriptionType = SubscriptionType.MONTHLY;
 
-    const subscriptionType = Object.values(SubscriptionType).includes(
-      subscription_type as SubscriptionType,
-    )
-      ? subscription_type
-      : SubscriptionType.MONTHLY;
+    // const subscriptionType = Object.values(SubscriptionType).includes(
+    //   subscription_type as SubscriptionType,
+    // )
+    //   ? subscription_type
+    //   : SubscriptionType.MONTHLY;
 
     const accessToken = await getAccessToken(request);
     if (!accessToken) {
@@ -88,9 +87,7 @@ export async function POST(request: NextRequest) {
     const priceId =
       subscriptionType === SubscriptionType.MONTHLY
         ? process.env.STRIPE_RECRUITER_MONTHLY_SUBSCRIPTION
-        : // Uncomment and add your annual plan env variable if needed
-          // : process.env.STRIPE_RECRUITER_ANNUAL_SUBSCRIPTION
-          process.env.STRIPE_RECRUITER_MONTHLY_SUBSCRIPTION;
+        : process.env.STRIPE_RECRUITER_MONTHLY_SUBSCRIPTION;
 
     if (!priceId) {
       return response(
@@ -111,8 +108,8 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: 'subscription',
-      success_url: `${origin}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/?canceled=true`,
+      success_url: `${origin}/home?isSuccess=true`,
+      cancel_url: `${origin}/home?isSuccess=false`,
       metadata: {
         profileId: profileId ?? '',
         type: subscriptionType || '',
@@ -122,8 +119,8 @@ export async function POST(request: NextRequest) {
     return response(
       {
         message: 'Redirecting to checkout page',
-        data: session,
-        error: 'Canceled',
+        data: { redirection_url: session?.url },
+        error: null,
       },
       404,
     );

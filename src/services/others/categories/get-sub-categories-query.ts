@@ -11,7 +11,13 @@ import axios from 'axios';
 import { URLS } from '@/services/base-url';
 
 // Categories
-const useGetSubCategoriesQuery = ({ categoryId }: { categoryId: string }) => {
+const useGetSubCategoriesQuery = ({
+  categoryId,
+  isSub,
+}: {
+  categoryId: string | undefined;
+  isSub: boolean;
+}) => {
   const getSubCategoriesFn = async (): Promise<GetSubCategoriesResponseT> => {
     const { data } = await axios.get(URLS.GET_SUB_CATEGORIES, { params: { categoryId } });
     return data as GetSubCategoriesResponseT;
@@ -20,6 +26,7 @@ const useGetSubCategoriesQuery = ({ categoryId }: { categoryId: string }) => {
   return useQuery({
     queryKey: ['get-sub-categories', categoryId],
     queryFn: getSubCategoriesFn,
+    enabled: isSub,
     retry: false,
   });
 };

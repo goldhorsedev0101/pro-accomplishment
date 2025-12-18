@@ -11,7 +11,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 
 // Icons
 import book from 'public/icons/book.svg';
@@ -26,18 +26,18 @@ const LanguageDetailsModal: FC<IProps> = ({ form_data }) => {
       {(form_data?.accomplishment_name || form_data?.date) && (
         <Box className="!border-none !p-3 !gap-1">
           {form_data?.accomplishment_name && (
-            <p className="text-heading font-medium capitalize">{form_data?.accomplishment_name}</p>
+            <p className="text-heading font-medium ">{form_data?.accomplishment_name}</p>
           )}
           {form_data?.date && (
-            <p className="text-neutral-grey-70 text-sm">{formatToDDMMYYYY(form_data?.date)}</p>
+            <p className="text-neutral-grey-80 text-sm">{formatToMDYYYY(form_data?.date)}</p>
           )}
         </Box>
       )}
 
       {form_data?.language && (
         <Box className="!border-none !p-3 !gap-1">
-          <p className="text-heading font-medium capitalize">Language</p>
-          <p className="text-neutral-grey-70 text-sm">{form_data?.language}</p>
+          <p className="text-heading font-medium ">Language</p>
+          <p className="text-neutral-grey-80 text-sm">{form_data?.language}</p>
         </Box>
       )}
 
@@ -50,7 +50,7 @@ const LanguageDetailsModal: FC<IProps> = ({ form_data }) => {
       )}
 
       {form_data?.ap_score && (
-        <Box className="!border-none !flex-row justify-between !p-3 items-center !gap-1 text-neutral-grey-100 font-medium capitalize">
+        <Box className="!border-none !flex-row justify-between !p-3 items-center !gap-1 text-neutral-grey-100 font-medium ">
           <p>AP Score</p>
           <p className="text-lg">{form_data?.ap_score}</p>
         </Box>
@@ -58,8 +58,8 @@ const LanguageDetailsModal: FC<IProps> = ({ form_data }) => {
 
       {form_data?.institution && (
         <Box className="!border-none !p-3 !gap-1">
-          <p className="text-heading font-medium capitalize">Institution or Schools of Study</p>
-          <p className="text-neutral-grey-70 text-sm">{form_data?.institution}</p>
+          <p className="text-heading font-medium ">Institution or Schools of Study</p>
+          <p className="text-neutral-grey-80 text-sm">{form_data?.institution}</p>
         </Box>
       )}
 

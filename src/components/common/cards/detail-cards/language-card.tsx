@@ -1,8 +1,10 @@
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 import Image from 'next/image';
+import Link from 'next/link';
 import book from 'public/icons/book.svg';
 import building from 'public/icons/building.svg';
+import linkIcon from 'public/icons/link.svg';
 import note from 'public/icons/note.svg';
 import language from 'public/pdf/language.svg';
 import { FC } from 'react';
@@ -30,12 +32,10 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
   return (
     <Box>
       <div>
-        {title && (
-          <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">{title}</p>
-        )}
+        {title && <p className="font-medium !text-heading font-quicksand break-all ">{title}</p>}
         {date && (
-          <p className="quicksand text-[var(--gray-60)] font-normal text-xs">
-            {formatToDDMMYYYY(date)}
+          <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm">
+            {formatToMDYYYY(date)}
           </p>
         )}
       </div>
@@ -43,14 +43,14 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
         <div className="space-y-2">
           {lang && (
             <div className="flex items-center gap-x-2">
-              <Image className="size-5" alt="" src={language} />
-              <p className="quicksand font-semibold text-sm text-[var(--black)]">{lang}</p>
+              <Image className="size-6" alt="" src={language} />
+              <p className="font-quicksand font-normal text-sm text-[var(--gray-80)] ">{lang}</p>
             </div>
           )}
           {yearsOfStudy && (
             <div className="flex items-center gap-x-2">
-              <Image className="size-5" alt="" src={book} />
-              <p className="quicksand font-normal w-full flex items-center justify-between text-sm text-[var(--black)]">
+              <Image className="size-6" alt="" src={book} />
+              <p className="font-quicksand font-normal w-full flex items-center justify-between text-sm text-[var(--gray-80)] ">
                 Years of Study
                 <span className="font-medium">{yearsOfStudy}</span>
               </p>
@@ -58,8 +58,10 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
           )}
           {institute && (
             <div className="flex items-center gap-x-2">
-              <Image className="size-5" alt="" src={building} />
-              <p className="quicksand font-normal text-sm text-[var(--gray-70)]">{institute}</p>
+              <Image className="size-6" alt="" src={building} />
+              <p className="font-quicksand font-normal text-sm text-[var(--gray-80)] ">
+                {institute}
+              </p>
             </div>
           )}
         </div>
@@ -69,18 +71,24 @@ const LanguageCard: FC<IProps> = ({ form_data }) => {
           AP Score {apScore}
         </div>
       )}
-      {(lang || yearsOfStudy || institute || apScore || notes || link) && (
-        <hr className="-my-2 border border-[var(--gray-10)]" />
-      )}
+
+      {(notes || link) && <hr className="-my-2 border border-[var(--gray-10)]" />}
+
       {link && (
-        <a href={validUrl} className="text-[var(--blue)] text-xs font-normal quicksand">
-          {link}
-        </a>
+        <div className="flex items-center gap-x-2">
+          <Image src={linkIcon} className="size-6" alt="" />
+          <Link href={validUrl} className="text-[var(--blue)] font-normal font-quicksand break-all">
+            {link}
+          </Link>
+        </div>
       )}
+
       {notes && (
         <div className="flex gap-x-1.5 items-start">
-          <Image src={note} alt="note" className="size-5" />
-          <p className="text-[var(--gray-70)] text-sm font-normal quicksand break-all">{notes}</p>
+          <Image src={note} alt="note" className="size-6" />
+          <p className="text-[var(--gray-80)] text-sm font-normal font-quicksand break-all">
+            {notes}
+          </p>
         </div>
       )}
     </Box>

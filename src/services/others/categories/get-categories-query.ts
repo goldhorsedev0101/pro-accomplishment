@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 // URL
+import { Categories } from '@/constants/catehories';
 import { URLS } from '@/services/base-url';
 
 // Categories
@@ -17,7 +18,11 @@ const useGetCategoriesQuery = () => {
     return data as GetCategoriesResponseT;
   };
 
-  return useQuery({ queryKey: ['get-categories'], queryFn: getCategoriesFn });
+  return useQuery({
+    initialData: { data: Categories, error: null, message: '' },
+    queryKey: ['get-categories'],
+    queryFn: getCategoriesFn,
+  });
 };
 
 export { useGetCategoriesQuery };

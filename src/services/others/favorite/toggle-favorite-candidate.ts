@@ -9,8 +9,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
 // Toast
-import toast from 'react-hot-toast';
-
 // URL
 import { URLS } from '@/services/base-url';
 
@@ -26,10 +24,11 @@ const useToggleFavoriteCandidateMutation = () => {
   };
 
   return useMutation({
-    onSuccess: ({ data: { is_favorited } }) => {
-      toast.success(
-        is_favorited ? 'Candidate added to favorites' : 'Candidate removed from favorites',
-      );
+    onSuccess: () => {
+      // { data: { is_favorited } }
+      // toast.success(
+      //   is_favorited ? 'Candidate added to favorites' : 'Candidate removed from favorites',
+      // );
 
       queryClient.invalidateQueries({ queryKey: ['get-favorite-candidates'] });
     },

@@ -1,6 +1,7 @@
 import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candidate-folio-response';
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 import Image from 'next/image';
+import note from 'public/icons/note.svg';
 import ranking from 'public/pdf/ranking.svg';
 import { FC } from 'react';
 import Box from '../../box';
@@ -18,19 +19,24 @@ const SpecializedSkillsCard: FC<IProps> = ({ form_data }) => {
         <Image src={ranking} alt="star" className="size-6" />
         <div>
           {accomplishment_name && (
-            <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
+            <p className="font-medium !text-heading font-quicksand break-all ">
               {accomplishment_name}
             </p>
           )}
           {date && (
-            <p className="quicksand text-[var(--gray-70)] font-normal text-xs">
-              {formatToDDMMYYYY(date)}
+            <p className="font-quicksand text-[var(--gray-80)] font-normal text-sm">
+              {formatToMDYYYY(date)}
             </p>
           )}
         </div>
       </div>
       {notes && (
-        <p className="text-[var(--gray-70)] text-xs font-normal quicksand break-all">{notes}</p>
+        <div className="flex gap-x-1.5">
+          <Image src={note} alt="building" className="size-6" />
+          <p className="text-neutral-grey-80 text-sm font-normal font-quicksand break-all">
+            {notes}
+          </p>
+        </div>
       )}
     </Box>
   );

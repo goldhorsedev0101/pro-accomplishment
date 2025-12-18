@@ -11,7 +11,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 
 // Icons
 import location from 'public/icons/location-colored.svg';
@@ -29,12 +29,10 @@ const ClubsDetailsModal: FC<IProps> = ({ form_data }) => {
       {(form_data?.club_name || form_data?.date_joined) && (
         <Box className="!border-none !p-3 !gap-2">
           {form_data?.club_name && (
-            <p className="text-heading font-medium capitalize">{form_data?.club_name}</p>
+            <p className="text-heading font-medium ">{form_data?.club_name}</p>
           )}
           {form_data?.date_joined && (
-            <p className="text-neutral-grey-70 text-sm">
-              {formatToDDMMYYYY(form_data?.date_joined)}
-            </p>
+            <p className="text-neutral-grey-80 text-sm">{formatToMDYYYY(form_data?.date_joined)}</p>
           )}
         </Box>
       )}

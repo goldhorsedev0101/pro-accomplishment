@@ -12,7 +12,7 @@ import Media from '../../studets-details/media';
 import Note from '../../studets-details/note';
 
 // Util
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 
 // Icons
 import calenderTick from 'public/icons/calendar-tick.svg';
@@ -29,12 +29,14 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
     <div className="flex flex-col gap-y-4 font-quicksand">
       {form_data?.name && (
         <Box className="!border-none !p-3 !flex-row justify-between">
-          <p className="text-heading font-medium capitalize">{form_data?.name}</p>
-          <p
-            className={`font-quicksand text-black font-normal text-sm rounded-sm py-0.5 px-1.5 capitalize ${form_data?.region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
-          >
-            {form_data.region}
-          </p>
+          <p className="text-heading font-medium break-all">{form_data?.name}</p>
+          {form_data.region && (
+            <p
+              className={`font-quicksand text-black font-normal h-fit text-sm rounded-sm py-0.5 px-1.5  ${form_data?.region === 'state' ? 'bg-[#D3EEE2]' : 'bg-[#E7D3EE]'} `}
+            >
+              {form_data.region}
+            </p>
+          )}
         </Box>
       )}
 
@@ -44,9 +46,7 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
             <Image alt="title/award" src={cup} width={20} height={20} />
             <p className="text-heading font-medium">Title / Award</p>
           </div>
-          <p className="text-heading text-sm">
-            {form_data?.title_or_award} {form_data?.region && '- ' + form_data?.region}
-          </p>
+          <p className="text-heading text-sm">{form_data?.title_or_award}</p>
         </Box>
       )}
 
@@ -55,7 +55,7 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
           label="Event Details"
           items={[
             { icon: calenderTick, label: 'Event Name', value: form_data?.event_name },
-            { icon: calender, label: 'Date', value: formatToDDMMYYYY(form_data?.date ?? '') },
+            { icon: calender, label: 'Date', value: formatToMDYYYY(form_data?.date ?? '') },
             { icon: location, label: 'Location', value: form_data?.location },
           ]}
         />
@@ -67,15 +67,17 @@ const AthleticDetailsModal: FC<IProps> = ({ form_data }) => {
 
           {form_data?.team_name && (
             <div className="flex items-center justify-between">
-              <p className="text-neutral-grey-70 text-sm">Team</p>
-              <p className="text-heading text-sm font-medium">{form_data?.team_name}</p>
+              <p className="text-neutral-grey-80 text-sm">Team</p>
+              <p className="text-heading text-sm font-medium break-all">{form_data?.team_name}</p>
             </div>
           )}
 
           {form_data?.opposing_team && (
             <div className="flex items-center justify-between">
-              <p className="text-neutral-grey-70 text-sm">Opposing Team</p>
-              <p className="text-heading text-sm font-medium">{form_data?.opposing_team}</p>
+              <p className="text-neutral-grey-80 text-sm">Opposing Team</p>
+              <p className="text-heading text-sm font-medium break-all">
+                {form_data?.opposing_team}
+              </p>
             </div>
           )}
         </Box>

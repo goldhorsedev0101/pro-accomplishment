@@ -19,6 +19,7 @@ import { useRouter } from 'next/navigation';
 
 // Types
 import { Dispatch, Fragment, JSX, ReactNode, SetStateAction } from 'react';
+import toast from 'react-hot-toast';
 
 interface IProps {
   setActiveTab: Dispatch<SetStateAction<PROFILE_ENUM>>;
@@ -38,6 +39,7 @@ const Sidebar = ({ activeTab, setActiveTab, children }: IProps): JSX.Element => 
     deleteCookie('accessToken');
     push(signIn);
     refresh();
+    toast.success('Logged out successfully');
   };
 
   return (
@@ -51,7 +53,7 @@ const Sidebar = ({ activeTab, setActiveTab, children }: IProps): JSX.Element => 
         {sidebar.map(({ icon, label, coloredIcon }, i) => (
           <Fragment key={i}>
             <TabsTrigger
-              className={`${label !== LOGOUT && 'data-[state=active]:text-primary'} text-neutral-grey-80 text-xl font-normal data-[state=active]:shadow-none data-[state=active]:font-medium capitalize cursor-pointer`}
+              className={`${label !== LOGOUT && 'data-[state=active]:text-primary'} text-neutral-grey-80 text-xl font-normal data-[state=active]:shadow-none data-[state=active]:font-medium cursor-pointer capitalize`}
               value={label}
               onClick={() => {
                 if (label === LOGOUT) handleLogout();

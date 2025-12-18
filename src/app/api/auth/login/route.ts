@@ -1,5 +1,6 @@
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
-import { getRecruiterProfileByEmail, signIn } from '@/services/server/authService';
+import { signIn } from '@/services/server/authService';
+import { getRecruiterProfileByEmail } from '@/services/server/recruiterService';
 import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';

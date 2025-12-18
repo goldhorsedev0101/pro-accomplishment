@@ -16,7 +16,7 @@ interface IProps {
 }
 
 const NoData: FC<IProps> = ({
-  description = 'There is no favorite student profile at the moment',
+  description = 'There is no top recruit profile at the moment',
   title = 'No Favorite Yet',
   img = heart,
   className,

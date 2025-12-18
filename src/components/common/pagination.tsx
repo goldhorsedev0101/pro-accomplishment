@@ -22,9 +22,9 @@ export default function Pagination({ totalPages, setPage }: IProps): JSX.Element
         className="flex gap-x-2 items-center"
         activeLinkClassName="!bg-primary text-white"
         onPageChange={(data) => setPage(data.selected + 1)}
-        pageLinkClassName="bg-neutral-grey-0 text-xs font-semibold text-black size-8 rounded-full flex items-center justify-center cursor-pointer"
-        nextLinkClassName="bg-neutral-grey-0 text-xs font-semibold text-black size-8 rounded-full flex items-center justify-center cursor-pointer"
-        previousLinkClassName="bg-neutral-grey-0 text-xs font-semibold text-black size-8 rounded-full flex items-center justify-center cursor-pointer"
+        pageLinkClassName="bg-neutral-grey-0 text-sm font-semibold text-black size-8 rounded-full flex items-center justify-center cursor-pointer"
+        nextLinkClassName="bg-neutral-grey-0 text-sm font-semibold text-black size-8 rounded-full flex items-center justify-center cursor-pointer"
+        previousLinkClassName="bg-neutral-grey-0 text-sm font-semibold text-black size-8 rounded-full flex items-center justify-center cursor-pointer"
       />
     </div>
   );

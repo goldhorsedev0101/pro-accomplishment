@@ -14,7 +14,10 @@
           <p data-field="name" class="font-medium text-[#0e0f0c] text-4xl"></p>
 
           <!-- About -->
-          <p class="flex items-start gap-x-2" data-field="quote-main">
+          <p
+            class="flex items-start gap-x-2 text-lg text-[var(--gray-80)] font-normal"
+            data-field="quote-main"
+          >
             <img
               class="text-primary rotate-180 min-w-5 min-h-5 size-5"
               data-field="quote"
@@ -22,10 +25,7 @@
               src="/"
             />
 
-            <span
-              class="font-normal max-w-[480px] text-lg text-[var(--gray-80)]"
-              data-field="about"
-            ></span>
+            <span class="inline" data-field="about"></span>
 
             <img
               class="text-primary min-w-5 min-h-5 size-5"
@@ -52,13 +52,16 @@
       <div class="flex items-center gap-x-3">
         <div class="flex items-center gap-x-1" data-field="school"></div>
 
-        <div class="size-1.5 rounded-full bg-[#B2B0B2]"></div>
+        <div
+          class="text-lg font-normal text-[var(--gray-80)] flex items-center gap-x-3"
+          data-field="grade"
+        >
+          <div class="size-1.5 rounded-full bg-[#B2B0B2]"></div>
+        </div>
 
-        <p class="text-lg font-normal text-[var(--gray-80)]">8th Grade</p>
-
-        <div class="size-1.5 rounded-full bg-[#B2B0B2]"></div>
-
-        <div class="flex items-center h-fit gap-x-1" data-field="gpa"></div>
+        <div class="flex items-center h-fit gap-x-1" data-field="gpa">
+          <div class="size-1.5 rounded-full bg-[#B2B0B2]"></div>
+        </div>
       </div>
     </div>
     <!-- =============== About End =============== -->
@@ -71,7 +74,7 @@
     <!-- =============== Objective End =============== -->
 
     <!-- =============== Accomplishment =============== -->
-    <p class="font-medium text-[var(--black)] text-2xl">Accomplishment</p>
+    <p class="font-medium text-[var(--black)] text-2xl">Accomplishments</p>
     <div data-field="categories" class="columns-2"></div>
     <!-- =============== Accomplishment End =============== -->
 

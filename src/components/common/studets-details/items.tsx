@@ -28,8 +28,8 @@ const Items: FC<IProps> = ({ items, label, className, gpa }) => {
           <div className={`flex items-center gap-x-1 ${className}`} key={i}>
             <Image alt={value} src={icon} width={20} height={20} />
             <div>
-              {label && <p className="text-neutral-grey-60 text-xs">{label}</p>}
-              <p className={`text-neutral-grey-70 text-sm ${className}`}>{value}</p>
+              {label && <p className="text-neutral-grey-80 text-sm">{label}</p>}
+              <p className={`text-neutral-grey-80 text-sm ${className}`}>{value}</p>
             </div>
           </div>
         );

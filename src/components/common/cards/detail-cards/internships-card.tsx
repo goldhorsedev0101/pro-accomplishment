@@ -2,6 +2,7 @@ import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candi
 import { formatToDDMMMYYYY } from '@/utils/date-format';
 import Image from 'next/image';
 import Link from 'next/link';
+import linkIcon from 'public/icons/link.svg';
 import note from 'public/icons/note.svg';
 import internships from 'public/pdf/internships.svg';
 import { FC } from 'react';
@@ -14,12 +15,13 @@ interface IProps {
 
 const InternshipsCard: FC<IProps> = ({ form_data }) => {
   const {
-    accomplishment_name: title,
+    internship_title,
+    company,
     start_date,
     end_date,
+    internship_type,
     previous_skills,
     acquired_skills,
-    company: organization,
     link,
     notes: doc,
   } = form_data || {};
@@ -37,29 +39,27 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
         </div>
         <div className="flex w-full justify-between">
           <div className="w-full">
-            {title && (
-              <p className="font-medium text-[var(--heading)] quicksand !text-sm break-all">
-                {title}
-              </p>
+            {internship_title && (
+              <p className="font-medium text-[var(--heading)] font-quicksand">{internship_title}</p>
             )}
 
-            {organization && (
-              <p className="quicksand text-[var(--gray-70)] font-normal text-xs break-all">
-                {organization}
+            {company && (
+              <p className="!text-sm font-normal text-neutral-grey-80 font-quicksand break-all">
+                {company}
               </p>
             )}
 
             {(startDate || endDate) && (
-              <p className="mt-2 text-[var(--black)] text-xs font-medium quicksand">
+              <p className="mt-2 text-[var(--black)] text-sm font-quicksand">
                 {startDate}
                 {startDate && endDate ? ' - ' : ''}
                 {endDate}
               </p>
             )}
           </div>
-          {form_data?.internship_type && (
-            <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm">
-              {form_data?.internship_type}
+          {internship_type && (
+            <p className="rounded-sm bg-[#FFFAF1] px-1.5 py-1 text-sm w-full max-w-fit h-fit">
+              {internship_type}
             </p>
           )}
         </div>
@@ -79,14 +79,18 @@ const InternshipsCard: FC<IProps> = ({ form_data }) => {
       )}
 
       {link && (
-        <Link href={validUrl} className="text-[var(--blue)] text-xs font-normal quicksand">
-          {link}
-        </Link>
+        <div className="flex items-center gap-x-2 pl-3">
+          <Image src={linkIcon} className="size-6" alt="" />
+          <Link href={validUrl} className="text-[var(--blue)] font-normal font-quicksand break-all">
+            {link}
+          </Link>
+        </div>
       )}
+
       {doc && (
-        <div className="flex gap-x-1.5 items-start">
-          <Image src={note} alt="note" className="size-5" />
-          <p className="text-[var(--gray-70)] text-sm font-normal quicksand">{doc}</p>
+        <div className="flex gap-x-1.5 items-start pl-3">
+          <Image src={note} alt="note" className="size-6" />
+          <p className="text-[var(--gray-80)] text-sm font-normal font-quicksand">{doc}</p>
         </div>
       )}
     </Box>

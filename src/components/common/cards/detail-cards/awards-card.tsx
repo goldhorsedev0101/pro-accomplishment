@@ -12,7 +12,7 @@ import { FormData } from '@/types/others/candidate/get-candidate-folio/get-candi
 import { FC, JSX } from 'react';
 
 // Utils
-import { formatToDDMMYYYY } from '@/utils/date-format';
+import { formatToMDYYYY } from '@/utils/date-format';
 
 interface IProps {
   form_data?: FormData;
@@ -25,22 +25,22 @@ const AwardsCard: FC<IProps> = ({ form_data }): JSX.Element => {
     <Box className="shadow-sm w-full !gap-y-3 !text-start">
       <div className="flex items-center gap-x-3">
         <div className="w-9 h-9 rounded-full bg-yellow-light flex items-center justify-center">
-          <Image src={cup} alt="cup" sizes="24" />
+          <Image src={cup} alt="cup" className="size-6" />
         </div>
         <div>
           <Heading
-            className="!text-sm !text-heading font-quicksand !break-all"
+            className="!text-base !text-heading font-quicksand !break-all"
             text={award_title ?? 'N/A'}
             width="medium"
           />
-          <p className="font-quicksand text-neutral-grey-70 font-normal text-xs">
-            {formatToDDMMYYYY(date_received ?? '')}
+          <p className="font-quicksand text-neutral-grey-80 font-normal text-sm">
+            {formatToMDYYYY(date_received ?? '')}
           </p>
         </div>
       </div>
 
       <div className="flex gap-x-2">
-        <Image src={building} alt="building" sizes="16" />
+        <Image src={building} alt="building" className="size-6" />
         <p className="text-neutral-grey-100 text-sm font-normal font-quicksand">{institution}</p>
       </div>
     </Box>

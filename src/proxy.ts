@@ -3,7 +3,7 @@ import Routes from './constants/routes';
 import { URLS } from './services/base-url';
 import { MeResponseT } from './types/others/me/me-response';
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const accessToken = req.cookies.get('accessToken')?.value;
   const { pathname } = req.nextUrl;
 

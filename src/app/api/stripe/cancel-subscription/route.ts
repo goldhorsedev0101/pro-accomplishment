@@ -18,10 +18,8 @@ export async function OPTIONS() {
   return corsOptions();
 }
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    const body = await request.json();
-
     const accessToken = await getAccessToken(request);
     if (!accessToken) {
       return response(
@@ -60,6 +58,7 @@ export async function POST(request: NextRequest) {
         404,
       );
     }
+
     const subscription = recruiterProfileResponse?.data?.subscription;
     if (!isSubscriptionValid(subscription)) {
       return response(
@@ -75,6 +74,7 @@ export async function POST(request: NextRequest) {
     const canceled = await stripe.subscriptions.update(subscription.transaction_id, {
       cancel_at_period_end: true,
       metadata: {
+        profileId: profileId!,
         subscriptionId: subscription?.id,
         status: 'canceled',
         canceled_at: new Date().toISOString(),

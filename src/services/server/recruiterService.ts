@@ -1,6 +1,32 @@
 import { supabase } from '@/lib/supabase/server';
 import { deleteExistingImage, ICustomError } from './authService';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+dayjs.extend(utc);
+export type TSubscriptionStatus = 'active' | 'canceled' | 'expired' | 'trialing'; // extend if needed
+export type TSubscriptionType = 'monthly_plan'; // extend if needed
+
+export interface ISubscription {
+  id: string; // uuid
+  created_at: string; // ISO timestamp
+  updated_at: string; // ISO timestamp
+  status: TSubscriptionStatus;
+  product_type: TSubscriptionType;
+  platform?: 'stripe' | 'apple' | 'google' | null;
+  profile_id: string; // uuid
+  apple_subscription_log_id?: string | null;
+  google_subscription_log_id?: string | null;
+  stripe_subscription_log_id?: string | null;
+  start_date?: string | null; // ISO timestamp
+  current_period_end?: string | null; // ISO timestamp
+  cancel_at_period_end?: boolean | null;
+  last_renewal_at?: string | null; // ISO timestamp
+  transaction_date: number; // epoch or numeric
+  transaction_id?: string | null;
+  renewal_count?: number | null;
+  auto_renew?: boolean | null;
+  has_acknowledged: boolean;
+}
 export interface RecruiterProfile {
   recruiter_id: string;
   profile_picture?: string | null;
@@ -11,9 +37,17 @@ export interface RecruiterProfile {
   role?: string;
   phone_number?: string | null;
   iso2?: string | null;
-  subscription?: string | null;
+  subscription?: ISubscription | null;
 }
 
+interface IUserLookup {
+  id: string;
+  email: string;
+  role: string;
+  is_deactivated: boolean;
+  deleted_at: string | null;
+  subscription?: ISubscription | null;
+}
 export const getRecruiterByProfileId = async ({ profileId }: { profileId: string }) => {
   const { data, error } = await supabase
     .from('recruiter')
@@ -47,9 +81,73 @@ export const getRecruiterByProfileId = async ({ profileId }: { profileId: string
   };
 };
 
-export const getProfileById = async ({ profileId }: { profileId: string }) => {
-  const { data, error } = await supabase.from('profile').select('*').eq('id', profileId).single();
-  return { data, error };
+export const getRecruiterProfileByEmail = async ({
+  email,
+}: {
+  email: string;
+}): Promise<{ data: IUserLookup | null; error: ICustomError | null }> => {
+  // Fetch recruiter profile
+  const { data: profile, error } = await supabase
+    .from('profile')
+    .select(
+      `
+      id,
+      email,
+      role,
+      is_deactivated,
+      deleted_at,
+      active_subscription_id,
+      subscription:subscription_id(*)
+    `,
+    )
+    .eq('email', email)
+    .eq('role', 'recruiter')
+    .maybeSingle<IUserLookup>();
+
+  let customError: ICustomError | null = error ? error : null;
+
+  if (profile) {
+    if (profile?.is_deactivated || profile?.deleted_at) {
+      customError = { message: 'User account is deactivated or deleted.' };
+    }
+  } else {
+    customError = { message: 'User not found' };
+  }
+
+  if (!profile || customError) {
+    return { data: null, error: customError };
+  }
+
+  const subscription = profile?.subscription || null;
+
+  if (subscription) {
+    if (
+      (subscription?.status === 'active' || subscription?.status === 'canceled') &&
+      subscription?.cancel_at_period_end
+    ) {
+      const now = dayjs().utc();
+      const expiryDate = dayjs.utc(subscription?.current_period_end);
+
+      if (expiryDate.isBefore(now)) {
+        // Mark subscription as expired
+        const { data: updatedSub, error: updateError } = await updateRecruiterSubscription({
+          subscriptionId: subscription?.id,
+          status: 'expired',
+          session: {},
+          type: 'system.subscription.expired',
+        });
+
+        if (!updateError && updatedSub) {
+          subscription.status = 'expired';
+          subscription.auto_renew = false;
+        }
+      }
+    }
+  }
+  return {
+    data: { ...profile, subscription },
+    error: null,
+  };
 };
 
 export const getRecruiterProfile = async ({
@@ -64,9 +162,12 @@ export const getRecruiterProfile = async ({
 
   const subscription = recruiter?.profile?.subscription;
 
-  if (subscription?.status === 'active' && subscription?.current_period_end) {
-    const now = dayjs();
-    const expiryDate = dayjs(subscription.current_period_end);
+  if (
+    (subscription?.status === 'active' || subscription?.status === 'canceled') &&
+    subscription?.cancel_at_period_end
+  ) {
+    const now = dayjs()?.utc();
+    const expiryDate = dayjs.utc(subscription.current_period_end);
 
     if (expiryDate.isBefore(now)) {
       const { data: updatedSub, error: updateError } = await updateRecruiterSubscription({
@@ -155,7 +256,7 @@ export const isSubscriptionValid = (subscription?: any): boolean => {
   const now = dayjs();
   const periodEnd = dayjs(subscription.current_period_end);
 
-  const validStatus = ['active'].includes(subscription.status?.toLowerCase());
+  const validStatus = ['active', 'canceled'].includes(subscription.status?.toLowerCase());
 
   const withinPeriod = now.isBefore(periodEnd);
 
@@ -181,6 +282,11 @@ export const updateRecruiterSubscription = async ({
     p_session: payload,
     p_type: type,
   });
+  console.log(
+    '\n${new Date().toLocaleTimeString()} \n ~ updateRecruiterSubscription ~  data, error:',
+    data,
+    error,
+  );
   return {
     data,
     error,

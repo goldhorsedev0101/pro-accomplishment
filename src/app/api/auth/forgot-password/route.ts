@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
-import { getRecruiterProfileByEmail, resetPassword } from '@/services/server/authService';
+import { resetPassword } from '@/services/server/authService';
+import { getRecruiterProfileByEmail } from '@/services/server/recruiterService';
 
 export const runtime = 'edge'; // ⚡ Faster cold starts and lower latency
 

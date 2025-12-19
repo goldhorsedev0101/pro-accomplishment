@@ -2,7 +2,6 @@
 import { fredoka, quicksand } from 'public/fonts';
 
 // Provider
-import ListenNetworkProvider from '@/providers/listen-network-provider';
 import QueryProvider from '@/providers/query-client-provider';
 
 // Types

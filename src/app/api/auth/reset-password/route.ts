@@ -1,6 +1,5 @@
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
 import { restoreSupabaseSession, updatePassword } from '@/services/server/authService';
-import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 
 export const runtime = 'edge';

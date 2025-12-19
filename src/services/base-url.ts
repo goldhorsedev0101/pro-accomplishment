@@ -36,4 +36,7 @@ export const URLS = {
   // =========================== Favorite ===================== //
   TOGGLE_FAVORITE_CANDIDATE: `${baseUrl}/favorite/toggle-favorite-candidate`,
   GET_FAVORITE_CANDIDATES: `${baseUrl}/favorite/get-favorite-candidates`,
+
+  // =========================== Stripe ===================== //
+  GET_SUBSCRIPTION_INFO: `${baseUrl}/stripe/subscription`,
 };

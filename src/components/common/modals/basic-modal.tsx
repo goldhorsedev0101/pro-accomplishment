@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils';
 import { FC, JSX, ReactNode } from 'react';
 
 interface IProps {
-  trigger: { className?: string; child: ReactNode };
+  trigger?: { className?: string; child?: ReactNode };
   title?: { className?: string; title: string };
   setIsOpen?: (v: boolean) => void;
   showCloseButton2?: boolean;
@@ -35,8 +35,8 @@ const BasicModal: FC<IProps> = ({
 }): JSX.Element => {
   return (
     <Dialog open={isOpen}>
-      <DialogTrigger onClick={() => setIsOpen?.(!isOpen)} className={cn(trigger.className)}>
-        {trigger.child}
+      <DialogTrigger onClick={() => setIsOpen?.(!isOpen)} className={cn(trigger?.className)}>
+        {trigger?.child}
       </DialogTrigger>
       <DialogContent
         showCloseButton={showCloseButton2}

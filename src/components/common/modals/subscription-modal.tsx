@@ -36,7 +36,6 @@ const SubscriptionModal = (): JSX.Element => {
       isOpen={!!data?.data}
       showCloseButton={false}
       showCloseButton2={false}
-      trigger={{ child: null }}
       footer={
         <div className="flex flex-col gap-y-5 w-full">
           <Image src={subscriptionBadge} alt="" className="self-center" height={116} width={116} />

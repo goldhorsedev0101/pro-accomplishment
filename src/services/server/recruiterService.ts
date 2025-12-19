@@ -91,13 +91,13 @@ export const getRecruiterProfileByEmail = async ({
     .from('profile')
     .select(
       `
-      id,
-      email,
-      role,
-      is_deactivated,
-      deleted_at,
-      active_subscription_id,
-      subscription:subscription_id(*)
+    id,
+    email,
+    role,
+    is_deactivated,
+    deleted_at,
+    active_subscription_id,
+    subscription:active_subscription_id(*)
     `,
     )
     .eq('email', email)

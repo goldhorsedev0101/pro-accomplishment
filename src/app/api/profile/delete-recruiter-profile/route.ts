@@ -1,7 +1,8 @@
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
 import { authGuard } from '@/services/server/authGuard';
-import { deleteRecruiterProfile } from '@/services/server/recruiterService';
+import { deleteRecruiterProfile, isSubscriptionValid } from '@/services/server/recruiterService';
 import { NextRequest } from 'next/server';
+import { stripe } from '../../../../lib/stripe';
 
 export const runtime = 'edge';
 
@@ -13,6 +14,28 @@ export async function DELETE(request: NextRequest) {
   try {
     const { recruiter, errorResponse } = await authGuard(request);
     if (errorResponse) return errorResponse;
+
+    const subscription = recruiter?.subscription;
+    if (!isSubscriptionValid(subscription)) {
+      return response(
+        {
+          message: 'No active subscription found',
+          data: null,
+          error: 'No active subscription found',
+        },
+        404,
+      );
+    }
+
+    await stripe.subscriptions.update(subscription?.transaction_id, {
+      cancel_at_period_end: true,
+      metadata: {
+        profileId: recruiter?.profile_id!,
+        subscriptionId: subscription?.id,
+        status: 'canceled',
+        canceled_at: new Date().toISOString(),
+      },
+    });
 
     const deleteRecruiterProfileResponse = await supabasePromiseResolver({
       requestFunction: deleteRecruiterProfile,

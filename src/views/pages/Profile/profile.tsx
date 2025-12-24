@@ -13,7 +13,9 @@ const Profile = (): JSX.Element => {
   const { data, isPending } = useGetProfileQuery();
   const { first_name, last_name, email, phone_number, iso2, profile_picture } = data?.data || {};
 
-  const number = phone_number?.startsWith('+') ? phone_number : `+${phone_number}`;
+  const number = phone_number?.startsWith('+')
+    ? phone_number
+    : `${phone_number && '+' + phone_number}`;
 
   const info = [
     { label: 'First Name', value: first_name },

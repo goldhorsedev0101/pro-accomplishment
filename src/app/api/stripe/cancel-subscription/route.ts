@@ -5,20 +5,15 @@ import {
   supabasePromiseResolver,
   verifyToken,
 } from '@/lib/supabase/helper';
-import {
-  getRecruiterProfile,
-  isSubscriptionValid,
-  updateRecruiterSubscription,
-} from '@/services/server/recruiterService';
+import { getRecruiterProfile, isSubscriptionValid } from '@/services/server/recruiterService';
 import { NextRequest } from 'next/server';
 import 'server-only';
 import { stripe } from '../../../../lib/stripe';
-import { error } from 'console';
 export async function OPTIONS() {
   return corsOptions();
 }
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
     const accessToken = await getAccessToken(request);
     if (!accessToken) {
@@ -71,7 +66,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const canceled = await stripe.subscriptions.update(subscription.transaction_id, {
+    await stripe.subscriptions.update(subscription.transaction_id, {
       cancel_at_period_end: true,
       metadata: {
         profileId: profileId!,
@@ -83,7 +78,7 @@ export async function GET(request: NextRequest) {
 
     return response(
       {
-        message: 'Cancellation requested. Waiting for Stripe confirmation.',
+        message: 'Cancellation requested successfully',
         data: { pending: true },
         error: null,
       },

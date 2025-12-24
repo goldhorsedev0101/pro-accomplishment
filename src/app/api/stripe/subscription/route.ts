@@ -76,7 +76,7 @@ export async function GET(request: NextRequest) {
           data: null,
           error: 'Already Subscribed',
         },
-        404,
+        200,
       );
     }
 
@@ -122,7 +122,7 @@ export async function GET(request: NextRequest) {
         data: { redirection_url: session?.url },
         error: null,
       },
-      404,
+      200,
     );
   } catch (error) {
     return response(

@@ -23,7 +23,7 @@ const Navbar = (): JSX.Element => {
   return (
     <div className="border-b-[#DCE0E5] border-b h-[90px] flex items-center justify-between px-6 sm:px-10 md:px-20">
       <Link href={home} className="flex items-center gap-2">
-        <Image src={logo} alt="avatar" width={43} height={42} />
+        <Image src={logo} alt="avatar" width={43} height={43} />
         <p className="text-black font-medium sm:text-2xl block text-lg">I&rsquo;m Accomplished</p>
       </Link>
 
@@ -37,7 +37,8 @@ const Navbar = (): JSX.Element => {
             width={40}
           />
         )}
-        <p className="text-black font-medium text-base ">
+
+        <p className="text-black font-medium text-base hidden sm:block">
           {first_name} {last_name}
         </p>
       </Link>

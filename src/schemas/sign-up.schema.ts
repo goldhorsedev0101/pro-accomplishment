@@ -10,7 +10,19 @@ export const SignUpSchema = Yup.object({
     .required('Last name is required')
     .min(2, 'Last name must be at least 2 characters')
     .max(32, 'Last name cannot exceed 32 characters'),
-  email: Yup.string().email('Invalid email address').required('Email is required').trim(),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is required')
+    .test(
+      'no-only-special-chars-before-at',
+      'Email username cannot contain only special characters',
+      (value) => {
+        if (!value) return false;
+        const [localPart] = value.split('@');
+        return /[a-zA-Z0-9]/.test(localPart);
+      },
+    )
+    .trim(),
   password: Yup.string()
     .required('Password is required')
     .min(8, 'Password must be at least 8 characters')

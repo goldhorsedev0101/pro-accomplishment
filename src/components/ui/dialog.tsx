@@ -52,15 +52,17 @@ function DialogContent({
   className,
   children,
   showCloseButton = true,
+  showCloseButton2 = true,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
   onClick?: () => void;
   showCloseButton?: boolean;
+  showCloseButton2?: boolean;
 }) {
   return (
     <DialogPortal data-slot="dialog-portal">
       <DialogOverlay>
-        {!showCloseButton && (
+        {!showCloseButton && showCloseButton2 && (
           <div
             onClick={onClick}
             className="absolute border bottom-[850px] z-[999999] left-8 p-2.5 cursor-pointer bg-white rounded-full"

@@ -12,23 +12,38 @@ import {
 import { cn } from '@/lib/utils';
 
 // Types
-import { Dispatch, FC, JSX, ReactNode, SetStateAction } from 'react';
+import { FC, JSX, ReactNode } from 'react';
 
 interface IProps {
-  trigger: { className?: string; child: ReactNode };
+  trigger?: { className?: string; child?: ReactNode };
   title?: { className?: string; title: string };
   setIsOpen?: (v: boolean) => void;
+  showCloseButton2?: boolean;
+  showCloseButton?: boolean;
   footer?: ReactNode;
   isOpen?: boolean;
 }
 
-const BasicModal: FC<IProps> = ({ trigger, title, footer, isOpen, setIsOpen }): JSX.Element => {
+const BasicModal: FC<IProps> = ({
+  trigger,
+  title,
+  footer,
+  isOpen,
+  setIsOpen,
+  showCloseButton2,
+  showCloseButton,
+}): JSX.Element => {
   return (
     <Dialog open={isOpen}>
-      <DialogTrigger onClick={() => setIsOpen?.(!isOpen)} className={cn(trigger.className)}>
-        {trigger.child}
+      <DialogTrigger onClick={() => setIsOpen?.(!isOpen)} className={cn(trigger?.className)}>
+        {trigger?.child}
       </DialogTrigger>
-      <DialogContent className="bg-neutral-grey-0" onClick={() => setIsOpen?.(false)}>
+      <DialogContent
+        showCloseButton={showCloseButton2}
+        showCloseButton2={showCloseButton}
+        className="bg-neutral-grey-0"
+        onClick={() => setIsOpen?.(false)}
+      >
         {title && (
           <DialogHeader>
             <DialogTitle

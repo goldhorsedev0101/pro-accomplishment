@@ -53,7 +53,6 @@ const ListenNetworkProvider = ({ children }: IProps) => {
         <BasicModal
           isOpen={true}
           setIsOpen={refresh}
-          trigger={{ child: null }}
           title={{
             title: 'Please check your internet connection',
             className: 'text-center',

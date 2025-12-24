@@ -4,14 +4,18 @@ import Heading from '@/components/common/heading';
 import Loader from '@/components/common/loader';
 import DeleteModal from '@/components/common/modals/delete-modal';
 import EditProfileModal from '@/components/common/modals/edit-profile-modal';
-import { useGetProfileQuery } from '@/services/others/profile/get-recruiter-profile';
+import { GetProfileResponseT } from '@/types/others/profile/get-recruiter-profile/get-profile-response';
 
 // Type
-import { Fragment, JSX } from 'react';
+import { FC, Fragment, JSX } from 'react';
 
-const Profile = (): JSX.Element => {
-  const { data, isPending } = useGetProfileQuery();
-  const { first_name, last_name, email, phone_number, iso2, profile_picture } = data?.data || {};
+interface IProps {
+  data?: GetProfileResponseT['data'];
+  isPending: boolean;
+}
+
+const Profile: FC<IProps> = ({ data, isPending }): JSX.Element => {
+  const { first_name, last_name, email, phone_number, iso2, profile_picture } = data || {};
 
   const number = phone_number?.startsWith('+')
     ? phone_number

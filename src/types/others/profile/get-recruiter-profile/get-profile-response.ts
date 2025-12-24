@@ -1,3 +1,5 @@
+import { SubscriptionType } from '../../subscription.type';
+
 export interface GetProfileResponseT {
   message: string;
   data: Data;
@@ -5,6 +7,7 @@ export interface GetProfileResponseT {
 }
 
 export interface Data {
+  subscription: SubscriptionType;
   profile_picture: null | string;
   phone_number: string;
   recruiter_id: string;

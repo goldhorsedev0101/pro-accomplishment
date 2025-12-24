@@ -5,35 +5,47 @@ import Image from 'next/image';
 import BasicModal from './basic-modal';
 
 // Types
-import { Fragment, JSX } from 'react';
+import { Fragment, JSX, useEffect, useState } from 'react';
 
 // Icons
 import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
+import { useGetProfileQuery } from '@/services/others/profile/get-recruiter-profile';
 import { useGetSubscriptionInfoQuery } from '@/services/others/stripe/get-subscription-info';
 import { useRouter, useSearchParams } from 'next/navigation';
 import checkIcon from 'public/icons/check.svg';
 import subscriptionBadge from 'public/icons/subscription-badge.svg';
 
+const features = [
+  'Unlimited access to student profiles',
+  'Download structured accomplishment summaries',
+  'Filter by GPA, leadership, extracurricular & more',
+  'Scan QR codes to instantly view student summaries',
+];
+
 const SubscriptionModal = (): JSX.Element => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const isSuccess = useSearchParams().get('isSuccess');
   const { push } = useRouter();
 
   const { data } = useGetSubscriptionInfoQuery();
   const { redirection_url } = data?.data || { redirection_url: '' };
 
-  const features = [
-    'Unlimited access to student profiles',
-    'Download structured accomplishment summaries',
-    'Filter by GPA, leadership, extracurricular & more',
-    'Scan QR codes to instantly view student summaries',
-  ];
+  const { data: profile } = useGetProfileQuery();
+  const { subscription } = profile?.data || {};
+
+  useEffect(() => {
+    if (subscription === undefined) return;
+    if (subscription == null || subscription?.status === 'expired') setIsOpen(true);
+  }, [profile]);
 
   if (isSuccess === 'true' || isSuccess === 'false') return <Fragment></Fragment>;
 
   return (
     <BasicModal
-      isOpen={!!data?.data}
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
       showCloseButton={false}
       showCloseButton2={false}
       footer={
@@ -43,8 +55,8 @@ const SubscriptionModal = (): JSX.Element => {
             Subscription Plan
           </h2>
           <p className="text-gray text-center text-lg px-6">
-            Upgrade to Pro for just <span className="font-semibold text-black">$29/month</span> and
-            unlock full access to student profiles
+            Upgrade to Pro for just <span className="font-semibold text-black">$19.99/month</span>{' '}
+            and unlock full access to student profiles
           </p>
 
           <div className="flex flex-col gap-y-2">

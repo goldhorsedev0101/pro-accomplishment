@@ -15,9 +15,27 @@ import { plans } from '@/constants/plans';
 import Image from 'next/image';
 
 // Types
-import { JSX } from 'react';
+import { useCancelSubscriptionMutation } from '@/services/others/stripe/cancel-subscription';
+import { GetProfileResponseT } from '@/types/others/profile/get-recruiter-profile/get-profile-response';
+import { FC, JSX } from 'react';
 
-const Subscription = (): JSX.Element => {
+interface IProps {
+  subscription?: GetProfileResponseT['data']['subscription'];
+}
+
+const Subscription: FC<IProps> = ({ subscription }): JSX.Element => {
+  const { status } = subscription || {};
+
+  const { mutateAsync } = useCancelSubscriptionMutation();
+
+  const handleCancelSubscription = async () => {
+    try {
+      await mutateAsync();
+    } catch (error) {
+      console.log('🚀 ~ handleCancelSubscription ~ error:', error);
+    }
+  };
+
   return (
     <div className="space-y-6">
       <Box>
@@ -25,7 +43,7 @@ const Subscription = (): JSX.Element => {
 
         <p className="font-normal text-sm !text-neutral-grey-80">
           You’re subscribed -
-          <span className="text-base font-medium text-neutral-grey-100"> $29/month</span>
+          <span className="text-base font-medium text-neutral-grey-100"> $19.99/month</span>
         </p>
 
         <div className="flex flex-col gap-y-4">
@@ -38,23 +56,33 @@ const Subscription = (): JSX.Element => {
         </div>
       </Box>
 
-      <BasicModal
-        trigger={{
-          className: 'text-red font-medium text-base w-fit',
-          child: 'Cancel Subscription',
-        }}
-        title={{
-          title: 'Are you sure you want to Cancel Subscription?',
-          className: 'text-center',
-        }}
-        footer={
-          <DialogClose asChild>
-            <Button variant={'destructive'} className="w-full bg-red h-14 rounded-xl">
-              Cancel
-            </Button>
-          </DialogClose>
-        }
-      />
+      {status !== 'canceled' ? (
+        <BasicModal
+          trigger={{
+            className: 'text-red font-medium text-base w-fit',
+            child: 'Cancel Subscription',
+          }}
+          title={{
+            title: 'Are you sure you want to Cancel Subscription?',
+            className: 'text-center',
+          }}
+          footer={
+            <DialogClose asChild>
+              <Button
+                variant={'destructive'}
+                onClick={handleCancelSubscription}
+                className="w-full bg-red h-14 rounded-xl"
+              >
+                Cancel
+              </Button>
+            </DialogClose>
+          }
+        />
+      ) : (
+        <p className="text-sm font-medium text-neutral-grey-100">
+          Cancellation scheduled for the end of this billing period
+        </p>
+      )}
     </div>
   );
 };

@@ -30,7 +30,7 @@ export async function DELETE(request: NextRequest) {
     await stripe.subscriptions.update(subscription?.transaction_id, {
       cancel_at_period_end: true,
       metadata: {
-        profileId: recruiter?.profile_id!,
+        profileId: recruiter?.profile_id,
         subscriptionId: subscription?.id,
         status: 'canceled',
         canceled_at: new Date().toISOString(),

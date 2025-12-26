@@ -4,9 +4,6 @@ import check from 'public/icons/check.svg';
 // Components
 import Box from '@/components/common/box';
 import Heading from '@/components/common/heading';
-import BasicModal from '@/components/common/modals/basic-modal';
-import { Button } from '@/components/ui/button';
-import { DialogClose } from '@/components/ui/dialog';
 
 // Constant
 import { plans } from '@/constants/plans';
@@ -15,8 +12,12 @@ import { plans } from '@/constants/plans';
 import Image from 'next/image';
 
 // Types
+import DeleteModal from '@/components/common/modals/delete-modal';
 import { useCancelSubscriptionMutation } from '@/services/others/stripe/cancel-subscription';
+import { useGetSubscriptionInfoQuery } from '@/services/others/stripe/get-subscription-info';
 import { GetProfileResponseT } from '@/types/others/profile/get-recruiter-profile/get-profile-response';
+import dayjs from 'dayjs';
+import { useRouter } from 'next/navigation';
 import { FC, JSX } from 'react';
 
 interface IProps {
@@ -25,6 +26,10 @@ interface IProps {
 
 const Subscription: FC<IProps> = ({ subscription }): JSX.Element => {
   const { status } = subscription || {};
+  const { push } = useRouter();
+
+  const { data } = useGetSubscriptionInfoQuery();
+  const { redirection_url } = data?.data || { redirection_url: '' };
 
   const { mutateAsync } = useCancelSubscriptionMutation();
 
@@ -57,30 +62,25 @@ const Subscription: FC<IProps> = ({ subscription }): JSX.Element => {
       </Box>
 
       {status !== 'canceled' ? (
-        <BasicModal
-          trigger={{
-            className: 'text-red font-medium text-base w-fit',
-            child: 'Cancel Subscription',
-          }}
-          title={{
-            title: 'Are you sure you want to Cancel Subscription?',
-            className: 'text-center',
-          }}
-          footer={
-            <DialogClose asChild>
-              <Button
-                variant={'destructive'}
-                onClick={handleCancelSubscription}
-                className="w-full bg-red h-14 rounded-xl"
-              >
-                Cancel
-              </Button>
-            </DialogClose>
-          }
+        <DeleteModal
+          btnText="Cancel"
+          triggerText="Cancel Subscription"
+          onClick={handleCancelSubscription}
+          title="Are you sure you want to Cancel Subscription?"
         />
       ) : (
         <p className="text-sm font-medium text-neutral-grey-100">
-          Cancellation scheduled for the end of this billing period
+          Cancellation scheduled for {dayjs(subscription?.current_period_end).format('MM-DD-YYYY')}.
+          <br />
+          {redirection_url && (
+            <span
+              className="text-primary text-base font-medium cursor-pointer"
+              onClick={() => push(redirection_url)}
+            >
+              {' '}
+              Subscribe
+            </span>
+          )}
         </p>
       )}
     </div>

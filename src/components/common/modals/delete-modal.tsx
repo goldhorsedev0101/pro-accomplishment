@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import BasicModal from './basic-modal';
 
 // Types
-import { JSX, useState } from 'react';
+import { FC, JSX, useState } from 'react';
 
 // Toast
 import Routes from '@/constants/routes';
@@ -17,7 +17,14 @@ import { deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
-const DeleteModal = (): JSX.Element => {
+interface IProps {
+  title?: string;
+  btnText?: string;
+  onClick?: () => void;
+  triggerText?: string;
+}
+
+const DeleteModal: FC<IProps> = ({ title, triggerText, btnText, onClick }): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [deleteText, setDeleteText] = useState<string>('');
   const queryClient = useQueryClient();
@@ -26,6 +33,13 @@ const DeleteModal = (): JSX.Element => {
 
   const handleDeleteAccount = async () => {
     if (deleteText === 'Accomplishment') {
+      if (onClick) {
+        onClick();
+        setIsOpen(false);
+        setDeleteText('');
+        return;
+      }
+
       const res = await mutateAsync(undefined, {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: ['get-profile'], refetchType: 'all' });
@@ -39,7 +53,7 @@ const DeleteModal = (): JSX.Element => {
         deleteCookie('accessToken');
         push(Routes.signIn);
       }
-    } else toast.error('Invalid input');
+    } else toast.error('Type "Accomplishment" to confirm');
   };
 
   return (
@@ -48,10 +62,10 @@ const DeleteModal = (): JSX.Element => {
       setIsOpen={setIsOpen}
       trigger={{
         className: 'text-red font-medium text-base cursor-pointer w-fit',
-        child: 'Delete Account',
+        child: triggerText || 'Delete Account',
       }}
       title={{
-        title: 'Are you sure you want to delete your account?',
+        title: title || 'Are you sure you want to delete your account?',
         className: 'text-center',
       }}
       footer={
@@ -71,7 +85,7 @@ const DeleteModal = (): JSX.Element => {
               onClick={handleDeleteAccount}
               className="w-full bg-red h-14 rounded-xl"
             >
-              Delete
+              {btnText || 'Delete'}
             </Button>
           </DialogClose>
         </div>

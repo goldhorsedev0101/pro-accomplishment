@@ -1,7 +1,7 @@
 // Types
 
 // Mutation
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 // Axios
 import axios from 'axios';
@@ -19,12 +19,18 @@ export interface IRes {
 }
 
 const useCancelSubscriptionMutation = () => {
+  const queryClient = useQueryClient();
+
   const cancelSubscriptionFn = async (): Promise<IRes> => {
     const { data } = await axios.post(URLS.CANCEL_SUBSCRIPTION);
     return data;
   };
 
   return useMutation({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['get-profile'] });
+      queryClient.invalidateQueries({ queryKey: ['get-subscription-info'] });
+    },
     mutationFn: cancelSubscriptionFn,
     onError: errorFn,
   });

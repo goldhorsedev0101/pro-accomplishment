@@ -5,7 +5,7 @@ import Image from 'next/image';
 import BasicModal from './basic-modal';
 
 // Types
-import { Fragment, JSX, useEffect, useState } from 'react';
+import { JSX, useEffect, useState } from 'react';
 
 // Icons
 import { Button } from '@/components/ui/button';
@@ -15,6 +15,7 @@ import { useGetSubscriptionInfoQuery } from '@/services/others/stripe/get-subscr
 import { useRouter, useSearchParams } from 'next/navigation';
 import checkIcon from 'public/icons/check.svg';
 import subscriptionBadge from 'public/icons/subscription-badge.svg';
+import tickCircleIcon from 'public/icons/tick-circle.svg';
 
 const features = [
   'Unlimited access to recruits profiles',
@@ -26,7 +27,7 @@ const features = [
 const SubscriptionModal = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const isSuccess = useSearchParams().get('isSuccess');
+  const isSuccess = useSearchParams().get('isSuccess') === 'true';
   const { push } = useRouter();
 
   const { data } = useGetSubscriptionInfoQuery();
@@ -35,12 +36,16 @@ const SubscriptionModal = (): JSX.Element => {
   const { data: profile } = useGetProfileQuery();
   const { subscription } = profile?.data || {};
 
+  const handleDone = () => {
+    setIsOpen(false);
+    push('/home');
+  };
+
   useEffect(() => {
     if (subscription === undefined) return;
     if (subscription == null || subscription?.status === 'expired') setIsOpen(true);
+    if (isSuccess) setIsOpen(true);
   }, [profile]);
-
-  if (isSuccess === 'true' || isSuccess === 'false') return <Fragment></Fragment>;
 
   return (
     <BasicModal
@@ -50,27 +55,45 @@ const SubscriptionModal = (): JSX.Element => {
       showCloseButton2={false}
       footer={
         <div className="flex flex-col gap-y-5 w-full">
-          <Image src={subscriptionBadge} alt="" className="self-center" height={116} width={116} />
+          <Image
+            src={isSuccess ? tickCircleIcon : subscriptionBadge}
+            alt=""
+            className="self-center"
+            height={116}
+            width={116}
+          />
           <h2 className="text-neutral-grey-90 font-medium text-25 text-center px-6">
-            Subscription Plan
+            {isSuccess ? 'Subscribed Successfully' : 'Subscription Plan'}
           </h2>
-          <p className="text-gray text-center text-lg px-6">
-            Upgrade to Pro for just <span className="font-semibold text-black">$19.99/month</span>{' '}
-            and unlock full access to student profiles
-          </p>
 
-          <div className="flex flex-col gap-y-2">
-            {features.map((feature, index) => (
-              <p key={index} className="text-gray text-sm flex items-center gap-x-2">
-                <Image src={checkIcon} alt="" width={24} height={24} />
-                {feature}
-              </p>
-            ))}
-          </div>
+          {isSuccess ? (
+            <p className="text-gray text-center text-lg px-6">
+              You have been subscribe successfully
+            </p>
+          ) : (
+            <p className="text-gray text-center text-lg px-6">
+              Upgrade to Pro for just <span className="font-semibold text-black">$19.99/month</span>{' '}
+              and unlock full access to student profiles
+            </p>
+          )}
+
+          {!isSuccess && (
+            <div className="flex flex-col gap-y-2">
+              {features.map((feature, index) => (
+                <p key={index} className="text-gray text-sm flex items-center gap-x-2">
+                  <Image src={checkIcon} alt="" width={24} height={24} />
+                  {feature}
+                </p>
+              ))}
+            </div>
+          )}
 
           <DialogClose asChild>
-            <Button className="w-full h-14 rounded-xl" onClick={() => push(redirection_url)}>
-              Subscribe
+            <Button
+              className="w-full h-14 rounded-xl"
+              onClick={() => (!isSuccess ? push(redirection_url) : handleDone())}
+            >
+              {isSuccess ? 'Done' : 'Subscribe'}
             </Button>
           </DialogClose>
         </div>

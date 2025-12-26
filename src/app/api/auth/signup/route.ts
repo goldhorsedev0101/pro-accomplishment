@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
       iso2,
       profileImage,
       company,
-      role_position,
+      rolePosition,
     } = body;
 
     const lowerCased = email?.toLowerCase();
@@ -97,7 +97,7 @@ export async function POST(request: NextRequest) {
         iso2,
         profileImage,
         company,
-        role_position,
+        rolePosition,
       },
     });
 

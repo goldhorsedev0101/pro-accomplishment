@@ -17,10 +17,10 @@ import checkIcon from 'public/icons/check.svg';
 import subscriptionBadge from 'public/icons/subscription-badge.svg';
 
 const features = [
-  'Unlimited access to student profiles',
-  'Download structured accomplishment summaries',
+  'Unlimited access to recruits profiles',
+  'Download structured accomplishment folios',
   'Filter by GPA, leadership, extracurricular & more',
-  'Scan QR codes to instantly view student summaries',
+  'Scan QR codes to instantly view recruits folios',
 ];
 
 const SubscriptionModal = (): JSX.Element => {

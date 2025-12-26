@@ -35,11 +35,13 @@ import { useAuth } from '@/context/auth.context';
 
 const initialValues: SignUpPayloadT = {
   confirmPassword: '',
+  role_position: '',
   profileImage: '',
   phoneNumber: '',
   firstName: '',
   lastName: '',
   password: '',
+  company: '',
   email: '',
   iso2: 'us',
 };
@@ -64,6 +66,7 @@ const SignUpView = (): JSX.Element => {
           password: pass,
           email: email.toLocaleLowerCase(),
         });
+
         setEmail(email.toLocaleLowerCase());
         push(verifyEmail);
         setRoute(SIGNUP);
@@ -74,7 +77,7 @@ const SignUpView = (): JSX.Element => {
   });
 
   return (
-    <form className="flex flex-col gap-y-6" onSubmit={handleSubmit}>
+    <form className="flex flex-col gap-y-6 w-full pt-52" onSubmit={handleSubmit}>
       <BackButton />
       <Heading text="Sign up" />
 
@@ -120,6 +123,26 @@ const SignUpView = (): JSX.Element => {
           value={values['email']}
           label="Email"
           name="email"
+          required
+        />
+
+        <Input
+          error={touched.company ? errors.company : undefined}
+          placeholder="Enter Company Name"
+          value={values['company']}
+          onChange={handleChange}
+          label="Company Name"
+          name="company"
+          required
+        />
+
+        <Input
+          error={touched.role_position ? errors.role_position : undefined}
+          placeholder="Enter Role Position"
+          value={values['role_position']}
+          onChange={handleChange}
+          label="Role Position"
+          name="role_position"
           required
         />
 

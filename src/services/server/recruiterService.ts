@@ -256,7 +256,7 @@ export const isSubscriptionValid = (subscription?: any): boolean => {
   const now = dayjs();
   const periodEnd = dayjs(subscription.current_period_end);
 
-  const validStatus = ['active', 'canceled'].includes(subscription.status?.toLowerCase());
+  const validStatus = ['active'].includes(subscription.status?.toLowerCase());
 
   const withinPeriod = now.isBefore(periodEnd);
 

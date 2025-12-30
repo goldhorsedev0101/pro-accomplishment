@@ -138,10 +138,10 @@ const SignUpView = (): JSX.Element => {
 
         <Input
           error={touched.rolePosition ? errors.rolePosition : undefined}
-          placeholder="Enter Role Position"
+          placeholder="Enter Role/Position"
           value={values['rolePosition']}
           onChange={handleChange}
-          label="Role Position"
+          label="Role/Position"
           name="rolePosition"
           required
         />

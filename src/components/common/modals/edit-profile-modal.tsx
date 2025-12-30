@@ -92,7 +92,7 @@ const EditProfileModal: FC<IProps> = ({
       footer={
         <form
           onSubmit={handleSubmit}
-          className="w-full flex-col flex gap-y-3 max-h-[50dvh] overflow-y-auto pr-3"
+          className="w-full flex-col flex gap-y-1 max-h-[50dvh] overflow-y-auto pr-3"
         >
           <div className="w-full flex items-center justify-center">
             <FileUploader
@@ -136,11 +136,11 @@ const EditProfileModal: FC<IProps> = ({
 
           <Input
             error={touched.rolePosition ? errors.rolePosition : undefined}
-            placeholder="Enter role position"
+            placeholder="Enter role/position"
             value={values.rolePosition}
             onChange={handleChange}
             className="bg-white"
-            label="Role Position"
+            label="Role/Position"
             name="rolePosition"
           />
 

@@ -10,6 +10,7 @@ import { JSX, useEffect, useState } from 'react';
 // Icons
 import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
+import { useAuth } from '@/context/auth.context';
 import { useGetProfileQuery } from '@/services/others/profile/get-recruiter-profile';
 import { useGetSubscriptionInfoQuery } from '@/services/others/stripe/get-subscription-info';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -26,9 +27,9 @@ const features = [
 
 const SubscriptionModal = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
   const isSuccess = useSearchParams().get('isSuccess') === 'true';
   const { push } = useRouter();
+  const { handleLogout } = useAuth();
 
   const { data } = useGetSubscriptionInfoQuery();
   const { redirection_url } = data?.data || { redirection_url: '' };
@@ -68,7 +69,7 @@ const SubscriptionModal = (): JSX.Element => {
 
           {isSuccess ? (
             <p className="text-gray text-center text-lg px-6">
-              you have been subscribed successfully
+              You have been subscribed successfully
             </p>
           ) : (
             <p className="text-gray text-center text-lg px-6">
@@ -88,14 +89,26 @@ const SubscriptionModal = (): JSX.Element => {
             </div>
           )}
 
-          <DialogClose asChild>
-            <Button
-              className="w-full h-14 rounded-xl"
-              onClick={() => (!isSuccess ? push(redirection_url) : handleDone())}
-            >
-              {isSuccess ? 'Done' : 'Subscribe'}
-            </Button>
-          </DialogClose>
+          <div className={`grid ${isSuccess ? 'grid-cols-1' : 'grid-cols-2'} items-center gap-x-6`}>
+            <DialogClose asChild>
+              <Button
+                className="h-14 rounded-xl w-full"
+                onClick={() => (!isSuccess ? push(redirection_url) : handleDone())}
+              >
+                {isSuccess ? 'Done' : 'Subscribe'}
+              </Button>
+            </DialogClose>
+
+            {!isSuccess && (
+              <Button
+                variant={'outline'}
+                onClick={() => handleLogout()}
+                className="h-14 rounded-xl w-full"
+              >
+                Logout
+              </Button>
+            )}
+          </div>
         </div>
       }
     />

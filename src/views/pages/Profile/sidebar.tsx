@@ -6,20 +6,17 @@ import Image from 'next/image';
 
 // Constant
 import { sidebar } from '@/constants/profile';
-import Routes from '@/constants/routes';
 
 // Enum
 import { PROFILE_ENUM } from '@/enum/profile.enum';
 
 // Cookie
-import { deleteCookie } from 'cookies-next';
 
 // Router
-import { useRouter } from 'next/navigation';
 
 // Types
+import { useAuth } from '@/context/auth.context';
 import { Dispatch, Fragment, JSX, ReactNode, SetStateAction } from 'react';
-import toast from 'react-hot-toast';
 
 interface IProps {
   setActiveTab: Dispatch<SetStateAction<PROFILE_ENUM>>;
@@ -29,18 +26,8 @@ interface IProps {
 
 const Sidebar = ({ activeTab, setActiveTab, children }: IProps): JSX.Element => {
   const isActive = (label: PROFILE_ENUM) => activeTab === label;
-
+  const { handleLogout } = useAuth();
   const { LOGOUT, PROFILE } = PROFILE_ENUM;
-
-  const { signIn } = Routes;
-  const { push, refresh } = useRouter();
-
-  const handleLogout = () => {
-    deleteCookie('accessToken');
-    push(signIn);
-    refresh();
-    toast.success('Logged out successfully');
-  };
 
   return (
     <Tabs

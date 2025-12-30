@@ -42,9 +42,13 @@ const Subscription: FC<IProps> = ({ subscription }): JSX.Element => {
       setIsPending(true);
       await mutateAsync();
       setTimeout(() => {
-        queryClient.invalidateQueries({ queryKey: ['get-profile'], refetchType: 'all' });
-        setIsPending(false);
+        queryClient.invalidateQueries({ queryKey: ['get-profile'] });
+        queryClient.invalidateQueries({ queryKey: ['get-subscription-info'] });
       }, 1500);
+
+      setTimeout(() => {
+        setIsPending(false);
+      }, 2500);
     } catch (error) {
       console.log('🚀 ~ handleCancelSubscription ~ error:', error);
     }

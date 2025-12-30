@@ -13,6 +13,7 @@ import { Toaster } from 'react-hot-toast';
 
 // CSS
 import './globals.css';
+import { AuthProvider } from '@/context/auth.context';
 
 export const metadata: Metadata = {
   title: 'Accomplishment Tracking',
@@ -31,8 +32,10 @@ export default function RootLayout({
         className={`${fredoka.variable} ${quicksand.variable} antialiased`}
       >
         <QueryProvider>
-          <Toaster />
-          {children}
+          <AuthProvider>
+            <Toaster />
+            {children}
+          </AuthProvider>
         </QueryProvider>
       </body>
     </html>

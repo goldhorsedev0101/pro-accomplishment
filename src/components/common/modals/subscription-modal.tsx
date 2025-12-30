@@ -18,10 +18,10 @@ import subscriptionBadge from 'public/icons/subscription-badge.svg';
 import tickCircleIcon from 'public/icons/tick-circle.svg';
 
 const features = [
-  'Unlimited access to recruits profiles',
+  'Unlimited access to recruit profiles',
   'Download structured accomplishment folios',
   'Filter by GPA, leadership, extracurricular & more',
-  'Scan QR codes to instantly view recruits folios',
+  'Scan QR codes to instantly view recruit folios',
 ];
 
 const SubscriptionModal = (): JSX.Element => {
@@ -68,12 +68,12 @@ const SubscriptionModal = (): JSX.Element => {
 
           {isSuccess ? (
             <p className="text-gray text-center text-lg px-6">
-              You have been subscribe successfully
+              you have been subscribed successfully
             </p>
           ) : (
             <p className="text-gray text-center text-lg px-6">
               Upgrade to Pro for just <span className="font-semibold text-black">$19.99/month</span>{' '}
-              and unlock full access to student profiles
+              and unlock full access to Recruit profiles
             </p>
           )}
 

@@ -59,7 +59,10 @@ const DeleteModal: FC<IProps> = ({ title, triggerText, btnText, onClick }): JSX.
   return (
     <BasicModal
       isOpen={isOpen}
-      setIsOpen={setIsOpen}
+      setIsOpen={(e) => {
+        setDeleteText('');
+        setIsOpen(e);
+      }}
       trigger={{
         className: 'text-red font-medium text-base cursor-pointer w-fit',
         child: triggerText || 'Delete Account',

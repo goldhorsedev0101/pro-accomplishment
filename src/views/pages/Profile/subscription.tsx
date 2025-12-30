@@ -4,6 +4,7 @@ import check from 'public/icons/check.svg';
 // Components
 import Box from '@/components/common/box';
 import Heading from '@/components/common/heading';
+import Loader from '@/components/common/loader';
 
 // Constant
 import { plans } from '@/constants/plans';
@@ -28,7 +29,7 @@ const Subscription: FC<IProps> = ({ subscription }): JSX.Element => {
   const { status } = subscription || {};
   const { push } = useRouter();
 
-  const { data } = useGetSubscriptionInfoQuery();
+  const { data, isLoading } = useGetSubscriptionInfoQuery();
   const { redirection_url } = data?.data || { redirection_url: '' };
 
   const { mutateAsync } = useCancelSubscriptionMutation();
@@ -40,6 +41,14 @@ const Subscription: FC<IProps> = ({ subscription }): JSX.Element => {
       console.log('🚀 ~ handleCancelSubscription ~ error:', error);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-[400px] flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">

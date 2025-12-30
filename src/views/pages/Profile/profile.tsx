@@ -15,7 +15,16 @@ interface IProps {
 }
 
 const Profile: FC<IProps> = ({ data, isPending }): JSX.Element => {
-  const { first_name, last_name, email, phone_number, iso2, profile_picture } = data || {};
+  const {
+    iso2,
+    email,
+    company,
+    last_name,
+    first_name,
+    phone_number,
+    role_position,
+    profile_picture,
+  } = data || {};
 
   const number = phone_number?.startsWith('+')
     ? phone_number
@@ -26,6 +35,8 @@ const Profile: FC<IProps> = ({ data, isPending }): JSX.Element => {
     { label: 'Last Name', value: last_name },
     { label: 'Email', value: email },
     { label: 'Phone Number', value: number },
+    { label: 'company', value: company },
+    { label: 'Position', value: role_position },
   ];
 
   if (isPending) {

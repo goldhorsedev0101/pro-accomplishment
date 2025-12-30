@@ -35,10 +35,13 @@ const BasicModal: FC<IProps> = ({
 }): JSX.Element => {
   return (
     <Dialog open={isOpen}>
-      <DialogTrigger onClick={() => setIsOpen?.(!isOpen)} className={cn(trigger?.className)}>
-        {trigger?.child}
-      </DialogTrigger>
+      {trigger?.child && (
+        <DialogTrigger onClick={() => setIsOpen?.(!isOpen)} className={cn(trigger?.className)}>
+          {trigger?.child}
+        </DialogTrigger>
+      )}
       <DialogContent
+        onCloseAutoFocus={(e) => e.preventDefault()}
         showCloseButton={showCloseButton2}
         showCloseButton2={showCloseButton}
         className="bg-neutral-grey-0"

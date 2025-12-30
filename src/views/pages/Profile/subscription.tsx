@@ -17,17 +17,20 @@ import DeleteModal from '@/components/common/modals/delete-modal';
 import { useCancelSubscriptionMutation } from '@/services/others/stripe/cancel-subscription';
 import { useGetSubscriptionInfoQuery } from '@/services/others/stripe/get-subscription-info';
 import { GetProfileResponseT } from '@/types/others/profile/get-recruiter-profile/get-profile-response';
+import { useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
-import { FC, JSX } from 'react';
+import { FC, JSX, useState } from 'react';
 
 interface IProps {
   subscription?: GetProfileResponseT['data']['subscription'];
 }
 
 const Subscription: FC<IProps> = ({ subscription }): JSX.Element => {
+  const [isPending, setIsPending] = useState<boolean>(false);
   const { status } = subscription || {};
   const { push } = useRouter();
+  const queryClient = useQueryClient();
 
   const { data, isLoading } = useGetSubscriptionInfoQuery();
   const { redirection_url } = data?.data || { redirection_url: '' };
@@ -36,13 +39,18 @@ const Subscription: FC<IProps> = ({ subscription }): JSX.Element => {
 
   const handleCancelSubscription = async () => {
     try {
+      setIsPending(true);
       await mutateAsync();
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: ['get-profile'], refetchType: 'all' });
+        setIsPending(false);
+      }, 1500);
     } catch (error) {
       console.log('🚀 ~ handleCancelSubscription ~ error:', error);
     }
   };
 
-  if (isLoading) {
+  if (isLoading || isPending) {
     return (
       <div className="w-full h-[400px] flex items-center justify-center">
         <Loader />
@@ -70,14 +78,7 @@ const Subscription: FC<IProps> = ({ subscription }): JSX.Element => {
         </div>
       </Box>
 
-      {status !== 'canceled' ? (
-        <DeleteModal
-          btnText="Cancel"
-          triggerText="Cancel Subscription"
-          onClick={handleCancelSubscription}
-          title="Are you sure you want to Cancel Subscription?"
-        />
-      ) : (
+      {status === 'canceled' ? (
         <p className="text-sm font-medium text-neutral-grey-100">
           Cancellation scheduled for {dayjs(subscription?.current_period_end).format('MM-DD-YYYY')}.
           <br />
@@ -91,6 +92,13 @@ const Subscription: FC<IProps> = ({ subscription }): JSX.Element => {
             </span>
           )}
         </p>
+      ) : (
+        <DeleteModal
+          btnText="Cancel"
+          triggerText="Cancel Subscription"
+          onClick={handleCancelSubscription}
+          title="Are you sure you want to Cancel Subscription?"
+        />
       )}
     </div>
   );

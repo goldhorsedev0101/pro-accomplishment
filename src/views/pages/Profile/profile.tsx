@@ -35,7 +35,7 @@ const Profile: FC<IProps> = ({ data, isPending }): JSX.Element => {
     { label: 'Last Name', value: last_name },
     { label: 'Email', value: email },
     { label: 'Phone Number', value: number },
-    { label: 'company', value: company },
+    { label: 'Company', value: company },
     { label: 'Position', value: role_position },
   ];
 
@@ -54,9 +54,11 @@ const Profile: FC<IProps> = ({ data, isPending }): JSX.Element => {
           <Heading text="Profile" width="medium" size="31" />
           <EditProfileModal
             profile_picture={profile_picture as string}
+            role_position={role_position}
             phone_number={phone_number}
             first_name={first_name}
             last_name={last_name}
+            company={company}
             email={email}
             iso2={iso2}
           />
@@ -67,7 +69,7 @@ const Profile: FC<IProps> = ({ data, isPending }): JSX.Element => {
             <Fragment key={i}>
               {value && (
                 <div className={`flex flex-col gap-y-1 pb-2`}>
-                  <p className="text-base font-medium text-neutral-grey-100">{label}</p>
+                  <p className="text-base font-medium text-neutral-grey-100 capitalize">{label}</p>
                   <p className="text-base font-normal text-neutral-grey-80">{value}</p>
                 </div>
               )}

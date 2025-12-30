@@ -13,11 +13,15 @@ import TermsConditions from './terms-conditions';
 import { PROFILE_ENUM } from '@/enum/profile.enum';
 
 // Types
+import { useGetProfileQuery } from '@/services/others/profile/get-recruiter-profile';
 import { JSX, useState } from 'react';
 
 const ProfileView = (): JSX.Element => {
   const { PROFILE, SUBSCRIPTION, CHANGE_PASSWORD, PRIVACY_POLICY, TERMS_CONDITIONS, LOGOUT } =
     PROFILE_ENUM;
+
+  const { data, isPending } = useGetProfileQuery();
+  const { subscription } = data?.data || {};
 
   const [activeTab, setActiveTab] = useState<PROFILE_ENUM>(PROFILE);
 
@@ -25,11 +29,11 @@ const ProfileView = (): JSX.Element => {
     <div className="flex items-start gap-x-6 w-full">
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab}>
         <TabsContent value={PROFILE}>
-          <Profile />
+          <Profile data={data?.data} isPending={isPending} />
         </TabsContent>
 
         <TabsContent value={SUBSCRIPTION}>
-          <Subscription />
+          <Subscription subscription={subscription} />
         </TabsContent>
 
         <TabsContent value={CHANGE_PASSWORD}>
@@ -45,7 +49,7 @@ const ProfileView = (): JSX.Element => {
         </TabsContent>
 
         <TabsContent value={LOGOUT}>
-          <Profile />
+          <Profile data={data?.data} isPending={isPending} />
         </TabsContent>
       </Sidebar>
     </div>

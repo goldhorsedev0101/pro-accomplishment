@@ -38,5 +38,6 @@ export const URLS = {
   GET_FAVORITE_CANDIDATES: `${baseUrl}/favorite/get-favorite-candidates`,
 
   // =========================== Stripe ===================== //
+  CANCEL_SUBSCRIPTION: `${baseUrl}/stripe/cancel-subscription`,
   GET_SUBSCRIPTION_INFO: `${baseUrl}/stripe/subscription`,
 };

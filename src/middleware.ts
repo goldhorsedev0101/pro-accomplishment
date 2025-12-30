@@ -47,9 +47,7 @@ export async function middleware(req: NextRequest) {
     }
 
     // Logged in but accessing public route → redirect to /home
-    if (isPublicRoute) {
-      return redirect(new URL(Routes.home, req.url));
-    }
+    if (isPublicRoute) return redirect(new URL(Routes.home, req.url));
   }
 
   return next();

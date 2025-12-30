@@ -4,14 +4,27 @@ import Heading from '@/components/common/heading';
 import Loader from '@/components/common/loader';
 import DeleteModal from '@/components/common/modals/delete-modal';
 import EditProfileModal from '@/components/common/modals/edit-profile-modal';
-import { useGetProfileQuery } from '@/services/others/profile/get-recruiter-profile';
+import { GetProfileResponseT } from '@/types/others/profile/get-recruiter-profile/get-profile-response';
 
 // Type
-import { Fragment, JSX } from 'react';
+import { FC, Fragment, JSX } from 'react';
 
-const Profile = (): JSX.Element => {
-  const { data, isPending } = useGetProfileQuery();
-  const { first_name, last_name, email, phone_number, iso2, profile_picture } = data?.data || {};
+interface IProps {
+  data?: GetProfileResponseT['data'];
+  isPending: boolean;
+}
+
+const Profile: FC<IProps> = ({ data, isPending }): JSX.Element => {
+  const {
+    iso2,
+    email,
+    company,
+    last_name,
+    first_name,
+    phone_number,
+    role_position,
+    profile_picture,
+  } = data || {};
 
   const number = phone_number?.startsWith('+')
     ? phone_number
@@ -22,6 +35,8 @@ const Profile = (): JSX.Element => {
     { label: 'Last Name', value: last_name },
     { label: 'Email', value: email },
     { label: 'Phone Number', value: number },
+    { label: 'company', value: company },
+    { label: 'Position', value: role_position },
   ];
 
   if (isPending) {

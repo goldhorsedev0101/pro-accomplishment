@@ -210,12 +210,16 @@ export const editRecruiterProfile = async ({
   phoneNumber,
   profileImage,
   iso2,
+  company,
+  rolePosition,
 }: {
   profileId: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
   profileImage: string | null;
+  company: string;
+  rolePosition: string;
   iso2: string;
 }) => {
   const { data: updateProfileData, error: updateProfileError } = await supabase
@@ -223,6 +227,8 @@ export const editRecruiterProfile = async ({
     .update({
       first_name: firstName,
       last_name: lastName,
+      company: company,
+      role_position: rolePosition,
       updated_at: new Date().toISOString(),
     })
     .eq('id', profileId)

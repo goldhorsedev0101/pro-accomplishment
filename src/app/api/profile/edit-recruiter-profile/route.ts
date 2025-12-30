@@ -12,7 +12,7 @@ export async function OPTIONS() {
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
-    const { firstName, lastName, phoneNumber, iso2, profileImage } = body;
+    const { firstName, lastName, phoneNumber, iso2, profileImage, company, rolePosition } = body;
 
     if (!firstName || !lastName || !phoneNumber || !iso2 || !profileImage) {
       return response(
@@ -37,6 +37,8 @@ export async function PUT(request: NextRequest) {
         phoneNumber,
         iso2,
         profileImage,
+        company,
+        rolePosition,
       },
     });
 

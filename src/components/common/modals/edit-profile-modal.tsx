@@ -102,7 +102,7 @@ const EditProfileModal: FC<IProps> = ({
             />
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-3">
+          <div className="flex flex-col sm:flex-row items-start gap-3">
             <Input
               error={touched.firstName ? errors.firstName : undefined}
               placeholder="Enter first name"

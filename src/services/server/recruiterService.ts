@@ -37,6 +37,8 @@ export interface RecruiterProfile {
   role?: string;
   phone_number?: string | null;
   iso2?: string | null;
+  role_position?: string | null;
+  company?: string | null;
   subscription?: ISubscription | null;
 }
 
@@ -194,6 +196,8 @@ export const getRecruiterProfile = async ({
     role: recruiter.profile.role,
     phone_number: recruiter.phone_number,
     iso2: recruiter.iso2,
+    role_position: recruiter.role_position,
+    company: recruiter.company,
     subscription,
   };
 

@@ -35,7 +35,7 @@ import { useAuth } from '@/context/auth.context';
 
 const initialValues: SignUpPayloadT = {
   confirmPassword: '',
-  role_position: '',
+  rolePosition: '',
   profileImage: '',
   phoneNumber: '',
   firstName: '',
@@ -137,12 +137,12 @@ const SignUpView = (): JSX.Element => {
         />
 
         <Input
-          error={touched.role_position ? errors.role_position : undefined}
+          error={touched.rolePosition ? errors.rolePosition : undefined}
           placeholder="Enter Role Position"
-          value={values['role_position']}
+          value={values['rolePosition']}
           onChange={handleChange}
           label="Role Position"
-          name="role_position"
+          name="rolePosition"
           required
         />
 

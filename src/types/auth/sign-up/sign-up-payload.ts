@@ -1,6 +1,6 @@
 export type SignUpPayloadT = {
   confirmPassword: string;
-  role_position: string;
+  rolePosition: string;
   profileImage: string;
   phoneNumber: string;
   firstName: string;

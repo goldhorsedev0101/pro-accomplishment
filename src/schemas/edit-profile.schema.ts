@@ -18,7 +18,7 @@ export const EditProfileSchema = Yup.object({
     .max(50, 'Company name cannot exceed 50 characters')
     .trim()
     .matches(/[a-zA-Z]/, 'Company name cannot consist of only numbers or special characters'),
-  role_position: Yup.string()
+  rolePosition: Yup.string()
     .required('Role position is required')
     .min(3, 'Role position must be at least 3 characters')
     .max(50, 'Role position cannot exceed 50 characters')

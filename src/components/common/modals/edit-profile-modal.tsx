@@ -67,7 +67,7 @@ const EditProfileModal: FC<IProps> = ({
       lastName: last_name,
       firstName: first_name,
       phoneNumber: phone_number,
-      role_position,
+      rolePosition: role_position,
       profileImage: profile_picture,
     },
     validationSchema: EditProfileSchema,
@@ -135,13 +135,13 @@ const EditProfileModal: FC<IProps> = ({
           />
 
           <Input
-            error={touched.role_position ? errors.role_position : undefined}
+            error={touched.rolePosition ? errors.rolePosition : undefined}
             placeholder="Enter role position"
-            value={values.role_position}
+            value={values.rolePosition}
             onChange={handleChange}
             className="bg-white"
             label="Role Position"
-            name="role_position"
+            name="rolePosition"
           />
 
           <Input value={email} disabled label="Email Address" />

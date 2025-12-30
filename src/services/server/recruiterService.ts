@@ -227,8 +227,6 @@ export const editRecruiterProfile = async ({
     .update({
       first_name: firstName,
       last_name: lastName,
-      company: company,
-      role_position: rolePosition,
       updated_at: new Date().toISOString(),
     })
     .eq('id', profileId)
@@ -244,6 +242,8 @@ export const editRecruiterProfile = async ({
       phone_number: phoneNumber,
       iso2: iso2,
       profile_picture: profileImage,
+      company: company,
+      role_position: rolePosition,
     })
     .eq('profile_id', profileId)
     .select('*')

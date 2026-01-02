@@ -10,8 +10,14 @@ const AuthLayout = ({ children }: { children: ReactNode }): JSX.Element => {
     <div className="h-screen overflow-x-hidden w-screen grid lg:grid-cols-2 xl:grid-cols-5 2xl:grid-cols-6">
       {/* Section 1 - Logo */}
       <div className="lg:col-span-1 hidden lg:block xl:col-span-3 bg-[#FFFAF1] w-full h-full relative">
-        <Image src={logo} alt="Logo" width={89} height={89} className="absolute top-8 left-8" />
-        <p className="absolute top-[130px] left-8 text-neutral-grey-100 text-4xl leading-14">
+        <Image
+          src={logo}
+          alt="Logo"
+          width={89}
+          height={89}
+          className="absolute top-8 left-8 z-10"
+        />
+        <p className="absolute top-[130px] left-8 text-neutral-grey-100 text-4xl leading-14 z-10">
           Accomplish <br /> Showcase <br /> Connect
         </p>
 

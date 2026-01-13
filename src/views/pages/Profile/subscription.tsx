@@ -46,10 +46,9 @@ const Subscription: FC<IProps> = ({ subscription }): JSX.Element => {
         queryClient.invalidateQueries({ queryKey: ['get-subscription-info'] });
       }, 1500);
 
-      setTimeout(() => {
-        setIsPending(false);
-      }, 2500);
+      setTimeout(() => setIsPending(false), 2500);
     } catch (error) {
+      setIsPending(false);
       console.log('🚀 ~ handleCancelSubscription ~ error:', error);
     }
   };

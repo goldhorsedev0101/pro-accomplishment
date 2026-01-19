@@ -108,6 +108,7 @@ export async function GET(request: NextRequest) {
         },
       ],
       mode: 'subscription',
+      currency: 'usd',
       success_url: `${origin}/home?isSuccess=true`,
       cancel_url: `${origin}/home?isSuccess=false`,
       metadata: {

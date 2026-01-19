@@ -103,7 +103,6 @@ export const getRecruiterProfileByEmail = async ({
     `,
     )
     .eq('email', email)
-    .eq('role', 'recruiter')
     .maybeSingle<IUserLookup>();
 
   let customError: ICustomError | null = error ? error : null;
@@ -111,6 +110,9 @@ export const getRecruiterProfileByEmail = async ({
   if (profile) {
     if (profile?.is_deactivated || profile?.deleted_at) {
       customError = { message: 'User account is deactivated or deleted.' };
+    }
+    if (profile?.role == 'candidate') {
+      customError = { message: 'This user exists as a Student.' };
     }
   } else {
     customError = { message: 'User not found' };

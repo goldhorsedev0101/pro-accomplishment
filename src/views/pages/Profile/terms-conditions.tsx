@@ -7,33 +7,144 @@ import { JSX } from 'react';
 
 const TermsConditions = (): JSX.Element => {
   return (
-    <Box>
-      <Heading text="Terms & Conditions" width="medium" size="31" />
-      <p className="font-normal text-neutral-grey-80">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem reprehenderit
-        quibusdam ab asperiores praesentium. Autem earum amet fuga officiis culpa, sequi itaque
-        tempora animi praesentium officia aspernatur, neque non ducimus hic nulla aut deserunt sed
-        sunt voluptas? Animi, assumenda qui inventore quibusdam porro, eum vero voluptas incidunt
-        cum culpa nemo. Tempora a veniam eaque reprehenderit ipsam distinctio dolorem suscipit
-        dolores adipisci eveniet debitis, quibusdam corporis modi impedit quaerat magnam at iste
-        quod porro nemo. Tempore provident ipsa aut, necessitatibus explicabo consequuntur vel iure
-        modi aliquam ad a pariatur neque qui labore fuga ex unde esse soluta dolores libero
-        voluptates. Perferendis ut, odio ducimus hic reprehenderit labore dolor modi impedit
-        provident inventore corrupti, maiores dolorem sint dignissimos sequi? Distinctio obcaecati
-        labore fugiat ipsum, placeat et officiis sequi laudantium id, sunt dignissimos modi, vitae
-        beatae. Qui, consectetur aperiam laudantium temporibus explicabo natus quos voluptatibus
-        cumque? Magni temporibus voluptates assumenda, eos asperiores dicta nihil officia
-        reprehenderit expedita aut commodi neque. Error necessitatibus quos dolorum nemo quaerat
-        aliquam hic ipsam eaque cupiditate qui deleniti maxime accusantium, nobis dolore laboriosam
-        quo placeat, tempora possimus? Mollitia harum voluptatem alias cumque dolores expedita quas
-        dignissimos rem nesciunt esse debitis quam suscipit amet nulla sequi ipsum accusantium illo
-        distinctio, delectus reprehenderit eligendi consectetur assumenda? Dolorem ab autem ullam
-        aliquid eos non unde? Cum, quisquam tempore architecto labore laudantium iste reprehenderit!
-        Dicta ratione eveniet facilis, temporibus dolor repellendus quas aut voluptatem. Ullam
-        deleniti nulla incidunt veniam at voluptate iusto libero sapiente eaque aperiam, fuga qui
-        voluptates voluptatibus numquam recusandae delectus ipsam distinctio laboriosam cupiditate.
-        Nam voluptates laboriosam possimus libero nihil eveniet, qui inventore amet.
-      </p>
+    <Box className="space-y-3">
+      <Heading text="Terms and Conditions" width="medium" size="31" />
+
+      <p className="font-normal text-neutral-grey-80">Last updated: 1/19/2026</p>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Agreement to Terms</h2>
+        <p className="font-normal text-neutral-grey-80">
+          By accessing and using I&apos;m Accomplished, you agree to be bound by these Terms and
+          Conditions. If you do not agree with any part of these terms, you may not use our service.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Description of Service</h2>
+        <p className="font-normal text-neutral-grey-80">
+          I&apos;m Accomplished is a digital platform designed to help users track, record, and
+          celebrate their accomplishments. Our service is designed for students, professionals,
+          parents, job seekers, business owners, and anyone looking to document their achievements
+          and progress.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">User Accounts</h2>
+        <p className="font-normal text-neutral-grey-80 mb-3">When you create an account with us:</p>
+        <ul className="list-disc pl-6 font-normal text-neutral-grey-80 space-y-2">
+          <li>You must provide accurate, complete, and current information</li>
+          <li>
+            You are responsible for maintaining the confidentiality of your account credentials
+          </li>
+          <li>You are responsible for all activities that occur under your account</li>
+          <li>You must notify us immediately of any unauthorized use of your account</li>
+          <li>
+            You must be at least 13 years old to use our service (with parental consent if under 18)
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Acceptable Use</h2>
+        <p className="font-normal text-neutral-grey-80 mb-3">
+          You agree not to use I&apos;m Accomplished to:
+        </p>
+        <ul className="list-disc pl-6 font-normal text-neutral-grey-80 space-y-2">
+          <li>Violate any applicable laws or regulations</li>
+          <li>Infringe upon the rights of others</li>
+          <li>Upload malicious code, viruses, or harmful content</li>
+          <li>Attempt to gain unauthorized access to our systems</li>
+          <li>Harass, abuse, or harm other users</li>
+          <li>Use the service for any unauthorized commercial purposes</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">User Content</h2>
+        <p className="font-normal text-neutral-grey-80">
+          You retain ownership of all accomplishments, records, and content you input into I&apos;m
+          Accomplished. By using our service, you grant us a license to store, process, and display
+          your content solely for the purpose of providing our services to you. We will not share
+          your personal accomplishments with third parties without your explicit consent.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Intellectual Property</h2>
+        <p className="font-normal text-neutral-grey-80">
+          The I&apos;m Accomplished platform, including its design, features, functionality, and
+          content (excluding user-generated content), is owned by us and protected by copyright,
+          trademark, and other intellectual property laws. You may not copy, modify, distribute, or
+          create derivative works without our explicit written permission.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Service Availability</h2>
+        <p className="font-normal text-neutral-grey-80">
+          We strive to maintain continuous service availability, but we do not guarantee
+          uninterrupted access. We reserve the right to modify, suspend, or discontinue any aspect
+          of the service at any time, with or without notice. We are not liable for any
+          modification, suspension, or discontinuation of the service.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Limitation of Liability</h2>
+        <p className="font-normal text-neutral-grey-80">
+          I&apos;m Accomplished is provided &quot;as is&quot; without warranties of any kind. We are
+          not liable for any indirect, incidental, special, consequential, or punitive damages
+          arising from your use of the service. Our total liability shall not exceed the amount paid
+          by you, if any, for accessing the service.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Termination</h2>
+        <p className="font-normal text-neutral-grey-80">
+          We reserve the right to terminate or suspend your account and access to the service at our
+          sole discretion, without notice, for conduct that we believe violates these Terms or is
+          harmful to other users, us, or third parties, or for any other reason.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Data Export and Account Deletion</h2>
+        <p className="font-normal text-neutral-grey-80">
+          You may request to export your accomplishment data or delete your account at any time.
+          Upon account deletion, your personal data will be permanently removed from our systems,
+          subject to legal retention requirements.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Modifications to Terms</h2>
+        <p className="font-normal text-neutral-grey-80">
+          We reserve the right to modify these Terms and Conditions at any time. We will notify
+          users of any material changes by posting the updated terms on this page and updating the
+          &quot;Last updated&quot; date. Your continued use of the service after changes constitutes
+          acceptance of the modified terms.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Governing Law</h2>
+        <p className="font-normal text-neutral-grey-80">
+          These Terms shall be governed by and construed in accordance with applicable laws, without
+          regard to conflict of law provisions. Any disputes arising from these terms shall be
+          resolved through binding arbitration or in the courts of appropriate jurisdiction.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Contact Information</h2>
+        <p className="font-normal text-neutral-grey-80">
+          If you have any questions about these Terms and Conditions, please contact us through the
+          contact form on our website or reach out to our support team.
+        </p>
+      </section>
     </Box>
   );
 };

@@ -32,32 +32,34 @@ const Sidebar = ({ activeTab, setActiveTab, children }: IProps): JSX.Element => 
   return (
     <Tabs
       onValueChange={(v) => setActiveTab(v as PROFILE_ENUM)}
-      className="w-full flex md:!flex-row items-start gap-x-6"
+      className="w-full grid md:grid-cols-[324px_1fr] gap-x-6"
       defaultValue={PROFILE}
       value={activeTab}
     >
-      <TabsList className="flex bg-white gap-y-3 flex-col h-full items-start w-full md:max-w-[324px] border border-neutral-grey-20 rounded-xl px-4 py-6">
-        {sidebar.map(({ icon, label, coloredIcon }, i) => (
-          <Fragment key={i}>
-            <TabsTrigger
-              className={`${label !== LOGOUT && 'data-[state=active]:text-primary'} text-neutral-grey-80 text-xl font-normal data-[state=active]:shadow-none data-[state=active]:font-medium cursor-pointer capitalize`}
-              value={label}
-              onClick={() => {
-                if (label === LOGOUT) handleLogout();
-              }}
-            >
-              <Image
-                src={isActive(label) ? coloredIcon : icon}
-                alt={label}
-                width={24}
-                height={24}
-              />
-              {label.replace(/-/g, ' ')}
-            </TabsTrigger>
-            {i !== sidebar.length - 1 && <hr className="w-full" />}
-          </Fragment>
-        ))}
-      </TabsList>
+      <div className="w-full h-fit sticky top-[102px] self-start z-10">
+        <TabsList className="flex bg-white gap-y-3 flex-col h-full items-start w-full md:max-w-[324px] border border-neutral-grey-20 rounded-xl px-4 py-6">
+          {sidebar.map(({ icon, label, coloredIcon }, i) => (
+            <Fragment key={i}>
+              <TabsTrigger
+                className={`${label !== LOGOUT && 'data-[state=active]:text-primary'} text-neutral-grey-80 text-xl font-normal data-[state=active]:shadow-none data-[state=active]:font-medium cursor-pointer capitalize`}
+                value={label}
+                onClick={() => {
+                  if (label === LOGOUT) handleLogout();
+                }}
+              >
+                <Image
+                  src={isActive(label) ? coloredIcon : icon}
+                  alt={label}
+                  width={24}
+                  height={24}
+                />
+                {label.replace(/-/g, ' ')}
+              </TabsTrigger>
+              {i !== sidebar.length - 1 && <hr className="w-full" />}
+            </Fragment>
+          ))}
+        </TabsList>
+      </div>
 
       <div className="w-full">{children}</div>
     </Tabs>

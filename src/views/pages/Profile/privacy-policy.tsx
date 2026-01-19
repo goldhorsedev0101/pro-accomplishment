@@ -7,33 +7,112 @@ import { JSX } from 'react';
 
 const PrivacyPolicy = (): JSX.Element => {
   return (
-    <Box>
+    <Box className="space-y-3">
       <Heading text="Privacy Policy" width="medium" size="31" />
-      <p className="font-normal text-neutral-grey-80">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem reprehenderit
-        quibusdam ab asperiores praesentium. Autem earum amet fuga officiis culpa, sequi itaque
-        tempora animi praesentium officia aspernatur, neque non ducimus hic nulla aut deserunt sed
-        sunt voluptas? Animi, assumenda qui inventore quibusdam porro, eum vero voluptas incidunt
-        cum culpa nemo. Tempora a veniam eaque reprehenderit ipsam distinctio dolorem suscipit
-        dolores adipisci eveniet debitis, quibusdam corporis modi impedit quaerat magnam at iste
-        quod porro nemo. Tempore provident ipsa aut, necessitatibus explicabo consequuntur vel iure
-        modi aliquam ad a pariatur neque qui labore fuga ex unde esse soluta dolores libero
-        voluptates. Perferendis ut, odio ducimus hic reprehenderit labore dolor modi impedit
-        provident inventore corrupti, maiores dolorem sint dignissimos sequi? Distinctio obcaecati
-        labore fugiat ipsum, placeat et officiis sequi laudantium id, sunt dignissimos modi, vitae
-        beatae. Qui, consectetur aperiam laudantium temporibus explicabo natus quos voluptatibus
-        cumque? Magni temporibus voluptates assumenda, eos asperiores dicta nihil officia
-        reprehenderit expedita aut commodi neque. Error necessitatibus quos dolorum nemo quaerat
-        aliquam hic ipsam eaque cupiditate qui deleniti maxime accusantium, nobis dolore laboriosam
-        quo placeat, tempora possimus? Mollitia harum voluptatem alias cumque dolores expedita quas
-        dignissimos rem nesciunt esse debitis quam suscipit amet nulla sequi ipsum accusantium illo
-        distinctio, delectus reprehenderit eligendi consectetur assumenda? Dolorem ab autem ullam
-        aliquid eos non unde? Cum, quisquam tempore architecto labore laudantium iste reprehenderit!
-        Dicta ratione eveniet facilis, temporibus dolor repellendus quas aut voluptatem. Ullam
-        deleniti nulla incidunt veniam at voluptate iusto libero sapiente eaque aperiam, fuga qui
-        voluptates voluptatibus numquam recusandae delectus ipsam distinctio laboriosam cupiditate.
-        Nam voluptates laboriosam possimus libero nihil eveniet, qui inventore amet.
-      </p>
+
+      <p className="font-normal text-neutral-grey-80">Last updated: 1/19/2026</p>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Introduction</h2>
+        <p className="font-normal text-neutral-grey-80">
+          Welcome to I&apos;m Accomplished. We respect your privacy and are committed to protecting
+          your personal data. This privacy policy will inform you about how we look after your
+          personal data when you use our app and tell you about your privacy rights and how the law
+          protects you.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Information We Collect</h2>
+        <p className="font-normal text-neutral-grey-80 mb-3">
+          We collect and process the following types of information:
+        </p>
+        <ul className="list-disc pl-6 font-normal text-neutral-grey-80 space-y-2">
+          <li>Personal identification information (name, email address)</li>
+          <li>Accomplishment records and tracking data you choose to input</li>
+          <li>Usage data and analytics to improve our services</li>
+          <li>Device and browser information for optimization purposes</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">How We Use Your Information</h2>
+        <p className="font-normal text-neutral-grey-80 mb-3">
+          We use your personal data for the following purposes:
+        </p>
+        <ul className="list-disc pl-6 font-normal text-neutral-grey-80 space-y-2">
+          <li>To provide and maintain our accomplishment tracking services</li>
+          <li>To manage your account and provide customer support</li>
+          <li>To improve and personalize your experience</li>
+          <li>To communicate with you about updates, features, and promotions</li>
+          <li>To analyze usage patterns and enhance our app functionality</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Data Security</h2>
+        <p className="font-normal text-neutral-grey-80">
+          We implement appropriate technical and organizational security measures to protect your
+          personal data against unauthorized access, alteration, disclosure, or destruction. Your
+          accomplishment records are stored securely and are only accessible by you.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Data Sharing and Disclosure</h2>
+        <p className="font-normal text-neutral-grey-80">
+          We do not sell, trade, or rent your personal information to third parties. We may share
+          your data only in the following circumstances: with your explicit consent, to comply with
+          legal obligations, or to protect the rights and safety of I&apos;m Accomplished and its
+          users.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Your Rights</h2>
+        <p className="font-normal text-neutral-grey-80 mb-3">You have the right to:</p>
+        <ul className="list-disc pl-6 font-normal text-neutral-grey-80 space-y-2">
+          <li>Access your personal data</li>
+          <li>Correct inaccurate or incomplete data</li>
+          <li>Request deletion of your data</li>
+          <li>Object to processing of your data</li>
+          <li>Export your data in a portable format</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Cookies and Tracking</h2>
+        <p className="font-normal text-neutral-grey-80">
+          We use cookies and similar tracking technologies to enhance your experience, analyze
+          usage, and improve our services. You can control cookie preferences through your browser
+          settings.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Children&apos;s Privacy</h2>
+        <p className="font-normal text-neutral-grey-80">
+          Our service is intended for users of all ages, including students. If you are under 18,
+          please ensure you have parental consent before using I&apos;m Accomplished. We do not
+          knowingly collect data from children under 13 without parental consent.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Changes to This Policy</h2>
+        <p className="font-normal text-neutral-grey-80">
+          We may update this privacy policy from time to time. We will notify you of any changes by
+          posting the new policy on this page and updating the &quot;Last updated&quot; date.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
+        <p className="font-normal text-neutral-grey-80">
+          If you have any questions about this privacy policy or our data practices, please contact
+          us through the contact form on our website or reach out to our support team.
+        </p>
+      </section>
     </Box>
   );
 };

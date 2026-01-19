@@ -16,16 +16,16 @@ export async function DELETE(request: NextRequest) {
     if (errorResponse) return errorResponse;
 
     const subscription = recruiter?.subscription;
-    if (!isSubscriptionValid(subscription)) {
-      return response(
-        {
-          message: 'No active subscription found',
-          data: null,
-          error: 'No active subscription found',
-        },
-        404,
-      );
-    }
+    // if (isSubscriptionValid(subscription)) {
+    //   return response(
+    //     {
+    //       message: 'Active subscription found',
+    //       data: null,
+    //       error: 'Active subscription found',
+    //     },
+    //     404,
+    //   );
+    // }
 
     await stripe.subscriptions.update(subscription?.transaction_id, {
       cancel_at_period_end: true,

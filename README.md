@@ -165,4 +165,4 @@ MIT
 - Page logic and routing are in [`src/views/`](src/views/) and [`src/app/`](src/app/).
 - API and mutations are in [`src/services/`](src/services/).
 - Update validation schemas in [`src/schemas/`](src/schemas/).
-- Use the modular structure for easy feature addition or modification.
+- Use the modular structure for easy feature addition or modification..

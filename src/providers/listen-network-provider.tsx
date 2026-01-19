@@ -3,7 +3,6 @@
 import BasicModal from '@/components/common/modals/basic-modal';
 import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
-import { useRouter } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
 
 interface IProps {
@@ -29,7 +28,6 @@ async function isInternetConnectionWorking() {
 const ListenNetworkProvider = ({ children }: IProps) => {
   const [isOffline, setIsOffline] = useState<boolean>(false);
 
-  const { refresh } = useRouter();
   useEffect(() => {
     const checkConnection = async () => {
       const isConnected = await isInternetConnectionWorking();
@@ -46,6 +44,8 @@ const ListenNetworkProvider = ({ children }: IProps) => {
       window.removeEventListener('offline', checkConnection);
     };
   }, []);
+
+  const refresh = () => window.location.reload();
 
   if (isOffline) {
     return (

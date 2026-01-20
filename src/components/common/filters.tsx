@@ -45,7 +45,7 @@ export function Filters(): JSX.Element {
               href={category('all', 'All', false)}
               className="relative cursor-pointer border border-neutral-grey-20 !w-[110px] !h-[110px] rounded-full flex items-center justify-center"
             >
-              <Image src={allIcon} alt={'all'} width={49} height={49} />
+              <Image src={allIcon} alt={'all'} width={49} height={49} priority />
               <p className="absolute text-center top-32 w-[150px] text-neutral-grey-100 font-medium text-base">
                 All
               </p>
@@ -61,7 +61,7 @@ export function Filters(): JSX.Element {
                   href={category(id, name, has_sub_categories)}
                   className="relative cursor-pointer border border-neutral-grey-20 !w-[110px] !h-[110px] rounded-full flex items-center justify-center"
                 >
-                  <Image src={icon_url} alt={name} width={49} height={49} />
+                  <Image src={icon_url} alt={name} width={49} height={49} loading="lazy" />
                   <p className="absolute text-center top-32 w-[150px] text-neutral-grey-100 font-medium text-base">
                     {name}
                   </p>

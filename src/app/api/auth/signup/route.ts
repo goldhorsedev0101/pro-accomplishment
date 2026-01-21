@@ -27,6 +27,7 @@ export async function POST(request: NextRequest) {
       profileImage,
       company,
       rolePosition,
+      fcmToken,
     } = body;
 
     const lowerCased = email?.toLowerCase();
@@ -98,6 +99,7 @@ export async function POST(request: NextRequest) {
         profileImage,
         company,
         rolePosition,
+        fcmToken,
       },
     });
 

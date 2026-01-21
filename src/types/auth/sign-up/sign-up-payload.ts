@@ -9,5 +9,5 @@ export type SignUpPayloadT = {
   company: string;
   email: string;
   iso2: string;
-  fcm_token?: string;
+  fcmToken?: string;
 };

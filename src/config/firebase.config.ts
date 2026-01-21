@@ -11,13 +11,6 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
 };
 
-// Debug: Log configuration (remove in production)
-console.log('🔧 Firebase Config:', {
-  projectId: firebaseConfig.projectId,
-  appId: firebaseConfig.appId,
-  vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY?.substring(0, 20) + '...',
-});
-
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
 const messaging = async () => {
@@ -33,9 +26,6 @@ export const fetchToken = async () => {
       const token = await getToken(fcmMessaging, {
         vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
       });
-
-      console.log('🔔 FCM Token:', token);
-      console.log('📋 Copy this token for testing notifications');
 
       return token;
     }

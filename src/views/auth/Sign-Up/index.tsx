@@ -32,6 +32,7 @@ import { useRouter } from 'next/navigation';
 // Context
 import PhoneNumberInput from '@/components/common/phone-input';
 import { useAuth } from '@/context/auth.context';
+import { useFCM } from '@/context/fcm.context';
 
 const initialValues: SignUpPayloadT = {
   confirmPassword: '',
@@ -52,6 +53,7 @@ const SignUpView = (): JSX.Element => {
   const { setEmail, setRoute } = useAuth();
   const { signIn, verifyEmail } = Routes;
   const { push } = useRouter();
+  const { fcmToken } = useFCM();
 
   const { handleChange, handleSubmit, values, errors, touched, setFieldValue } = useFormik({
     initialValues,
@@ -65,6 +67,7 @@ const SignUpView = (): JSX.Element => {
           phoneNumber: '+' + phoneNumber,
           password: pass,
           email: email.toLocaleLowerCase(),
+          ...(fcmToken && { fcmToken }),
         });
 
         setEmail(email.toLocaleLowerCase());

@@ -25,10 +25,10 @@ import { useRouter } from 'next/navigation';
 
 // Types
 import { useAuth } from '@/context/auth.context';
-import { JSX, useEffect, useState } from 'react';
+import { JSX } from 'react';
 
-// Firebase
-import { fetchToken } from '@/config/firebase.config';
+// FCM Context
+import { useFCM } from '@/context/fcm.context';
 
 const SignInView = (): JSX.Element => {
   const { setEmail } = useAuth();
@@ -36,31 +36,8 @@ const SignInView = (): JSX.Element => {
   const { forgetPassword, signUp, home, verifyEmail } = Routes;
   const { mutateAsync, isPending } = useSignInMutation();
 
-  // FCM Token state
-  const [fcmToken, setFcmToken] = useState<string | null>(null);
-
-  // Initialize FCM on component mount
-  useEffect(() => {
-    const initializeFCM = async () => {
-      try {
-        if ('serviceWorker' in navigator) {
-          await navigator.serviceWorker.register('/firebase-messaging-sw.js');
-          await navigator.serviceWorker.ready;
-        }
-
-        const permission = await Notification.requestPermission();
-
-        if (permission === 'granted') {
-          const token = await fetchToken();
-          if (token) setFcmToken(token);
-        }
-      } catch (error) {
-        console.error('❌ Error initializing FCM on login page:', error);
-      }
-    };
-
-    initializeFCM();
-  }, []);
+  // Get FCM token from context
+  const { fcmToken } = useFCM();
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: { email: '', password: '' },

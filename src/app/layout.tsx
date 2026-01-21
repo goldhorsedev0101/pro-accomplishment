@@ -14,6 +14,7 @@ import { Toaster } from 'react-hot-toast';
 // CSS
 import './globals.css';
 import { AuthProvider } from '@/context/auth.context';
+import { FCMProvider } from '@/context/fcm.context';
 
 export const metadata: Metadata = {
   title: 'Accomplishment Tracking',
@@ -33,8 +34,10 @@ export default function RootLayout({
       >
         <QueryProvider>
           <AuthProvider>
-            <Toaster />
-            {children}
+            <FCMProvider>
+              <Toaster />
+              {children}
+            </FCMProvider>
           </AuthProvider>
         </QueryProvider>
       </body>

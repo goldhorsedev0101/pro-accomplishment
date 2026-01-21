@@ -90,6 +90,29 @@ export const signIn = async ({ email, password }: { email: string; password: str
 //   return { data, error };
 // };
 
+export const setFcmToken = async ({ fcmToken }: { fcmToken: string }) => {
+  const { data, error } = await supabase.rpc('mob_set_fcm_token', {
+    p_fcm_token: fcmToken,
+  });
+
+  return { data, error };
+};
+
+export const deleteFcmToken = async ({
+  profileId,
+  fcmToken,
+}: {
+  profileId: string;
+  fcmToken: string;
+}) => {
+  const { data, error } = await supabase.rpc('mob_delete_fcm_token', {
+    p_profile_id: profileId,
+    p_fcm_token: fcmToken,
+  });
+
+  return { data, error };
+};
+
 export const signOut = async () => {
   const { error } = await supabase.auth.signOut();
   if (error) {
@@ -175,6 +198,7 @@ export const createProfile = async ({
   iso2,
   company,
   rolePosition,
+  fcmToken,
 }: {
   userId: string;
   firstName: string;
@@ -186,6 +210,7 @@ export const createProfile = async ({
   iso2: string;
   company: string;
   rolePosition: string;
+  fcmToken?: string;
 }) => {
   const { data, error } = await supabase.rpc('web_create_profile_and_recruiter', {
     p_profile_id: userId,
@@ -198,6 +223,7 @@ export const createProfile = async ({
     p_iso2: iso2,
     p_company: company,
     p_role_position: rolePosition,
+    p_fcm_token: fcmToken,
   });
 
   return { data, error };

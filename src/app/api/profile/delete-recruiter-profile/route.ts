@@ -3,6 +3,7 @@ import { authGuard } from '@/services/server/authGuard';
 import { deleteRecruiterProfile, isSubscriptionValid } from '@/services/server/recruiterService';
 import { NextRequest } from 'next/server';
 import { stripe } from '../../../../lib/stripe';
+import { deleteFcmToken } from '@/services/server/authService';
 
 export const runtime = 'edge';
 
@@ -14,6 +15,9 @@ export async function DELETE(request: NextRequest) {
   try {
     const { recruiter, errorResponse } = await authGuard(request);
     if (errorResponse) return errorResponse;
+
+    const body = await request.json().catch(() => ({}));
+    const fcmToken = body?.fcmToken || null;
 
     const subscription = recruiter?.subscription;
     if (isSubscriptionValid(subscription)) {
@@ -32,6 +36,24 @@ export async function DELETE(request: NextRequest) {
       requestFunction: deleteRecruiterProfile,
       requestBody: { profileId: recruiter?.profile_id },
     });
+
+    if (fcmToken) {
+      const fcmTokenDeletion = await supabasePromiseResolver({
+        requestFunction: deleteFcmToken,
+        requestBody: { profileId: recruiter?.profile_id, fcmToken: fcmToken },
+      });
+
+      if (!fcmTokenDeletion?.success) {
+        return response(
+          {
+            message: 'Fcm Token Deletion failed',
+            data: null,
+            error: fcmTokenDeletion?.error,
+          },
+          400,
+        );
+      }
+    }
 
     if (!deleteRecruiterProfileResponse?.success) {
       return response(

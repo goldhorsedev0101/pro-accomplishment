@@ -1,5 +1,5 @@
 import { corsOptions, response, supabasePromiseResolver } from '@/lib/supabase/helper';
-import { signIn } from '@/services/server/authService';
+import { setFcmToken, signIn } from '@/services/server/authService';
 import { getRecruiterProfileByEmail } from '@/services/server/recruiterService';
 import { NextRequest } from 'next/server';
 
@@ -11,7 +11,7 @@ export async function OPTIONS() {
 
 export async function POST(request: NextRequest) {
   try {
-    const { email, password } = await request.json();
+    const { email, password, fcmToken } = await request.json();
     if (!email || !password) {
       return response(
         {
@@ -30,11 +30,22 @@ export async function POST(request: NextRequest) {
         requestFunction: signIn,
         requestBody: { email: lowerCasedEmail, password },
       }),
+
       supabasePromiseResolver({
         requestFunction: getRecruiterProfileByEmail,
         requestBody: { email: lowerCasedEmail },
       }),
     ]);
+
+    // set FCM Token
+    if (fcmToken) {
+      await supabasePromiseResolver({
+        requestFunction: setFcmToken,
+        requestBody: {
+          fcmToken: fcmToken,
+        },
+      });
+    }
 
     if (!loginResponse?.success) {
       return response(

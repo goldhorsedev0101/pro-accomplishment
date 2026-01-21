@@ -15,7 +15,10 @@ import Image from 'next/image';
 
 // Types
 import { useGetFavoriteCandidateQuery } from '@/services/others/favorite/get-favorite-candidate';
-import { Fragment, JSX, useState } from 'react';
+import { Fragment, JSX, useState, useEffect } from 'react';
+
+// Firebase
+import { fetchToken } from '@/config/firebase.config';
 
 const HomeView = (): JSX.Element => {
   const [search, setSearch] = useState<string>('');
@@ -26,6 +29,43 @@ const HomeView = (): JSX.Element => {
     take: 10,
     search,
   });
+
+  // Fetch FCM token on mount
+  useEffect(() => {
+    const initializeFCM = async () => {
+      try {
+        // Step 1: Register service worker first
+        if ('serviceWorker' in navigator) {
+          const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+          console.log('✅ Service Worker registered:', registration);
+
+          // Wait for service worker to be ready
+          await navigator.serviceWorker.ready;
+          console.log('✅ Service Worker is ready');
+        }
+
+        // Step 2: Request notification permission
+        const permission = await Notification.requestPermission();
+        console.log('📢 Notification permission:', permission);
+
+        if (permission === 'granted') {
+          // Step 3: Fetch FCM token
+          const token = await fetchToken();
+          if (token) {
+            console.log('✅ FCM token fetched successfully');
+          } else {
+            console.warn('⚠️ No FCM token received');
+          }
+        } else {
+          console.log('❌ Notification permission denied');
+        }
+      } catch (error) {
+        console.error('❌ Error initializing FCM:', error);
+      }
+    };
+
+    initializeFCM();
+  }, []);
 
   const { candidates, meta_data } = data?.data || {};
 

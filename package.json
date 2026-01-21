@@ -28,6 +28,7 @@
     "cookies-next": "^6.1.0",
     "dayjs": "^1.11.18",
     "embla-carousel-react": "^8.6.0",
+    "firebase": "^12.8.0",
     "formik": "^2.4.6",
     "input-otp": "^1.4.2",
     "jwt-decode": "^4.0.0",

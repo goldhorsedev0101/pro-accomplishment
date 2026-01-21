@@ -25,13 +25,49 @@ import { useRouter } from 'next/navigation';
 
 // Types
 import { useAuth } from '@/context/auth.context';
-import { JSX } from 'react';
+import { JSX, useState, useEffect } from 'react';
+
+// Firebase
+import { fetchToken } from '@/config/firebase.config';
 
 const SignInView = (): JSX.Element => {
   const { setEmail } = useAuth();
   const { push, refresh } = useRouter();
   const { forgetPassword, signUp, home, verifyEmail } = Routes;
   const { mutateAsync, isPending } = useSignInMutation();
+
+  // FCM Token state
+  const [fcmToken, setFcmToken] = useState<string | null>(null);
+
+  // Initialize FCM on component mount
+  useEffect(() => {
+    const initializeFCM = async () => {
+      try {
+        // Step 1: Register service worker
+        if ('serviceWorker' in navigator) {
+          await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+          await navigator.serviceWorker.ready;
+          console.log('✅ Service Worker ready for login page');
+        }
+
+        // Step 2: Request notification permission
+        const permission = await Notification.requestPermission();
+
+        if (permission === 'granted') {
+          // Step 3: Fetch FCM token
+          const token = await fetchToken();
+          if (token) {
+            setFcmToken(token);
+            console.log('✅ FCM token ready for login:', token);
+          }
+        }
+      } catch (error) {
+        console.error('❌ Error initializing FCM on login page:', error);
+      }
+    };
+
+    initializeFCM();
+  }, []);
 
   const { handleChange, handleSubmit, values, errors, touched } = useFormik({
     initialValues: { email: '', password: '' },
@@ -40,10 +76,15 @@ const SignInView = (): JSX.Element => {
       const pass = password.trimEnd().trimStart();
 
       try {
-        const { data } = await mutateAsync({
+        const payload = {
           email: email.toLocaleLowerCase().trim(),
           password: pass,
-        });
+          ...(fcmToken && { fcm_token: fcmToken }),
+        };
+
+        console.log('📤 Login payload:', { ...payload, password: '***' });
+
+        const { data } = await mutateAsync(payload);
         const code = data?.code;
 
         if (code == 'verification_email_resend') {

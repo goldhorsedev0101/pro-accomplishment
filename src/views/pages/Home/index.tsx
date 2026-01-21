@@ -15,14 +15,18 @@ import Image from 'next/image';
 
 // Types
 import { useGetFavoriteCandidateQuery } from '@/services/others/favorite/get-favorite-candidate';
-import { Fragment, JSX, useState, useEffect } from 'react';
+import { Fragment, JSX, useEffect, useState } from 'react';
 
 // Firebase
 import { fetchToken } from '@/config/firebase.config';
+import { useFCMForegroundMessages } from '@/hooks/useFCMForegroundMessages';
 
 const HomeView = (): JSX.Element => {
   const [search, setSearch] = useState<string>('');
   const [page, setPage] = useState(1);
+
+  // Handle foreground FCM messages (when app is open)
+  useFCMForegroundMessages();
 
   const { data, isLoading } = useGetFavoriteCandidateQuery({
     skip: (page - 1) * 10,

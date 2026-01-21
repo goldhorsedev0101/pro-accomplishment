@@ -2,6 +2,7 @@
 
 import { messaging } from '@/config/firebase.config';
 import { onMessage } from 'firebase/messaging';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
@@ -9,6 +10,8 @@ import toast from 'react-hot-toast';
  * Hook to handle foreground FCM messages (when app is open and focused)
  */
 export const useFCMForegroundMessages = () => {
+  const router = useRouter();
+
   useEffect(() => {
     const setupForegroundMessaging = async () => {
       try {
@@ -25,15 +28,21 @@ export const useFCMForegroundMessages = () => {
               const { title, body } = notification;
 
               // Show toast notification
-              toast.success(`${title}: ${body}`, {
+              toast.success(`${title}\n${body}\n\nClick to view profile...`, {
                 duration: 5000,
+                style: {
+                  cursor: 'pointer',
+                },
               });
 
-              console.log('✅ Toast notification shown');
+              // Auto-navigate after a short delay or on toast click
+              setTimeout(() => {
+                if (data?.candidate_id) {
+                  router.push(`/home/en/${data.candidate_id}`);
+                }
+              }, 1000);
             }
           });
-
-          console.log('✅ Foreground message handler registered');
 
           // Cleanup on unmount
           return () => {
@@ -46,5 +55,5 @@ export const useFCMForegroundMessages = () => {
     };
 
     setupForegroundMessaging();
-  }, []);
+  }, [router]);
 };

@@ -25,7 +25,7 @@ import { useRouter } from 'next/navigation';
 
 // Types
 import { useAuth } from '@/context/auth.context';
-import { JSX, useState, useEffect } from 'react';
+import { JSX, useEffect, useState } from 'react';
 
 // Firebase
 import { fetchToken } from '@/config/firebase.config';
@@ -43,23 +43,16 @@ const SignInView = (): JSX.Element => {
   useEffect(() => {
     const initializeFCM = async () => {
       try {
-        // Step 1: Register service worker
         if ('serviceWorker' in navigator) {
           await navigator.serviceWorker.register('/firebase-messaging-sw.js');
           await navigator.serviceWorker.ready;
-          console.log('✅ Service Worker ready for login page');
         }
 
-        // Step 2: Request notification permission
         const permission = await Notification.requestPermission();
 
         if (permission === 'granted') {
-          // Step 3: Fetch FCM token
           const token = await fetchToken();
-          if (token) {
-            setFcmToken(token);
-            console.log('✅ FCM token ready for login:', token);
-          }
+          if (token) setFcmToken(token);
         }
       } catch (error) {
         console.error('❌ Error initializing FCM on login page:', error);
@@ -79,10 +72,8 @@ const SignInView = (): JSX.Element => {
         const payload = {
           email: email.toLocaleLowerCase().trim(),
           password: pass,
-          ...(fcmToken && { fcm_token: fcmToken }),
+          ...(fcmToken && { fcmToken }),
         };
-
-        console.log('📤 Login payload:', { ...payload, password: '***' });
 
         const { data } = await mutateAsync(payload);
         const code = data?.code;

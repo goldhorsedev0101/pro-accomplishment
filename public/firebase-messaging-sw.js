@@ -49,8 +49,14 @@ function returnNotificationLink(data) {
         lang: data.lang || 'en',
         id: data.id,
       });
-
+    case 'CandidateProfile':
+      // Navigate to candidate profile
+      return `/home/en/${data.candidate_id}`;
     default:
+      // If no navigateTo specified but candidate_id exists, go to profile
+      if (data.candidate_id) {
+        return `/home/en/${data.candidate_id}`;
+      }
       return '';
   }
 }

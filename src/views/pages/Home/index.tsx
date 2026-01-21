@@ -18,7 +18,6 @@ import { useGetFavoriteCandidateQuery } from '@/services/others/favorite/get-fav
 import { Fragment, JSX, useEffect, useState } from 'react';
 
 // Firebase
-import { fetchToken } from '@/config/firebase.config';
 import { useFCMForegroundMessages } from '@/hooks/useFCMForegroundMessages';
 
 const HomeView = (): JSX.Element => {
@@ -40,29 +39,13 @@ const HomeView = (): JSX.Element => {
       try {
         // Step 1: Register service worker first
         if ('serviceWorker' in navigator) {
-          const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
-          console.log('✅ Service Worker registered:', registration);
-
+          await navigator.serviceWorker.register('/firebase-messaging-sw.js');
           // Wait for service worker to be ready
           await navigator.serviceWorker.ready;
-          console.log('✅ Service Worker is ready');
         }
 
         // Step 2: Request notification permission
-        const permission = await Notification.requestPermission();
-        console.log('📢 Notification permission:', permission);
-
-        if (permission === 'granted') {
-          // Step 3: Fetch FCM token
-          const token = await fetchToken();
-          if (token) {
-            console.log('✅ FCM token fetched successfully');
-          } else {
-            console.warn('⚠️ No FCM token received');
-          }
-        } else {
-          console.log('❌ Notification permission denied');
-        }
+        await Notification.requestPermission();
       } catch (error) {
         console.error('❌ Error initializing FCM:', error);
       }

@@ -30,29 +30,20 @@ export const FCMProvider = ({ children }: { children: ReactNode }) => {
     try {
       setIsLoading(true);
 
-      // Register service worker
       if ('serviceWorker' in navigator) {
         await navigator.serviceWorker.register('/firebase-messaging-sw.js');
         await navigator.serviceWorker.ready;
       }
 
-      // Request permission
-      console.log('🔔 Requesting notification permission...');
       const permission = await Notification.requestPermission();
-      console.log('🔔 Notification permission status:', permission);
 
       if (permission === 'granted') {
         const token = await fetchToken();
+
         if (token) {
-          console.log('🔑 FCM Token generated:', token);
           setFcmToken(token);
-          // Optionally store in localStorage
           localStorage.setItem('fcmToken', token);
-        } else {
-          console.warn('⚠️ FCM Token could not be fetched.');
         }
-      } else {
-        console.warn('🚫 Notification permission denied or ignored.');
       }
     } catch (error) {
       console.error('❌ Error initializing FCM in Provider:', error);

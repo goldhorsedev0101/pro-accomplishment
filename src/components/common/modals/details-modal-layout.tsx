@@ -24,6 +24,7 @@ const DetailsModalLayout = ({ trigger, children, title, isHeader }: IProps) => {
       <Dialog onOpenChange={setIsOpen} open={isOpen}>
         <DialogTrigger className="outline-none"> {trigger}</DialogTrigger>
         <DialogContent
+          showCloseButton={false}
           className="!bg-[#E9EDEE] max-h-[70dvh] max-w-[764px] w-full overflow-y-auto outline-none rounded-[20px] !p-3 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
           onInteractOutside={(e) => e.preventDefault()}
           onClick={() => setIsOpen(false)}

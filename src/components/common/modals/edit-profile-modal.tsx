@@ -50,39 +50,30 @@ const EditProfileModal: FC<IProps> = ({
 
   const { mutateAsync, isPending } = useEditProfileMutation();
 
-  const {
-    touched,
-    errors,
-    values,
-    handleChange,
-    handleSubmit,
-    resetForm,
-    setFieldValue,
-    dirty,
-    isValid,
-  } = useFormik({
-    initialValues: {
-      iso2,
-      company,
-      lastName: last_name,
-      firstName: first_name,
-      phoneNumber: phone_number,
-      rolePosition: role_position,
-      profileImage: profile_picture,
-    },
-    validationSchema: EditProfileSchema,
-    enableReinitialize: true,
-    onSubmit: async (values) => {
-      await mutateAsync(values, {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ['get-profile'], refetchType: 'all' });
-          toast.success('Profile Edit successfully');
-        },
-      });
-      setIsOpen(false);
-      resetForm();
-    },
-  });
+  const { touched, errors, values, handleChange, handleSubmit, resetForm, setFieldValue, dirty } =
+    useFormik({
+      initialValues: {
+        iso2,
+        company,
+        lastName: last_name,
+        firstName: first_name,
+        phoneNumber: phone_number,
+        rolePosition: role_position,
+        profileImage: profile_picture,
+      },
+      validationSchema: EditProfileSchema,
+      enableReinitialize: true,
+      onSubmit: async (values) => {
+        await mutateAsync(values, {
+          onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['get-profile'], refetchType: 'all' });
+            toast.success('Profile Edit successfully');
+          },
+        });
+        setIsOpen(false);
+        resetForm();
+      },
+    });
 
   return (
     <BasicModal

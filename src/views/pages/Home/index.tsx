@@ -15,7 +15,7 @@ import Image from 'next/image';
 
 // Types
 import { useGetFavoriteCandidateQuery } from '@/services/others/favorite/get-favorite-candidate';
-import { Fragment, JSX, useEffect, useState } from 'react';
+import { Fragment, JSX, useState } from 'react';
 
 // Firebase
 import { useFCMForegroundMessages } from '@/hooks/useFCMForegroundMessages';
@@ -32,27 +32,6 @@ const HomeView = (): JSX.Element => {
     take: 10,
     search,
   });
-
-  // Fetch FCM token on mount
-  useEffect(() => {
-    const initializeFCM = async () => {
-      try {
-        // Step 1: Register service worker first
-        if ('serviceWorker' in navigator) {
-          await navigator.serviceWorker.register('/firebase-messaging-sw.js');
-          // Wait for service worker to be ready
-          await navigator.serviceWorker.ready;
-        }
-
-        // Step 2: Request notification permission
-        await Notification.requestPermission();
-      } catch (error) {
-        console.error('❌ Error initializing FCM:', error);
-      }
-    };
-
-    initializeFCM();
-  }, []);
 
   const { candidates, meta_data } = data?.data || {};
 

@@ -20,37 +20,29 @@ export const useFCMForegroundMessages = () => {
         if (fcmMessaging) {
           // Listen for foreground messages
           const unsubscribe = onMessage(fcmMessaging, (payload) => {
-            console.log('📨 Foreground message received:', payload);
-
-            const { notification, data } = payload;
+            const { notification } = payload;
 
             if (notification) {
               const { title, body } = notification;
 
               // Show toast notification
               toast.success(`${title}\n${body}\n\nClick to view profile...`, {
+                position: 'bottom-right',
                 duration: 5000,
                 style: {
                   cursor: 'pointer',
                 },
               });
-
-              // Auto-navigate after a short delay or on toast click
-              setTimeout(() => {
-                if (data?.candidate_id) {
-                  router.push(`/home/en/${data.candidate_id}`);
-                }
-              }, 1000);
             }
           });
 
           // Cleanup on unmount
           return () => {
-            unsubscribe;
+            unsubscribe();
           };
         }
       } catch (error) {
-        console.error('❌ Error setting up foreground messaging:', error);
+        console.error('❌ Error setting up foreground messaging hook:', error);
       }
     };
 

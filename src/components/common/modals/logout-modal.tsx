@@ -20,18 +20,18 @@ interface IProps {
 }
 
 const LogoutModal: FC<IProps> = ({ isOpen, setIsOpen }): JSX.Element => {
-  const { push, refresh } = useRouter();
+  const { replace, refresh } = useRouter();
 
   const handleDeleteAccount = async () => {
     toast.success('Logged out successfully');
-    push(Routes.deleteCandidateAccount);
+    replace(Routes.deleteCandidateAccount);
     deleteCookie('accessToken');
     setIsOpen(false);
     refresh();
   };
 
   const handleClose = () => {
-    push(Routes.home);
+    replace(Routes.home);
     setIsOpen(false);
   };
 

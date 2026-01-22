@@ -33,7 +33,9 @@ export async function middleware(req: NextRequest) {
 
   // Not logged in → accessing private route → redirect
   if (!accessToken && isPrivateRoute) {
-    return redirect(new URL(Routes.signIn, req.url));
+    const response = redirect(new URL(Routes.signIn, req.url));
+    response.headers.set('Cache-Control', 'no-store, max-age=0, must-revalidate');
+    return response;
   }
 
   // Logged in → validate token
@@ -43,14 +45,24 @@ export async function middleware(req: NextRequest) {
     if (!user) {
       const response = redirect(new URL(Routes.signIn, req.url));
       response.cookies.delete('accessToken');
+      response.headers.set('Cache-Control', 'no-store, max-age=0, must-revalidate');
       return response;
     }
 
     // Logged in but accessing public route → redirect to /home
-    if (isPublicRoute) return redirect(new URL(Routes.home, req.url));
+    if (isPublicRoute) {
+      const response = redirect(new URL(Routes.home, req.url));
+      response.headers.set('Cache-Control', 'no-store, max-age=0, must-revalidate');
+      return response;
+    }
   }
 
-  return next();
+  const response = next();
+  if (isPrivateRoute) {
+    response.headers.set('Cache-Control', 'no-store, max-age=0, must-revalidate');
+  }
+
+  return response;
 }
 
 // Token validation

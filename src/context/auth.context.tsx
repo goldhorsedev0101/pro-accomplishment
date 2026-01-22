@@ -28,11 +28,11 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [email, setEmail] = useState('');
 
   const { signIn } = Routes;
-  const { push, refresh } = useRouter();
+  const { replace, refresh } = useRouter();
 
   const handleLogout = () => {
     deleteCookie('accessToken');
-    push(signIn);
+    replace(signIn);
     refresh();
     toast.success('Logged out successfully');
   };

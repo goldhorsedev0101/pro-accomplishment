@@ -21,13 +21,13 @@ const ProfileView = (): JSX.Element => {
     PROFILE_ENUM;
 
   const { data, isPending } = useGetProfileQuery();
-  const { subscription } = data?.data || {};
+  const { subscription, profile_id } = data?.data || {};
 
   const [activeTab, setActiveTab] = useState<PROFILE_ENUM>(PROFILE);
 
   return (
     <div className="flex items-start gap-x-6 w-full">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab}>
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} profileId={profile_id || ''}>
         <TabsContent value={PROFILE}>
           <Profile data={data?.data} isPending={isPending} />
         </TabsContent>

@@ -16,18 +16,31 @@ import { PROFILE_ENUM } from '@/enum/profile.enum';
 
 // Types
 import { useAuth } from '@/context/auth.context';
+import { useFCM } from '@/context/fcm.context';
+import { useSignOutMutation } from '@/services/auth/sign-out-mutation';
 import { Dispatch, Fragment, JSX, ReactNode, SetStateAction } from 'react';
 
 interface IProps {
   setActiveTab: Dispatch<SetStateAction<PROFILE_ENUM>>;
   activeTab: PROFILE_ENUM;
   children: ReactNode;
+  profileId: string;
 }
 
-const Sidebar = ({ activeTab, setActiveTab, children }: IProps): JSX.Element => {
+const Sidebar = ({ activeTab, setActiveTab, children, profileId }: IProps): JSX.Element => {
   const isActive = (label: PROFILE_ENUM) => activeTab === label;
   const { handleLogout } = useAuth();
   const { LOGOUT, PROFILE } = PROFILE_ENUM;
+  const { mutateAsync } = useSignOutMutation();
+  const { fcmToken } = useFCM();
+  const logout = async () => {
+    try {
+      await mutateAsync({ fcmToken: fcmToken || '', profileId });
+      handleLogout();
+    } catch (error) {
+      console.log('🚀 ~ logout ~ error:', error);
+    }
+  };
 
   return (
     <Tabs
@@ -44,7 +57,7 @@ const Sidebar = ({ activeTab, setActiveTab, children }: IProps): JSX.Element => 
                 className={`${label !== LOGOUT && 'data-[state=active]:text-primary'} text-neutral-grey-80 text-xl font-normal data-[state=active]:shadow-none data-[state=active]:font-medium cursor-pointer capitalize`}
                 value={label}
                 onClick={() => {
-                  if (label === LOGOUT) handleLogout();
+                  if (label === LOGOUT) logout();
                 }}
               >
                 <Image

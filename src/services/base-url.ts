@@ -12,6 +12,7 @@ export const URLS = {
   CHANGE_PASSWORD: `${baseUrl}/auth/change-password`,
   VERIFY_OTP: `${baseUrl}/auth/verify-otp`,
   RESEND_OTP: `${baseUrl}/auth/resend-otp`,
+  SIGN_OUT: `${baseUrl}/auth/logout`,
   SIGN_IN: `${baseUrl}/auth/login`,
   SIGN_UP: `${baseUrl}/auth/signup`,
 

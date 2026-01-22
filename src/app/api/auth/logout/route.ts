@@ -11,8 +11,8 @@ export async function OPTIONS() {
 
 export async function POST(request: NextRequest) {
   try {
-    const { profileid, fcmToken } = await request.json();
-    if (!profileid || !fcmToken) {
+    const { profileId, fcmToken } = await request.json();
+    if (!profileId || !fcmToken) {
       return response(
         {
           message: 'profileId and fcmToken are required',
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     const fcmTokenDeletion = await supabasePromiseResolver({
       requestFunction: deleteFcmToken,
       requestBody: {
-        profileid: profileid,
+        profileId: profileId,
         fcmToken: fcmToken,
       },
     });
